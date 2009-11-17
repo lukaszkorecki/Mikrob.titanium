@@ -2,12 +2,12 @@
 <ti:app xmlns:ti='http://ti.appcelerator.org'>
 <!-- These values are edited/maintained by Titanium Developer -->
 <id>com.coffeesounds.deskblip</id>
-<name>deskblip</name>
-<version>1.0</version>
-<publisher>lukasz</publisher>
+<name>deskBlip</name>
+<version>0.9.0</version>
+<publisher>Łukasz Korecki</publisher>
 <url>http://coffeesounds.com</url>
-<icon>default_app_logo.png</icon>
-<copyright>2009 by lukasz</copyright>
+<icon>/Users/lukasz/Dev/projects/deskblip/Resources/icons/db_logo_128.png</icon>
+<copyright>2009 by Łukasz Korecki</copyright>
 <!-- Window Definition - these values can be edited -->
 <window>
 <id>initial</id>

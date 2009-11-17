@@ -5,12 +5,26 @@
  * @author Lukasz
  */
 var Interface = {
-	draw : function(updates) {
-		air.Introspector.Console.dump(updates);
-		var len = updates.length;
-		air.trace('-------');
-		for(var i;i<len;i++) {
-			air.trace(updates);
+	Dashboard : {
+		draw : function(updates) {
+			var self = this;
+			var len = updates.length;
+			var dash = $('dash1');
+			updates.each(function(blip){
+				var blob = new Update(blip);
+				dash.insert(blob.print());
+				Interface.notify(blob.user.login, blob.body);
+				
+			});
 		}
-   }
+	},
+	notify : function(login, body) {
+		var window = Titanium.UI.getMainWindow(); // get the main window
+		var note = Titanium.Notification.createNotification(window);
+		note.setTitle(login); //Add the title;
+		note.setMessage(body); //Add the message;
+		note.show();//Make it appear with the default timings.
+			 
+			 
+	 }
 };
