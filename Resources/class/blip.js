@@ -25,9 +25,10 @@ var Blip = new Class.create(Service,{
 			},
 			onSuccess : function(response) {
 
-			var ob = Titanium.JSON.parse(response.responseText);
-			self.dashboard_last_id= ob[0].id;
-				self.dashboardProcess(ob);
+				var ob = Titanium.JSON.parse(response.responseText);
+				self.dashboard_last_id= ob[0].id;
+				var is_update = self.dashboard_last_id ? true : false;
+				self.dashboardProcess(ob,is_update);
 			},
 			onFailure : function(response) {
 			
@@ -36,7 +37,7 @@ var Blip = new Class.create(Service,{
 			}
  		});
 	},
-	dashboardProcess :function(response_obj){},
+	dashboardProcess :function(response_obj,is_update){},
 	handleFailure :	function(response_obj){},
 	createBlip : function(str) {
 		var self = this;

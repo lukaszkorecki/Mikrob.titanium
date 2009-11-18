@@ -25,6 +25,7 @@
 						var pass = $F(this['pass']);
 						try {
 							blip = new Blip(username, pass);
+							// TODO it works - so make it happen somewhere else
 							blip.dashboardProcess = Interface.Dashboard.draw;
 							blip.dashboardGet();
 
@@ -49,6 +50,7 @@
 			font-family:helvetica;
 			font-size:10pt;
 			color:#000;
+			overflow:hidden;
 		}
 
 		.update {
@@ -65,6 +67,27 @@
 		
 			vertical-align:center;
 		}
+		.column {
+			position:fixed;
+			left:2%;
+			overflow:auto;
+			top:5px;
+			bottom:115px;
+			margin:0 auto;
+			padding-bottom:110px;
+		}
+		#sender {
+			position:fixed;
+			bottom:10px;
+			height:100px;
+			left:2%;
+			width:95%;
+			background:#e1e1e1;
+			-webkit-border-radius:5px;
+			border:1px solid 888;
+		}
+		#sender form textarea { width:100%;}
+		#sender form { padding:10px;}
  	</style>
 </head>
 <body>
@@ -77,16 +100,16 @@
 				<input type="password" name="pass" value=""/>
 		<p><input type="submit" value="Continue &rarr;"></p>
 		</form>
-		<div id="dash1">
-			
-		</div>
 		<div id="sender">
 			<form action="#" method="" id="sender_form" accept-charset="utf-8">
 				
 				<label for="Blip">Blip</label>
-				<input type="text" name="content" />
+				<textarea  name="content" ></textarea>
 			<p><input type="submit" value="Send &rarr;"></p>
 			</form>
+			
+		</div>
+		<div id="dash1" class="column">
 			
 		</div>
 	</div>

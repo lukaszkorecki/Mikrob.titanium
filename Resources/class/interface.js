@@ -6,14 +6,19 @@
  */
 var Interface = {
 	Dashboard : {
-		draw : function(updates) {
+		draw : function(updates,is_update) {
 			var self = this;
 			var len = updates.length;
+			var i=0;
 			var dash = $('dash1');
 			updates.each(function(blip){
 				var blob = new Update(blip);
-				dash.insert(blob.print());
-				Interface.notify(blob.user.login, blob.body);
+				pos = is_update ? 'top' : 'bottom';
+				dash.insert(blob.print(),{position:pos});
+				if (i<4) {
+					Interface.notify(blob.user.login, blob.body);
+				}
+				i++;
 				
 			});
 		}
