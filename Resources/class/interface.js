@@ -12,15 +12,42 @@ var Interface = {
 			var i=0;
 			var dash = $('dash1');
 			updates.each(function(blip){
-				var blob = new Update(blip);
-				pos = is_update ? 'top' : 'bottom';
-				dash.insert(blob.print(),{position:pos});
+
+				var blob;
+				switch(blip.type) {
+					case 'Notice':
+						blob = new Notice(blip);
+						break;
+					
+					case 'PrivateMessage':
+					if(blip.user.login ==='t')
+					{
+						blob = new TwitterBlip(blip);
+					}
+					else
+					{
+						blob  =new Message(blip, true);
+					}
+						break;
+					case 'DirectedMessage':
+						blob = new Message(blip, false);
+						break;
+					default:
+						blob = new Update(blip);
+						break;
+				}
+				var pos = is_update ? 'top' : 'bottom';
+				console.log(pos);
+				try {
+					dash.insert(blob.print(),{position:pos});
+				} catch(elo) { console.dir(elo); }
 				if (i<4) {
-					Interface.notify(blob.user.login, blob.body);
+					Interface.notify(blob.user.login, blob.raw_body);
 				}
 				i++;
 				
 			});
+
 		}
 	},
 	notify : function(login, body) {

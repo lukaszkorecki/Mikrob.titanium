@@ -26,8 +26,15 @@
 						try {
 							blip = new Blip(username, pass);
 							// TODO it works - so make it happen somewhere else
+							// idealy would be to have one loop, that just runs stuff
+							// but depeneding on different services
+							// we might create separate intervals...
 							blip.dashboardProcess = Interface.Dashboard.draw;
-							blip.dashboardGet();
+							var i=0;
+							setInterval(function(){
+								blip.dashboardGet();
+								console.log(i++);
+							}, 10000);
 
 						}
 						catch(de) { alert(de);}
