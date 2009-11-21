@@ -1,0 +1,81 @@
+
+body {
+	font-family:helvetica;
+	font-size:10pt;
+	color:#000;
+	overflow:hidden;
+}
+a  {
+	color:#333;
+	text-decoration:none;
+	
+}
+a:hover {
+	color:red;
+}
+.update {
+	margin-bottom:10px;
+}
+.update   {
+	background: -webkit-gradient(linear, left top, left bottom,    from(#888), to(#dbdbdb), color-stop(0.5, #fff), 	    color-stop(0.5, #fff));  */
+	border:2px solid #e1e1e1;
+	-webkit-border-radius:10px;
+	-webkit-box-shadow: 0 0 -15px 0  #888;
+	padding:4px;
+	margin-bottom:10px;
+}
+.update img {
+	border:4px solid #000;
+	-webkit-border-radius:5px;
+
+	vertical-align:center;
+	float:left;
+	display:block;
+	margin-right:10px;
+}
+.update p {
+	margin:5px;
+		   margin-left:34px;
+	padding:5px;
+}
+.column {
+	border-top:2px solid #333;
+	border-bottom:2px solid #333;
+	position:fixed;
+/*
+left:3%;
+right:3%;
+*/
+	 padding-left:3%;
+	 padding-right:3%;
+	background:#222;
+	overflow:auto;
+			 margin-left:-10px;
+	top:5px;
+	bottom:115px;
+	margin:0 auto;
+}
+.user, .recipient {
+	font-weight:bold;
+	padding:2px;
+
+	border:1px solid #444;
+	background: #999;
+	-webkit-border-radius:4px;
+}
+#sender {
+	position:fixed;
+	padding-bottom:10px;
+	height:100px;
+	bottom:0;
+	left:0;
+	width:100%;
+	border-top:2px solid #888;
+}
+#sender form textarea {
+	width:100%;
+	-webkit-border-radius:5px;
+}
+#sender form {
+	padding:10px;
+}

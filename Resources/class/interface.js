@@ -36,10 +36,13 @@ var Interface = {
 						blob = new Update(blip);
 						break;
 				}
-				var pos = is_update ? 'top' : 'bottom';
-				console.log(pos);
 				try {
-					dash.insert(blob.print(),{position:pos});
+					if(is_update) {
+					
+						dash.insert(blob,'top');
+					} else {
+						dash.insert(blob, 'bottom');
+					}
 				} catch(elo) { console.dir(elo); }
 				if (i<4) {
 					Interface.notify(blob.user.login, blob.raw_body);
@@ -48,6 +51,7 @@ var Interface = {
 				
 			});
 
+		$('throbber').toggle();
 		}
 	},
 	notify : function(login, body) {
@@ -58,5 +62,14 @@ var Interface = {
 		note.show();//Make it appear with the default timings.
 			 
 			 
-	 }
+	 },
+	setAreaContent : function(string) {
+		var mt = $('main_textarea');
+		if (string) {
+			var old = mt.innerHTML;
+			mt.update(old+" "+string);
+		} else {
+			mt.update("");
+		}
+	}
 };

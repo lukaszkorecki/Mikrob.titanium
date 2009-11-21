@@ -25,10 +25,11 @@ var Blip = new Class.create(Service,{
 			},
 			onSuccess : function(response) {
 
-				var is_update = false;
-				if(self.dashboard_last_id!==0) is_update = true;
-				console.log(self.dashboard_last_id);
-				console.log(is_update);
+				var is_update = true;
+				if(self.dashboard_last_id===0){
+				is_update = false;
+				console.log('here');
+				}
 				var ob = Titanium.JSON.parse(response.responseText);
 				self.dashboard_last_id= ob[0].id;
 				
@@ -58,7 +59,7 @@ var Blip = new Class.create(Service,{
 					'Authorization' : 'Basic '+self.credentials
 				},
 				'postBody' : 'update[body]='+str,
-				onSuccess : function(resp) {  self.dashboardGet();},
+				onSuccess : function(resp) {  self.dashboardGet(); Interface.setAreaContent();},
 				onFailure : function(resp) { console.dir(resp);}
 			}
 		);

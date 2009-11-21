@@ -17,6 +17,8 @@
 		var blip;
 		document.observe('dom:loaded',
 			function(){
+			$('sender').toggle();
+			$('throbber').toggle();
 				Element.observe(
 					'login_form',
 					'submit',
@@ -40,6 +42,8 @@
 						catch(de) { alert(de);}
 
 							this.fade();
+							$('throbber').toggle();
+							$('sender').toggle();
 							event.preventDefault();
 					}
 				);
@@ -52,54 +56,15 @@
 			});
 		
 	</script>
-	<style type="text/css">
-		body {
-			font-family:helvetica;
-			font-size:10pt;
-			color:#000;
-			overflow:hidden;
-		}
-
-		.update {
-			background-color: #fff;
-			border:2px solid #e1e1e1;
-			-webkit-border-radius:10px;
-			-webkit-box-shadow: 0 0 -5px 0  #888;
-			padding:4px;
-			margin-bottom:15px;
-		}
-		.update img {
-			border:2px solid #000;
-			-webkit-border-radius:5px;
-		
-			vertical-align:center;
-		}
-		.column {
-			position:fixed;
-			left:2%;
-			overflow:auto;
-			top:5px;
-			bottom:115px;
-			margin:0 auto;
-			padding-bottom:110px;
-		}
-		#sender {
-			position:fixed;
-			bottom:10px;
-			height:100px;
-			left:2%;
-			width:95%;
-			background:#e1e1e1;
-			-webkit-border-radius:5px;
-			border:1px solid 888;
-		}
-		#sender form textarea { width:100%;}
-		#sender form { padding:10px;}
- 	</style>
+	<link rel="stylesheet" href="app://style.css" type="text/css" media="screen" charset="utf-8"/>
 </head>
 <body>
 	<div id="wrapper">
 
+
+		<div id="dash1" class="column">
+			
+		</div>
 		<form action="#" method="" accept-charset="utf-8" id="login_form">
 			<label for="Login">Login</label>
 				<input type="text" name="username" value=""/>
@@ -111,13 +76,11 @@
 			<form action="#" method="" id="sender_form" accept-charset="utf-8">
 				
 				<label for="Blip">Blip</label>
-				<textarea  name="content" ></textarea>
+				<textarea  id="main_textarea" name="content" rows="3" ></textarea>
 			<p><input type="submit" value="Send &rarr;"></p>
 			</form>
 			
-		</div>
-		<div id="dash1" class="column">
-			
+			<div id="throbber"><img src="app://icons/anim.gif" /></div>
 		</div>
 	</div>
 </body>
