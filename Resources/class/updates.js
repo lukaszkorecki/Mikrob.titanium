@@ -6,6 +6,11 @@ var Update = new Class.create({
 		this.raw_body = obj.body;
 		this.created_at = obj.created_at;
 
+		if(obj.pictures && obj.pictures.length > 0) {
+			this.pictures = obj.pictures;
+		} else {
+			this.pictures = false;
+		}
 		this.type = obj.type;
 
 		switch(obj.type) {
@@ -23,7 +28,30 @@ var Update = new Class.create({
 		this.pictures = obj.pictures || {};
 		this.cclass = 'update';
 	},
-	
+	updatePicture : function() {
+		var self = this;
+		var pic = false;
+		if (self.pictures !== false) {
+			try {
+			var img_link = self.pictures[0].url;
+			var img = new Element('img',{'src':img_link.replace('.jpg','_standard.jpg')});
+			var link = new Element('a',{'href':img_link});
+			pic = new Element('div',{'class':'update_picture'}).update(link.update(img));
+			} catch(err) { //console.log('failed pic detection');
+			}
+		}
+		return pic;
+		
+	 },
+	messageLink : function() {
+		  var self = this;
+		  var link = new Element('a', {'href':'#', 'class':'msg'}).update('Wiadomość');
+		  link.observe('click',function(event) {
+				  Interface.setAreaContent('>'+self.user.login);
+				  event.preventDefault();
+				  });
+		  return link;
+	},
 	quoteLink : function() {
 		var self = this;
 		var link = new Element('a', {'href':'#', 'class':'quote'}).update('Cytuj');
@@ -38,9 +66,9 @@ var Update = new Class.create({
 				
 		var self = this;
 		var url = 'http://blip.pl/'+self.short_type+'/'+self.id;
-		var link = new Element('a', {'href':url}).update('Link');
+		var link = new Element('a', {'href':url, 'title':self.id}).update('Link');
 		link.observe('click',function(event) {
-			Titanium.Desktop.openURL(url)
+			Titanium.Desktop.openURL(url);
 			event.preventDefault();
 		});
 		return link;
@@ -61,19 +89,26 @@ var Update = new Class.create({
 		var avatar = "http://blip.pl" + avid;
 		return new Element('img',{'src': avatar, 'class':'avatar'});
 	},
+	getActions: function() {
+		 var self = this;
+		 var actions = new Element('div',{'class':'actions'});
+		 actions.insert(self.userLink());
+		 actions.insert(self.quoteLink());
+		 actions.insert(self.messageLink());
+		 actions.insert(self.permaLink());
+		 actions.insert(new Element('span').update(self.created_at));
+		 return actions;
+	},
 	toElement : function() {
 		var self = this;
 		var container = new Element('div', {'class':self.cclass});
 		var p = new Element('p');
-		var img =  self.userAvatar();
-		var user_link =  self.userLink();
-		var quote_link = self.quoteLink();
-		container.insert(img);
-		p.insert(user_link);
+		container.insert(self.userAvatar());
+		container.insert(self.getActions());
 		p.insert(self.body);
+		var img = self.updatePicture();
+		if(img !== false) p.insert(img);
 		container.insert(p);
-		container.insert(self.quoteLink());
-		container.insert(self.permaLink());
 		return container;
 	},
 
@@ -117,6 +152,12 @@ var Message = new Class.create(Update, {
 		$super(obj);
 		this.recipient = obj.recipient;
 		this.isPrivate = isPrivate;
+		this.separator = new Element('span').insert('<strong>→</strong>');
+		this.mclass = 'directed';
+		if(self.isPrivate){
+			this.separator = new Element('span').insert('<strong>⇉</strong>');
+			this.mclass = 'private';
+		}
 	},
 	recipientLink : function() {
 		var self = this;
@@ -132,32 +173,35 @@ var Message = new Class.create(Update, {
 		var ravatar = "http://blip.pl" + ravid;
 		return new Element('img',{'src': ravatar, 'class':'ravatar'});
 	},
+	getActions : function() {
+
+		 var self = this;
+		 var actions = new Element('div', {'class':'actions'});
+		 actions.insert(self.userLink());
+		 actions.insert(self.separator);
+		 actions.insert(self.recipientLink());
+		 actions.insert(self.quoteLink());
+		 actions.insert(self.messageLink());
+		 actions.insert(self.permaLink());
+		 actions.insert(new Element('span').update(self.created_at));
+
+		 return actions;
+	},
 	toElement : function(){
 		var self = this;
 
 
-		var separator = new Element('span').insert('&gt;');
-		var cclass = 'directed';
-		if(self.isPrivate){
-			separator = new Element('span').insert('&gt;');
-			cclass = 'private';
-		}
-		var container = new Element('div', {'class':self.cclass+' '+cclass});
+		var container = new Element('div', {'class':self.cclass+' '+self.mclass});
 		var p = new Element('p');
-		var img = self.userAvatar();
-		var rimg = self.recipientAvatar();
-		var user_link = self.userLink();
-		var recipient = self.recipientLink();
-		container.insert(img);
-		container.insert(separator);
-		container.insert(rimg);
-		p.insert(user_link);
-		p.insert(separator);
-		p.insert(recipient);
+		container.insert(self.userAvatar());
+		container.insert(self.separator);
+		container.insert(self.recipientAvatar());
 		p.insert(self.body);
+		var img = self.updatePicture();
+		if(img !== false) p.insert(img);
+
 		container.update(p);
-		container.insert(self.quoteLink());
-		container.insert(self.permaLink());
+		container.insert(self.getActions());
 		return container;
 	}
 });
@@ -170,14 +214,12 @@ var TwitterBlip = new Class.create(Update,{
 		var container = new Element('div', {'class': self.cclass + ' twitter'});
 		// TODO this is saying avatar, because eventually it will
 		// render an avatar
-		var avatar = new Element('span').update('Twitter');
 		var body = self.body;
 		var p = new Element('p');
-		container.insert(avatar);
+		container.insert(self.userAvatar());
 		p.insert(body);
 		container.update(p);
-		container.insert(self.quoteLink());
-		container.insert(self.permaLink());
+		container.insert(self.getActions());
 		return container;
 	}
 });
@@ -190,14 +232,12 @@ var Notice = new Class.create(Update,{
 		// TODO this is saying avatar, because eventually it will
 		// render an avatar
 		var container = new Element('div', {'class': self.cclass+' notice'});
-		var avatar = new Element('span', {'class':'user'}).update('Powiadomienie');
 		var body = self.body;
 		var p = new Element('p');
-		container.insert(avatar);
+		container.insert(self.userAvatar());
 		p.insert(body);
 		container.update(p);
-		container.insert(self.quoteLink());
-		container.insert(self.permaLink());
+		container.insert(self.getActions());
 		return container;
 	}
 });

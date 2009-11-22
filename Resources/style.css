@@ -11,26 +11,31 @@ a  {
 	
 }
 a:hover {
-	color:red;
+	color:#0425aa;
+	background:#045eaa;
 }
 .update {
 	margin-bottom:10px;
 }
 .update   {
-	background: -webkit-gradient(linear, left top, left bottom,    from(#888), to(#dbdbdb), color-stop(0.5, #fff), 	    color-stop(0.5, #fff));  */
-	border:2px solid #e1e1e1;
-	-webkit-border-radius:10px;
-	-webkit-box-shadow: 0 0 -15px 0  #888;
+	/*
+	background: -webkit-gradient(linear, left top, left bottom,    from(#fff), to(#dbdbdb), color-stop(0.5, ##aaa);
+	*/
+	background:#eee;
+	/*-webkit-border-radius:10px;*/
+	border-bottom:1px solid #888;
 	padding:4px;
 	margin-bottom:10px;
+width:100%
 }
-.update img {
-	border:4px solid #000;
+.update img.avatar,  .update img.ravatar {
+	border:4px solid #888;
 	-webkit-border-radius:5px;
 
-	vertical-align:center;
+	/*
 	float:left;
 	display:block;
+	*/
 	margin-right:10px;
 }
 .update p {
@@ -38,30 +43,33 @@ a:hover {
 		   margin-left:34px;
 	padding:5px;
 }
+.update_picture  img {
+
+	border:4px solid #000;
+	-webkit-border-radius:5px;
+	-webkit-transform:rotate(15deg) scale(0.7);
+	
+}
 .column {
+	/*
 	border-top:2px solid #333;
 	border-bottom:2px solid #333;
+	*/
 	position:fixed;
-/*
-left:3%;
-right:3%;
-*/
-	 padding-left:3%;
 	 padding-right:3%;
-	background:#222;
 	overflow:auto;
-			 margin-left:-10px;
 	top:5px;
 	bottom:115px;
-	margin:0 auto;
 }
-.user, .recipient {
+/*.user, .recipient { */
+.actions a {
 	font-weight:bold;
 	padding:2px;
 
-	border:1px solid #444;
-	background: #999;
+	background: -webkit-gradient(linear, left top, left bottom,    from(#aaa), to(#dbdbdb), color-stop(0.5, #fff), 	    color-stop(0.5, #fff)); 
+	border:1px solid #888;
 	-webkit-border-radius:4px;
+	margin: 0 3px 0 3px ;
 }
 #sender {
 	position:fixed;

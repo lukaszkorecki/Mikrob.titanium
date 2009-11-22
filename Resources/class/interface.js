@@ -11,6 +11,7 @@ var Interface = {
 			var len = updates.length;
 			var i=0;
 			var dash = $('dash1');
+			if(is_update) updates.reverse();
 			updates.each(function(blip){
 
 				var blob;
@@ -39,9 +40,11 @@ var Interface = {
 				try {
 					if(is_update) {
 					
-						dash.insert(blob,'top');
+						//alert('going to the top');
+						dash.insert({'top': blob});
 					} else {
-						dash.insert(blob, 'bottom');
+						//alert('going to the bottom');
+						dash.insert({'bottom': blob});
 					}
 				} catch(elo) { console.dir(elo); }
 				if (i<4) {
