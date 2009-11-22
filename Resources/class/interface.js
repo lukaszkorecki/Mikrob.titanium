@@ -59,6 +59,9 @@ var Interface = {
 				
 			});
 
+		if ( ! is_update) {
+			$$('.unread').each(function(el) { el.removeClassName('unread') } );
+		}
 		$('throbber').toggle();
 		}
 	},

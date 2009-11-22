@@ -19,7 +19,7 @@ var Blip = new Class.create(Service,{
 			'requestHeaders' : {
 				'X-blip-api' : '0.02',
 				'Accept' : 'application/json',
-				'User-Agent' : Titanium.App.getName()+" "+Titanium.App.getVersion(),
+				'User-Agent' : Titanium.App.getName().replace('b','B')+" "+Titanium.App.getVersion(),
 				"Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
 				'Authorization' : 'Basic '+self.credentials
 			},
@@ -36,6 +36,10 @@ var Blip = new Class.create(Service,{
 
 				self.dashboardProcess(ob,is_update);
 			},
+			on403 : function() {alert('zŁy login or haśło');},
+			on401 : function() {alert('zŁy login or haśło');},
+			on501 : function() {alert('blip niedomaga');},
+			on503 : function() {alert('blip niedomaga');},
 			onFailure : function(response) {
 			
 				var ob = Titanium.JSON.parse(response.responseText);
@@ -59,7 +63,11 @@ var Blip = new Class.create(Service,{
 					'Authorization' : 'Basic '+self.credentials
 				},
 				'postBody' : 'update[body]='+str,
-				onSuccess : function(resp) {  self.dashboardGet(); Interface.setAreaContent();},
+				onSuccess : function(resp) {  Interface.setAreaContent(); $('throbber').toggle(); Interface.notify(Titanium.App.getName().replace('b','B'),'Wysłano');},
+			on403 : function() {alert('zŁy login or haśło');},
+			on401 : function() {alert('zŁy login or haśło');},
+			on501 : function() {alert('blip niedomaga');},
+			on503 : function() {alert('blip niedomaga');},
 				onFailure : function(resp) { console.dir(resp);}
 			}
 		);

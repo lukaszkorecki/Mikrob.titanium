@@ -12,9 +12,16 @@
 
 	<!-- szit -->
 	<script type="text/javascript" charset="utf-8">
+		Interface.notify(Titanium.App.getName().replace('b','B'),Titanium.App.getVersion());
 		var blip;
 		document.observe('dom:loaded',
 			function(){
+		try {
+			var saved_u = Titanium.App.Properties.getString("username");
+			var saved_p = Titanium.App.Properties.getString("password");
+			$$('input[name="username"]').first().setValue(saved_u);
+			$$('input[name="pass"]').first().setValue(saved_p);
+		} catch(er) { console.dir(er); }
 			$('sender').toggle();
 			$('throbber').toggle();
 				Element.observe(
@@ -31,11 +38,15 @@
 							// we might create separate intervals...
 							blip.dashboardProcess = Interface.Dashboard.draw;
 							blip.dashboardGet();
+							Interface.notify(Titanium.App.getName().replace('b','B'),'Pobieram kokpit');
 							var i=0;
 							setInterval(function(){
 								blip.dashboardGet();
 							}, 10000);
 
+							// TODO this should be somewhere else
+							Titanium.App.Properties.setString('username',username);
+							Titanium.App.Properties.setString('password',pass);
 						}
 						catch(de) { alert(de);}
 
@@ -58,6 +69,10 @@
 						$('charcount').update(this.getValue().length);
 
 				});
+				Element.observe('mark_as_read_button','click',function(event){
+					event.preventDefault();
+					$$('.unread').each(function(el) { el.removeClassName('unread') } );
+				});
 			});
 		
 	</script>
@@ -72,15 +87,20 @@
 		</div>
 		<div id="controls">
 
-		<form action="#" method="" accept-charset="utf-8" id="login_form">
-			<label for="Login">Login</label>
-				<input type="text" name="username" value=""/>
-			<label for="pass">Hasło</label>
-				<input type="password" name="pass" value=""/>
-		<p><input type="submit" value="Continue &rarr;"></p>
+			<!-- login form -->
+			<form action="#" method="" accept-charset="utf-8" id="login_form">
+				<label for="Login">Login</label>
+					<input type="text" name="username" value=""/>
+				<label for="pass">Hasło</label>
+					<input type="password" name="pass" value=""/>
+			<p><input type="submit" value="Continue &rarr;"></p>
 		</form>
+		<!-- update content form -->
 		<form action="#" method="" id="sender" accept-charset="utf-8">
 			
+		<div>
+			<a href="#" id="mark_as_read_button">Oznacz jako przeczytane</a>
+		</div>
 			<textarea  id="main_textarea" name="content" rows="3"  ></textarea>
 			<span id="charcount">0</span>
 

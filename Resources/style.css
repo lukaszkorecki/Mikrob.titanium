@@ -33,26 +33,30 @@ a:hover {
 	position: relative;
 	box-shadow: #333 -1px 1px 3px;
 	-webkit-border-radius:4px;
+color:#888;
+}
+.update .avatar_container {
+	float:left;
+	display:block;
 }
 .update img.avatar,  .update img.ravatar {
 	border:4px solid #eee;
 	-webkit-border-radius:5px;
 	 box-shadow: #333 -1px 1px 3px;
-	float:left;
-	display:block;
 
 }
 .update_picture {
-
+	/*
 	position:absolute;
 	top:15px;
 	right:-20px;
-	alpha: 0.8;
+	*/
+display:block; margin:0 auto;
 }
 .update_picture  img {
 	border:4px solid #000;
 	-webkit-border-radius:5px;
-	-webkit-transform:rotate(5deg) scale(0.5);
+	-webkit-transform:rotate(5deg);  scale(0.4); 
 	
 }
 .column {
@@ -69,10 +73,14 @@ a:hover {
 .user, .recipient {
 	font-weight:bold;
 	margin:1px 4px 1px 4px;
-	backgorund:#aaa;
+	background:#aaa;
 	-webkit-border-radius:4px;
 }
-.actions { margin-top:20px;clear:both;}
+.actions {
+	margin-top:20px;
+	clear:both;
+	background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb), color-stop(0.5,rgba(255,255,255,0)));
+}
 .actions a {
 	font-weight:bold;
 	padding:2px;
@@ -81,9 +89,9 @@ a:hover {
 	border:1px solid #888;
 	-webkit-border-radius:4px;
 	margin: 0 3px 0 3px ;
-background:#eee;
+	background:#eee;
 }
-.actions span {margin-top:5px; display:block;}
+.actions span {margin:10px 5px 2px 5px; display:block;}
 input, textarea { -webkit-border-readius:4px;}
 #sender {
 	position:fixed;
@@ -105,4 +113,12 @@ input[type="text"], input[type="password"] {
 	position:fixed;
 	bottom:5px;
 	right:10px;
+}
+/* specific */
+.notice p {
+	margin-left:4px;
+}
+
+.unread p{
+	color:#000;
 }

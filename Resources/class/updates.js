@@ -26,24 +26,25 @@ var Update = new Class.create({
 				break;
 		}
 		this.pictures = obj.pictures || {};
-		this.cclass = 'update';
+		this.cclass = 'update unread';
 	},
 	updatePicture : function() {
 		var self = this;
 		var pic = false;
 		if (self.pictures !== false) {
 			try {
-			var img_link = self.pictures[0].url;
-			var img = new Element('img',{'src':img_link.replace('.jpg','_standard.jpg')});
-			var link = new Element('a',{'href':img_link});
-			link.observe('click',function(event) {
-				event.preventDefault();
-				Titanium.Desktop.openApplication(img_link);
+				var img_link = self.pictures[0].url;
+				var link = new Element('a',{'href':img_link});
+				link.observe('click',function(event) {
+					event.preventDefault();
+					Titanium.Desktop.openApplication('open '+img_link);
 
-			});
-			pic = new Element('div',{'class':'update_picture'}).update(link.update(img));
-			} catch(err) { //console.log('failed pic detection');
-			}
+				});
+				img_link = img_link.replace('.jpg','_standard.jpg');
+				if(img_link.match('secure_picture')) img_link += 'standard';
+				var img = new Element('img',{'src':img_link});
+				pic = new Element('span',{'class':'update_picture'}).update(link.update(img));
+			} catch(err) { console.log('failed pic detection'); }
 		}
 		return pic;
 		
@@ -107,12 +108,13 @@ var Update = new Class.create({
 		var self = this;
 		var container = new Element('div', {'class':self.cclass});
 		var p = new Element('p');
-		container.insert(self.userAvatar());
+		var av_container = new Element('div', {'class': 'avatar_container'});
+		container.insert(av_container.update(self.userAvatar()));
 		p.insert(self.userLink());
 		p.insert(self.body);
-		container.insert(p);
 		var img = self.updatePicture();
-		if(img !== false) container.insert(img);
+		if(img !== false) p.insert(img);
+		container.insert(p);
 		container.insert(self.getActions());
 		return container;
 	},
@@ -195,17 +197,20 @@ var Message = new Class.create(Update, {
 
 		var container = new Element('div', {'class':self.cclass+' '+self.mclass});
 		var p = new Element('p');
-		container.insert(self.userAvatar());
-		container.insert(self.separator);
-		container.insert(self.recipientAvatar());
+		var av_container = new Element('div', {'class': 'avatar_container'});
+		av_container.insert(self.userAvatar());
+		av_container.insert('<br />');
+		av_container.insert(self.recipientAvatar());
+		console.dir(av_container);
+		container.insert(av_container);
 		p.insert(self.userLink());
 		p.insert(self.separator);
 		p.insert(self.recipientLink());
 		p.insert(self.body);
 
-		container.update(p);
 		var img = self.updatePicture();
-		if(img !== false) container.insert(img);
+		if(img !== false) p.insert(img);
+		container.insert(p);
 		container.insert(self.getActions());
 		return container;
 	}
@@ -221,9 +226,10 @@ var TwitterBlip = new Class.create(Update,{
 		// render an avatar
 		var body = self.body;
 		var p = new Element('p');
-		container.insert(self.userAvatar());
+		var av_container = new Element('div', {'class': 'avatar_container'});
+		container.insert(av_container.update(self.userAvatar()));
 		p.insert(body);
-		container.update(p);
+		container.insert(p);
 		// TODO create different actions
 		container.insert(self.getActions());
 		return container;
@@ -240,7 +246,8 @@ var Notice = new Class.create(Update,{
 		var container = new Element('div', {'class': self.cclass+' notice'});
 		var body = self.body;
 		var p = new Element('p');
-		container.insert(self.userAvatar());
+		var av_container = new Element('div', {'class': 'avatar_container'});
+		container.insert(av_container.update(self.userAvatar()));
 		p.insert(body);
 		container.update(p);
 		//container.insert(self.getActions());
