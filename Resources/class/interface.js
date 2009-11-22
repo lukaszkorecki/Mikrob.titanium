@@ -14,7 +14,7 @@ var Interface = {
 			if(is_update) updates.reverse();
 			updates.each(function(blip){
 
-				var blob;
+				var blob = false;
 				switch(blip.type) {
 					case 'Notice':
 						blob = new Notice(blip);
@@ -49,9 +49,11 @@ var Interface = {
 				} catch(elo) { console.dir(elo); }
 				if (i<4) {
 					try {
-					Interface.notify(blob.user.login, blob.raw_body);
+						Interface.notify(blob.user.login, blob.raw_body);
 					}
-					catch (notifyerr) { console.dir(notifyerr); }
+					catch (notifyerr) {
+						console.dir(notifyerr);
+					}
 				}
 				i++;
 				
@@ -69,13 +71,17 @@ var Interface = {
 			 
 			 
 	 },
-	setAreaContent : function(string) {
+	setAreaContent : function(string, is_prepend) {
 		var mt = $('main_textarea');
 		if (string) {
-			var old = mt.innerHTML;
-			mt.update(old+" "+string);
+			var old = mt.getValue();
+			if(is_prepend) {
+				mt.setValue(string+" "+old);
+			} else {
+				mt.setValue(old+" "+string);
+			}
 		} else {
-			mt.update("");
+			mt.setValue("");
 		}
 	}
 };

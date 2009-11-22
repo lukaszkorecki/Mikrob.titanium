@@ -36,6 +36,11 @@ var Update = new Class.create({
 			var img_link = self.pictures[0].url;
 			var img = new Element('img',{'src':img_link.replace('.jpg','_standard.jpg')});
 			var link = new Element('a',{'href':img_link});
+			link.observe('click',function(event) {
+				event.preventDefault();
+				Titanium.Desktop.openApplication(img_link);
+
+			});
 			pic = new Element('div',{'class':'update_picture'}).update(link.update(img));
 			} catch(err) { //console.log('failed pic detection');
 			}
@@ -47,7 +52,7 @@ var Update = new Class.create({
 		  var self = this;
 		  var link = new Element('a', {'href':'#', 'class':'msg'}).update('Wiadomość');
 		  link.observe('click',function(event) {
-				  Interface.setAreaContent('>'+self.user.login);
+				  Interface.setAreaContent('>'+self.user.login, true);
 				  event.preventDefault();
 				  });
 		  return link;
@@ -92,7 +97,6 @@ var Update = new Class.create({
 	getActions: function() {
 		 var self = this;
 		 var actions = new Element('div',{'class':'actions'});
-		 actions.insert(self.userLink());
 		 actions.insert(self.quoteLink());
 		 actions.insert(self.messageLink());
 		 actions.insert(self.permaLink());
@@ -104,11 +108,12 @@ var Update = new Class.create({
 		var container = new Element('div', {'class':self.cclass});
 		var p = new Element('p');
 		container.insert(self.userAvatar());
-		container.insert(self.getActions());
+		p.insert(self.userLink());
 		p.insert(self.body);
-		var img = self.updatePicture();
-		if(img !== false) p.insert(img);
 		container.insert(p);
+		var img = self.updatePicture();
+		if(img !== false) container.insert(img);
+		container.insert(self.getActions());
 		return container;
 	},
 
@@ -177,9 +182,6 @@ var Message = new Class.create(Update, {
 
 		 var self = this;
 		 var actions = new Element('div', {'class':'actions'});
-		 actions.insert(self.userLink());
-		 actions.insert(self.separator);
-		 actions.insert(self.recipientLink());
 		 actions.insert(self.quoteLink());
 		 actions.insert(self.messageLink());
 		 actions.insert(self.permaLink());
@@ -196,11 +198,14 @@ var Message = new Class.create(Update, {
 		container.insert(self.userAvatar());
 		container.insert(self.separator);
 		container.insert(self.recipientAvatar());
+		p.insert(self.userLink());
+		p.insert(self.separator);
+		p.insert(self.recipientLink());
 		p.insert(self.body);
-		var img = self.updatePicture();
-		if(img !== false) p.insert(img);
 
 		container.update(p);
+		var img = self.updatePicture();
+		if(img !== false) container.insert(img);
 		container.insert(self.getActions());
 		return container;
 	}
@@ -219,6 +224,7 @@ var TwitterBlip = new Class.create(Update,{
 		container.insert(self.userAvatar());
 		p.insert(body);
 		container.update(p);
+		// TODO create different actions
 		container.insert(self.getActions());
 		return container;
 	}
@@ -237,7 +243,7 @@ var Notice = new Class.create(Update,{
 		container.insert(self.userAvatar());
 		p.insert(body);
 		container.update(p);
-		container.insert(self.getActions());
+		//container.insert(self.getActions());
 		return container;
 	}
 });
