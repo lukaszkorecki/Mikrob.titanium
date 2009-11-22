@@ -2,7 +2,7 @@
 <ti:app xmlns:ti='http://ti.appcelerator.org'>
 <!-- These values are edited/maintained by Titanium Developer -->
 <id>com.coffeesounds.deskblip</id>
-<name>deskBlip</name>
+<name>deskblip</name>
 <version>0.9.0</version>
 <publisher>Łukasz Korecki</publisher>
 <url>http://coffeesounds.com</url>

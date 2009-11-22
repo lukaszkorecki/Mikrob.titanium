@@ -100,8 +100,7 @@ var Update = new Class.create({
 		 var actions = new Element('div',{'class':'actions'});
 		 actions.insert(self.quoteLink());
 		 actions.insert(self.messageLink());
-		 actions.insert(self.permaLink());
-		 actions.insert(new Element('span').update(self.created_at));
+		 actions.insert(new Element('span').insert({'top':self.created_at, 'bottom':self.permaLink()}));
 		 return actions;
 	},
 	toElement : function() {
@@ -186,8 +185,7 @@ var Message = new Class.create(Update, {
 		 var actions = new Element('div', {'class':'actions'});
 		 actions.insert(self.quoteLink());
 		 actions.insert(self.messageLink());
-		 actions.insert(self.permaLink());
-		 actions.insert(new Element('span').update(self.created_at));
+		 actions.insert(new Element('span').insert({'top':self.created_at, 'bottom':self.permaLink()}));
 
 		 return actions;
 	},

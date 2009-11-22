@@ -25,6 +25,7 @@ var Blip = new Class.create(Service,{
 			},
 			onSuccess : function(response) {
 
+			console.dir(response);
 				var is_update = true;
 				if(self.dashboard_last_id===0){
 				is_update = false;
@@ -62,7 +63,7 @@ var Blip = new Class.create(Service,{
 					"Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
 					'Authorization' : 'Basic '+self.credentials
 				},
-				'postBody' : 'update[body]='+str,
+				'postBody' : 'update[body]='+Titanium.Network.encodeURIComponent(str),
 				onSuccess : function(resp) {  Interface.setAreaContent(); $('throbber').toggle(); Interface.notify(Titanium.App.getName().replace('b','B'),'Wysłano');},
 			on403 : function() {alert('zŁy login or haśło');},
 			on401 : function() {alert('zŁy login or haśło');},

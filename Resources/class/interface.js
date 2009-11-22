@@ -79,10 +79,11 @@ var Interface = {
 		if (string) {
 			var old = mt.getValue();
 			if(is_prepend) {
-				mt.setValue(string+" "+old);
+				mt.setValue(string+old);
 			} else {
-				mt.setValue(old+" "+string);
+				mt.setValue(old+string);
 			}
+			mt.focus();
 		} else {
 			mt.setValue("");
 		}

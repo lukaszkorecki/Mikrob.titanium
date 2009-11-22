@@ -16,12 +16,13 @@
 		var blip;
 		document.observe('dom:loaded',
 			function(){
-		try {
-			var saved_u = Titanium.App.Properties.getString("username");
-			var saved_p = Titanium.App.Properties.getString("password");
-			$$('input[name="username"]').first().setValue(saved_u);
-			$$('input[name="pass"]').first().setValue(saved_p);
-		} catch(er) { console.dir(er); }
+			//Titanium.Network.HTTPClient.userAgent = Titanium.App.getName() +  " " + Titanium.App.getVersion();
+			try {
+				var saved_u = Titanium.App.Properties.getString("username");
+				var saved_p = Titanium.App.Properties.getString("password");
+				$$('input[name="username"]').first().setValue(saved_u);
+				$$('input[name="pass"]').first().setValue(saved_p);
+			} catch(er) { console.dir(er); }
 			$('sender').toggle();
 			$('throbber').toggle();
 				Element.observe(
@@ -73,6 +74,10 @@
 					event.preventDefault();
 					$$('.unread').each(function(el) { el.removeClassName('unread') } );
 				});
+				Element.observe('make_private','click',function(event){
+					Interface.setAreaContent('>',true);
+					$('main_textarea').toggleClassName('priv_t');
+				});
 			});
 		
 	</script>
@@ -99,7 +104,8 @@
 		<form action="#" method="" id="sender" accept-charset="utf-8">
 			
 		<div>
-			<a href="#" id="mark_as_read_button">Oznacz jako przeczytane</a>
+			<a href="#" class="button" id="mark_as_read_button">Oznacz jako przeczytane</a>
+			<a href="#" class="button" id="make_private">Sprywatyzuj</a>
 		</div>
 			<textarea  id="main_textarea" name="content" rows="3"  ></textarea>
 			<span id="charcount">0</span>
