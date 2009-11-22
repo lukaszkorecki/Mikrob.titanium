@@ -48,7 +48,10 @@ var Interface = {
 					}
 				} catch(elo) { console.dir(elo); }
 				if (i<4) {
+					try {
 					Interface.notify(blob.user.login, blob.raw_body);
+					}
+					catch (notifyerr) { console.dir(notifyerr); }
 				}
 				i++;
 				
