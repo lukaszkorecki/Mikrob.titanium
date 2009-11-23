@@ -74,6 +74,7 @@
 				Element.observe('mark_as_read_button','click',function(event){
 					event.preventDefault();
 					$$('.unread').each(function(el) { el.removeClassName('unread') } );
+					$('unread_count').update('0');
 				});
 				Element.observe('make_private','click',function(event){
 					Interface.setAreaContent('>',true);
@@ -105,7 +106,7 @@
 		<form action="#" method="" id="sender" accept-charset="utf-8">
 			
 		<div>
-			<a href="#" class="button" id="mark_as_read_button">Oznacz jako przeczytane <span id="unread_count"></span></a>
+			<a href="#" class="button" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
 			<a href="#" class="button" id="make_private">Sprywatyzuj</a>
 		</div>
 			<textarea  id="main_textarea" name="content" rows="3"  ></textarea>
