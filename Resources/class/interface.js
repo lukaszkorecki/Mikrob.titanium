@@ -9,6 +9,7 @@ var Interface = {
 		draw : function(updates,is_update) {
 			var self = this;
 			var len = updates.length;
+			
 			var i=0;
 			var dash = $('dash1');
 			if(is_update) updates.reverse();
@@ -49,7 +50,7 @@ var Interface = {
 				} catch(elo) { console.dir(elo); }
 				if (i<4) {
 					try {
-						Interface.notify(blob.user.login, blob.raw_body);
+						Interface.notify(blob.user.login, blob.raw_body, 'http://blip.pl'+blob.user.avatar.url_15);
 					}
 					catch (notifyerr) {
 						console.dir(notifyerr);
@@ -61,17 +62,24 @@ var Interface = {
 
 		if ( ! is_update) {
 			$$('.unread').each(function(el) { el.removeClassName('unread') } );
+			$('unread_count').update('0');
+		} else {
+			$('unread_count').update($$('.unread').length);
 		}
 		$('throbber').toggle();
 		}
 	},
 	notify : function(login, body) {
+	try {
+
 		var window = Titanium.UI.getMainWindow(); // get the main window
 		var note = Titanium.Notification.createNotification(window);
 		note.setTitle(login); //Add the title;
 		note.setMessage(body); //Add the message;
 		note.show();//Make it appear with the default timings.
-			 
+	} catch(err) {
+		console.dir(err);
+	} 
 			 
 	 },
 	setAreaContent : function(string, is_prepend) {

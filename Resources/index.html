@@ -12,7 +12,8 @@
 
 	<!-- szit -->
 	<script type="text/javascript" charset="utf-8">
-		Interface.notify(Titanium.App.getName().replace('b','B'),Titanium.App.getVersion());
+		Interface.notify(Titanium.App.getName(),Titanium.App.getVersion());
+
 		var blip;
 		document.observe('dom:loaded',
 			function(){
@@ -104,7 +105,7 @@
 		<form action="#" method="" id="sender" accept-charset="utf-8">
 			
 		<div>
-			<a href="#" class="button" id="mark_as_read_button">Oznacz jako przeczytane</a>
+			<a href="#" class="button" id="mark_as_read_button">Oznacz jako przeczytane <span id="unread_count"></span></a>
 			<a href="#" class="button" id="make_private">Sprywatyzuj</a>
 		</div>
 			<textarea  id="main_textarea" name="content" rows="3"  ></textarea>
