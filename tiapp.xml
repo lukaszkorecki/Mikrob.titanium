@@ -3,10 +3,10 @@
 <!-- These values are edited/maintained by Titanium Developer -->
 <id>com.coffeesounds.deskblip</id>
 <name>deskblip</name>
-<version>0.9.0alpha</version>
+<version>0.9.0</version>
 <publisher>Łukasz Korecki</publisher>
 <url>http://coffeesounds.com</url>
-<icon>db_logo_128.png</icon>
+<icon>/Users/lukasz/Dev/projects/deskblip/Resources/icons/db_logo_128.png</icon>
 <copyright>2009 by Łukasz Korecki</copyright>
 <!-- Window Definition - these values can be edited -->
 <window>

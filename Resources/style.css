@@ -6,7 +6,8 @@ body {
 	overflow:hidden;
 	 text-shadow: #eee -1px 1px 3px;
 	margin:0;
-padding:0;
+	padding:0;
+	-webkit-user-select:none;
 }
 a  {
 	color:#333;
@@ -20,6 +21,7 @@ a:hover {
 .update {
 	margin-bottom:10px;
 	border-bottom:1px solid #888;
+	background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb), color-stop(0.5,rgba(255,255,255,0)));
 }
 .update p {
 	/*
@@ -29,7 +31,8 @@ a:hover {
 	/*-webkit-border-radius:10px;*/
 	padding:4px;
 	margin:5px;
-	margin-left:30px;
+	margin-left:40px;
+	min-height:30px;
 	width:85%;
 	padding:5px;
 	position: relative;
@@ -66,10 +69,12 @@ a:hover {
 	border-bottom:2px solid #333;
 	*/
 	position:fixed;
-	overflow-x:none;
+	overflow-x:hidden;
 	overflow-y:auto;
 	top:0;
 	bottom:120px;
+	padding:5px;
+	border-bottom: 2px solid #888;
 }
 .user, .recipient {
 	font-weight:bold;
@@ -78,10 +83,8 @@ a:hover {
 	-webkit-border-radius:4px;
 }
 .actions {
-	margin-top:10px;
-	margin-bottom:10px;
+	margin-top:15px;
 	clear:both;
-	background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb), color-stop(0.5,rgba(255,255,255,0)));
 }
 .button {
 	font-weight:bold;
@@ -94,21 +97,23 @@ a:hover {
 	background:#eee;
 }
 .actions span {
-	margin:2px 5px 2px 5px;
+	margin-top:10px;
+	margin-bottom:10px;
 	display:block;
 }
 input, textarea { -webkit-border-readius:4px;}
-#sender {
+#controls {
 	position:fixed;
 	padding-bottom:10px;
 	height:100px;
 	bottom:0;
 	left:0;
 	width:100%;
-	border-top:2px solid #888;
 }
 #controls form textarea {
-	width:100%;
+	width:90%;
+	margin:0 auto;
+display:block;
 }
 input[type="text"], input[type="password"] {
 	width: 100%;
@@ -118,6 +123,9 @@ input[type="text"], input[type="password"] {
 	position:fixed;
 	bottom:5px;
 	right:10px;
+	background:#888;
+	padding:2px;
+	-webkit-border-radius:3px;
 }
 /* specific */
 .notice p {
@@ -128,6 +136,6 @@ input[type="text"], input[type="password"] {
 	color:#000;
 }
 .priv_t { border:red;}
-
+.small { font-size:80%;}
 /* system specific */
-.win32 .column { background: #CBC9cf; }
+.win32 .column, .linux .column { background: #CBC9cf; }

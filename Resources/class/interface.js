@@ -14,8 +14,8 @@ var Interface = {
 			var dash = $('dash1');
 			if(is_update) updates.reverse();
 			updates.each(function(blip){
-
 				var blob = false;
+				console.dir(blip.type);
 				switch(blip.type) {
 					case 'Notice':
 						blob = new Notice(blip);
@@ -50,7 +50,7 @@ var Interface = {
 				} catch(elo) { console.dir(elo); }
 				if (i<4) {
 					try {
-						Interface.notify(blob.user.login, blob.raw_body, 'http://blip.pl'+blob.user.avatar.url_15);
+						Interface.notify(blob.user.login, blob.raw_body, ('http://blip.pl'+blob.user.avatar.url_50 || false));
 					}
 					catch (notifyerr) {
 						console.dir(notifyerr);
@@ -69,13 +69,16 @@ var Interface = {
 		$('throbber').toggle();
 		}
 	},
-	notify : function(login, body) {
+	notify : function(login, body,img) {
 	try {
 
 		var window = Titanium.UI.getMainWindow(); // get the main window
 		var note = Titanium.Notification.createNotification(window);
 		note.setTitle(login); //Add the title;
 		note.setMessage(body); //Add the message;
+		if(img) {
+			note.setIcon(img);
+		}
 		note.show();//Make it appear with the default timings.
 	} catch(err) {
 		console.dir(err);

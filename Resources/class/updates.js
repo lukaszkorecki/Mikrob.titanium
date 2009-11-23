@@ -51,7 +51,7 @@ var Update = new Class.create({
 	 },
 	messageLink : function() {
 		  var self = this;
-		  var link = new Element('a', {'href':'#', 'class':'msg button'}).update('Wiadomość');
+		  var link = new Element('a', {'href':'#', 'class':'small msg button'}).update('Wiadomość');
 		  link.observe('click',function(event) {
 				  Interface.setAreaContent('>'+self.user.login, true);
 				  event.preventDefault();
@@ -72,7 +72,7 @@ var Update = new Class.create({
 				
 		var self = this;
 		var url = 'http://blip.pl/'+self.short_type+'/'+self.id;
-		var link = new Element('a', {'href':url, 'title':self.id}).update('Link');
+		var link = new Element('a', {'href':url,'class':'button small', 'title':self.id}).update('Link');
 		link.observe('click',function(event) {
 			Titanium.Desktop.openURL(url);
 			event.preventDefault();
@@ -81,7 +81,7 @@ var Update = new Class.create({
 	},
 	userLink : function() {
 		var self = this;
-		var ulink= new Element('a', {'href':'#', 'class': 'user'}).update('^'+self.user.login);
+		var ulink= new Element('a', {'href':'#', 'class': 'small user'}).update('^'+self.user.login);
 		ulink.observe('click',function(event){
 			event.preventDefault();
 			console.dir(this);
@@ -98,9 +98,10 @@ var Update = new Class.create({
 	getActions: function() {
 		 var self = this;
 		 var actions = new Element('div',{'class':'actions'});
+		 actions.insert(self.permaLink());
 		 actions.insert(self.quoteLink());
 		 actions.insert(self.messageLink());
-		 actions.insert(new Element('span').insert({'top':self.created_at, 'bottom':self.permaLink()}));
+		 actions.insert(self.created_at);
 		 return actions;
 	},
 	toElement : function() {
@@ -160,7 +161,8 @@ var Message = new Class.create(Update, {
 		this.isPrivate = isPrivate;
 		this.separator = new Element('span').insert('<strong>→</strong>');
 		this.mclass = 'directed';
-		if(self.isPrivate){
+		if(this.isPrivate){
+			alert('prajvet!');
 			this.separator = new Element('span').insert('<strong>⇉</strong>');
 			this.mclass = 'private';
 		}
@@ -178,16 +180,6 @@ var Message = new Class.create(Update, {
 		var ravid= self.recipient.avatar ? self.recipient.avatar.url_30 : "";
 		var ravatar = "http://blip.pl" + ravid;
 		return new Element('img',{'src': ravatar, 'class':'ravatar'});
-	},
-	getActions : function() {
-
-		 var self = this;
-		 var actions = new Element('div', {'class':'actions'});
-		 actions.insert(self.quoteLink());
-		 actions.insert(self.messageLink());
-		 actions.insert(new Element('span').insert({'top':self.created_at, 'bottom':self.permaLink()}));
-
-		 return actions;
 	},
 	toElement : function(){
 		var self = this;

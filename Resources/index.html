@@ -43,6 +43,7 @@
 							Interface.notify(Titanium.App.getName().replace('b','B'),'Pobieram kokpit');
 							var i=0;
 							setInterval(function(){
+								$('throbber').toggle();
 								blip.dashboardGet();
 							}, 10000);
 
@@ -89,33 +90,31 @@
 	<div id="wrapper">
 
 
-		<div id="dash1" class="column">
-			
-		</div>
 		<div id="controls">
-
 			<!-- login form -->
 			<form action="#" method="" accept-charset="utf-8" id="login_form">
 				<label for="Login">Login</label>
 					<input type="text" name="username" value=""/>
 				<label for="pass">Hasło</label>
 					<input type="password" name="pass" value=""/>
-			<p><input type="submit" value="Continue &rarr;"></p>
-		</form>
+				<input type="submit" class="button" value="Zaloguj &rarr;">
+			</form>
 		<!-- update content form -->
 		<form action="#" method="" id="sender" accept-charset="utf-8">
-			
-		<div>
-			<a href="#" class="button" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
-			<a href="#" class="button" id="make_private">Sprywatyzuj</a>
-		</div>
 			<textarea  id="main_textarea" name="content" rows="3"  ></textarea>
-			<span id="charcount">0</span>
-
-		<p><input type="submit" value="Send &rarr;"></p>
-		</form>
-		
-		<div id="throbber"><img src="app://icons/anim.gif" /></div>
+			<input type="submit" class="button" value="Wyślij &rarr;">
+			<span id="charcount" class="button">0</span>
+			</form>
+			<!-- controlls -->
+			<div>
+				<a href="#" class="button small" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
+				<a href="#" class="button small" id="make_private">Sprywatyzuj</a>
+			</div>
+			<div id="throbber"><img src="app://icons/anim.gif" /></div>
+		</div>
+		<!-- here b columns -->
+		<div id="dash1" class="column">
+			
 		</div>
 	</div>
 </body>
