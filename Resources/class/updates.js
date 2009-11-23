@@ -51,7 +51,7 @@ var Update = new Class.create({
 	 },
 	messageLink : function() {
 		  var self = this;
-		  var link = new Element('a', {'href':'#', 'class':'msg'}).update('Wiadomość');
+		  var link = new Element('a', {'href':'#', 'class':'msg button'}).update('Wiadomość');
 		  link.observe('click',function(event) {
 				  Interface.setAreaContent('>'+self.user.login, true);
 				  event.preventDefault();
@@ -60,7 +60,7 @@ var Update = new Class.create({
 	},
 	quoteLink : function() {
 		var self = this;
-		var link = new Element('a', {'href':'#', 'class':'quote'}).update('Cytuj');
+		var link = new Element('a', {'href':'#', 'class':'quote button'}).update('Cytuj');
 		link.observe('click',function(event) {
 		
 			Interface.setAreaContent('http://blip.pl/'+self.short_type+'/'+self.id);

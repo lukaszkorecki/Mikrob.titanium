@@ -81,7 +81,7 @@ a:hover {
 	clear:both;
 	background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb), color-stop(0.5,rgba(255,255,255,0)));
 }
-.actions a {
+.button {
 	font-weight:bold;
 	padding:2px;
 
