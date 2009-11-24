@@ -15,7 +15,6 @@ var Interface = {
 			if(is_update) updates.reverse();
 			updates.each(function(blip){
 				var blob = false;
-				console.dir(blip.type);
 				switch(blip.type) {
 					case 'Notice':
 						blob = new Notice(blip);

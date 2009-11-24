@@ -31,20 +31,18 @@ var Update = new Class.create({
 	updatePicture : function() {
 		var self = this;
 		var pic = false;
-		if (self.pictures !== false) {
-			try {
+		if (self.pictures != false) {
 				var img_link = self.pictures[0].url;
 				var link = new Element('a',{'href':img_link});
 				link.observe('click',function(event) {
 					event.preventDefault();
-					Titanium.Desktop.openApplication('open '+img_link);
+					Titanium.Desktop.openURL('open '+img_link);
 
 				});
 				img_link = img_link.replace('.jpg','_standard.jpg');
 				if(img_link.match('secure_picture')) img_link += 'standard';
 				var img = new Element('img',{'src':img_link});
 				pic = new Element('span',{'class':'update_picture'}).update(link.update(img));
-			} catch(err) { console.log('failed pic detection'); }
 		}
 		return pic;
 		
@@ -53,7 +51,9 @@ var Update = new Class.create({
 		  var self = this;
 		  var link = new Element('a', {'href':'#', 'class':'small msg button'}).update('Wiadomość');
 		  link.observe('click',function(event) {
-				  Interface.setAreaContent('>'+self.user.login, true);
+				  var pointer = '>';
+				  if(self.type=='PrivateMessage') pointer = '>>';
+				  Interface.setAreaContent(pointer+self.user.login, true);
 				  event.preventDefault();
 				  });
 		  return link;
@@ -84,7 +84,7 @@ var Update = new Class.create({
 		var ulink= new Element('a', {'href':'#', 'class': 'small user'}).update('^'+self.user.login);
 		ulink.observe('click',function(event){
 			event.preventDefault();
-			console.dir(this);
+			Titanium.Desktop.openURL('http://'+self.user.login+'blip.pl');
 		});
 		return ulink;
 	},
