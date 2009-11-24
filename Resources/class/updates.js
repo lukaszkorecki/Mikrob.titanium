@@ -162,7 +162,6 @@ var Message = new Class.create(Update, {
 		this.separator = new Element('span').insert('<strong>→</strong>');
 		this.mclass = 'directed';
 		if(this.isPrivate){
-			alert('prajvet!');
 			this.separator = new Element('span').insert('<strong>⇉</strong>');
 			this.mclass = 'private';
 		}

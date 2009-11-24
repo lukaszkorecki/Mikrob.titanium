@@ -61,6 +61,7 @@
 				);
 				Element.observe('sender','submit',function(event){
 						$('throbber').toggle();
+						this.disable();
 					var blyp = $F(this['content']);
 
 					blip.createBlip(blyp);

@@ -64,7 +64,7 @@ var Blip = new Class.create(Service,{
 					'Authorization' : 'Basic '+self.credentials
 				},
 				'postBody' : 'update[body]='+Titanium.Network.encodeURIComponent(str),
-				onSuccess : function(resp) {  Interface.setAreaContent(); $('throbber').toggle(); Interface.notify(Titanium.App.getName().replace('b','B'),'Wysłano');},
+				onSuccess : function(resp) {  Interface.setAreaContent(); $('throbber').toggle(); Interface.notify(Titanium.App.getName().replace('b','B'),'Wysłano'); $('sender').enable();},
 			on403 : function() {alert('zŁy login or haśło');},
 			on401 : function() {alert('zŁy login or haśło');},
 			on501 : function() {alert('blip niedomaga');},
