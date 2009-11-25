@@ -17,8 +17,8 @@ var Blip = new Class.create(Service,{
 		return {
 				'X-blip-api' : '0.02',
 				'Accept' : 'application/json',
-//				'User-Agent' : Titanium.App.getName().replace('b','B')+" "+Titanium.App.getVersion(),
-				"Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+				'User-Agent' : Titanium.App.getName()+" "+Titanium.App.getVersion(),
+				"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
 //				'Authorization' : 'Basic '+self.credentials
 			};
 	},
@@ -28,52 +28,40 @@ var Blip = new Class.create(Service,{
 		if(self.dashboard_last_id !== 0) {
 			 url = self.api_root+'dashboard/since/'+self.dashboard_last_id+self.include_string_full;
 		}
-		new Ajax.Request(url,
-			{
-			'method' : 'GET',
-			'evalJS' : true,
-			'requestHeaders' : self.commonHeaders(),
-			onSuccess : function(response) {
-
-				var is_update = true;
-				if(self.dashboard_last_id===0){
-					is_update = false;
-				}
-				var ob = Titanium.JSON.parse(response.responseText);
+		req = new HttpConnector();
+		req.setRequestHeaders(self.commonHeaders());
+		req.setUserCred(self.login, self.password);
+		req.get(url);
+		req.onSuccess = function(status,response) {
+			console.log("GET:"+status);
+			var ob = Titanium.JSON.parse(response);
+			if(ob.length >0) {
 				self.dashboard_last_id= ob[0].id;
-				
-
-				self.dashboardProcess(ob,is_update);
-			},
-			on403 : function() {alert('zŁy login or haśło');},
-			on401 : function() {alert('zŁy login or haśło');},
-			on501 : function() {alert('blip niedomaga');},
-			on503 : function() {alert('blip niedomaga');},
-			onFailure : function(response) {
-			
-				var ob = Titanium.JSON.parse(response.responseText);
-				self.handleFailure(ob);
+				self.dashboardProcess(ob,self.dashboard_last_id);
 			}
- 		});
+		};
+		req.onFailure = function(status, response) {
+			alert(status);
+			alert(response);
+		};
 	},
 	dashboardProcess :function(response_obj,is_update){},
 	handleFailure :	function(response_obj){},
 	createBlip : function(str) {
 		var self = this;
-		new Ajax.Request(self.api_root+'updates',
-			{
-				'method' : 'POST',
-				'evalJS' : true,
-				'requestHeaders' : self.commonHeaders(),
-				'postBody' : 'update[body]='+Titanium.Network.encodeURIComponent(str),
-				onSuccess : function(resp) {  Interface.setAreaContent(); $('throbber').toggle(); Interface.notify(Titanium.App.getName().replace('b','B'),'Wysłano'); $('sender').enable();},
-			on403 : function() {alert('zŁy login or haśło');},
-			on401 : function() {alert('zŁy login or haśło');},
-			on501 : function() {alert('blip niedomaga');},
-			on503 : function() {alert('blip niedomaga');},
-				onFailure : function(resp) { console.dir(resp);}
-			}
-		);
+		req = new HttpConnector();
+		req.setRequestHeaders(self.commonHeaders());
+		req.setUserCred(self.login, self.password);
+		req.post(self.api_root+'updates','update[body]='+str);
+		req.onSuccess = function(resp) { 
+			Interface.setAreaContent();
+			$('throbber').toggle();
+			Interface.notify(Titanium.App.getName(),'Wysłano');
+			$('sender').enable();
+		};
+		req.onFailure = function(resp) {
+			console.dir(resp);
+		};
 	
 	}
 });

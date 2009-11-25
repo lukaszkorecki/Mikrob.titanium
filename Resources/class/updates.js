@@ -6,11 +6,8 @@ var Update = new Class.create({
 		this.raw_body = obj.body;
 		this.created_at = obj.created_at;
 
-		if(obj.pictures && obj.pictures.length > 0) {
-			this.pictures = obj.pictures;
-		} else {
 			this.pictures = false;
-		}
+		
 		this.type = obj.type;
 
 		switch(obj.type) {
@@ -31,7 +28,7 @@ var Update = new Class.create({
 	updatePicture : function() {
 		var self = this;
 		var pic = false;
-		if (self.pictures != false) {
+		if (self.pictures.length !==0) {
 				var img_link = self.pictures[0].url;
 				var link = new Element('a',{'href':img_link});
 				link.observe('click',function(event) {
@@ -45,7 +42,6 @@ var Update = new Class.create({
 				pic = new Element('span',{'class':'update_picture'}).update(link.update(img));
 		}
 		return pic;
-		
 	 },
 	messageLink : function() {
 		  var self = this;
@@ -112,8 +108,7 @@ var Update = new Class.create({
 		container.insert(av_container.update(self.userAvatar()));
 		p.insert(self.userLink());
 		p.insert(self.body);
-		var img = self.updatePicture();
-		if(img !== false) p.insert(img);
+		if(self.pictures !== false) p.insert(self.updatePicture());
 		container.insert(p);
 		container.insert(self.getActions());
 		return container;
@@ -197,8 +192,7 @@ var Message = new Class.create(Update, {
 		p.insert(self.recipientLink());
 		p.insert(self.body);
 
-		var img = self.updatePicture();
-		if(img !== false) p.insert(img);
+		if(self.pictures !== false) p.insert(self.updatePicture());
 		container.insert(p);
 		container.insert(self.getActions());
 		return container;

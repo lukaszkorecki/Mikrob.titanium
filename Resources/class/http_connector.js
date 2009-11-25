@@ -8,10 +8,10 @@
  * @author Łukasz Korecki
  */
 var HttpConnector = new Class.create({
-	initialize : function(url) {
+	initialize : function() {
 		this.client = Titanium.Network.createHTTPClient();
+		// TODO add custom user agent
 		this.headers = {};
-		this.url = url;
 	},
 /**
  * @param object - Object literal representing request headers (i.e{'Content-Type':'application/json'});
@@ -36,20 +36,20 @@ var HttpConnector = new Class.create({
  * GET request to a given resource 
  * @param string resource i.e. '/users/get/id'
  */
-	get : function(resource) {
+	get : function(url) {
 		var self = this;
 		self.client.onreadystatechange = function() {
 			if(this.readyState == self.client.DONE) {
 			
 				var status = self.client.status;
-				if (status===200) {
+				if (status>=200 && status < 400) {
 					self.onSuccess(status, self.client.responseText);
 				}else {
 					self.onFail(status, self.client.responseText);
 				}
 			}
-		}
-			self.client.open("GET",self.url+resource, true);
+		};
+			self.client.open("GET",url);
 			self.client.send(null);
 	},
 /**
@@ -57,7 +57,7 @@ var HttpConnector = new Class.create({
  * @param string resource - '/somewhere'
  * @param string data - post data to be sent
  */
-	post : function(resource, data) {
+	post : function(url, data) {
 		var self = this;
 		self.client.onreadystatechange = function() {
 			if(this.readyState == self.client.DONE) {
@@ -69,8 +69,8 @@ var HttpConnector = new Class.create({
 					self.onFail(status, self.client.responseText);
 				}
 			}
-		}
-			self.client.open("POST",self.url+resource, true);
+		};
+			self.client.open("POST",url);
 			self.client.send(data);
 	},
 /**

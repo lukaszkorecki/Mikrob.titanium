@@ -8,6 +8,7 @@
 var Service = Class.create({
 	initialize : function(login, password) {
 		this.login = login;
+		this.password = password;
 		this.credentials = btoa(this.login+":"+password);
 	},
 	login : function() {},

@@ -12,7 +12,7 @@ var Interface = {
 			
 			var i=0;
 			var dash = $('dash1');
-			if(is_update) updates.reverse();
+			if(is_update !==0) updates.reverse();
 			updates.each(function(blip){
 				var blob = false;
 				switch(blip.type) {
@@ -38,7 +38,7 @@ var Interface = {
 						break;
 				}
 				try {
-					if(is_update) {
+					if(is_update !== 0) {
 					
 						//alert('going to the top');
 						dash.insert({'top': blob});
@@ -59,8 +59,8 @@ var Interface = {
 				
 			});
 
-		if ( ! is_update) {
-			$$('.unread').each(function(el) { el.removeClassName('unread') } );
+		if (  is_update ===0) {
+			$$('.unread').each(function(el) { el.removeClassName('unread'); } );
 			$('unread_count').update('0');
 		} else {
 			$('unread_count').update($$('.unread').length);
