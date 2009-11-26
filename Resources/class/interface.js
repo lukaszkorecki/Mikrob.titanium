@@ -1,7 +1,7 @@
 /**
  * Interface singleton - manages the tabs, views, columns and single purpose windows/sections 
  * 
- * @package deskBlip.class.interface
+ * @package mikrob.class.interface
  * @author Lukasz
  */
 var Interface = {

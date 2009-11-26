@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ti:app xmlns:ti='http://ti.appcelerator.org'>
 <!-- These values are edited/maintained by Titanium Developer -->
-<id>com.coffeesounds.deskblip</id>
-<name>deskblip</name>
+<id>com.coffeesounds.mikrob</id>
+<name>mikrob</name>
 <version>0.9.0alpha</version>
 <publisher>Łukasz Korecki</publisher>
 <url>http://coffeesounds.com</url>
@@ -11,7 +11,7 @@
 <!-- Window Definition - these values can be edited -->
 <window>
 <id>initial</id>
-<title>deskblip</title>
+<title>mikrob</title>
 <url>app://index.html</url>
 <width>370</width>
 <max-width>3000</max-width>

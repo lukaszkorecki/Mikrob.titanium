@@ -16,7 +16,7 @@
 	<script type="text/javascript" charset="utf-8">
 		Interface.notify(Titanium.App.getName(),Titanium.App.getVersion());
 
-		var blip;
+		var services = new Array();
 		document.observe('dom:loaded',
 			function(){
 			//Titanium.Network.HTTPClient.userAgent = Titanium.App.getName() +  " " + Titanium.App.getVersion();
@@ -28,45 +28,39 @@
 			} catch(er) { console.dir(er); }
 			$('sender').toggle();
 			$('throbber').toggle();
-				Element.observe(
-					'login_form',
-					'submit',
-					function(event){
-						var username = $F(this['username']);
-						var pass = $F(this['pass']);
-						try {
-							blip = new Blip(username, pass);
-							// TODO it works - so make it happen somewhere else
-							// idealy would be to have one loop, that just runs stuff
-							// but depeneding on different services
-							// we might create separate intervals...
-							blip.dashboardProcess = Interface.Dashboard.draw;
-							blip.dashboardGet();
-							Interface.notify(Titanium.App.getName().replace('b','B'),'Pobieram kokpit');
-							var i=0;
-							setInterval(function(){
-								$('throbber').toggle();
-								blip.dashboardGet();
-							}, 10000);
-
-							// TODO this should be somewhere else
-							Titanium.App.Properties.setString('username',username);
-							Titanium.App.Properties.setString('password',pass);
-						}
-						catch(de) { alert(de);}
-
-							this.fade();
+				Element.observe('login_form','submit',function(event){
+					var username = $F(this['username']);
+					var pass = $F(this['pass']);
+					try {
+						services.push = new Blip(username, pass);
+						// TODO it works - so make it happen somewhere else
+						// idealy would be to have one loop, that just runs stuff
+						// but depeneding on different services
+						// we might create separate intervals...
+						services[0].dashboardProcess = Interface.Dashboard.draw;
+						services[0].dashboardGet();
+						Interface.notify(Titanium.App.getName(),'Pobieram kokpit');
+						setInterval(function(){
 							$('throbber').toggle();
-							$('sender').toggle();
-							event.preventDefault();
+							services[0].dashboardGet();
+						}, 10000);
+
+						// TODO this should be somewhere else
+						Titanium.App.Properties.setString('username',username);
+						Titanium.App.Properties.setString('password',pass);
+					}
+					catch(de) { alert(de);}
+						this.fade();
+						$('throbber').toggle();
+						$('sender').toggle();
+						event.preventDefault();
 					}
 				);
 				Element.observe('sender','submit',function(event){
-						$('throbber').toggle();
-						this.disable();
+					$('throbber').toggle();
+					this.disable();
 					var blyp = $F(this['content']);
-
-					blip.createBlip(blyp);
+					services[0].createBlip(blyp);
 					event.preventDefault();
 				});
 				Element.observe('main_textarea','keydown',function(event){
