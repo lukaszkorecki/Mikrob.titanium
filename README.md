@@ -1,10 +1,10 @@
-# deskBlip 0.9
+# mikrob 0.9
 
 ## Polski
 
 *Uwaga* - ten projekt jest natury bardzo eksperymentalnej, mimo że zachowuje się dość stabilnie i robi to czego można by się spodziewać - jedno jest pewne - jego nazwa **na pewno** się zmieni.
 
-deskBlip jest zbudowany w oparciu o [Titanium firmy Appcelerator](http://appcelerator.com) i jest Bogatą Aplikacją Internetową na Twoim Pulpicie.
+mikrob jest zbudowany w oparciu o [Titanium firmy Appcelerator](http://appcelerator.com) i jest Bogatą Aplikacją Internetową na Twoim Pulpicie.
 
 {ech} Chodzi o to, że jest to zwykła aplikacja - dokładnie jak twoja przeglądarka czy klient IM, ale ja miałem o wiele więcej frajdy piszą ją bo użyłem tylko CSS3, HTML i Javascript. Nie ma ani jednej linii kodu napisanej w C/C++/Java
 
@@ -21,7 +21,7 @@ Wszelkie informacje odnośnie oficjalnego wydania aplikacji oraz nowych funkcjac
 ## English
 *Warning* - this project is highly experimental, while it most of the time behaves properly and as expected there's one thing that's sure about it - the name of the application **will** change.
 
-deskBlip is built using [Appcelerator's Titanium](http://appcelerator.com) and as such represents the so called Rich Internet Applications on the Desktop.
+mikrob is built using [Appcelerator's Titanium](http://appcelerator.com) and as such represents the so called Rich Internet Applications on the Desktop.
 
 {sigh} Basically it means that it works just like any other application you have now opened, but I had more fun writting it because I used CSS3, HTML and Javascript. No single line of C/C++/Java.
 
