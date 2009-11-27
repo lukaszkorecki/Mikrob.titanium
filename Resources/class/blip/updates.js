@@ -6,7 +6,13 @@ var Update = new Class.create({
 		this.raw_body = obj.body;
 		this.created_at = obj.created_at;
 
-			this.pictures = false;
+        if(obj.pictures !== undefined)
+        {
+            this.pictures = obj.pictures;
+        } else
+        {
+            this.pictures= false;
+        }
 		
 		this.type = obj.type;
 
@@ -23,12 +29,19 @@ var Update = new Class.create({
 				break;
 		}
 		this.pictures = obj.pictures || {};
-		this.cclass = 'update unread';
+		this.cclass = 'update ';
+        if(this.user.login == username)
+        {
+            this.cclass += " own";
+        } 
+        else { 
+            this.cclass += " unread";
+        }
 	},
 	updatePicture : function() {
 		var self = this;
 		var pic = false;
-		if (self.pictures.length !==0) {
+		if (self.pictures !==false && self.pictures[0] != undefined) {
 				var img_link = self.pictures[0].url;
 				var link = new Element('a',{'href':img_link});
 				link.observe('click',function(event) {

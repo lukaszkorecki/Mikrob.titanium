@@ -61,9 +61,9 @@ var Interface = {
 
 		if (  is_update ===0) {
 			$$('.unread').each(function(el) { el.removeClassName('unread'); } );
-			$('unread_count').update('0');
+            Interface.setUnreadCount('0');
 		} else {
-			$('unread_count').update($$('.unread').length);
+			Interface.setUnreadCount($$('.unread').length);
 		}
 		$('throbber').toggle();
 		}
@@ -84,6 +84,12 @@ var Interface = {
 	} 
 			 
 	 },
+    setUnreadCount : function(count_str) {
+       $('unread_count').update(count_str);
+       try {
+           Titanium.UI.setBadge(count_str);
+       } catch (badge_err) { console.log(badge_err); }
+    },
 	setAreaContent : function(string, is_prepend) {
 		var mt = $('main_textarea');
 		if (string) {
