@@ -1,10 +1,10 @@
-#appname:deskblip
-#appid:com.coffeesounds.deskblip
-#publisher:Łukasz Korecki
-#image:db_logo_128.png
+#appname:Mikrob
+#appid:com.coffeesounds.mikrob
+#publisher:lukasz
+#image:default_app_logo.png
 #url:http://coffeesounds.com
-#guid:9062965b-54b9-41aa-8e06-90ec19f659c4
-#desc:desktop client for blip.pl service
+#guid:5d98ee26-34e6-4bb3-a4e3-3cb53113ec68
+#desc:No description provided
 #type:desktop
 runtime:0.7.0
 api:0.7.0
