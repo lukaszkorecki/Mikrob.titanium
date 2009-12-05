@@ -1,10 +1,20 @@
 /**
+ *
  * Interface singleton - manages the tabs, views, columns and single purpose windows/sections 
  * 
  * @package mikrob.class.interface
  * @author Lukasz
  */
 var Interface = {
+	globalLimit : 20,
+	afterSend : function(resp) {
+		var self =this;
+		Interface.setAreaContent();
+		$('throbber').toggle();
+		Interface.notify(Titanium.App.getName(),'Wysłano');
+		$('sender').enable();
+		$('charcount').update('0');
+	},
 	Dashboard : {
 		draw : function(updates,is_update) {
 			var self = this;
@@ -14,42 +24,43 @@ var Interface = {
 			var dash = $('dash1');
 			if(is_update !==0) updates.reverse();
 			updates.each(function(blip){
-				var blob = false;
+				var single_status = {};
 				switch(blip.type) {
 					case 'Notice':
-						blob = new Notice(blip);
+						single_status = new Notice(blip);
 						break;
 					
 					case 'PrivateMessage':
 					if(blip.user.login ==='t')
 					{
-						blob = new TwitterBlip(blip);
+						single_status = new TwitterBlip(blip);
 					}
 					else
 					{
-						blob  =new Message(blip, true);
+						single_status  =new Message(blip, true);
 					}
 						break;
 					case 'DirectedMessage':
-						blob = new Message(blip, false);
+						single_status = new Message(blip, false);
 						break;
 					default:
-						blob = new Update(blip);
+						single_status = new Update(blip);
 						break;
 				}
 				try {
 					if(is_update !== 0) {
 					
 						//alert('going to the top');
-						dash.insert({'top': blob});
+						dash.insert({'top': single_status});
 					} else {
 						//alert('going to the bottom');
-						dash.insert({'bottom': blob});
+						dash.insert({'bottom': single_status});
 					}
 				} catch(elo) { console.dir(elo); }
 				if (i<4) {
 					try {
-						Interface.notify(blob.user.login, blob.raw_body, ('http://blip.pl'+blob.user.avatar.url_50 || false));
+						var av = 'http://blip.pl'+single_status.user.avatar.url_50 || false;
+						Interface.notify(single_status.user.login, single_status.raw_body, av );
 					}
 					catch (notifyerr) {
 						console.dir(notifyerr);
@@ -64,6 +75,11 @@ var Interface = {
             Interface.setUnreadCount('0');
 		} else {
 			Interface.setUnreadCount($$('.unread').length);
+//		FIXME make the column show only maxlimit of updates
+//			num = $$('.unread').length;
+//			upd  =$$('.updates');
+//			upd.slice((upd.length - num)).each(function(el) { el.remove(); } );
+
 		}
 		$('throbber').toggle();
 		}

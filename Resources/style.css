@@ -14,13 +14,19 @@ a  {
 	
 }
 a:hover {
+/*
 	color:#0425aa;
 	background:#045eaa;
+*/
+	font-weight:bolder;
 }
 .update {
 	margin-bottom:10px;
-	border-bottom:1px solid #888;
-	background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb), color-stop(0.5,rgba(255,255,255,0)));
+	padding:4px;
+	padding-top:0;
+	border-bottom:1px solid #333;
+	background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb));
+
 }
 .update p {
 	/*
@@ -35,8 +41,7 @@ a:hover {
 	width:85%;
 	padding:5px;
 	position: relative;
-	box-shadow: rgba(0,0,0,0.5) -1px 1px 3px;
-	-webkit-box-shadow: rgba(0,0,0,0.5) -1px 1px 3px;
+	box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
 	-webkit-border-radius:4px;
 	color:#888;
 	z-index:1;
@@ -51,8 +56,7 @@ a:hover {
 .update img.avatar,  .update img.ravatar {
 	border:4px solid #eee;
 	-webkit-border-radius:5px;
-	 box-shadow: rbga(0,0,0,0.5) -1px 1px 3px;
-	 -webkit-box-shadow: rbga(0,0,0,0.5) -1px 1px 3px;
+	box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
 
 }
 .update_picture {
@@ -76,7 +80,7 @@ a:hover {
 	overflow-y:auto;
 	top:0;
 	bottom:120px;
-	padding:5px;
+	padding:0px;
 	border-bottom: 2px solid #888;
 }
 .user, .recipient {
@@ -93,8 +97,7 @@ a:hover {
 	font-weight:bold;
 	padding:2px;
 
-	box-shadow: rgba(0,0,0,0.5) -1px 1px 3px;
-	-webkit-box-shadow: rgba(0,0,0,0.5) -1px 1px 3px;
+	box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
 	border:1px solid #888;
 	-webkit-border-radius:4px;
 	margin: 0 3px 0 3px ;
@@ -103,17 +106,17 @@ a:hover {
 .actions span {
 	margin-top:10px;
 	margin-bottom:10px;
-	display:block;
+/*	display:block; */
 }
-input, textarea { -webkit-border-readius:4px;}
+input, textarea { -webkit-border-readius:6px;}
+textarea { font-family:helvetica; }
 #controls {
 	position:fixed;
 	padding-bottom:10px;
-	height:100px;
+	height:110px;
 	bottom:0;
 	left:0;
 	width:100%;
-background:#222;
 }
 #controls form textarea {
 	width:90%;
@@ -151,4 +154,3 @@ input[type="text"], input[type="password"] {
 .priv_t { border:red;}
 .small { font-size:80%;}
 /* system specific */
-.win32 .column, .linux .column { background: #CBC9cf; }

@@ -18,72 +18,112 @@
 		Interface.notify(Titanium.App.getName(),Titanium.App.getVersion());
 
 		var services = new Array();
-        var username ="";
+		var username ="";
 		document.observe('dom:loaded',function(){
-            Titanium.userAgent = Titanium.App.getName() +  " " + Titanium.App.getVersion();
-            try {
-                var saved_u = Titanium.App.Properties.getString("username");
-                var saved_p = Titanium.App.Properties.getString("password");
-                $$('input[name="username"]').first().setValue(saved_u);
-                $$('input[name="pass"]').first().setValue(saved_p);
-            }
-            catch(er) {
-                console.dir(er);
-            }
+			Titanium.userAgent = Titanium.App.getName() +  " " + Titanium.App.getVersion();
+			try {
+				var saved_u = Titanium.App.Properties.getString("username");
+				var saved_p = Titanium.App.Properties.getString("password");
+				$$('input[name="username"]').first().setValue(saved_u);
+				$$('input[name="pass"]').first().setValue(saved_p);
+			}
+			catch(er) {
+				console.dir(er);
+			}
 			$('sender').toggle();
 			$('throbber').toggle();
-            Element.observe('login_form','submit',function(event){
-                username = $F(this['username']);
-                var pass = $F(this['pass']);
-                services.push( new Blip(username, pass));
-                // TODO it works - so make it happen somewhere else
-                // idealy would be to have one loop, that just runs stuff
-                // but depeneding on different services
-                // we might create separate intervals...
-                services[0].dashboardProcess = Interface.Dashboard.draw;
-                services[0].dashboardGet();
-                Interface.notify(Titanium.App.getName(),'Pobieram kokpit');
-                setInterval(function(){
-                    $('throbber').toggle();
-                    services[0].dashboardGet();
-                }, 10000);
+			Element.observe('login_form','submit',function(event){
+				username = $F(this['username']);
+				var pass = $F(this['pass']);
+				services.push( new Blip(username, pass));
+				// TODO it works - so make it happen somewhere else
+				// idealy would be to have one loop, that just runs stuff
+				// but depeneding on different services
+				// we might create separate intervals...
+				services[0].dashboardProcess = Interface.Dashboard.draw;
+				services[0].afterSend = Interface.afterSend;
+				services[0].dashboardGet();
+				Interface.notify(Titanium.App.getName(),'Pobieram kokpit');
+				loop1 = new PeriodicalExecuter(run_loop1,10);
+				function run_loop1() {
+					$('throbber').toggle();
+					services[0].dashboardGet();
+				}
+				// TODO this should be somewhere else
+				Titanium.App.Properties.setString('username',username);
+				Titanium.App.Properties.setString('password',pass);
 
-                // TODO this should be somewhere else
-                Titanium.App.Properties.setString('username',username);
-                Titanium.App.Properties.setString('password',pass);
-
-                this.fade();
-                $('throbber').toggle();
-                $('sender').toggle();
-                event.preventDefault();
-                }
-            );
-            Element.observe('sender','submit',function(event){
-                $('throbber').toggle();
-                this.disable();
-                var blyp = $F(this['content']);
-                services[0].createBlip(blyp);
-                event.preventDefault();
-            });
-            Element.observe('main_textarea','keydown',function(event){
-                    
-                    if(event.keyCode == 13) event.preventDefault();
-                    $('charcount').update(this.getValue().length);
-
-            });
-            Element.observe('mark_as_read_button','click',function(event){
-                event.preventDefault();
-                $$('.unread').each(function(el) { el.removeClassName('unread') } );
-                Interface.setUnreadCount('0');
-            });
-            Element.observe('make_private','click',function(event){
-                Interface.setAreaContent('>',true);
-                $('main_textarea').toggleClassName('priv_t');
-            });
-        });
+				this.fade();
+				$('throbber').toggle();
+				$('sender').toggle();
+				event.preventDefault();
+			});
+			Element.observe('home_link','click',function(event) {
+				services[0].dashboard_last_id=0;
+				services[0].dashboardGet(0);
+				event.preventDefault();
+				loop1 = new PeriodicalExecuter(run_loop1,10);
+				function run_loop1() {
+					$('throbber').toggle();
+					services[0].dashboardGet();
+				}
+			});
+			Element.observe('sender','submit',function(event){
+				event.preventDefault();
+				if($F(this['content']).length <= 160) {
+					$('throbber').toggle();
+					this.disable();
+					var blyp = $F(this['content']);
+					services[0].createBlip(blyp);
+				} else {
+					yy = $F(this['content']).length - 160;
+					Interface.notify("Błęd", "Treść za długa o "+yy+" znaków");
+				}
+			});
+			Element.observe('main_textarea','keydown',function(event){
+				var content = this.getValue();
+				if(event.keyCode == 13) {
+					if( content.length <= 160){
+						event.preventDefault();
+						$('throbber').toggle();
+						$('sender').disable();
+						services[0].createBlip(content);
+					} else {
+						Interface.notify("Błęd", "Treść za długa o "+(content.length - 160)+" znaków");
+					}
+				}
+				$('charcount').update(content.length);
+			});
+			Element.observe('mark_as_read_button','click',function(event){
+				event.preventDefault();
+				$$('.unread').each(function(el) { el.removeClassName('unread'); } );
+				Interface.setUnreadCount('0');
+			});
+			Element.observe('make_private','click',function(event){
+				Interface.setAreaContent('>',true);
+				$('main_textarea').toggleClassName('priv_t');
+			});
+			// Pagination
+			Element.observe('next_page','click',function(event) {
+				event.preventDefault();
+				services[0].dashboard_last_id=0;
+				var p =services[0].current_page + 1;
+				services[0].dashboardGet(p);
+				console.log(services[0].current_page);
+			});
+			Element.observe('previous_page','click',function(event) {
+				event.preventDefault();
+				services[0].dashboard_last_id=0;
+				var p = services[0].current_page - 1;
+				services[0].dashboardGet(p);
+				console.log(services[0].current_page);
+			});
+		});
 		
 	</script>
-	<link rel="stylesheet" href="app://style.css" type="text/css" media="screen" charset="utf-8"/>
+	<link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8"/>
+	<link rel="stylesheet" href="win32.css" type="text/css" media="screen" charset="utf-8"/>
+	<link rel="stylesheet" href="linux.css" type="text/css" media="screen" charset="utf-8"/>
 </head>
 <body>
 	<div id="wrapper">
@@ -99,13 +139,18 @@
 				<input type="submit" class="button" value="Zaloguj &rarr;">
 			</form>
 		<!-- update content form -->
+	<div id="paginator">
+		<a class="button" href="#" id="previous_page">Prev</a>
+		<a class="button" href="#" id="home_link">Domek</a>
+		<a class="button" href="#" id="next_page">Next</a>
+	</div>
 		<form action="#" method="" id="sender" accept-charset="utf-8">
 			<textarea  id="main_textarea" name="content" rows="3"  ></textarea>
-			<input type="submit" class="button" value="Wyślij &rarr;">
-			<span id="charcount" class="button">0</span>
+<!--			<input type="submit" class="button" value="Wyślij &rarr;"> -->
 			</form>
 			<!-- controlls -->
 			<div>
+				<span id="charcount" class="button">0</span>
 				<a href="#" class="button small" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
 				<a href="#" class="button small" id="make_private">Sprywatyzuj</a>
 			</div>

@@ -1,0 +1,30 @@
+.win32 .column{
+	background: #222;
+}
+.win32 #controls { 
+	background:#222;
+}
+.win32 .update p {
+	-webkit-box-shadow:  -1px 1px 3px rgba(0,0,0,0.5);
+}
+.win32 .update {
+	border-color:#eee;
+	background: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		from(rgb(150,150,150)),
+		to(#dbdbdb)
+	);
+	padding-top:5px;
+	margin-bottom:0;
+
+}
+.win32 .update img.avatar,  .win32 .update img.ravatar {
+	margin-top:5px;
+	 -webkit-box-shadow:-1px 1px 3px rbga(0,0,0,0.5) ;
+
+}
+.win32 .button {
+	-webkit-box-shadow: -1px 1px 3px rbga(0,0,0,0.7) ;
+}

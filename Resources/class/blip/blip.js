@@ -10,8 +10,9 @@ var Blip = new Class.create(Service,{
 	dashboard_last_id : 0,
 	bliposphere_last_id : 0,
 	tag_last_id : 0,
+	current_page : 0,
 	include_string_user : "?include=user,recipient",
-	include_string_full : "?include=user,user[avatar],recipient,recipient[avatar],pictures",
+	include_string_full : "?include=user,user[avatar],recipient,recipient[avatar],pictures&limit="+Interface.globalLimit,
 	commonHeaders : function() {
 		var self = this;
 		return {
@@ -22,11 +23,16 @@ var Blip = new Class.create(Service,{
 //				'Authorization' : 'Basic '+self.credentials
 			};
 	},
-	dashboardGet : function() {
+	dashboardGet : function(offset) {
 		var self = this;
 		 var url = self.api_root+'dashboard'+self.include_string_full;
 		if(self.dashboard_last_id !== 0) {
 			 url = self.api_root+'dashboard/since/'+self.dashboard_last_id+self.include_string_full;
+		}
+		if(offset >= 0) {
+			url += '&offset='+(offset * Interface.globalLimit);
+		} else {
+			url += '&offset=0';
 		}
 		req = new HttpConnector();
 		req.setRequestHeaders(self.commonHeaders());
@@ -47,18 +53,14 @@ var Blip = new Class.create(Service,{
 	},
 	dashboardProcess :function(response_obj,is_update){},
 	handleFailure :	function(response_obj){},
+	afterSend :	function(response_obj){},
 	createBlip : function(str) {
 		var self = this;
 		req = new HttpConnector();
 		req.setRequestHeaders(self.commonHeaders());
 		req.setUserCred(self.login, self.password);
 		req.post(self.api_root+'updates','update[body]='+str);
-		req.onSuccess = function(resp) { 
-			Interface.setAreaContent();
-			$('throbber').toggle();
-			Interface.notify(Titanium.App.getName(),'Wysłano');
-			$('sender').enable();
-		};
+		req.onSuccess = function(resp) { self.afterSend(resp); };
 		req.onFailure = function(resp) {
 			console.dir(resp);
 		};

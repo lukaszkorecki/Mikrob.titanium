@@ -6,13 +6,13 @@ var Update = new Class.create({
 		this.raw_body = obj.body;
 		this.created_at = obj.created_at;
 
-        if(obj.pictures !== undefined)
-        {
-            this.pictures = obj.pictures;
-        } else
-        {
-            this.pictures= false;
-        }
+		if(obj.pictures !== undefined)
+		{
+			this.pictures = obj.pictures;
+		} else
+		{
+			this.pictures= false;
+		}
 		
 		this.type = obj.type;
 
@@ -30,13 +30,16 @@ var Update = new Class.create({
 		}
 		this.pictures = obj.pictures || {};
 		this.cclass = 'update ';
-        if(this.user.login == username)
-        {
-            this.cclass += " own";
-        } 
-        else { 
-            this.cclass += " unread";
-        }
+		if(this.user.login == username)
+		{
+			this.cclass += " own";
+		} 
+		else { 
+			this.cclass += " unread";
+		}
+	},
+	createdAt : function() {
+		return this.created_at.substr(this.created_at.indexOf(" "));
 	},
 	updatePicture : function() {
 		var self = this;
@@ -105,13 +108,14 @@ var Update = new Class.create({
 		return new Element('img',{'src': avatar, 'class':'avatar'});
 	},
 	getActions: function() {
-		 var self = this;
-		 var actions = new Element('div',{'class':'actions'});
-		 actions.insert(self.permaLink());
-		 actions.insert(self.quoteLink());
-		 actions.insert(self.messageLink());
-		 actions.insert(self.created_at);
-		 return actions;
+	var self = this;
+		var actions = new Element('div',{'class':'actions'});
+		actions.insert(self.userLink());
+		actions.insert(self.permaLink());
+		actions.insert(self.quoteLink());
+		actions.insert(self.messageLink());
+		actions.insert(self.createdAt());
+		return actions;
 	},
 	toElement : function() {
 		var self = this;
@@ -119,7 +123,6 @@ var Update = new Class.create({
 		var p = new Element('p');
 		var av_container = new Element('div', {'class': 'avatar_container'});
 		container.insert(av_container.update(self.userAvatar()));
-		p.insert(self.userLink());
 		p.insert(self.body);
 		if(self.pictures !== false) p.insert(self.updatePicture());
 		container.insert(p);
@@ -188,6 +191,19 @@ var Message = new Class.create(Update, {
 		var ravatar = "http://blip.pl" + ravid;
 		return new Element('img',{'src': ravatar, 'class':'ravatar'});
 	},
+	getActions :function() {
+	var self = this;
+		var actions = new Element('div',{'class':'actions'});
+		actions.insert(self.userLink());
+		actions.insert(self.separator);
+		actions.insert(self.recipientLink());
+		actions.insert(self.permaLink());
+		actions.insert(self.quoteLink());
+		actions.insert(self.messageLink());
+		actions.insert(self.createdAt());
+		return actions;
+
+	},
 	toElement : function(){
 		var self = this;
 
@@ -198,11 +214,7 @@ var Message = new Class.create(Update, {
 		av_container.insert(self.userAvatar());
 		av_container.insert('<br />');
 		av_container.insert(self.recipientAvatar());
-		console.dir(av_container);
 		container.insert(av_container);
-		p.insert(self.userLink());
-		p.insert(self.separator);
-		p.insert(self.recipientLink());
 		p.insert(self.body);
 
 		if(self.pictures !== false) p.insert(self.updatePicture());
