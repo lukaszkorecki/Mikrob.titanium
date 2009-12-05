@@ -103,6 +103,13 @@
 				Interface.setAreaContent('>',true);
 				$('main_textarea').toggleClassName('priv_t');
 			});
+			Element.observe('shorten_links','click',function(event){
+				event.preventDefault();
+				var content = $('main_textarea').getValue();
+				console.log("tresc z element.observe.click\n\t"+content);
+				Interface.shortenLinksInString(content, services[0].shortenLink);
+
+			});
 			// Pagination
 			Element.observe('next_page','click',function(event) {
 				event.preventDefault();
@@ -153,6 +160,7 @@
 				<span id="charcount" class="button">0</span>
 				<a href="#" class="button small" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
 				<a href="#" class="button small" id="make_private">Sprywatyzuj</a>
+				<a href="#" class="button small" id="shorten_links">Skróć linki</a>
 			</div>
 			<div id="throbber"><img src="app://icons/anim.gif" /></div>
 		</div>

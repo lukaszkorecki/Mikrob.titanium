@@ -65,5 +65,40 @@ var Blip = new Class.create(Service,{
 			console.dir(resp);
 		};
 	
+	},
+	shortenLink : function(url) {
+		console.log('services->shortlink'+url);
+		var self = this;
+		req = new HttpConnector();
+		req.setRequestHeaders(self.commonHeaders());
+		req.setUserCred(self.login, self.password);
+		req.post(self.api_root+'shortlinks', 'shortlink[original_link]='+url);
+		req.onSuccess = function(st, resp) {
+			console.log('services->shortlink->shortened'+url);
+			console.log(st);
+			var obj = Titanium.JSON.parse(resp);
+			Interface.replaceLinks(url, obj.url);
+		}; 
+		req.onFailure = function(st, resp) {
+			console.log(st);
+			Interface.notify("Błąd","Tworzenie linka się nie powiedło");
+		};
+	},
+	expandLink : function(url) {
+		var self = this;
+		req = new HttpConnector();
+		req.setRequestHeaders(self.commonHeaders());
+		req.setUserCred(self.login, self.password);
+		req.get(self.api_root+'shortlinks', 'shortlink[original_link]='+url);
+		req.onSuccess = function(st, resp) {
+			console.log(st);
+			console.dir(resp);
+//			var obj = Titanium.JSON.parse(resp);
+//			Interface.setAreaContent(obj.url);
+		};
+		req.onFailure = function(st, resp) {
+			console.log(st);
+			Interface.notify("Błąd","Rozwijanie linka się nie powiedło");
+		};
 	}
 });

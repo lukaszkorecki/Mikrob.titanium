@@ -12,7 +12,7 @@ Fajnie.
 
 Jeśli jesteś użytkownikiem Windowsa i chcesz mieć ładne powiadomienia na pulpicie - [Snarl](http://www.fullphat.net/) będzie twoim przyjacielem. Jeśli używasz OSX potrzebujesz [Growl](http://growl.info) - ale z pewnością go już masz.
 
-Użytkownicy Linuxa - dajcie mi znać co tam u Was - bo nie mam pojęcia czy macie jakieś okienka z powiadomieniami :-)
+Użytkownicy Linuxa nie musza nic robić oprócz działającej instalacji libnotify.
 
 Wszelkie informacje odnośnie oficjalnego wydania aplikacji oraz nowych funkcjach itd można znaleźć bezpośrednio [u mnie na blipie](http://plugawy.blip.pl).
 

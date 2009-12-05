@@ -13,6 +13,7 @@ a  {
 	text-decoration:none;
 	
 }
+p { word-wrap: break-word; } /* fix them things */
 a:hover {
 /*
 	color:#0425aa;

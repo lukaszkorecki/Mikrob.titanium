@@ -119,5 +119,24 @@ var Interface = {
 		} else {
 			mt.setValue("");
 		}
-	}
+	},
+	shortenLinksInString : function(string,shorten_function,exceptions) {
+		console.log("shortenLinksInString: "+string);
+			var findLinks = /http:\/\/\S+/gi;
+		var rez = string.match(findLinks);
+		console.dir(rez);
+		if(rez) {
+			console.log('mamy linki!');
+			rez.each(function(link) {
+				if(! link.match('/blip.pl/i') || ! link.match('/rdir.pl/i') || ! link.match('/youtube.com/'))	services[0].shortenLink(link);
+			});
+		} else { console.log('nic nie teges'); }
+	},
+	replaceLinks : function(old_stuff, new_stuff) {
+	   console.log(old_stuff+ " " + new_stuff);
+		var content = $('main_textarea').getValue();
+		var content_n = content.replace(old_stuff, new_stuff);
+		console.log(content_n);
+		$('main_textarea').setValue(content_n);
+   }
 };
