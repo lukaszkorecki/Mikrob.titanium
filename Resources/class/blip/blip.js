@@ -66,6 +66,24 @@ var Blip = new Class.create(Service,{
 		};
 	
 	},
+	expandBlip : function(blipid) {
+		var self = this;
+		req = new HttpConnector();
+		req.setRequestHeaders(self.commonHeaders());
+		req.setUserCred(self.login, self.password);
+		req.get(self.api_root+'updates/'+blipid);
+		req.onSuccess = function(st, resp) {
+			console.log(st);
+			console.dir(resp);
+//			var obj = Titanium.JSON.parse(resp);
+//			Interface.setAreaContent(obj.url);
+		};
+		req.onFailure = function(st, resp) {
+			console.log(st);
+			Interface.notify("Błąd","Rozwijanie linka się nie powiedło");
+		};
+
+	 },
 	shortenLink : function(url) {
 		console.log('services->shortlink'+url);
 		var self = this;

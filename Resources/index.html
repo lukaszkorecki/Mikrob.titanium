@@ -147,9 +147,11 @@
 			</form>
 		<!-- update content form -->
 	<div id="paginator">
-		<a class="button" href="#" id="previous_page">Prev</a>
-		<a class="button" href="#" id="home_link">Domek</a>
-		<a class="button" href="#" id="next_page">Next</a>
+		<img src="/home/lukasz/logo.gif" />
+		<a class="button" href="#" id="previous_page">&larr;</a>
+		<a class="button" href="#" id="home_link">&home;</a>
+		<a class="button" href="#" id="next_page">&rarr;</a>
+		<a href="#" class="button small" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
 	</div>
 		<form action="#" method="" id="sender" accept-charset="utf-8">
 			<textarea  id="main_textarea" name="content" rows="3"  ></textarea>
@@ -158,9 +160,8 @@
 			<!-- controlls -->
 			<div>
 				<span id="charcount" class="button">0</span>
-				<a href="#" class="button small" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
-				<a href="#" class="button small" id="make_private">Sprywatyzuj</a>
-				<a href="#" class="button small" id="shorten_links">Skróć linki</a>
+				<a href="#" class="button small" title="Zmienia wiadomość na prywatną" id="make_private">Sprywatyzuj</a>
+				<a href="#" class="button small" title="Skraca wszystkie linki, które wpisano" id="shorten_links">Skróć linki</a>
 			</div>
 			<div id="throbber"><img src="app://icons/anim.gif" /></div>
 		</div>

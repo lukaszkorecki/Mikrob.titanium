@@ -95,8 +95,11 @@ var Update = new Class.create({
 		var self = this;
 		var ulink= new Element('a', {'href':'#', 'class': 'small user'}).update('^'+self.user.login);
 		ulink.observe('click',function(event){
-			event.preventDefault();
+		console.log('userLink');
+		try{ 
 			Titanium.Desktop.openURL('http://'+self.user.login+'blip.pl');
+		} catch(err) { console.dir(err); }
+			event.preventDefault();
 		});
 		return ulink;
 	},
@@ -130,10 +133,14 @@ var Update = new Class.create({
 		return container;
 	},
 
+/**
+ * TODO change these functions to build elements with Prototype's Element class
+ * instead of using only simple textreplacements
+ */
 	parseBody : function(body) {
-		function formatBlipZnaczki(body) {
-			return body.replace(/[☺☻☹★✩✫♫♪♥♦♣♠✿❀❁❄☾☂☀☁☃☄☮☯☎❦♀♂☚☛☠☢☣☤✌✍✎✂✆✈✉✔✘☥☸☦☧☨✝☩☪☭♚♛♜♝♞♟®™♈♉♊♋♌♍♎♏♐♑♒♓∞¥€£≤≥«»≠≈∫∑∏µ∆øπΩ•÷‰⇐⇒⇔√˚]/gi, "<span class=\"big\">$&</span>");
-		}
+//		function formatBlipZnaczki(body) {
+//			return body.replace(/[☺☻☹★✩✫♫♪♥♦♣♠✿❀❁❄☾☂☀☁☃☄☮☯☎❦♀♂☚☛☠☢☣☤✌✍✎✂✆✈✉✔✘☥☸☦☧☨✝☩☪☭♚♛♜♝♞♟®™♈♉♊♋♌♍♎♏♐♑♒♓∞¥€£≤≥«»≠≈∫∑∏µ∆øπΩ•÷‰⇐⇒⇔√˚]/gi, "<span class=\"big\">$&</span>");
+//		}
 		function formatLinks(txt) {
 			var findLinks = /http:\/\/\S+/gi;
 			return txt.replace(findLinks, '<a class="externalLink" target="_blank" href="$&" title="$&">$&</a>');
@@ -154,14 +161,12 @@ var Update = new Class.create({
 		body = body.replace(/\>/gi, '&gt;');
 		body = body.replace(/\</gi, '&lt;');
 
-		var text2 = formatBlipZnaczki(body);
-		var text1 = formatLinks(text2);
+		//var text2 = formatBlipZnaczki(body);
+		var text1 = formatLinks(body);
 		text2 = formatTags(text1).replace(/\/#/g, '/');
 		text1 = formatUsers(text2).replace(/\/\^/g, '/');
 		text2 = formatUsersTwitter(text1).replace(/\/\@/g, '/');
-		text1 = text2;
-
-		return text1;
+		return text2;
 		}
 });
 

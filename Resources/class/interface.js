@@ -138,5 +138,13 @@ var Interface = {
 		var content_n = content.replace(old_stuff, new_stuff);
 		console.log(content_n);
 		$('main_textarea').setValue(content_n);
-   }
+   },
+	cacheImage : function(url) {
+		 var home_dir = Titanium.Filesystem.getUserDirectory();
+		 var Sep = Titanium.Filesystem.getSeparator();
+		 var name = '.mikrob_img_cache';
+		 var img_cache_dir = home_dir+Sep+name+Sep;
+	},
+	getImageFromCache : function(name) {
+	}
 };
