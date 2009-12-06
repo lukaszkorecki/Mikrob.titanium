@@ -56,6 +56,7 @@ var Interface = {
 						//alert('going to the bottom');
 						dash.insert({'bottom': single_status});
 					}
+					Interface.injectQuote('quoted_link');
 				} catch(elo) { console.dir(elo); }
 				if (i<4) {
 					try {
@@ -65,6 +66,7 @@ var Interface = {
 					catch (notifyerr) {
 						console.dir(notifyerr);
 					}
+					single_status = null;
 				}
 				i++;
 				
@@ -121,22 +123,17 @@ var Interface = {
 		}
 	},
 	shortenLinksInString : function(string,shorten_function,exceptions) {
-		console.log("shortenLinksInString: "+string);
 			var findLinks = /http:\/\/\S+/gi;
 		var rez = string.match(findLinks);
-		console.dir(rez);
 		if(rez) {
-			console.log('mamy linki!');
 			rez.each(function(link) {
 				if(! link.match('/blip.pl/i') || ! link.match('/rdir.pl/i') || ! link.match('/youtube.com/'))	services[0].shortenLink(link);
 			});
 		} else { console.log('nic nie teges'); }
 	},
 	replaceLinks : function(old_stuff, new_stuff) {
-	   console.log(old_stuff+ " " + new_stuff);
 		var content = $('main_textarea').getValue();
 		var content_n = content.replace(old_stuff, new_stuff);
-		console.log(content_n);
 		$('main_textarea').setValue(content_n);
    },
 	cacheImage : function(url) {
@@ -146,5 +143,38 @@ var Interface = {
 		 var img_cache_dir = home_dir+Sep+name+Sep;
 	},
 	getImageFromCache : function(name) {
+	},
+	injectQuote : function(target_class) {
+		var els = $$('.'+target_class);
+		els.each(function(el) {
+			var blip_link = el.readAttribute('href');
+			if(blip_link.match('/blip/i')) {
+				var id = blip_link.split('/').last();
+				services[0].getBlip(id);
+				el.addClassName('s'+id);
+			}
+			el.removeClassName(target_class);
+		});
+	},
+	injectQuotedBlip : function(target_class, obj) {
+		var els = $$('.s'+target_class);
+		els.each(function(el) {
+			var blip="";
+			switch(obj.type) {
+				case 'DirectedMessage':
+					blip = new Message(obj,false);
+				break;
+				default:
+					blip = new Update(obj);
+				break;
+			}
+			var contents = blip.toQuoted();
+			el.insert('["');
+			el.insert(contents);
+			el.insert('"]');
+			el.removeClassName(target_class);
+			blip = null;
+		});
 	}
+
 };

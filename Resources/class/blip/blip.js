@@ -66,17 +66,19 @@ var Blip = new Class.create(Service,{
 		};
 	
 	},
-	expandBlip : function(blipid) {
+	getBlip : function(blipid) {
+		console.log("HELO! "+blipid);
 		var self = this;
 		req = new HttpConnector();
 		req.setRequestHeaders(self.commonHeaders());
 		req.setUserCred(self.login, self.password);
-		req.get(self.api_root+'updates/'+blipid);
+		req.get(self.api_root+'updates/'+blipid+self.include_string_full);
 		req.onSuccess = function(st, resp) {
 			console.log(st);
 			console.dir(resp);
-//			var obj = Titanium.JSON.parse(resp);
+			var obj = Titanium.JSON.parse(resp);
 //			Interface.setAreaContent(obj.url);
+			Interface.injectQuotedBlip(blipid,obj);
 		};
 		req.onFailure = function(st, resp) {
 			console.log(st);

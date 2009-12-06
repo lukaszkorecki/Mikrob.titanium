@@ -15,11 +15,8 @@ a  {
 }
 p { word-wrap: break-word; } /* fix them things */
 a:hover {
-/*
-	color:#0425aa;
-	background:#045eaa;
-*/
-	font-weight:bolder;
+	background:#222;
+	color:#eee
 }
 .update {
 	margin-bottom:10px;

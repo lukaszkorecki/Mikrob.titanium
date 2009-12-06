@@ -49,19 +49,19 @@ var Update = new Class.create({
 				var link = new Element('a',{'href':img_link});
 				link.observe('click',function(event) {
 					event.preventDefault();
-					Titanium.Desktop.openURL('open '+img_link);
+					Titanium.Desktop.openURL(img_link);
 
 				});
-				img_link = img_link.replace('.jpg','_standard.jpg');
-				if(img_link.match('secure_picture')) img_link += 'standard';
-				var img = new Element('img',{'src':img_link});
+				n_img_link = img_link.replace('.jpg','_standard.jpg');
+				if(n_img_link.match('secure_picture')) n_img_link += 'standard';
+				var img = new Element('img',{'src':n_img_link});
 				pic = new Element('span',{'class':'update_picture'}).update(link.update(img));
 		}
 		return pic;
 	 },
 	messageLink : function() {
 		  var self = this;
-		  var link = new Element('a', {'href':'#', 'class':'small msg button'}).update('Wiadomość');
+		  var link = new Element('a', {'href':'#', 'class':'msg button small'}).update('Wiadomość');
 		  link.observe('click',function(event) {
 				  var pointer = '>';
 				  if(self.type=='PrivateMessage') pointer = '>>';
@@ -72,7 +72,7 @@ var Update = new Class.create({
 	},
 	quoteLink : function() {
 		var self = this;
-		var link = new Element('a', {'href':'#', 'class':'quote button'}).update('Cytuj');
+		var link = new Element('a', {'href':'#', 'class':'quote button small'}).update('Cytuj');
 		link.observe('click',function(event) {
 		
 			Interface.setAreaContent('http://blip.pl/'+self.short_type+'/'+self.id);
@@ -93,7 +93,7 @@ var Update = new Class.create({
 	},
 	userLink : function() {
 		var self = this;
-		var ulink= new Element('a', {'href':'#', 'class': 'small user'}).update('^'+self.user.login);
+		var ulink= new Element('a', {'href':'#', 'class': 'button'}).update(self.user.login);
 		ulink.observe('click',function(event){
 		console.log('userLink');
 		try{ 
@@ -138,24 +138,21 @@ var Update = new Class.create({
  * instead of using only simple textreplacements
  */
 	parseBody : function(body) {
-//		function formatBlipZnaczki(body) {
-//			return body.replace(/[☺☻☹★✩✫♫♪♥♦♣♠✿❀❁❄☾☂☀☁☃☄☮☯☎❦♀♂☚☛☠☢☣☤✌✍✎✂✆✈✉✔✘☥☸☦☧☨✝☩☪☭♚♛♜♝♞♟®™♈♉♊♋♌♍♎♏♐♑♒♓∞¥€£≤≥«»≠≈∫∑∏µ∆øπΩ•÷‰⇐⇒⇔√˚]/gi, "<span class=\"big\">$&</span>");
-//		}
 		function formatLinks(txt) {
 			var findLinks = /http:\/\/\S+/gi;
-			return txt.replace(findLinks, '<a class="externalLink" target="_blank" href="$&" title="$&">$&</a>');
+			return txt.replace(findLinks, '<a class="quoted_link" target="_blank" href="$&" title="$&">$&</a>');
 		}
 		function formatUsers(txt) {
 			var findUsers = /\^([\w]{1,})/gi;
-			return txt.replace(findUsers, '<a class="externalLink" title="$&" href="http://$&.blip.pl"><span class="linksFirstLetter">^</span>$1</a>');
+			return txt.replace(findUsers, '<a target="_blank" class="externalLink" title="$&" href="http://$&.blip.pl"><span class="linksFirstLetter">^</span>$1</a>');
 		}
 		function formatUsersTwitter(txt) {
 			var findUsers = /\@([\w]{1,})/gi;
-			return txt.replace(findUsers, '<a class="externalLink" title="$&" href="http://$&.blip.pl"><span class="linksFirstLetter">@</span>$1</a>');
+			return txt.replace(findUsers, '<a target="_blank" class="externalLink" title="$&" href="http://$&.blip.pl"><span class="linksFirstLetter">@</span>$1</a>');
 		}
 		function formatTags(txt) {
 			var findTags = /#[a-zA-Z0-9ęóąśłżźćń_\-☺☻☹★✩✫♫♪♥♦♣♠✿❀❁❄☾☂☀☁☃☄☮☯☎❦♀♂☚☛☠☢☣☤✌✍✎✂✆✈✉✔✘☥☸☦☧☨✝☩☪☭♚♛♜♝♞♟®™♈♉♊♋♌♍♎♏♐♑♒♓…∞¥€£≤≥«»≠≈∫∑∏µ∆øπΩ•÷‰⇐⇒⇔√˚]*/gi;
-			return txt.replace(findTags, '<a class="externalLink tagLink" title="$&" href="http://blip.pl/tags/$&">$&</a>');
+			return txt.replace(findTags, '<a target="_blank" class="externalLink tagLink" title="$&" href="http://blip.pl/tags/$&">$&</a>');
 		}
 		body = body.replace('&', '&amp;');
 		body = body.replace(/\>/gi, '&gt;');
@@ -167,7 +164,17 @@ var Update = new Class.create({
 		text1 = formatUsers(text2).replace(/\/\^/g, '/');
 		text2 = formatUsersTwitter(text1).replace(/\/\@/g, '/');
 		return text2;
-		}
+
+		},
+		toQuoted : function() {
+		   var self = this;
+		   var sztrong = new Element('strong');
+		   sztrong.update(self.userLink());
+		   var container = new Element('span');
+		   container.insert(sztrong);
+		   container.insert(self.body);
+		   return container;
+	}
 });
 
 var Message = new Class.create(Update, {
@@ -184,7 +191,7 @@ var Message = new Class.create(Update, {
 	},
 	recipientLink : function() {
 		var self = this;
-		var recipient_link = new Element('a', {'href':'#', 'class':'recipient'}).update('^'+self.recipient.login);
+		var recipient_link = new Element('a', {'href':'#', 'class':'button'}).update(self.recipient.login);
 		recipient_link.observe('click',function(event){
 			event.preventDefault();
 		});
@@ -226,6 +233,17 @@ var Message = new Class.create(Update, {
 		container.insert(p);
 		container.insert(self.getActions());
 		return container;
+	},
+		toQuoted : function() {
+		   var self = this;
+		   var sztrong = new Element('strong');
+		   sztrong.insert(self.userLink());
+		   sztrong.insert(self.separator);
+		   sztrong.insert(self.recipientLink());
+		   var container = new Element('span');
+		   container.insert(sztrong);
+		   container.insert(self.body);
+		   return container;
 	}
 });
 var TwitterBlip = new Class.create(Update,{
