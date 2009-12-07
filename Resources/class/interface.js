@@ -16,6 +16,53 @@ var Interface = {
 		$('charcount').update('0');
 	},
 	Dashboard : {
+		drawPage : function(updates) {
+			var self = this;
+			var len = updates.length;
+			
+			var i=0;
+			var dash = $('dash1');
+			if(is_update !==0) updates.reverse();
+			updates.each(function(blip){
+				var single_status = {};
+				switch(blip.type) {
+					case 'Notice':
+						single_status = new Notice(blip);
+						break;
+					
+					case 'PrivateMessage':
+						if(blip.user.login ==='t')
+						{
+							single_status = new TwitterBlip(blip);
+						}
+						else
+						{
+							single_status  = new Message(blip, true);
+						}
+					break;
+					case 'DirectedMessage':
+						single_status = new Message(blip, false);
+						break;
+					default:
+						single_status = new Update(blip);
+						break;
+				}
+					if(is_update !== 0) {
+					
+						//alert('going to the top');
+						dash.insert({'top': single_status});
+					} else {
+						//alert('going to the bottom');
+						dash.insert({'bottom': single_status});
+					}
+					Interface.injectQuote('quoted_link');
+				i++;
+				
+			});
+
+		$$('.unread').each(function(el) { el.removeClassName('unread'); } );
+		$('throbber').toggle();
+		},
 		draw : function(updates,is_update) {
 			var self = this;
 			var len = updates.length;
@@ -76,7 +123,8 @@ var Interface = {
 			$$('.unread').each(function(el) { el.removeClassName('unread'); } );
             Interface.setUnreadCount('0');
 		} else {
-			Interface.setUnreadCount($$('.unread').length);
+			var unr = $$('.unread').length;
+			Interface.setUnreadCount(""+unr+"");
 //		FIXME make the column show only maxlimit of updates
 //			num = $$('.unread').length;
 //			upd  =$$('.updates');
@@ -103,6 +151,9 @@ var Interface = {
 			 
 	 },
     setUnreadCount : function(count_str) {
+		 if(count_str =='0') {
+			 count_str ="";
+		 }
        $('unread_count').update(count_str);
        try {
            Titanium.UI.setBadge(count_str);

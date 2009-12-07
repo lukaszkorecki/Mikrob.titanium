@@ -96,7 +96,7 @@ var Update = new Class.create({
 		var ulink= new Element('a', {'href':'#', 'class': 'button'}).update(self.user.login);
 		ulink.observe('click',function(event){
 		try{ 
-			Titanium.Desktop.openURL('http://'+self.user.login+'blip.pl');
+			Titanium.Desktop.openURL('http://'+self.user.login+'.blip.pl');
 		} catch(err) { console.dir(err); }
 			event.preventDefault();
 		});
@@ -193,6 +193,7 @@ var Message = new Class.create(Update, {
 		var recipient_link = new Element('a', {'href':'#', 'class':'button'}).update(self.recipient.login);
 		recipient_link.observe('click',function(event){
 			event.preventDefault();
+			Titanium.Desktop.openURL('http://'+self.recipient.login+'.blip.pl');
 		});
 		return recipient_link;
 	},
