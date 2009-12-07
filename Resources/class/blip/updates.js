@@ -29,7 +29,7 @@ var Update = new Class.create({
 				break;
 		}
 		this.pictures = obj.pictures || {};
-		this.cclass = 'update ';
+		this.cclass = 'up'+this.id+' update ';
 		if(this.user.login == username)
 		{
 			this.cclass += " own";
@@ -90,6 +90,9 @@ var Update = new Class.create({
 			event.preventDefault();
 		});
 		return link;
+	},
+	deleteLink : function() {
+
 	},
 	userLink : function() {
 		var self = this;
