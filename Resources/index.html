@@ -18,7 +18,7 @@
 		Interface.notify(Titanium.App.getName(),Titanium.App.getVersion());
 
 		var services = new Array();
-		var username ="";
+		var username,loop1 ="";
 		document.observe('dom:loaded',function(){
 			Titanium.userAgent = Titanium.App.getName() +  " " + Titanium.App.getVersion();
 			try {
@@ -57,16 +57,6 @@
 				$('throbber').toggle();
 				$('sender').toggle();
 				event.preventDefault();
-			});
-			Element.observe('home_link','click',function(event) {
-				services[0].dashboard_last_id=0;
-				services[0].dashboardGet(0);
-				event.preventDefault();
-				loop1 = new PeriodicalExecuter(run_loop1,10);
-				function run_loop1() {
-					$('throbber').toggle();
-					services[0].dashboardGet();
-				}
 			});
 			Element.observe('sender','submit',function(event){
 				event.preventDefault();
@@ -111,17 +101,41 @@
 
 			});
 			// Pagination
-			Element.observe('next_page','click',function(event) {
-				event.preventDefault();
+			Element.observe('home_link','click',function(event) {
 				services[0].dashboard_last_id=0;
-				var p =services[0].current_page + 1;
+				services[0].dashboardProcess = Interface.Dashboard.draw;
+				services[0].dashboardGet();
+				event.preventDefault();
+				$('current_page').update();
+				loop1 = new PeriodicalExecuter(run_loop1,10);
+				function run_loop1() {
+					$('throbber').toggle();
+					services[0].dashboardGet();
+				}
+			});
+			Element.observe('next_page','click',function(event) {
+				loop1.stop();
+				event.preventDefault();
+				services[0].dashboardProcess = Interface.Dashboard.drawPage;
+				services[0].dashboard_last_id=0;
+				services[0].current_page = services[0].current_page + 1;
+				var p =services[0].current_page;
+				console.log(p);
+				console.log(services[0].current_page);
 				services[0].dashboardGet(p);
+				$('current_page').update("Strona: "+p);
 				console.log(services[0].current_page);
 			});
 			Element.observe('previous_page','click',function(event) {
+				loop1.stop();
 				event.preventDefault();
+				services[0].dashboardProcess = Interface.Dashboard.drawPage;
 				services[0].dashboard_last_id=0;
-				var p = services[0].current_page - 1;
+				services[0].current_page = services[0].current_page - 1;
+				var p =services[0].current_page;
+				console.log(p);
+				console.log(services[0].current_page);
+				$('current_page').update("Strona: "+p);
 				services[0].dashboardGet(p);
 				console.log(services[0].current_page);
 			});
@@ -147,8 +161,9 @@
 			</form>
 		<!-- update content form -->
 	<div id="paginator">
+		<span id="current_page" class="button"></span>
 		<a class="button" href="#" id="previous_page">&larr;</a>
-		<a class="button" href="#" id="home_link">.</a>
+		<a class="button" href="#" id="home_link">Kokpit</a>
 		<a class="button" href="#" id="next_page">&rarr;</a>
 		<a href="#" class="button small" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
 	</div>

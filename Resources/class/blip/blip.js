@@ -1,4 +1,3 @@
-
 /**
  * BlipApi class, extends Service class 
  */
