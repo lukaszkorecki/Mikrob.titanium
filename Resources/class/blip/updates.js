@@ -95,7 +95,6 @@ var Update = new Class.create({
 		var self = this;
 		var ulink= new Element('a', {'href':'#', 'class': 'button'}).update(self.user.login);
 		ulink.observe('click',function(event){
-		console.log('userLink');
 		try{ 
 			Titanium.Desktop.openURL('http://'+self.user.login+'blip.pl');
 		} catch(err) { console.dir(err); }

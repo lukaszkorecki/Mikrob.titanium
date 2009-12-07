@@ -39,7 +39,6 @@ var Blip = new Class.create(Service,{
 		req.setUserCred(self.login, self.password);
 		req.get(url);
 		req.onSuccess = function(status,response) {
-			console.log("GET:"+status);
 			var ob = Titanium.JSON.parse(response);
 			if(ob.length >0) {
 				self.dashboard_last_id= ob[0].id;
@@ -62,20 +61,16 @@ var Blip = new Class.create(Service,{
 		req.post(self.api_root+'updates','update[body]='+str);
 		req.onSuccess = function(resp) { self.afterSend(resp); };
 		req.onFailure = function(resp) {
-			console.dir(resp);
 		};
 	
 	},
 	getBlip : function(blipid) {
-		console.log("HELO! "+blipid);
 		var self = this;
 		req = new HttpConnector();
 		req.setRequestHeaders(self.commonHeaders());
 		req.setUserCred(self.login, self.password);
 		req.get(self.api_root+'updates/'+blipid+self.include_string_full);
 		req.onSuccess = function(st, resp) {
-			console.log(st);
-			console.dir(resp);
 			var obj = Titanium.JSON.parse(resp);
 //			Interface.setAreaContent(obj.url);
 			Interface.injectQuotedBlip(blipid,obj);
@@ -87,20 +82,16 @@ var Blip = new Class.create(Service,{
 
 	 },
 	shortenLink : function(url) {
-		console.log('services->shortlink'+url);
 		var self = this;
 		req = new HttpConnector();
 		req.setRequestHeaders(self.commonHeaders());
 		req.setUserCred(self.login, self.password);
 		req.post(self.api_root+'shortlinks', 'shortlink[original_link]='+url);
 		req.onSuccess = function(st, resp) {
-			console.log('services->shortlink->shortened'+url);
-			console.log(st);
 			var obj = Titanium.JSON.parse(resp);
 			Interface.replaceLinks(url, obj.url);
 		}; 
 		req.onFailure = function(st, resp) {
-			console.log(st);
 			Interface.notify("Błąd","Tworzenie linka się nie powiedło");
 		};
 	},
@@ -111,8 +102,6 @@ var Blip = new Class.create(Service,{
 		req.setUserCred(self.login, self.password);
 		req.get(self.api_root+'shortlinks', 'shortlink[original_link]='+url);
 		req.onSuccess = function(st, resp) {
-			console.log(st);
-			console.dir(resp);
 //			var obj = Titanium.JSON.parse(resp);
 //			Interface.setAreaContent(obj.url);
 		};

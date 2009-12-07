@@ -151,4 +151,12 @@ input[type="text"], input[type="password"] {
 }
 .priv_t { border:red;}
 .small { font-size:80%;}
+.quoted {
+	-webkit-border-radius:4px;
+	border:1px solid #444;
+	display:block;
+}
+.quoted:hover a{
+	color:#000;
+}
 /* system specific */

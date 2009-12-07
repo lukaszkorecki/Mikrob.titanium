@@ -31,15 +31,15 @@ var Interface = {
 						break;
 					
 					case 'PrivateMessage':
-					if(blip.user.login ==='t')
-					{
-						single_status = new TwitterBlip(blip);
-					}
-					else
-					{
-						single_status  =new Message(blip, true);
-					}
-						break;
+						if(blip.user.login ==='t')
+						{
+							single_status = new TwitterBlip(blip);
+						}
+						else
+						{
+							single_status  = new Message(blip, true);
+						}
+					break;
 					case 'DirectedMessage':
 						single_status = new Message(blip, false);
 						break;
@@ -127,7 +127,7 @@ var Interface = {
 		var rez = string.match(findLinks);
 		if(rez) {
 			rez.each(function(link) {
-				if(! link.match('/blip.pl/i') || ! link.match('/rdir.pl/i') || ! link.match('/youtube.com/'))	services[0].shortenLink(link);
+				if( link.search('blip.pl') ==-1) services[0].shortenLink(link);
 			});
 		} else { console.log('nic nie teges'); }
 	},
@@ -148,7 +148,7 @@ var Interface = {
 		var els = $$('.'+target_class);
 		els.each(function(el) {
 			var blip_link = el.readAttribute('href');
-			if(blip_link.match('/blip/i')) {
+			if(blip_link.search('blip') != -1) {
 				var id = blip_link.split('/').last();
 				services[0].getBlip(id);
 				el.addClassName('s'+id);
@@ -169,9 +169,8 @@ var Interface = {
 				break;
 			}
 			var contents = blip.toQuoted();
-			el.insert('["');
-			el.insert(contents);
-			el.insert('"]');
+			contents.addClassName('quoted');
+			el.update(contents);
 			el.removeClassName(target_class);
 			blip = null;
 		});
