@@ -179,22 +179,17 @@ var Interface = {
 	injectQuotedBlip : function(target_class, obj) {
 		var els = $$('.s'+target_class);
 		els.each(function(el) {
-			var blip="";
-			switch(obj.type) {
-				case 'DirectedMessage':
-					blip = new Message(obj,false);
-				break;
-				default:
-					blip = new Update(obj);
-				break;
-			}
-			var contents = blip.toQuoted();
-			contents.addClassName('quoted');
-			el.update(contents);
-			el.removeClassName(target_class);
-			// FIXME tooo slooow!
-			Interface.injectQuote('quoted_link');
-			blip = null;
+			el.update('[Blip]');
+			el.observe('click', function(event) {
+				event.preventDefault();
+				var blip = Interface.get_update_object(obj);
+				var contents = blip.toQuoted();
+				contents.addClassName('quoted');
+				var elem = el.up('p') || el.up(); //.next();
+				elem.insert({'after':contents});
+				el.remove()
+				Interface.injectQuote('quoted_link');
+			});
 		});
 	}
 
