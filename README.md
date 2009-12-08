@@ -2,7 +2,7 @@
 
 ## Polski
 
-*Uwaga* - ten projekt jest natury bardzo eksperymentalnej, mimo że zachowuje się dość stabilnie i robi to czego można by się spodziewać - jedno jest pewne - jego nazwa **na pewno** się zmieni.
+*Uwaga* - ten projekt jest natury bardzo eksperymentalnej. Interfejs użytkownika na pewno ulegnie zmianie.
 
 Mikrob jest zbudowany w oparciu o [Titanium firmy Appcelerator](http://appcelerator.com) i jest Bogatą Aplikacją Internetową na Twoim Pulpicie.
 
@@ -10,16 +10,24 @@ Mikrob jest zbudowany w oparciu o [Titanium firmy Appcelerator](http://appcelera
 
 Fajnie.
 
-Jeśli jesteś użytkownikiem Windowsa i chcesz mieć ładne powiadomienia na pulpicie - [Snarl](http://www.fullphat.net/) będzie twoim przyjacielem. Jeśli używasz OSX potrzebujesz [Growl](http://growl.info) - ale z pewnością go już masz.
+Jeśli jesteś użytkownikiem Windowsa i chcesz mieć ładne powiadomienia na pulpicie - [Snarl](http://www.fullphat.net/) będzie twoim przyjacielem. Osobiście zalecam użycie [Growl for Windows](http://www.growlforwindows.com/) wraz z pluginem [Snarly](http://blog.growlforwindows.com/2009/05/growl-snarl-gnarly.html) - Snarl lubi kraść focus aktywnego okna, Growl jest bardziej przyjazny.
+
+Jeśli używasz OSX potrzebujesz [Growl](http://growl.info) - ale z pewnością go już masz.
 
 Użytkownicy Linuxa nie musza nic robić oprócz działającej instalacji libnotify.
 
 Wszelkie informacje odnośnie oficjalnego wydania aplikacji oraz nowych funkcjach itd można znaleźć bezpośrednio [u mnie na blipie](http://plugawy.blip.pl).
 
+### Jak tego używać
 
-***
+By wysłać wiadomość po prostu pacnij Enter. Możesz też skracać linki by zaoszczędzić na znakach - serwis [rdir](http://rdir.pl) jest używany jako usługa do skracania.
+
+Cytowane statusy możesz przejrzeć klikając na `[Blip]` (możesz je potem przejrzeć w przeglądarce albo samemu zacytować).
+
+Paginacja działa mniej więcej tak jak na stronie www blipa (choć czasami może się spsuć).
+
 ## English
-*Warning* - this project is highly experimental, while it most of the time behaves properly and as expected there's one thing that's sure about it - the name of the application **will** change.
+*Warning* - this project is quite experimental. The user interface will change for sure.
 
 Mikrob is built using [Appcelerator's Titanium](http://appcelerator.com) and as such represents the so called Rich Internet Applications on the Desktop.
 
@@ -27,4 +35,6 @@ Mikrob is built using [Appcelerator's Titanium](http://appcelerator.com) and as 
 
 Sweet.
 
-If you are a Windows user and want to get those neat-looking notifications on your desktop, get [Snarl](http://www.fullphat.net/index.php). If you are on OSX [Growl](http://growl.info) is your best bet - but probably you have it already.
+If you are a Windows user and want to get those neat-looking notifications on your desktop, get [Snarl](http://www.fullphat.net/index.php). Better yet - I suggest you get [Growl for Windows](http://www.growlforwindows.com/) along with [Snarly plugin](http://blog.growlforwindows.com/2009/05/growl-snarl-gnarly.html). Snarl likes to steal focus of your active window, and Growl is more friendly.
+
+If you are on OSX [Growl](http://growl.info) is your best bet - but probably you have it already.
