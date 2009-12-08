@@ -59,6 +59,21 @@ var Update = new Class.create({
 		}
 		return pic;
 	 },
+	updatePictureLink : function() {
+		var self = this;
+		var link = false;
+		if (self.pictures !==false && self.pictures[0] != undefined) {
+				var img_link = self.pictures[0].url;
+				link = new Element('a',{'href':img_link});
+				link.observe('click',function(event) {
+					event.preventDefault();
+					Titanium.Desktop.openURL(img_link);
+
+				});
+				link.update('[Pic]');
+		}
+		return link;
+	},
 	messageLink : function() {
 		  var self = this;
 		  var link = new Element('a', {'href':'#', 'class':'msg button small'}).update('Wiadomość');
@@ -175,6 +190,7 @@ var Update = new Class.create({
 		   var container = new Element('span');
 		   container.insert(sztrong);
 		   container.insert(self.body);
+		   container.insert(self.updatePictureLink());
 		   container.insert(self.quoteLink());
 		   container.insert(self.permaLink());
 		   container.insert(self.createdAt());
@@ -249,6 +265,7 @@ var Message = new Class.create(Update, {
 		   var container = new Element('span');
 		   container.insert(sztrong);
 		   container.insert(self.body);
+		   container.insert(self.updatePictureLink());
 		   container.insert(self.quoteLink());
 		   container.insert(self.permaLink());
 		   container.insert(self.createdAt());
