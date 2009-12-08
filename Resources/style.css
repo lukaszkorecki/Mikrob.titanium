@@ -24,8 +24,7 @@ a:hover {
 	margin-bottom:10px;
 	padding:4px;
 	padding-top:0;
-	border-bottom:1px solid #333;
-	background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb));
+	border-bottom:1px solid #eee;
 
 }
 .update p {
@@ -50,6 +49,21 @@ a:hover {
 	float:left;
 	display:block;
 			z-index:10;
+}
+.quoted {
+	-webkit-border-radius:4px;
+	background:#eee;
+	padding:5px;
+	width:80%;
+	margin-top:10px;
+	margin-left:40px;
+	display:block;
+	color:#888;
+	box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
+}
+.quoted:hover a{
+	color:#000;
+	background:#fff;
 }
 .own p { margin-left:5px; margin-right:40px;}
 .own .avatar_container {float: right;}
@@ -91,6 +105,7 @@ a:hover {
 }
 .actions {
 	margin-top:15px;
+	margin-bottom:5px;
 	clear:both;
 }
 .button {
@@ -100,7 +115,7 @@ a:hover {
 	box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
 	border:1px solid #888;
 	-webkit-border-radius:4px;
-	margin: 0 3px 0 3px ;
+	margin: 3px;
 	background:#eee;
 }
 .actions span {
@@ -108,7 +123,10 @@ a:hover {
 	margin-bottom:10px;
 /*	display:block; */
 }
-input, textarea { -webkit-border-readius:6px;}
+input, textarea {
+	-webkit-border-readius:6px;
+
+}
 textarea { font-family:helvetica; }
 #controls {
 	position:fixed;
@@ -117,11 +135,6 @@ textarea { font-family:helvetica; }
 	bottom:0;
 	left:0;
 	width:100%;
-}
-#controls form textarea {
-	width:90%;
-	margin:0 auto;
-display:block;
 }
 input[type="text"], input[type="password"] {
 	width: 100%;
@@ -153,16 +166,19 @@ input[type="text"], input[type="password"] {
 }
 .priv_t { border:red;}
 .small { font-size:80%;}
-.quoted {
-	-webkit-border-radius:4px;
-	background:#eee;
-	padding:5px;
-	width:80%;
-	margin-top:10px;
-	margin-left:40px;
-	display:block;
+/* sender form */
+textarea {
+	width:70% !important;
+	float:left;
+	height:70px;
+margin:5px 0 0 10px;
 }
-.quoted:hover a{
-	color:#000;
+#sender  div {
+	float: left;
+	margin-left: 10px;
+	margin-top: 2px;
+	width: 23%;
+
 }
-/* system specific */
+#sender div .sender_item { display:block; width: 70%; }
+	#unread_count { text-align:center}

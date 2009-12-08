@@ -1,7 +1,8 @@
 /**
  *
  * Interface singleton - manages the tabs, views, columns and single purpose windows/sections 
- * 
+ * TODO this object needs to be turned into a class and service specific functions need to go to 
+ * its subclasses
  * @package mikrob.class.interface
  * @author Lukasz
  */
@@ -51,10 +52,10 @@ var Interface = {
 			updates.each(function(blip){
 					var single_status = Interface.get_update_object(blip);
 					dash.insert({'bottom': single_status});
-					Interface.injectQuote('quoted_link');
+					Interface.expandLink('quoted_link');
 				
 			});
-			Interface.injectQuote('quoted_link');
+	//		Interface.expandLink('quoted_link');
 			$$('.unread').each(function(el) { el.removeClassName('unread'); } );
 			$('throbber').toggle();
 		},
@@ -72,7 +73,7 @@ var Interface = {
 					} else {
 						dash.insert({'bottom': single_status});
 					}
-					Interface.injectQuote('quoted_link');
+					Interface.expandLink('quoted_link');
 				if (i<4) {
 					try {
 						var av = 'http://blip.pl'+single_status.user.avatar.url_50 || false;
@@ -100,7 +101,7 @@ var Interface = {
 
 		}
 		$('throbber').toggle();
-		Interface.injectQuote('quoted_link');
+		//Interface.expandLink('quoted_link');
 		}
 	},
 	notify : function(login, body,img) {
@@ -164,14 +165,21 @@ var Interface = {
 	},
 	getImageFromCache : function(name) {
 	},
-	injectQuote : function(target_class) {
+	expandLink : function(target_class) {
 		var els = $$('.'+target_class);
 		els.each(function(el) {
 			var blip_link = el.readAttribute('href');
+			var id="";
 			if(blip_link.search('blip') != -1) {
-				var id = blip_link.split('/').last();
+				id = blip_link.split('/').last();
 				services[0].getBlip(id);
 				el.addClassName('s'+id);
+			}
+			if (blip_link.search('rdir') != -1) {
+				
+				id = blip_link.split('/').last();
+				services[0].expandLink(id);
+				el.addClassName('r'+id);
 			}
 			el.removeClassName(target_class);
 		});
@@ -187,9 +195,26 @@ var Interface = {
 				contents.addClassName('quoted');
 				var elem = el.up('p') || el.up(); //.next();
 				elem.insert({'after':contents});
-				el.remove()
-				Interface.injectQuote('quoted_link');
+				el.remove();
+				Interface.expandLink('quoted_link');
 			});
+		});
+	},
+	expandShortenUrl : function(id, obj) {
+		var els = $$('.r'+id);
+		els.each(function(el) {
+			el.update();
+			el.insert('[');
+			el.insert(obj.original_link.split('/')[2]);
+			el.insert(']');
+			var stats_link = new Element('a',{
+				'href':'http://rdir.pl/'+id+'/stats',
+				'class':'small',
+				'target':'_blank'
+				}
+			).update('s');
+			el.insert({'after':stats_link});
+			el.removeClassName('r'+id);
 		});
 	}
 

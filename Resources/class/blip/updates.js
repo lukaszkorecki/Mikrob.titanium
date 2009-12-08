@@ -120,10 +120,11 @@ var Update = new Class.create({
 		});
 		return ulink;
 	},
-	userAvatar : function() {
+	userAvatar : function(size) {
 		var self = this;
 
-		var avid= self.user.avatar ? self.user.avatar.url_30 : "";
+		if ( ! size) size="30";
+		var avid= self.user.avatar ? self.user.avatar['url_'+size] : "";
 		var avatar = "http://blip.pl" + avid;
 		return new Element('img',{'src': avatar, 'class':'avatar'});
 	},
@@ -186,7 +187,8 @@ var Update = new Class.create({
 		toQuoted : function() {
 		   var self = this;
 		   var sztrong = new Element('strong');
-		   sztrong.update(self.userLink());
+		   sztrong.insert(self.userAvatar('15'));
+		   sztrong.insert(self.userLink());
 		   var container = new Element('span');
 		   container.insert(sztrong);
 		   container.insert(self.body);
@@ -219,9 +221,10 @@ var Message = new Class.create(Update, {
 		});
 		return recipient_link;
 	},
-	recipientAvatar: function() {
+	recipientAvatar: function(size) {
 		var self = this;
-		var ravid= self.recipient.avatar ? self.recipient.avatar.url_30 : "";
+		if (! size) {size="30";}
+		var ravid= self.recipient.avatar ? self.recipient.avatar['url_'+size] : "";
 		var ravatar = "http://blip.pl" + ravid;
 		return new Element('img',{'src': ravatar, 'class':'ravatar'});
 	},
@@ -257,19 +260,21 @@ var Message = new Class.create(Update, {
 		return container;
 	},
 		toQuoted : function() {
-		   var self = this;
-		   var sztrong = new Element('strong');
-		   sztrong.insert(self.userLink());
-		   sztrong.insert(self.separator);
-		   sztrong.insert(self.recipientLink());
-		   var container = new Element('span');
-		   container.insert(sztrong);
-		   container.insert(self.body);
-		   container.insert(self.updatePictureLink());
-		   container.insert(self.quoteLink());
-		   container.insert(self.permaLink());
-		   container.insert(self.createdAt());
-		   return container;
+			var self = this;
+			var sztrong = new Element('strong');
+			sztrong.insert(self.userAvatar('15'));
+			sztrong.insert(self.userLink());
+			sztrong.insert(self.separator);
+			sztrong.insert(self.recipientAvatar('15'));
+			sztrong.insert(self.recipientLink());
+			var container = new Element('span');
+			container.insert(sztrong);
+			container.insert(self.body);
+			container.insert(self.updatePictureLink());
+			container.insert(self.quoteLink());
+			container.insert(self.permaLink());
+			container.insert(self.createdAt());
+			return container;
 	}
 });
 var TwitterBlip = new Class.create(Update,{

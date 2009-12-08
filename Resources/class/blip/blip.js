@@ -1,5 +1,8 @@
 /**
  * BlipApi class, extends Service class 
+ * TODO make HttpConnector a class variable
+ * FIXME all onSuccess and onFailure callbacks should be defined outside of the class
+ * definition 
  */
 var Blip = new Class.create(Service,{
 	initialize : function($super, login, password) {
@@ -57,7 +60,9 @@ var Blip = new Class.create(Service,{
 		req = new HttpConnector();
 		req.setRequestHeaders(self.commonHeaders());
 		req.setUserCred(self.login, self.password);
-		req.post(self.api_root+'updates','update[body]='+str);
+		try {
+			req.post(self.api_root+'updates','update[body]='+encodeURIComponent(str));
+		} catch (chuj) { console.dir(chuj); }
 		req.onSuccess = function(resp) { self.afterSend(resp); };
 		req.onFailure = function(resp) {
 		};
@@ -94,15 +99,15 @@ var Blip = new Class.create(Service,{
 			Interface.notify("Błąd","Tworzenie linka się nie powiedło");
 		};
 	},
-	expandLink : function(url) {
+	expandLink : function(id) {
 		var self = this;
 		req = new HttpConnector();
 		req.setRequestHeaders(self.commonHeaders());
 		req.setUserCred(self.login, self.password);
-		req.get(self.api_root+'shortlinks', 'shortlink[original_link]='+url);
+		req.get(self.api_root+'shortlinks/'+id);
 		req.onSuccess = function(st, resp) {
-//			var obj = Titanium.JSON.parse(resp);
-//			Interface.setAreaContent(obj.url);
+			var obj = Titanium.JSON.parse(resp);
+			Interface.expandShortenUrl(id,obj);
 		};
 		req.onFailure = function(st, resp) {
 			console.log(st);
