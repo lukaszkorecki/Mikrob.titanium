@@ -176,6 +176,7 @@ var Update = new Class.create({
 		   container.insert(sztrong);
 		   container.insert(self.body);
 		   container.insert(self.quoteLink());
+		   container.insert(self.permaLink());
 		   container.insert(self.createdAt());
 		   return container;
 	}
@@ -249,6 +250,7 @@ var Message = new Class.create(Update, {
 		   container.insert(sztrong);
 		   container.insert(self.body);
 		   container.insert(self.quoteLink());
+		   container.insert(self.permaLink());
 		   container.insert(self.createdAt());
 		   return container;
 	}
