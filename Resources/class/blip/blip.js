@@ -48,8 +48,7 @@ var Blip = new Class.create(Service,{
 			}
 		};
 		req.onFailure = function(status, response) {
-			alert(status);
-			alert(response);
+			Interface.notify('Błąd', 'Błąd połączenia z API: '+status);
 		};
 	},
 	dashboardProcess :function(response_obj,is_update){},
@@ -65,6 +64,8 @@ var Blip = new Class.create(Service,{
 		} catch (chuj) { console.dir(chuj); }
 		req.onSuccess = function(resp) { self.afterSend(resp); };
 		req.onFailure = function(resp) {
+			Interface.notify('Błąd', 'Nie ma takiego użytkownika');
+			self.afterSend(resp);
 		};
 	
 	},

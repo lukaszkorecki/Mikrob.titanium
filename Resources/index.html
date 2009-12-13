@@ -86,7 +86,12 @@
 			});
 			Element.observe('mark_as_read_button','click',function(event){
 				event.preventDefault();
-				$$('.unread').each(function(el) { el.removeClassName('unread'); } );
+				var unread = $$('.unread');
+
+				for(var i=19, l = unread.length;i<l;i++) {
+					unread[i].remove();
+				}
+				unread.each(function(el) { el.removeClassName('unread'); } );
 				Interface.setUnreadCount('0');
 			});
 			Element.observe('make_private','click',function(event){

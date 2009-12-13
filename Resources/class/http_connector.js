@@ -42,6 +42,7 @@ var HttpConnector = new Class.create({
 			if(this.readyState == self.client.DONE) {
 			
 				var status = self.client.status;
+				console.log('HttpConnector get status'+ status);
 				if (status>=200 && status < 400) {
 					self.onSuccess(status, self.client.responseText);
 				}else {
@@ -62,6 +63,7 @@ var HttpConnector = new Class.create({
 			if(this.readyState == self.client.DONE) {
 			
 				var status = self.client.status;
+				console.log('HttpConnector delete status'+ status);
 				if (status>=200 && status < 400) {
 					self.onSuccess(status, self.client.responseText);
 				}else {
@@ -103,6 +105,7 @@ var HttpConnector = new Class.create({
 			if(this.readyState == self.client.DONE) {
 			
 				var status = self.client.status;
+				console.log('HttpConnector post status'+ status);
 				if (status===200 || status ===201) {
 					self.onSuccess(status, self.client.responseText);
 				}else {
