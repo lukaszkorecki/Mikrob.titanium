@@ -6,15 +6,21 @@
 	<script type="text/javascript" src="libs/effects.js"></script>
 
 	<!-- classess -->
-	<script src="class/http_connector.js" type="text/javascript" charset="utf-8"></script>
-	<script src="class/service.js" type="text/javascript" charset="utf-8"></script>
-	<script src="class/interface.js" type="text/javascript" charset="utf-8"></script>
+	<script src="class/application/http_connector.js" type="text/javascript" charset="utf-8"></script>
+	<script src="class/application/service.js" type="text/javascript" charset="utf-8"></script>
+	<script src="class/application/interface.js" type="text/javascript" charset="utf-8"></script>
+	<!-- blip stuff -->
 	<script src="class/blip/blip.js" type="text/javascript" charset="utf-8"></script>
 	<script src="class/blip/blipi.js" type="text/javascript" charset="utf-8"></script>
+	<script src="blipi_api_key.js" type="text/javascript" charset="utf-8"></script>
 	<script src="class/blip/updates.js" type="text/javascript" charset="utf-8"></script>
+	<!-- flaker stuff -->
 	<script src="class/flaker/flaker.js" type="text/javascript" charset="utf-8"></script>
 
-	<!-- szit -->
+	<!--
+	proto-code,
+	TODO refactor and move into external classes/files
+	-->
 	<script type="text/javascript" charset="utf-8">
 		Interface.notify(Titanium.App.getName(),Titanium.App.getVersion());
 
@@ -38,8 +44,8 @@
 				var pass = $F(this['pass']);
 				services.push( new Blip(username, pass));
 				// TODO it works - so make it happen somewhere else
-				// idealy would be to have one loop, that just runs stuff
-				// but depeneding on different services
+				// ideally would be to have one loop, that just runs stuff
+				// but depending on different services
 				// we might create separate intervals...
 				services[0].dashboardProcess = Interface.Dashboard.draw;
 				services[0].afterSend = Interface.afterSend;
@@ -187,9 +193,7 @@
 			<div id="throbber"><img src="app://icons/anim.gif" /></div>
 		</div>
 		<!-- here b columns -->
-		<div id="dash1" class="column">
-			
-		</div>
+		<div id="dash1" class="column"><img src="icons/anim.gif" alt="AJAX!" /></div>
 	</div>
 </body>
 </html>

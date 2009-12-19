@@ -12,6 +12,9 @@ var HttpConnector = new Class.create({
 		this.client = Titanium.Network.createHTTPClient();
 		// TODO add custom user agent
 		this.headers = this.setRequestHeaders(options || {});
+		// overrrrrrride the UA (http headers seem to have no effect)
+		this.client.userAgent = Titanium.App.getName()+" "+Titanium.App.getVersion();
+ 
 	},
 /**
  * @param object - Object literal representing request headers (i.e{'Content-Type':'application/json'});
@@ -38,12 +41,15 @@ var HttpConnector = new Class.create({
  */
 	get : function(url) {
 		var self = this;
+		console.log(url);
 		self.client.onreadystatechange = function() {
 			if(this.readyState == self.client.DONE) {
 			
 				var status = self.client.status;
 				console.log('HttpConnector get status'+ status);
-				if (status>=200 && status < 400) {
+				console.log('HttpConnector get response'+ self.client.responseText);
+				console.dir(self.client);
+				if (self.client.statusText == 'OK') {
 					self.onSuccess(status, self.client.responseText);
 				}else {
 					self.onFail(status, self.client.responseText);
@@ -65,7 +71,9 @@ var HttpConnector = new Class.create({
 			
 				var status = self.client.status;
 				console.log('HttpConnector delete status'+ status);
-				if (status>=200 && status < 400) {
+				console.log('HttpConnector delete response'+ self.client.responseText);
+				console.dir(self.client);
+				if (self.client.statusText == 'OK') {
 					self.onSuccess(status, self.client.responseText);
 				}else {
 					self.onFail(status, self.client.responseText);
@@ -85,7 +93,10 @@ var HttpConnector = new Class.create({
 			if(this.readyState == self.client.DONE) {
 			
 				var status = self.client.status;
-				if (status>=200 && status < 400) {
+				console.log('HttpConnector put status'+ status);
+				console.log('HttpConnector put response'+ self.client.responseText);
+				console.dir(self.client);
+				if (self.client.statusText == 'OK') {
 					self.onSuccess(status, self.client.responseText);
 				}else {
 					self.onFail(status, self.client.responseText);
@@ -101,13 +112,16 @@ var HttpConnector = new Class.create({
  * @param string data - post data to be sent - needs to be a query string and URIencoded
  */
 	post : function(url, data) {
+		console.log(url);
 		var self = this;
 		self.client.onreadystatechange = function() {
 			if(this.readyState == self.client.DONE) {
 			
 				var status = self.client.status;
 				console.log('HttpConnector post status'+ status);
-				if (status===200 || status ===201) {
+				console.log('HttpConnector post response'+ self.client.responseText);
+				console.dir(self.client);
+				if (self.client.statusText == 'OK' || self.client.statusText =='Created') {
 					self.onSuccess(status, self.client.responseText);
 				}else {
 					self.onFail(status, self.client.responseText);
@@ -166,7 +180,7 @@ var HttpConnector = new Class.create({
 			
 				var status = self.client.status;
 				console.log('HttpConnector post status'+ status);
-				if (status===200 || status ===201) {
+				if (self.client.statusText == 'OK' || self.client.statusText =='Created') {
 					self.onSuccess(status, self.client.responseText);
 				}else {
 					self.onFail(status, self.client.responseText);

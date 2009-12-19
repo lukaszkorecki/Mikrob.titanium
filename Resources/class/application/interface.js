@@ -6,6 +6,13 @@
  * @package mikrob.class.interface
  * @author Lukasz
  */
+//var Interface = new Class.create({
+//		
+//	initialize : function(container_id) {
+//		this.container_id = container_id;
+//	},
+//	globalLimit : 20,
+//});
 var Interface = {
 	globalLimit : 20,
 	afterSend : function(resp) {

@@ -36,8 +36,7 @@ var Blip = new Class.create(Service,{
 		} else {
 			url += '&offset=0';
 		}
-		req = new HttpConnector();
-		req.setRequestHeaders(self.commonHeaders());
+		req = new HttpConnector(self.commonHeaders());
 		req.setUserCred(self.login, self.password);
 		req.get(url);
 		req.onSuccess = function(status,response) {
@@ -56,12 +55,11 @@ var Blip = new Class.create(Service,{
 	afterSend :	function(response_obj){},
 	createBlip : function(str) {
 		var self = this;
-		req = new HttpConnector();
-		req.setRequestHeaders(self.commonHeaders());
+		req = new HttpConnector(self.commonHeaders());
 		req.setUserCred(self.login, self.password);
 		try {
 			req.post(self.api_root+'updates','update[body]='+encodeURIComponent(str));
-		} catch (chuj) { console.dir(chuj); }
+		} catch (no_encodeuri_compononent) { console.dir(no_encodeuri_compononent); }
 		req.onSuccess = function(resp) { self.afterSend(resp); };
 		req.onFailure = function(resp) {
 			Interface.notify('Błąd', 'Nie ma takiego użytkownika');
@@ -71,8 +69,7 @@ var Blip = new Class.create(Service,{
 	},
 	getBlip : function(blipid) {
 		var self = this;
-		req = new HttpConnector();
-		req.setRequestHeaders(self.commonHeaders());
+		req = new HttpConnector(self.commonHeaders());
 		req.setUserCred(self.login, self.password);
 		req.get(self.api_root+'updates/'+blipid+self.include_string_full);
 		req.onSuccess = function(st, resp) {
@@ -88,8 +85,7 @@ var Blip = new Class.create(Service,{
 	 },
 	shortenLink : function(url) {
 		var self = this;
-		req = new HttpConnector();
-		req.setRequestHeaders(self.commonHeaders());
+		req = new HttpConnector(self.commonHeaders());
 		req.setUserCred(self.login, self.password);
 		req.post(self.api_root+'shortlinks', 'shortlink[original_link]='+url);
 		req.onSuccess = function(st, resp) {
@@ -102,8 +98,7 @@ var Blip = new Class.create(Service,{
 	},
 	expandLink : function(id) {
 		var self = this;
-		req = new HttpConnector();
-		req.setRequestHeaders(self.commonHeaders());
+		req = new HttpConnector(self.commonHeaders());
 		req.setUserCred(self.login, self.password);
 		req.get(self.api_root+'shortlinks/'+id);
 		req.onSuccess = function(st, resp) {

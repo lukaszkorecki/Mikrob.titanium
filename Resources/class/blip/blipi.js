@@ -17,7 +17,7 @@ var Blipi = new Class.create({
 	/**
 	 * Api root
 	 */
-	api_root : 'http://api.blip.pl/',
+	api_root : 'http://api.blipi.pl/',
 
 	/**
 	 * Success handler - needs to be defined from outside
@@ -26,7 +26,7 @@ var Blipi = new Class.create({
 	 */
 	onSuccess : function(status, response) {
 		console.log(status);
-		console.dir(Titanium.JSON.parse(response));
+		console.log(response);
 	},
 	/**
 	 * Failure handler - needs to be defined from outside
