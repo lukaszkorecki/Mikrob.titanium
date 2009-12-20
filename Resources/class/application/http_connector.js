@@ -39,16 +39,18 @@ var HttpConnector = new Class.create({
  * GET request to a given resource 
  * @param string resource i.e. '/users/get/id'
  */
+	debug_response : function(method, url) {
+		//console.log(url);
+		//console.log('HttpConnector '+method+' status'+ self.client.status + " "+self.client.statusText);
+		//console.log('HttpConnector get response'+ self.client.responseText);
+		//console.dir(self.client);
+	},
 	get : function(url) {
 		var self = this;
-		console.log(url);
 		self.client.onreadystatechange = function() {
 			if(this.readyState == self.client.DONE) {
-			
+				self.debug_response('get', url);	
 				var status = self.client.status;
-				console.log('HttpConnector get status'+ status);
-				console.log('HttpConnector get response'+ self.client.responseText);
-				console.dir(self.client);
 				if (self.client.statusText == 'OK') {
 					self.onSuccess(status, self.client.responseText);
 				}else {
@@ -70,9 +72,7 @@ var HttpConnector = new Class.create({
 			if(this.readyState == self.client.DONE) {
 			
 				var status = self.client.status;
-				console.log('HttpConnector delete status'+ status);
-				console.log('HttpConnector delete response'+ self.client.responseText);
-				console.dir(self.client);
+				self.debug_response('delete', url);	
 				if (self.client.statusText == 'OK') {
 					self.onSuccess(status, self.client.responseText);
 				}else {
@@ -93,9 +93,7 @@ var HttpConnector = new Class.create({
 			if(this.readyState == self.client.DONE) {
 			
 				var status = self.client.status;
-				console.log('HttpConnector put status'+ status);
-				console.log('HttpConnector put response'+ self.client.responseText);
-				console.dir(self.client);
+				self.debug_response('put',url);
 				if (self.client.statusText == 'OK') {
 					self.onSuccess(status, self.client.responseText);
 				}else {
@@ -112,15 +110,12 @@ var HttpConnector = new Class.create({
  * @param string data - post data to be sent - needs to be a query string and URIencoded
  */
 	post : function(url, data) {
-		console.log(url);
 		var self = this;
 		self.client.onreadystatechange = function() {
 			if(this.readyState == self.client.DONE) {
 			
 				var status = self.client.status;
-				console.log('HttpConnector post status'+ status);
-				console.log('HttpConnector post response'+ self.client.responseText);
-				console.dir(self.client);
+				self.debug_response('post',url);
 				if (self.client.statusText == 'OK' || self.client.statusText =='Created') {
 					self.onSuccess(status, self.client.responseText);
 				}else {

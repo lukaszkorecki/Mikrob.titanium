@@ -11,9 +11,14 @@ var Service = Class.create({
 		this.password = password;
 		this.credentials = btoa(this.login+":"+password);
 	},
-	login : function() {},
-	getDashboard : function() {},
-	getSubscriptions : function() {},
-	getServiceInfo: function() {}
+	saveService : function(type, login, password) {
+	},
+	deleteService : function() {
+
+	},
+	updateService : function() {
+
 	}
-);
+
+
+});
