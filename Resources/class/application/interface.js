@@ -65,7 +65,7 @@ var Interface = {
 	//		Interface.expandLink('quoted_link');
 			$$('.unread').each(function(el) { el.removeClassName('unread'); } );
 			// not very clever way of scrolling up ;-)
-			$$('.column')[0].scrollByLines(-($$('.column')[0].scrollHeight))
+			$$('.column')[0].scrollByLines(-($$('.column')[0].scrollHeight));
 			$('throbber').toggle();
 		},
 		draw : function(updates,is_update) {

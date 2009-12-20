@@ -6,4 +6,5 @@
 ../../tools/jslint/jsl -nologo -process class/service.js
 ../../tools/jslint/jsl -nologo -process class/blip/updates.js
 ../../tools/jslint/jsl -nologo -process class/http_connector.js
+../../tools/jslint/jsl -nologo -process class/database_connector.js
 
