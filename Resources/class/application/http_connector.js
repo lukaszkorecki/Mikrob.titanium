@@ -1,4 +1,3 @@
-
 /**
  * Class for establishing HTTP/REST connections
  * It utiilizes Titanium's native HTTPClient

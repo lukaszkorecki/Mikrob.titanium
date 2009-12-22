@@ -23,6 +23,13 @@
 	TODO refactor and move into external classes/files
 	-->
 	<script type="text/javascript" charset="utf-8">
+		function run_tests() {
+			var win = Titanium.UI.getCurrentWindow();
+			var w2 = win.createWindow('app://test.html')
+			
+			w2.setHeight(300); w2.setWidth(200); w2.setResizable(true); w2.open()
+
+		}
 		Interface.notify(Titanium.App.getName(),Titanium.App.getVersion());
 
 		var services = new Array();
