@@ -23,6 +23,7 @@ var HttpConnector = new Class.create({
 		for (header in obj) {
 			self.client.setRequestHeader(header, obj[header] );
 		}
+		return obj;
 
 	},
 
@@ -33,6 +34,7 @@ var HttpConnector = new Class.create({
  */
 	setUserCred : function(login, pass) {
 		this.client.setBasicCredentials(login,pass);
+		return btoa(login+":"+pass);
 	},
 /**
  * GET request to a given resource 

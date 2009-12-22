@@ -1,6 +1,7 @@
 var Update = new Class.create({
-	initialize : function(obj)	{
+	initialize : function(obj, username)	{
 		this.id = obj.id;
+		this.username = username || false;
 		this.user = obj.user;
 		this.body = this.parseBody(obj.body);
 		this.raw_body = obj.body;
@@ -28,9 +29,9 @@ var Update = new Class.create({
 				this.short_type = 's';
 				break;
 		}
-		this.pictures = obj.pictures || {};
+	//	this.pictures = obj.pictures || {};
 		this.cclass = 'up'+this.id+' update ';
-		if(this.user.login == username)
+		if(this.user.login == this.username)
 		{
 			this.cclass += " own";
 		} 
