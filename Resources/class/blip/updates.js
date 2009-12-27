@@ -1,5 +1,6 @@
 var Update = new Class.create({
-	initialize : function(obj, username)	{
+	initialize : function(obj, owner_service_id, username)	{
+		this.owner_service_id = owner_service_id;
 		this.id = obj.id;
 		this.username = username || false;
 		this.user = obj.user;
@@ -81,7 +82,7 @@ var Update = new Class.create({
 		  link.observe('click',function(event) {
 				  var pointer = '>';
 				  if(self.type=='PrivateMessage') pointer = '>>';
-				  Interface.setAreaContent(pointer+self.user.login, true);
+				  interfaces[self.owner_service_id].setAreaContent(pointer+self.user.login, true);
 				  event.preventDefault();
 				  });
 		  return link;
@@ -91,7 +92,7 @@ var Update = new Class.create({
 		var link = new Element('a', {'href':'#', 'class':'quote button small'}).update('Cytuj');
 		link.observe('click',function(event) {
 		
-			Interface.setAreaContent('http://blip.pl/'+self.short_type+'/'+self.id);
+			interfaces[self.owner_service_id].setAreaContent('http://blip.pl/'+self.short_type+'/'+self.id);
 			event.preventDefault();
 		});
 		return link;
@@ -202,8 +203,8 @@ var Update = new Class.create({
 });
 
 var Message = new Class.create(Update, {
-	initialize : function($super, obj, isPrivate) {
-		$super(obj);
+	initialize : function($super, obj, isPrivate, owner_service_id) {
+		$super(obj, owner_service_id);
 		this.recipient = obj.recipient;
 		this.isPrivate = isPrivate;
 		this.separator = new Element('span').insert('<strong>→</strong>');
@@ -279,8 +280,8 @@ var Message = new Class.create(Update, {
 	}
 });
 var TwitterBlip = new Class.create(Update,{
-	initialize : function($super, obj) {
-		$super(obj);
+	initialize : function($super, obj, owner_service_id) {
+		$super(obj, owner_service_id);
 	},
 	toElement : function() {
 		var self = this;
@@ -299,8 +300,8 @@ var TwitterBlip = new Class.create(Update,{
 	}
 });
 var Notice = new Class.create(Update,{
-	initialize : function($super, obj) {
-		$super(obj);
+	initialize : function($super, obj, owner_service_id) {
+		$super(obj, owner_service_id);
 	},
 	toElement : function() {
 		var self = this;

@@ -14,7 +14,7 @@ var Blip = new Class.create(Service,{
 	tag_last_id : 0,
 	current_page : 0,
 	include_string_user : "?include=user,recipient",
-	include_string_full : "?include=user,user[avatar],recipient,recipient[avatar],pictures&limit=20", // +interfaces[this.service_id].globalLimit,
+	include_string_full : "?include=user,user[avatar],recipient,recipient[avatar],pictures&limit=20",
 	commonHeaders : function() {
 		var self = this;
 		return {
@@ -50,9 +50,13 @@ var Blip = new Class.create(Service,{
 			interfaces[self.service_id].notify('Błąd', 'Błąd połączenia z API: '+status);
 		};
 	},
-	dashboardProcess :function(response_obj,is_update){},
-	handleFailure :	function(response_obj){},
-	afterSend :	function(response_obj){},
+	dashboardProcess :function(response_obj,is_update){
+
+		interfaces[this.service_id].draw(response_obj, is_update);
+	},
+	afterSend :	function(response_obj){
+		interfaces[this.service_id].afterSend(response_obj);
+	},
 	createBlip : function(str) {
 		var self = this;
 		req = new HttpConnector(self.commonHeaders());

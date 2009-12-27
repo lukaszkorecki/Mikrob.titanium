@@ -29,25 +29,25 @@ document.observe('dom:loaded',function(){
 	interfaces.push(  new BlipInterface('dash1', 0));
 	$('sender').toggle();
 	$('throbber').toggle();
+
 	Element.observe('login_form','submit',function(event){
 		username = $F(this['username']);
 		var pass = $F(this['pass']);
 		services.push( new Blip(username, pass, 0));
-		// TODO it works - so make it happen somewhere else
-		// ideally would be to have one loop, that just runs stuff
-		// but depending on different services
-		// we might create separate intervals...
-		services[0].dashboardProcess = interfaces[0].draw;
-		services[0].afterSend = interfaces[0].afterSend;
+
+	//	services[0].dashboardProcess = interfaces[0].draw;
+	//	services[0].afterSend = interfaces[0].afterSend;
 		services[0].dashboardGet();
-		try {
-			interfaces[0].notify(Titanium.App.getName(),'Pobieram kokpit');
-			} catch (  errr ) { console.dir(errr); }
+		interfaces[0].notify(Titanium.App.getName(),'Pobieram kokpit');
+
+
 		loop1 = new PeriodicalExecuter(run_loop1,10);
 		function run_loop1() {
 			$('throbber').toggle();
 			services[0].dashboardGet();
 		}
+
+
 		// TODO this should be somewhere else
 		// and use the local storage instead of properties
 		Titanium.App.Properties.setString('username',username);

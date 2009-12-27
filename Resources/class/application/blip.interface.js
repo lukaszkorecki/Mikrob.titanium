@@ -7,23 +7,16 @@ var BlipInterface = new Class.create(Interface, {
 		var single_status = {};
 		switch(blip.type) {
 			case 'Notice':
-				single_status = new Notice(blip);
+				single_status = new Notice(blip, this.service_id);
 				break;
 			case 'PrivateMessage':
-				if(blip.user.login ==='t')
-				{
-					single_status = new TwitterBlip(blip);
-				}
-				else
-				{
-					single_status  = new Message(blip, true);
-				}
+				single_status = (blip.user.login == 't') ? new TwitterBlip(blip, this.service_id) : new Message(blip, true, this.service_id);
 			break;
 			case 'DirectedMessage':
-				single_status = new Message(blip, false);
+				single_status = new Message(blip, false, this.service_id);
 				break;
 			default:
-				single_status = new Update(blip);
+				single_status = new Update(blip, this.service_id);
 				break;
 		}
 		return single_status;
@@ -36,15 +29,15 @@ var BlipInterface = new Class.create(Interface, {
 		var dash = $(self.container_id);
 		dash.update();
 		updates.each(function(blip){
-				var single_status = self.getUpdateObject(blip);
-				dash.insert({'bottom': single_status});
-				self.expandLink('quoted_link');
+			var single_status = self.getUpdateObject(blip);
+			dash.insert({'bottom': single_status});
+			self.expandLink('quoted_link');
 			
 		});
 		$$(self.container_id+' .unread').each(function(el) { el.removeClassName('unread'); } );
 		// not very clever way of scrolling up ;-)
 		dash.scrollByLines(-(dash.scrollHeight));
-		$('throbber').toggle();
+		self.throbber.toggle();
 	},
 	draw : function(updates,is_update) {
 		var self = this;
@@ -54,7 +47,9 @@ var BlipInterface = new Class.create(Interface, {
 		var dash = $(self.container_id);
 		if(is_update !==0) updates.reverse();
 		updates.each(function(blip){
-			var single_status = self.getUpdateObject(blip);
+			try {
+				var single_status = self.getUpdateObject(blip);
+			} catch (guo_err) { console.dir(guo_err); }
 				if(is_update !== 0) {
 					dash.insert({'top': single_status});
 				} else {
@@ -81,13 +76,9 @@ var BlipInterface = new Class.create(Interface, {
 		} else {
 			var unr = $$(self.container_id + ' .unread').length;
 			self.setUnreadCount(""+unr+"");
-	//		FIXME make the column show only maxlimit of updates
-	//			num = $$('.unread').length;
-	//			upd  =$$('.updates');
-	//			upd.slice((upd.length - num)).each(function(el) { el.remove(); } );
 
 		}
-		$('throbber').toggle();
+		self.throbber.toggle();
 	}	,
 	expandLink : function(target_class) {
 		var els = $$('.'+target_class);

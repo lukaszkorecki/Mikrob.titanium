@@ -6,26 +6,22 @@
  * @package mikrob.class.interface
  * @author Lukasz
  */
-//var Interface = new Class.create({
-//		
-//	initialize : function(container_id) {
-//		this.container_id = container_id;
-//	},
-//	globalLimit : 20,
-//});
-var Interface = Class.create({
+
+var Interface = new Class.create({
 	initialize : function(container_id, service_id) {
 		this.container_id = container_id;
 		this.service_id = service_id;
 		this.globalLimit = 20;
+		this.throbber = $('throbber');
+
 	},
 	afterSend : function(resp) {
 		var self =this;
-		Interface.setAreaContent();
-		$('throbber').toggle();
-		Interface.notify(Titanium.App.getName(),'Wysłano');
+		self.throbber.toggle();
+		self.notify(Titanium.App.getName(),'Wysłano');
 		$('sender').enable();
 		$('charcount').update('0');
+		self.setAreaContent();
 	},
 	notify : function(login, body,img) {
 		try {
