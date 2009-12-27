@@ -24,11 +24,15 @@
 	<!-- load test code here -->
 	<script src="tests/tests_http_connector.js" type="text/javascript" charset="utf-8"></script>
 	<script src="tests/tests_blip_updates.js" type="text/javascript" charset="utf-8"></script>
+	<script src="tests/tests_blip_updates.js" type="text/javascript" charset="utf-8"></script>
+	<script src="tests/tests_database_connector.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 	document.observe('dom:ready',function(){
 		// run unit tests here
-		HttpConnectorTest.run();
-		BlipUpdatesTest.run();
+		// automatically
+			DatabaseConnectorTest.run();
+	//		BlipUpdatesTest.run();
+	//		HttpConnectorTest.run();
 	});
 	</script>
 </head>

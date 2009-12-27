@@ -1,5 +1,5 @@
 body.win32 {
-	background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb));
+	background: -webkit-gradient(linear, left top, left bottom,    from(#fff), to(#dbdbdb));
 }
 .win32 .column{
 	background: #222;
@@ -12,17 +12,10 @@ body.win32 {
 }
 .win32 .update {
 	border-color:#eee;
-	background: -webkit-gradient(
-		linear,
-		left top,
-		left bottom,
-		from(rgb(150,150,150)),
-		to(#dbdbdb)
-	);
 	padding-top:5px;
 	margin-bottom:0;
 
-	background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb));
+	background: -webkit-gradient(linear, left top, left bottom,    from(#fff), to(#dbdbdb));
 }
 .win32 .update img.avatar,  .win32 .update img.ravatar {
 	margin-top:5px;

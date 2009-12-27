@@ -1,4 +1,4 @@
-var Database_Connector = new Class.create({
+var DatabaseConnector = new Class.create({
 	initialize : function(db_name, table_name, table_object) {
 	
 		this.db_name = db_name;
@@ -69,13 +69,10 @@ var Database_Connector = new Class.create({
 	},
 	query : function(squery_str) {
 		console.log(squery_str);
-		return 'done';
-		/*
 		database  = Titanium.Database.open(this.db_name);
-		var res = this.database.execute(squery_str);
+		var res = database.execute(squery_str);
 		database.close();
 		return res.rowCount();
-		*/
 	},
 	/**
 	 * @param object find object literal:

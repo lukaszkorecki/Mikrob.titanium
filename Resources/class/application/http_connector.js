@@ -13,6 +13,7 @@ var HttpConnector = new Class.create({
 		this.headers = this.setRequestHeaders(options || {});
 		// overrrrrrride the UA (http headers seem to have no effect)
 		this.client.userAgent = Titanium.App.getName()+" "+Titanium.App.getVersion();
+//		this.client.userAgent = 'deskBlip 0.7.9';
  
 	},
 /**
