@@ -5,8 +5,8 @@
  * definition 
  */
 var Blip = new Class.create(Service,{
-	initialize : function($super, login, password) {
-		$super(login, password);
+	initialize : function($super, login, password, service_id) {
+		$super(login, password, service_id);
 	},
 	api_root : 'http://api.blip.pl/',
 	dashboard_last_id : 0,
@@ -14,7 +14,7 @@ var Blip = new Class.create(Service,{
 	tag_last_id : 0,
 	current_page : 0,
 	include_string_user : "?include=user,recipient",
-	include_string_full : "?include=user,user[avatar],recipient,recipient[avatar],pictures&limit="+Interface.globalLimit,
+	include_string_full : "?include=user,user[avatar],recipient,recipient[avatar],pictures&limit=20", // +interfaces[this.service_id].globalLimit,
 	commonHeaders : function() {
 		var self = this;
 		return {
@@ -32,7 +32,7 @@ var Blip = new Class.create(Service,{
 			 url = self.api_root+'dashboard/since/'+self.dashboard_last_id+self.include_string_full;
 		}
 		if(offset >= 0) {
-			url += '&offset='+(offset * Interface.globalLimit);
+			url += '&offset='+(offset * interfaces[self.service_id].globalLimit);
 		} else {
 			url += '&offset=0';
 		}
@@ -47,7 +47,7 @@ var Blip = new Class.create(Service,{
 			}
 		};
 		req.onFailure = function(status, response) {
-			Interface.notify('Błąd', 'Błąd połączenia z API: '+status);
+			interfaces[self.service_id].notify('Błąd', 'Błąd połączenia z API: '+status);
 		};
 	},
 	dashboardProcess :function(response_obj,is_update){},
@@ -62,7 +62,7 @@ var Blip = new Class.create(Service,{
 		} catch (no_encodeuri_compononent) { console.dir(no_encodeuri_compononent); }
 		req.onSuccess = function(resp) { self.afterSend(resp); };
 		req.onFailure = function(resp) {
-			Interface.notify('Błąd', 'Nie ma takiego użytkownika');
+			interfaces[self.service_id].notify('Błąd', 'Nie ma takiego użytkownika');
 			self.afterSend(resp);
 		};
 	
@@ -74,12 +74,11 @@ var Blip = new Class.create(Service,{
 		req.get(self.api_root+'updates/'+blipid+self.include_string_full);
 		req.onSuccess = function(st, resp) {
 			var obj = Titanium.JSON.parse(resp);
-//			Interface.setAreaContent(obj.url);
-			Interface.injectQuotedBlip(blipid,obj);
+			interfaces[self.service_id].injectQuotedBlip(blipid,obj);
 		};
 		req.onFailure = function(st, resp) {
 			console.log(st);
-			Interface.notify("Błąd","Rozwijanie linka się nie powiedło");
+			interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiedło");
 		};
 
 	 },
@@ -90,10 +89,10 @@ var Blip = new Class.create(Service,{
 		req.post(self.api_root+'shortlinks', 'shortlink[original_link]='+url);
 		req.onSuccess = function(st, resp) {
 			var obj = Titanium.JSON.parse(resp);
-			Interface.replaceLinks(url, obj.url);
+			interfaces[self.service_id].replaceLinks(url, obj.url);
 		}; 
 		req.onFailure = function(st, resp) {
-			Interface.notify("Błąd","Tworzenie linka się nie powiedło");
+			interfaces[self.service_id].notify("Błąd","Tworzenie linka się nie powiedło");
 		};
 	},
 	expandLink : function(id) {
@@ -103,11 +102,11 @@ var Blip = new Class.create(Service,{
 		req.get(self.api_root+'shortlinks/'+id);
 		req.onSuccess = function(st, resp) {
 			var obj = Titanium.JSON.parse(resp);
-			Interface.expandShortenUrl(id,obj);
+			interfaces[self.service_id].expandShortenUrl(id,obj);
 		};
 		req.onFailure = function(st, resp) {
 			console.log(st);
-			Interface.notify("Błąd","Rozwijanie linka się nie powiedło");
+			interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiedło");
 		};
 	}
 });

@@ -1,7 +1,6 @@
 var BlipInterface = new Class.create(Interface, {
 	initialize : function($super, container_id, service_id) {
-		$super(container_id);
-		this.service_id = service_id;
+		$super(container_id, service_id);
 	},
 
 	getUpdateObject : function(blip) {
@@ -37,12 +36,11 @@ var BlipInterface = new Class.create(Interface, {
 		var dash = $(self.container_id);
 		dash.update();
 		updates.each(function(blip){
-				var single_status = Interface.get_update_object(blip);
+				var single_status = self.getUpdateObject(blip);
 				dash.insert({'bottom': single_status});
-				Interface.expandLink('quoted_link');
+				self.expandLink('quoted_link');
 			
 		});
-//		Interface.expandLink('quoted_link');
 		$$(self.container_id+' .unread').each(function(el) { el.removeClassName('unread'); } );
 		// not very clever way of scrolling up ;-)
 		dash.scrollByLines(-(dash.scrollHeight));
@@ -62,11 +60,11 @@ var BlipInterface = new Class.create(Interface, {
 				} else {
 					dash.insert({'bottom': single_status});
 				}
-				Interface.expandLink('quoted_link');
+				self.expandLink('quoted_link');
 			if (i<4) {
 				try {
 					var av = 'http://blip.pl'+single_status.user.avatar.url_50 || false;
-					Interface.notify(single_status.user.login, single_status.raw_body, av );
+					self.notify(single_status.user.login, single_status.raw_body, av );
 				}
 				catch (notifyerr) {
 					console.dir(notifyerr);
@@ -79,10 +77,10 @@ var BlipInterface = new Class.create(Interface, {
 
 		if (  is_update ===0) {
 			$$(self.container_id+' .unread').each(function(el) { el.removeClassName('unread'); } );
-			Interface.setUnreadCount('0');
+			self.nterface.setUnreadCount('0');
 		} else {
 			var unr = $$(self.container_id + ' .unread').length;
-			Interface.setUnreadCount(""+unr+"");
+			self.setUnreadCount(""+unr+"");
 	//		FIXME make the column show only maxlimit of updates
 	//			num = $$('.unread').length;
 	//			upd  =$$('.updates');
@@ -90,7 +88,6 @@ var BlipInterface = new Class.create(Interface, {
 
 		}
 		$('throbber').toggle();
-		//Interface.expandLink('quoted_link');
 	}	,
 	expandLink : function(target_class) {
 		var els = $$('.'+target_class);
@@ -112,18 +109,19 @@ var BlipInterface = new Class.create(Interface, {
 		});
 	},
 	injectQuotedBlip : function(target_class, obj) {
+		var self = this;
 		var els = $$('.s'+target_class);
 		els.each(function(el) {
 			el.update('[Blip]');
 			el.observe('click', function(event) {
 				event.preventDefault();
-				var blip = Interface.get_update_object(obj);
+				var blip = self.getUpdateObject(obj);
 				var contents = blip.toQuoted();
 				contents.addClassName('quoted');
 				var elem = el.up('p') || el.up(); //.next();
 				elem.insert({'after':contents});
 				el.remove();
-				Interface.expandLink('quoted_link');
+				self.expandLink('quoted_link');
 			});
 		});
 	},
@@ -143,4 +141,20 @@ var BlipInterface = new Class.create(Interface, {
 			el.insert({'after':stats_link});
 			el.removeClassName('r'+id);
 		});
-	}});
+
+	},
+	shortenLinksInString : function(string,shorten_function,exceptions) {
+			var findLinks = /http:\/\/\S+/gi;
+		var rez = string.match(findLinks);
+		if(rez) {
+			rez.each(function(link) {
+				if( link.search('blip.pl') ==-1) services[0].shortenLink(link);
+			});
+		} else { console.log('nic nie teges'); }
+	},
+	replaceLinks : function(old_stuff, new_stuff) {
+		var content = $('main_textarea').getValue();
+		var content_n = content.replace(old_stuff, new_stuff);
+		$('main_textarea').setValue(content_n);
+   }
+});

@@ -6,10 +6,11 @@
  * @package mikrob.class.service
  */
 var Service = Class.create({
-	initialize : function(login, password) {
+	initialize : function(login, password, service_id) {
 		this.login = login;
 		this.password = password;
 		this.credentials = btoa(this.login+":"+password);
+		this.service_id = service_id;
 	},
 	saveService : function(type, login, password) {
 	},
