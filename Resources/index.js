@@ -26,7 +26,7 @@ document.observe('dom:loaded',function(){
 	catch(er) {
 		console.dir(er);
 	}
-	interfaces.push(  new BlipInterface('dash1', 0));
+	interfaces.push(  new BlipInterface('dash0', 0));
 	$('sender').toggle();
 	$('throbber').toggle();
 

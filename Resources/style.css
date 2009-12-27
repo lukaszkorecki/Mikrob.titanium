@@ -89,7 +89,7 @@ a:hover {
 	border-top:2px solid #333;
 	border-bottom:2px solid #333;
 	*/
-	position:fixed;
+	position:absolute;
 	overflow-x:hidden;
 	overflow-y:auto;
 	top:0;
@@ -98,6 +98,7 @@ a:hover {
 	max-width:400px;
 	border-bottom: 2px solid #888;
 }
+#dash2 { left: 410px;}
 .user, .recipient {
 	font-weight:bold;
 	margin:1px 4px 1px 4px;
