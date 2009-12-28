@@ -1,8 +1,8 @@
 var Twitter = new Class.create(Service, {
-	initialize : function($super, login, password, service_id) {
+	initialize : function($super, login, password, service_id, api_root) {
 		$super(login, password, service_id);
+		this.api_root  = (api_root) ? api_root : 'https://twitter.com/';
 	},
-	api_root : 'http://twitter.com',
 	dashboard_last_id : 0,
 	current_page : 0,
 	commonHeaders :  {
@@ -10,17 +10,20 @@ var Twitter = new Class.create(Service, {
 	},
 	dashboardGet : function(offset) {
 		var self = this;
-		var url = self.api_root+"/statuses/home_timeline.json";
+		var url = self.api_root+"statuses/home_timeline.json";
 		console.log(url);
 		req = new HttpConnector(self.commonHeaders);
 		req.setUserCred(self.login, self.password);
 		req.get(url);
 		req.onSuccess = function(status, response) {
-			try {
-				var ob = Titanium.JSON.parse(response);
-			} catch (parse_err) { console.dir(parse_err); }
+			var ob = {};
+			if(response != undefined) {
+				ob = Titanium.JSON.parse(response);
+			}
 			if(ob.length > 0) {
 				self.dashboardProcess(ob, false);
+			} else {
+				interfaces[self.service_id].notify("Błąd", "Błąd pobierania, spróbuj później");
 			}
 		};
 		req.onFail = function(status, response) {

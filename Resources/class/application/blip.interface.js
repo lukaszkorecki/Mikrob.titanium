@@ -135,7 +135,7 @@ var BlipInterface = new Class.create(Interface, {
 
 	},
 	shortenLinksInString : function(string,shorten_function,exceptions) {
-			var findLinks = /http:\/\/\S+/gi;
+		var findLinks = /http:\/\/\S+/gi;
 		var rez = string.match(findLinks);
 		if(rez) {
 			rez.each(function(link) {
