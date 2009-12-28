@@ -98,7 +98,8 @@ a:hover {
 	max-width:400px;
 	border-bottom: 2px solid #888;
 }
-#dash2 { left: 410px;}
+#dash1 { left: 405px;}
+#dash2 { left: 810px;}
 .user, .recipient {
 	font-weight:bold;
 	margin:1px 4px 1px 4px;

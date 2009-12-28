@@ -10,3 +10,5 @@
 ../../tools/jslint/jsl -nologo -process ./class/blip/blipi.js
 ../../tools/jslint/jsl -nologo -process ./class/blip/updates.js
 ../../tools/jslint/jsl -nologo -process ./class/flaker/flaker.js
+../../tools/jslint/jsl -nologo -process ./class/twitter/twitter.js
+../../tools/jslint/jsl -nologo -process ./class/twitter/status.js

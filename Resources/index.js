@@ -35,17 +35,20 @@ document.observe('dom:loaded',function(){
 		var pass = $F(this['pass']);
 		services.push( new Blip(username, pass, 0));
 
-	//	services[0].dashboardProcess = interfaces[0].draw;
-	//	services[0].afterSend = interfaces[0].afterSend;
 		services[0].dashboardGet();
 		interfaces[0].notify(Titanium.App.getName(),'Pobieram kokpit');
 
 
-		loop1 = new PeriodicalExecuter(run_loop1,10);
+		loop1 = new PeriodicalExecuter(run_loop1,20);
 		function run_loop1() {
 			$('throbber').toggle();
 			services[0].dashboardGet();
 		}
+//		loop2 = new PeriodicalExecuter(run_loop2,30);
+//		function run_loop2() {
+//			$('throbber').toggle();
+//			services[1].dashboardGet();
+//		}
 
 
 		// TODO this should be somewhere else

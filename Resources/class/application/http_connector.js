@@ -57,6 +57,7 @@ var HttpConnector = new Class.create({
  * @param string resource i.e. '/users/get/id'
  */
 	debug_response : function(method, url, client) {
+		 return 'yuck!';
 		console.log("HttpConnector: \n" + url + "\nmethod: "+method+"\nstatus: ");
 		console.log(client.status + " " + client.statusText);
 	},

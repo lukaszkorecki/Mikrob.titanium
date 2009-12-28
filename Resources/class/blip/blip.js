@@ -33,9 +33,10 @@ var Blip = new Class.create(Service,{
 		}
 		if(offset >= 0) {
 			url += '&offset='+(offset * interfaces[self.service_id].globalLimit);
-		} else {
-			url += '&offset=0';
 		}
+	//	else {
+	//		url += '&offset=0';
+	//	}
 		req = new HttpConnector(self.commonHeaders());
 		req.setUserCred(self.login, self.password);
 		req.get(url);
