@@ -1,7 +1,7 @@
 /**
  * BlipApi class, extends Service class 
  * TODO make HttpConnector a class variable
- * FIXME all onSuccess and onFailure callbacks should be defined outside of the class
+ * FIXME all onSuccess and onFail callbacks should be defined outside of the class
  * definition 
  */
 var Blip = new Class.create(Service,{
@@ -46,8 +46,11 @@ var Blip = new Class.create(Service,{
 				self.dashboardProcess(ob,self.dashboard_last_id);
 			}
 		};
-		req.onFailure = function(status, response) {
+		req.onFail = function(status, response) {
 			interfaces[self.service_id].notify('Błąd', 'Błąd połączenia z API: '+status);
+			console.log("błąd!");
+			self.loginFail();
+			console.log("brak statusów");
 		};
 	},
 	dashboardProcess :function(response_obj,is_update){
@@ -65,7 +68,7 @@ var Blip = new Class.create(Service,{
 			req.post(self.api_root+'updates','update[body]='+encodeURIComponent(str));
 		} catch (no_encodeuri_compononent) { console.dir(no_encodeuri_compononent); }
 		req.onSuccess = function(resp) { self.afterSend(resp); };
-		req.onFailure = function(resp) {
+		req.onFail = function(resp) {
 			interfaces[self.service_id].notify('Błąd', 'Nie ma takiego użytkownika');
 			self.afterSend(resp);
 		};
@@ -80,7 +83,7 @@ var Blip = new Class.create(Service,{
 			var obj = Titanium.JSON.parse(resp);
 			interfaces[self.service_id].injectQuotedBlip(blipid,obj);
 		};
-		req.onFailure = function(st, resp) {
+		req.onFail = function(st, resp) {
 			console.log(st);
 			interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiedło");
 		};
@@ -95,7 +98,7 @@ var Blip = new Class.create(Service,{
 			var obj = Titanium.JSON.parse(resp);
 			interfaces[self.service_id].replaceLinks(url, obj.url);
 		}; 
-		req.onFailure = function(st, resp) {
+		req.onFail = function(st, resp) {
 			interfaces[self.service_id].notify("Błąd","Tworzenie linka się nie powiedło");
 		};
 	},
@@ -108,7 +111,7 @@ var Blip = new Class.create(Service,{
 			var obj = Titanium.JSON.parse(resp);
 			interfaces[self.service_id].expandShortenUrl(id,obj);
 		};
-		req.onFailure = function(st, resp) {
+		req.onFail = function(st, resp) {
 			console.log(st);
 			interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiedło");
 		};

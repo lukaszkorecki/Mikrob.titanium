@@ -12,6 +12,9 @@ var Service = Class.create({
 		this.credentials = btoa(this.login+":"+password);
 		this.service_id = service_id;
 	},
+	loginFail : function() {
+		interfaces[this.service_id].loginFail();
+	},
 	saveService : function(type, login, password) {
 	},
 	deleteService : function() {

@@ -27,6 +27,21 @@ var HttpConnector = new Class.create({
 		return obj;
 
 	},
+	handleResponse : function(status,response_object) {
+		 var self = this;
+		 switch(status) {
+			 case 200:
+			 case 201:
+				 self.onSuccess(status, response_object.responseText);
+				 break;
+			 case 401:
+			 case 403:
+			 case 501:
+			 case 503:
+				 self.onFail(status, response_object.responseText);
+				 break;
+		 }
+	 },
 
 /**
  * Sets Basic auth details
@@ -41,23 +56,16 @@ var HttpConnector = new Class.create({
  * GET request to a given resource 
  * @param string resource i.e. '/users/get/id'
  */
-	debug_response : function(method, url) {
-		//console.log(url);
-		//console.log('HttpConnector '+method+' status'+ self.client.status + " "+self.client.statusText);
-		//console.log('HttpConnector get response'+ self.client.responseText);
-		//console.dir(self.client);
+	debug_response : function(method, url, client) {
+		console.log("HttpConnector: \n" + url + "\nmethod: "+method+"\nstatus: ");
+		console.log(client.status + " " + client.statusText);
 	},
 	get : function(url) {
 		var self = this;
 		self.client.onreadystatechange = function() {
 			if(this.readyState == self.client.DONE) {
-				self.debug_response('get', url);	
-				var status = self.client.status;
-				if (self.client.statusText == 'OK') {
-					self.onSuccess(status, self.client.responseText);
-				}else {
-					self.onFail(status, self.client.responseText);
-				}
+				self.handleResponse(self.client.status, self.client);
+				self.debug_response('get', url, self.client);	
 			}
 		};
 			self.client.open("GET",url);
@@ -72,14 +80,9 @@ var HttpConnector = new Class.create({
  
 		self.client.onreadystatechange = function() {
 			if(this.readyState == self.client.DONE) {
-			
-				var status = self.client.status;
-				self.debug_response('delete', url);	
-				if (self.client.statusText == 'OK') {
-					self.onSuccess(status, self.client.responseText);
-				}else {
-					self.onFail(status, self.client.responseText);
-				}
+
+				self.handleResponse(self.client.status, self.client);
+				self.debug_response('delete', url, self.client);	
 			}
 	};
 	self.client.open("DELETE",url);
@@ -93,14 +96,8 @@ var HttpConnector = new Class.create({
 		var self = this;
 		self.client.onreadystatechange = function() {
 			if(this.readyState == self.client.DONE) {
-			
-				var status = self.client.status;
-				self.debug_response('put',url);
-				if (self.client.statusText == 'OK') {
-					self.onSuccess(status, self.client.responseText);
-				}else {
-					self.onFail(status, self.client.responseText);
-				}
+				self.handleResponse(self.client.status, self.client);
+				self.debug_response('put', url, self.client);	
 			}
 		};
 			self.client.open("PUT",url);
@@ -115,14 +112,8 @@ var HttpConnector = new Class.create({
 		var self = this;
 		self.client.onreadystatechange = function() {
 			if(this.readyState == self.client.DONE) {
-			
-				var status = self.client.status;
-				self.debug_response('post',url);
-				if (self.client.statusText == 'OK' || self.client.statusText =='Created') {
-					self.onSuccess(status, self.client.responseText);
-				}else {
-					self.onFail(status, self.client.responseText);
-				}
+				self.handleResponse(self.client.status, self.client);
+				self.debug_response('post', url, self.client);	
 			}
 		};
 			self.client.open("POST",url);
@@ -174,14 +165,8 @@ var HttpConnector = new Class.create({
 		self.setRequestHeaders(h);
 		self.client.onreadystatechange = function() {
 			if(this.readyState == self.client.DONE) {
-			
-				var status = self.client.status;
-				console.log('HttpConnector post status'+ status);
-				if (self.client.statusText == 'OK' || self.client.statusText =='Created') {
-					self.onSuccess(status, self.client.responseText);
-				}else {
-					self.onFail(status, self.client.responseText);
-				}
+				self.handleResponse(self.client.status, self.client);
+				self.debug_response('post with file', url, self.client);	
 			}
 		};
 			self.client.open("POST",url);

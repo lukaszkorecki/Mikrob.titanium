@@ -8,7 +8,7 @@
  */
 
 var Interface = new Class.create({
-	initialize : function(container_id, service_id) {
+	initialize :function(container_id, service_id) {
 		this.container_id = container_id;
 		this.service_id = service_id;
 		this.globalLimit = 20;
@@ -47,6 +47,12 @@ var Interface = new Class.create({
            Titanium.UI.setBadge(count_str);
        } catch (badge_err) { console.log(badge_err); }
     },
+	loginFail : function() {
+		console.log("LOGIN FAIL");
+		$('login_form').show();
+		$('throbber').toggle();
+		$('sender').toggle();
+	},
 	setAreaContent : function(string, is_prepend) {
 		var mt = $('main_textarea');
 		if (string) {
