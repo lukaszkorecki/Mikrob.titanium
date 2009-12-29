@@ -50,6 +50,12 @@ a:hover {
 	display:block;
 			z-index:10;
 }
+.update .avatar_container .avatar {
+	display: block;
+	width: 30px;
+	height: 30px;
+	background-image: url(app://icons/nn_nano.png);
+}
 .quoted {
 	-webkit-border-radius:4px;
 	background:#eee;
