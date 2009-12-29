@@ -8,10 +8,42 @@ function run_tests() {
 	w2.open();
 
 }
+function open_or_create_db() {
+	var services = { 
+		'id' : {
+			field_type : 'id'
+		},
+		'login' : {
+			field_type : 'text',
+			not_null : true
+		},
+		'password' : {
+			field_type : 'text',
+			not_null : true
+		},
+		'type' : {
+			field_type : 'text',
+			not_null : true
+		},
+		'api_url' : {
+			field_type : 'text'
+		}
+	
+	};
+	db = new DatabaseConnector('mikrob', 'services', services);
+	if(db.find().length === 0) { 
+	
+		alert("Yo got no acounts, brov");
+	}
+}
+function get_services() {
+
+}
 // globalz
 var interfaces = new Array();
 // TODO this should come from the DB
 var services = new Array();
+var db;
 var username,loop1 ="";
 document.observe('dom:loaded',function(){
 		//Titanium.userAgent = Titanium.App.getName() +  " " + Titanium.App.getVersion();
@@ -27,6 +59,7 @@ document.observe('dom:loaded',function(){
 		console.dir(er);
 	}
 	interfaces.push(  new BlipInterface('dash0', 0));
+	interfaces.push(  new TwitterInterface('dash1', 1));
 	$('sender').toggle();
 	$('throbber').toggle();
 
@@ -34,6 +67,7 @@ document.observe('dom:loaded',function(){
 		username = $F(this['username']);
 		var pass = $F(this['pass']);
 		services.push( new Blip(username, pass, 0));
+		services.push( new Twitter(username, pass, 1, 'http://blip-twitter.heroku.com'));
 
 		services[0].dashboardGet();
 		interfaces[0].notify(Titanium.App.getName(),'Pobieram kokpit');
@@ -111,7 +145,7 @@ document.observe('dom:loaded',function(){
 	// Pagination
 	Element.observe('home_link','click',function(event) {
 		services[0].dashboard_last_id=0;
-		services[0].dashboardProcess = interfaces[0].Dashboard.draw;
+		services[0].dashboardProcess = interfaces[0].draw;
 		services[0].dashboardGet();
 		event.preventDefault();
 		$('current_page').update();
@@ -124,7 +158,7 @@ document.observe('dom:loaded',function(){
 	Element.observe('next_page','click',function(event) {
 		loop1.stop();
 		event.preventDefault();
-		services[0].dashboardProcess = interfaces[0].Dashboard.drawPage;
+		services[0].dashboardProcess = interfaces[0].drawPage;
 		services[0].dashboard_last_id=0;
 		services[0].current_page = services[0].current_page + 1;
 		var p =services[0].current_page;
@@ -137,7 +171,7 @@ document.observe('dom:loaded',function(){
 	Element.observe('previous_page','click',function(event) {
 		loop1.stop();
 		event.preventDefault();
-		services[0].dashboardProcess = interfaces[0].Dashboard.drawPage;
+		services[0].dashboardProcess = interfaces[0].drawPage;
 		services[0].dashboard_last_id=0;
 		services[0].current_page = services[0].current_page - 1;
 		var p =services[0].current_page;

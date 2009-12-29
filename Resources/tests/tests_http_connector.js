@@ -21,6 +21,7 @@ var HttpConnectorTest = Evidence.TestCase.extend("HttpConnectorTest",{
 	"testConstructor" : function() {
 		var x = {};
 		this.assertIdentical(this.conn.headers.length, x.length);
+		this.assertIdentical(this.conn_headers.headers.length, this.t_headers.length);
 	},
 	"testConstructorWithParams" : function() {
 		this.assertIdentical(this.conn_headers.headers.length, this.t_headers.length);

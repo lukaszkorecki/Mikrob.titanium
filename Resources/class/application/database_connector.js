@@ -6,6 +6,7 @@ var DatabaseConnector = new Class.create({
 		if (table_object) {
 			this.init_table_if_needed(table_object);
 		}
+		this.result = "";
 	},
 /**
  *  @param object table_object - object literal repsresenting create statement fields and field types
@@ -23,10 +24,11 @@ var DatabaseConnector = new Class.create({
  */
 	init_table_if_needed : function(table_object) {
 		var self = this;
-		var sql = "CREATE TABLE IF NOT EXISTS "+this.table_name + "(";
+		var sql = "CREATE TABLE IF NOT EXISTS "+this.table_name + " (";
 		for(var k in table_object) {
 			sql += k +" "+self.get_field_type(table_object[k])+", ";
 		}
+		sql = sql.truncate(sql.length-2,"");
 		sql += ");";
 
 		return this.query(sql);
@@ -67,12 +69,30 @@ var DatabaseConnector = new Class.create({
 		}
 		return field_type;
 	},
-	query : function(squery_str) {
-		console.log(squery_str);
+	result_as_object : function(res_object) {
+		var row_count = res_object.rowCount();
+		var obj = new Array();
+		for(var r=0;r<res_object.rowCount();r++) {
+			var blank = {};
+			for(var i=0; i<res_object.fieldCount(); i++) {
+				blank[res_object.fieldName(i)] = res_object.fieldByName(res_object.fieldName(i));
+			}
+			obj.push({row : blank});
+			res_object.next();
+		}
+		this.result.close();
+		return obj;
+	},
+	query : function(squery_str, return_object) {
 		database  = Titanium.Database.open(this.db_name);
 		var res = database.execute(squery_str);
 		database.close();
-		return res.rowCount();
+		this.result = res;
+		if(return_object) {
+			return this.result_as_object(res);
+		} else {
+			return res.rowCount();
+		}
 	},
 	/**
 	 * @param object find object literal:
@@ -85,23 +105,23 @@ var DatabaseConnector = new Class.create({
 		var sql = 'SELECT * FROM '+this.table_name;
 		var count = "";
 		var conditions = "";
-		if (object.count) {
-			switch(object.count) {
-				case 'first':
-					count += " LIMIT 1 ";
-					break;
-				
-				default:
-					count += " ";
-					break;
+		if(object) {
+			if (object.count) {
+				switch(object.count) {
+					case 'first':
+						count += " LIMIT 1 ";
+						break;
+					default:
+						count += " ";
+						break;
+				}
+			}
+			if(object.conditions) {
+				conditions += " WHERE "+object.conditions.field + " = '"+object.conditions.value+"' ";
 			}
 		}
-		if(object.conditions) {
-			conditions += " WHERE "+object.conditions.field + " = ".object.conditions.value;
-		
-		}
 		var f_sql = sql +" " +conditions+" " +count+";";
-		return this.query(f_sql);
+		return this.query(f_sql , true);
 	
 	},
 
@@ -121,10 +141,14 @@ var DatabaseConnector = new Class.create({
 			sql += key+", ";
 		}
 		
+		sql = sql.truncate(sql.length-2,"");
+
 		sql +=") VALUES(";
 		for(var value in object.fields) {
-			sql += object.fields[value]+", ";
+			sql += "'"+object.fields[value]+"', ";
 		}
+		sql = sql.truncate(sql.length-2,"");
+
 		sql+=")";
 
 		return this.query(sql);
@@ -144,13 +168,14 @@ var DatabaseConnector = new Class.create({
 			 
 		var sql = "UPDATE "+this.table_name + " SET ";
 		for(var key in object.fields) {
-			sql += " "+key+"= "+object.fields[key]+",";
+			sql += " "+key+"= '"+object.fields[key]+"', ";
 		}
+		sql = sql.truncate(sql.length-2,"");
 		// remove last ,
 		sql+=" WHERE id="+object.id;
 		return this.query(sql);
 	},
-	'delete' : function(object) {
+	remove : function(object) {
 		var sql = "DELETE FROM "+this.table_name+" WHERE id='"+object.id+"';";
 		return this.query(sql);
 	

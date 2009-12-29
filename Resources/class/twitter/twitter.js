@@ -10,8 +10,7 @@ var Twitter = new Class.create(Service, {
 	},
 	dashboardGet : function(offset) {
 		var self = this;
-		var url = self.api_root+"statuses/home_timeline.json";
-		console.log(url);
+		var url = self.api_root+"/statuses/home_timeline.json";
 		req = new HttpConnector(self.commonHeaders);
 		req.setUserCred(self.login, self.password);
 		req.get(url);
@@ -19,6 +18,10 @@ var Twitter = new Class.create(Service, {
 			var ob = {};
 			if(response != undefined) {
 				ob = Titanium.JSON.parse(response);
+			} else {
+				console.log(status);
+				console.log(response);
+				interfaces[self.service_id].notify("BŁĄŽ", "NIE POBRAŁEM!");
 			}
 			if(ob.length > 0) {
 				self.dashboardProcess(ob, false);
@@ -27,6 +30,8 @@ var Twitter = new Class.create(Service, {
 			}
 		};
 		req.onFail = function(status, response) {
+			console.log(status);
+			console.log(response);
 			interfaces[self.service_id].notify("Błąd", "Błąd połączenia z API: " + status);
 		};
 	},
