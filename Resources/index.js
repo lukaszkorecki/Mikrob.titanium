@@ -8,91 +8,48 @@ function run_tests() {
 	w2.open();
 
 }
-function open_or_create_db() {
-	var services = { 
-		'id' : {
-			field_type : 'id'
-		},
-		'login' : {
-			field_type : 'text',
-			not_null : true
-		},
-		'password' : {
-			field_type : 'text',
-			not_null : true
-		},
-		'type' : {
-			field_type : 'text',
-			not_null : true
-		},
-		'api_url' : {
-			field_type : 'text'
-		}
-	
-	};
-	db = new DatabaseConnector('mikrob', 'services', services);
-	if(db.find().length === 0) { 
-	
-		alert("Yo got no acounts, brov");
-	}
-}
-function get_services() {
-
-}
 // globalz
 var interfaces = new Array();
 // TODO this should come from the DB
 var services = new Array();
-var db;
-var username,loop1 ="";
+var username,loop1,active_service =0;
 document.observe('dom:loaded',function(){
-		//Titanium.userAgent = Titanium.App.getName() +  " " + Titanium.App.getVersion();
-	try {
-		// TODO this should be somewhere else
-		// and use the local storage instead of properties
-		var saved_u = Titanium.App.Properties.getString("username");
-		var saved_p = Titanium.App.Properties.getString("password");
-		$$('input[name="username"]').first().setValue(saved_u);
-		$$('input[name="pass"]').first().setValue(saved_p);
-	}
-	catch(er) {
-		console.dir(er);
-	}
-	interfaces.push(  new BlipInterface('dash0', 0));
-	interfaces.push(  new TwitterInterface('dash1', 1));
 	$('sender').toggle();
 	$('throbber').toggle();
 
 	Element.observe('login_form','submit',function(event){
-		username = $F(this['username']);
-		var pass = $F(this['pass']);
-		services.push( new Blip(username, pass, 0));
-		services.push( new Twitter(username, pass, 1, 'http://blip-twitter.heroku.com'));
+		Application.get_services();
+		if(Application.services.length === 0) {
+			alert("nie masz kont! dodaj jakieś!");
+			Application.open_add_service_window();
+		
+		} else {
+			active_service = 0;
+			for (var i = 0; i < Application.services.length; i++) {
+				var obj = Application.return_service_objects(Application.services[i], i);
+				interfaces.push ( obj.interFace);
+				services.push ( obj.service);
+			}
+			services[active_service].dashboardGet();
+			interfaces[active_service].notify(Titanium.App.getName(),'Pobieram kokpit');
 
-		services[0].dashboardGet();
-		interfaces[0].notify(Titanium.App.getName(),'Pobieram kokpit');
 
+			loop1 = new PeriodicalExecuter(run_loop1,20);
+			function run_loop1() {
+				$('throbber').toggle();
+				services[active_service].dashboardGet();
+			}
 
-		loop1 = new PeriodicalExecuter(run_loop1,20);
-		function run_loop1() {
+			Application.populate_account_switcher();
+
+			// Clean up old stuff
+			Titanium.App.Properties.setString('username',"");
+			Titanium.App.Properties.setString('password',"");
+
+			this.fade();
 			$('throbber').toggle();
-			services[0].dashboardGet();
+			$('sender').toggle();
 		}
-//		loop2 = new PeriodicalExecuter(run_loop2,30);
-//		function run_loop2() {
-//			$('throbber').toggle();
-//			services[1].dashboardGet();
-//		}
-
-
-		// TODO this should be somewhere else
-		// and use the local storage instead of properties
-		Titanium.App.Properties.setString('username',username);
-		Titanium.App.Properties.setString('password',pass);
-
-		this.fade();
-		$('throbber').toggle();
-		$('sender').toggle();
 		event.preventDefault();
 	});
 	Element.observe('sender','submit',function(event){
@@ -101,10 +58,10 @@ document.observe('dom:loaded',function(){
 			$('throbber').toggle();
 			this.disable();
 			var blyp = $F(this['content']);
-			services[0].createBlip(blyp);
+			services[active_service].createBlip(blyp);
 		} else {
 			yy = $F(this['content']).length - 160;
-			interfaces[0].notify("Błęd", "Treść za długa o "+yy+" znaków");
+			interfaces[active_service].notify("Błęd", "Treść za długa o "+yy+" znaków");
 		}
 	});
 	Element.observe('main_textarea','keydown',function(event){
@@ -114,71 +71,78 @@ document.observe('dom:loaded',function(){
 				event.preventDefault();
 				$('throbber').toggle();
 				$('sender').disable();
-				services[0].createBlip(content);
+				services[active_service].createBlip(content);
 			} else {
-				interfaces[0].notify("Błęd", "Treść za długa o "+(content.length - 160)+" znaków");
+				interfaces[active_service].notify("Błęd", "Treść za długa o "+(content.length - 160)+" znaków");
 			}
 		}
 		$('charcount').update(content.length);
 	});
 	Element.observe('mark_as_read_button','click',function(event){
 		event.preventDefault();
-		var unread = $$('.unread');
+		var unread = $$('dash'+active_service +' .unread');
 
 		for(var i=19, l = unread.length;i<l;i++) {
 			unread[i].remove();
 		}
 		unread.each(function(el) { el.removeClassName('unread'); } );
-		interfaces[0].setUnreadCount('0');
+		interfaces[active_service].setUnreadCount('0');
 	});
 	Element.observe('make_private','click',function(event){
-		interfaces[0].setAreaContent('>',true);
+		interfaces[active_service].setAreaContent('>',true);
 		$('main_textarea').toggleClassName('priv_t');
 	});
 	Element.observe('shorten_links','click',function(event){
 		event.preventDefault();
 		var content = $('main_textarea').getValue();
 		console.log("tresc z element.observe.click\n\t"+content);
-		interfaces[0].shortenLinksInString(content, services[0].shortenLink);
+		interfaces[active_service].shortenLinksInString(content, services[active_service].shortenLink);
 
 	});
 	// Pagination
-	Element.observe('home_link','click',function(event) {
-		services[0].dashboard_last_id=0;
-		services[0].dashboardProcess = interfaces[0].draw;
-		services[0].dashboardGet();
-		event.preventDefault();
-		$('current_page').update();
-		loop1 = new PeriodicalExecuter(run_loop1,10);
-		function run_loop1() {
-			$('throbber').toggle();
-			services[0].dashboardGet();
-		}
-	});
-	Element.observe('next_page','click',function(event) {
-		loop1.stop();
-		event.preventDefault();
-		services[0].dashboardProcess = interfaces[0].drawPage;
-		services[0].dashboard_last_id=0;
-		services[0].current_page = services[0].current_page + 1;
-		var p =services[0].current_page;
-		console.log(p);
-		console.log(services[0].current_page);
-		services[0].dashboardGet(p);
-		$('current_page').update("Strona: "+p);
-		console.log(services[0].current_page);
-	});
-	Element.observe('previous_page','click',function(event) {
-		loop1.stop();
-		event.preventDefault();
-		services[0].dashboardProcess = interfaces[0].drawPage;
-		services[0].dashboard_last_id=0;
-		services[0].current_page = services[0].current_page - 1;
-		var p =services[0].current_page;
-		console.log(p);
-		console.log(services[0].current_page);
-		$('current_page').update("Strona: "+p);
-		services[0].dashboardGet(p);
-		console.log(services[0].current_page);
+//	Element.observe('home_link','click',function(event) {
+//		services[active_service].dashboard_last_id=0;
+//		services[active_service].dashboardProcess = interfaces[active_service].draw;
+//		services[active_service].dashboardGet();
+//		event.preventDefault();
+//		$('current_page').update();
+//		loop1 = new PeriodicalExecuter(run_loop1,10);
+//		function run_loop1() {
+//			$('throbber').toggle();
+//			services[active_service].dashboardGet();
+//		}
+//	});
+//	Element.observe('next_page','click',function(event) {
+//		loop1.stop();
+//		event.preventDefault();
+//		services[active_service].dashboardProcess = interfaces[active_service].drawPage;
+//		services[active_service].dashboard_last_id=0;
+//		services[active_service].current_page = services[active_service].current_page + 1;
+//		var p =services[active_service].current_page;
+//		console.log(p);
+//		console.log(services[active_service].current_page);
+//		services[active_service].dashboardGet(p);
+//		$('current_page').update("Strona: "+p);
+//		console.log(services[active_service].current_page);
+//	});
+//	Element.observe('previous_page','click',function(event) {
+//		loop1.stop();
+//		event.preventDefault();
+//		services[active_service].dashboardProcess = interfaces[active_service].drawPage;
+//		services[active_service].dashboard_last_id=0;
+//		services[active_service].current_page = services[active_service].current_page - 1;
+//		var p =services[active_service].current_page;
+//		console.log(p);
+//		console.log(services[active_service].current_page);
+//		$('current_page').update("Strona: "+p);
+//		services[active_service].dashboardGet(p);
+//		console.log(services[active_service].current_page);
+//	});
+	Element.observe('change_service', 'change', function(event){
+			console.dir(event);
+			var old = active_service;
+		active_service = event.target.value || 0 ;
+		Application.activate_service(old, activate_service);
+
 	});
 });

@@ -5,6 +5,8 @@
 	<script type="text/javascript" src="libs/prototype.js"></script>
 	<script type="text/javascript" src="libs/effects.js"></script>
 
+	<!-- cool stuff -->
+	<script src="class/application/application.js" type="text/javascript" charset="utf-8"></script>
 	<!-- classess -->
 	<script src="class/application/http_connector.js" type="text/javascript" charset="utf-8"></script>
 	<script src="class/application/database_connector.js" type="text/javascript" charset="utf-8"></script>
@@ -21,7 +23,6 @@
 	<script src="class/flaker/flaker.js" type="text/javascript" charset="utf-8"></script>
 	<!-- twitter stuff -->
 	<script src="class/twitter/twitter.js" type="text/javascript" charset="utf-8"></script>
-	<script src="class/twitter/twitter_clone.js" type="text/javascript" charset="utf-8"></script>
 	<script src="class/twitter/status.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- events and startup stuff -->
@@ -37,11 +38,13 @@
 		<div id="controls">
 			<!-- login form -->
 			<form action="#" method="" accept-charset="utf-8" id="login_form">
+				<!--
 				<label for="Login">Login</label>
 					<input type="text" name="username" value=""/>
 				<label for="pass">Hasło</label>
 					<input type="password" name="pass" value=""/>
-				<input type="submit" class="button" value="Zaloguj &rarr;">
+				-->
+				<input type="submit" class="button" value="Zaloguj się do swoich kont &rarr;">
 			</form>
 		<!-- update content form -->
 	<div id="paginator">
@@ -52,6 +55,8 @@
 		<span id="current_page" class="button"></span>
 		-->
 		<a href="#" class="button small" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
+		<select  id="change_service">
+		</select>
 	</div>
 		<form action="#" method="" id="sender" accept-charset="utf-8">
 			<textarea  id="main_textarea" name="content" rows="3"  ></textarea>

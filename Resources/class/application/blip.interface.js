@@ -72,7 +72,7 @@ var BlipInterface = new Class.create(Interface, {
 
 		if (  is_update ===0) {
 			$$(self.container_id+' .unread').each(function(el) { el.removeClassName('unread'); } );
-			self.nterface.setUnreadCount('0');
+			self.interface.setUnreadCount('0');
 		} else {
 			var unr = $$(self.container_id + ' .unread').length;
 			self.setUnreadCount(""+unr+"");
@@ -109,8 +109,10 @@ var BlipInterface = new Class.create(Interface, {
 				var blip = self.getUpdateObject(obj);
 				var contents = blip.toQuoted();
 				contents.addClassName('quoted');
-				var elem = el.up('p') || el.up(); //.next();
-				elem.insert({'after':contents});
+				var elem = el.up('p') || el.up() || false; //.next();
+				if(elem) {
+					elem.insert({'after':contents});
+				}
 				el.remove();
 				self.expandLink('quoted_link');
 			});
