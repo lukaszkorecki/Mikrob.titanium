@@ -4,21 +4,8 @@ var Application = {
 	services : [],
 	get_services : function() {
 		var services = { 
-			'id' : { field_type : 'id' },
-			'login' : {
-				field_type : 'text',
-				not_null : true
-			},
-			'password' : {
-				field_type : 'text',
-				not_null : true
-			},
-			'type' : {
-				field_type : 'text',
-				not_null : true
-			},
-			'api_url' : { field_type : 'text' }
-		};
+			// minified for clarity ;-)
+			'id':{field_type:'id'},'login':{field_type:'text',not_null:true},'password':{field_type:'text',not_null:true},'type':{field_type:'text',not_null:true},'api_url':{field_type:'text'}};
 		this.db = new DatabaseConnector('mikrob', 'services', services);
 		var serv = this.db.find() || [];
 		this.services = serv;
@@ -92,12 +79,36 @@ var Application = {
 			var elem = new Element('option', {value : i}).update(this.services[i].login.capitalize() + " ("+this.services[i].type.capitalize()+")");
 			account_switcher.insert(elem);
 		}
+		var el = new Element('option', {value : 'change'}).update("Edytuj/Dodaj");
+		account_switcher.insert(el);
 	},
-activate_service : function(old_service_id, new_service_id) {
-	$('dash'+old_service_id).fade();
-	$('dash'+new_service_id).appear();
-}
+	activate_service : function(old_service_id, new_service_id) {
 
-	
+		$('dash'+old_service_id).fade();
+		$('dash'+new_service_id).appear();
+	},
+	save_window_settings : function() {
+		var win = Titanium.UI.getCurrentWindow();
+		var bounds = win.getBounds();
+		console.dir(bounds);
+		Titanium.App.Properties.setInt("width", bounds.width);
+		Titanium.App.Properties.setInt("height", bounds.height);
+		Titanium.App.Properties.setInt("x", bounds.x);
+		Titanium.App.Properties.setInt("y", bounds.y);
 
+	},
+	load_window_settings : function() {
+	        
+		var win = Titanium.UI.getCurrentWindow();
+		var bounds = win.getBounds();
+		try {
+			bounds.width = Titanium.App.Properties.getInt("width");
+			bounds.height = Titanium.App.Properties.getInt("height");
+			bounds.x = Titanium.App.Properties.getInt("x");
+			bounds.y = Titanium.App.Properties.getInt("y");
+		} catch (get_props) {
+			console.log('unable to get props');
+		}
+			win.setBounds(bounds);
+	}
 };

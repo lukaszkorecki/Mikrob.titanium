@@ -25,6 +25,9 @@
 	<link rel="stylesheet" href="linux.css" type="text/css" media="screen" charset="utf-8"/>
 	<script type="text/javascript" charset="utf-8">
 	document.observe('dom:loaded',function(){
+		Titanium.API.addEventListener(Titanium.CLOSE,function() { 
+			Application.populate_account_switcher();
+		}
 		Application.get_services();
 		var serv = Application.build_services();
 		console.dir(serv);

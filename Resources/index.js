@@ -8,19 +8,28 @@ function run_tests() {
 	w2.open();
 
 }
+// Window settings (position, size)
+Titanium.API.addEventListener(Titanium.EXIT,function() { 
+	Application.save_window_settings();
+});
+Titanium.API.addEventListener(Titanium.OPEN,function() { 
+		alert("opened!");
+	Application.load_window_settings();
+	alert("opened2");
+});
 // globalz
 var interfaces = new Array();
 // TODO this should come from the DB
 var services = new Array();
 var username,loop1,active_service =0;
 document.observe('dom:loaded',function(){
+	Application.load_window_settings();
 	$('sender').toggle();
 	$('throbber').toggle();
 
 	Element.observe('login_form','submit',function(event){
 		Application.get_services();
 		if(Application.services.length === 0) {
-			alert("nie masz kont! dodaj jakieś!");
 			Application.open_add_service_window();
 		
 		} else {
@@ -139,10 +148,15 @@ document.observe('dom:loaded',function(){
 //		console.log(services[active_service].current_page);
 //	});
 	Element.observe('change_service', 'change', function(event){
-			console.dir(event);
-			var old = active_service;
+		var old = active_service;
 		active_service = event.target.value || 0 ;
-		Application.activate_service(old, activate_service);
+		if(old != active_service) {
+			if(active_service == 'change') {
+				Application.open_add_service_window();
+			} else {
+				Application.activate_service(old, active_service);
+			}
+		}
 
 	});
 });
