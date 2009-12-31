@@ -13,6 +13,7 @@ var Interface = new Class.create({
     this.service_id = service_id;
     this.globalLimit = 20;
     this.throbber = $('throbber');
+    this.character_limit = 140;
 
   },
   afterSend : function(resp) {

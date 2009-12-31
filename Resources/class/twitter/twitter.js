@@ -11,6 +11,9 @@ var Twitter = new Class.create(Service, {
   dashboardGet : function(offset) {
     var self = this;
     var url = self.api_root+"/statuses/home_timeline.json";
+    if(self.dashboard_last_id !== 0) {
+      url += "?since_id="+self.dashboard_last_id;
+    }
     req = new HttpConnector(self.commonHeaders);
     req.setUserCred(self.login, self.password);
     req.get(url);
@@ -25,6 +28,7 @@ var Twitter = new Class.create(Service, {
       }
       if(ob.length > 0) {
         self.dashboardProcess(ob, false);
+        self.dashboard_last_id = ob[0].id;
       } else {
         interfaces[self.service_id].notify("Błąd", "Błąd pobierania, spróbuj później");
       }
@@ -38,5 +42,21 @@ var Twitter = new Class.create(Service, {
   dashboardProcess :function(response_obj,is_update){
 
     interfaces[this.service_id].draw(response_obj, is_update);
-  }
+  },
+  post : function(content) {
+    var self = this;
+    req = new HttpConnector();
+    req.setUserCred(self.login, self.password);
+    req.post(self.api_root+"/statuses/update.json", "status="+encodeURIComponent(content));
+    req.onSuccess = function(resp) {
+      self.afterSend(resp);
+    };
+    req.onFail = function(resp) {
+      interfaces[self.service_id].notify("Błąd!", "Coś tam!");
+      self.afterSend(resp, false);
+    };
+  },
+  afterSend :  function(response_obj){
+    interfaces[this.service_id].afterSend(response_obj);
+  },
 });

@@ -26,10 +26,10 @@
   <script type="text/javascript" charset="utf-8">
   document.observe('dom:loaded',function(){
     Titanium.API.addEventListener(Titanium.CLOSE,function() { 
-      Application.populate_account_switcher();
-    }
-    Application.get_services();
-    var serv = Application.build_services();
+      Application.populateAccountSwitcher();
+    });
+    Application.getServices();
+    var serv = Application.buildServices();
     console.dir(serv);
     $('add_service_form').observe('submit',function(event){
       var login = $F(this['login']);
@@ -39,7 +39,7 @@
       console.log(login + " " + password + " " + type + " " + api_root);
       event.preventDefault();
       if(login !== "" && password !== "" && type !=="") {
-        Application.save_service(login, password, type, api_root);
+        Application.saveService(login, password, type, api_root);
       } else {
         alert("Wypełninj wymagane pola!");
       }

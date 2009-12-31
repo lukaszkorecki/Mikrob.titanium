@@ -2,7 +2,7 @@
 var Application = {
   db : "",
   services : [],
-  get_services : function() {
+  getServices : function() {
     var services = { 
       // minified for clarity ;-)
       'id':{field_type:'id'},'login':{field_type:'text',not_null:true},'password':{field_type:'text',not_null:true},'type':{field_type:'text',not_null:true},'api_url':{field_type:'text'}};
@@ -10,13 +10,13 @@ var Application = {
     var serv = this.db.find() || [];
     this.services = serv;
     if(this.services.length > 0) {
-      this.build_services();
+      this.buildServices();
       return true;
     } else {
       return false;
     }
   },
-  build_services : function() {
+  buildServices : function() {
     var serv = [];
     for (var i = 0; i < this.services.length; i++) {
 
@@ -24,7 +24,7 @@ var Application = {
     }
     this.services = serv;
   },
-  save_service : function(login, password, type, api_url) {
+  saveService : function(login, password, type, api_url) {
     var a_u = api_url || "";
     var new_serv = { fields : {
       'login' : login,
@@ -36,7 +36,7 @@ var Application = {
     this.db.save(new_serv);
 
   },
-  open_add_service_window : function() {
+  openAddServiceWindow : function() {
     var win = Titanium.UI.getCurrentWindow();
     var w2 = win.createWindow('app://add_service.html');
     
@@ -45,7 +45,7 @@ var Application = {
     w2.setResizable(true);
     w2.open();
   },
-  return_service_objects : function(service_row, index) {
+  returnServiceObjects : function(service_row, index) {
     var obj = {
       'interFace' : null,
       service : null
@@ -70,10 +70,10 @@ var Application = {
     }
     return obj;
   },
-  populate_account_switcher : function() {
+  populateAccountSwitcher : function() {
     var account_switcher = $('change_service');
     account_switcher.update();
-    this.get_services();
+    this.getServices();
     for(var i=0, len = this.services.length;i<len;i++) {
 
       var elem = new Element('option', {value : i}).update(this.services[i].login.capitalize() + " ("+this.services[i].type.capitalize()+")");
@@ -82,12 +82,12 @@ var Application = {
     var el = new Element('option', {value : 'change'}).update("Edytuj/Dodaj");
     account_switcher.insert(el);
   },
-  activate_service : function(old_service_id, new_service_id) {
+  activateService : function(old_service_id, new_service_id) {
 
     $('dash'+old_service_id).fade();
     $('dash'+new_service_id).appear();
   },
-  save_window_settings : function() {
+  saveWindowSettings : function() {
     var win = Titanium.UI.getCurrentWindow();
     var bounds = win.getBounds();
     console.dir(bounds);
@@ -97,7 +97,7 @@ var Application = {
     Titanium.App.Properties.setInt("y", bounds.y);
 
   },
-  load_window_settings : function() {
+  loadWindowSettings : function() {
           
     var win = Titanium.UI.getCurrentWindow();
     var bounds = win.getBounds();

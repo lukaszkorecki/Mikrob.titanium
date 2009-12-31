@@ -10,12 +10,11 @@ function run_tests() {
 }
 // Window settings (position, size)
 Titanium.API.addEventListener(Titanium.EXIT,function() { 
-  Application.save_window_settings();
+  Application.saveWindowSettings();
 });
-Titanium.API.addEventListener(Titanium.OPEN,function() { 
-    alert("opened!");
-  Application.load_window_settings();
-  alert("opened2");
+Titanium.API.addEventListener(Titanium.OPEN,function(event) { 
+  console.dir(event);
+  Application.loadWindowSettings();
 });
 // globalz
 var interfaces = new Array();
@@ -23,19 +22,19 @@ var interfaces = new Array();
 var services = new Array();
 var username,loop1,active_service =0;
 document.observe('dom:loaded',function(){
-  Application.load_window_settings();
+  Application.loadWindowSettings();
   $('sender').toggle();
   $('throbber').toggle();
 
   Element.observe('login_form','submit',function(event){
-    Application.get_services();
+    Application.getServices();
     if(Application.services.length === 0) {
-      Application.open_add_service_window();
+      Application.openAddServiceWindow();
     
     } else {
       active_service = 0;
       for (var i = 0; i < Application.services.length; i++) {
-        var obj = Application.return_service_objects(Application.services[i], i);
+        var obj = Application.returnServiceObjects(Application.services[i], i);
         interfaces.push ( obj.interFace);
         services.push ( obj.service);
       }
@@ -49,7 +48,7 @@ document.observe('dom:loaded',function(){
         services[active_service].dashboardGet();
       }
 
-      Application.populate_account_switcher();
+      Application.populateAccountSwitcher();
 
       // Clean up old stuff
       Titanium.App.Properties.setString('username',"");
@@ -63,26 +62,27 @@ document.observe('dom:loaded',function(){
   });
   Element.observe('sender','submit',function(event){
     event.preventDefault();
-    if($F(this['content']).length <= 160) {
+    if($F(this['content']).length <= interfaces[active_service].character_limit) {
       $('throbber').toggle();
       this.disable();
       var blyp = $F(this['content']);
-      services[active_service].createBlip(blyp);
+      services[active_service].post(blyp);
     } else {
-      yy = $F(this['content']).length - 160;
+      yy = $F(this['content']).length - interfaces[active_service].character_limit;
       interfaces[active_service].notify("Błęd", "Treść za długa o "+yy+" znaków");
     }
   });
   Element.observe('main_textarea','keydown',function(event){
     var content = this.getValue();
     if(event.keyCode == 13) {
-      if( content.length <= 160){
+      content.length = content.length-1;
+      if( content.length <= interfaces[active_service].character_limit){
         event.preventDefault();
         $('throbber').toggle();
         $('sender').disable();
-        services[active_service].createBlip(content);
+        services[active_service].post(content);
       } else {
-        interfaces[active_service].notify("Błęd", "Treść za długa o "+(content.length - 160)+" znaków");
+        interfaces[active_service].notify("Błęd", "Treść za długa o "+(content.length - interfaces[active_service].character_limit)+" znaków");
       }
     }
     $('charcount').update(content.length);
@@ -113,9 +113,10 @@ document.observe('dom:loaded',function(){
     active_service = event.target.value || 0 ;
     if(old != active_service) {
       if(active_service == 'change') {
-        Application.open_add_service_window();
+        active_service = old;
+        Application.openAddServiceWindow();
       } else {
-        Application.activate_service(old, active_service);
+        Application.activateService(old, active_service);
       }
     }
 

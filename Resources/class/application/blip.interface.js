@@ -1,6 +1,7 @@
 var BlipInterface = new Class.create(Interface, {
   initialize : function($super, container_id, service_id) {
     $super(container_id, service_id);
+    this.character_limit = 160;
   },
 
   getUpdateObject : function(blip) {
