@@ -1,34 +1,34 @@
 body.linux {
-	background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb));
+  background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb));
 }
 .linux .column{
-	background: #222;
+  background: #222;
 }
 .linux #controls { 
-	background:#222;
+  background:#222;
 }
 .linux .update p {
-	-webkit-box-shadow:  -1px 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow:  -1px 1px 3px rgba(0,0,0,0.5);
 }
 .linux .update {
-	border-color:#eee;
-	background: -webkit-gradient(
-		linear,
-		left top,
-		left bottom,
-		from(rgb(150,150,150)),
-		to(#dbdbdb)
-	);
-	padding-top:5px;
-	margin-bottom:0;
+  border-color:#eee;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgb(150,150,150)),
+    to(#dbdbdb)
+  );
+  padding-top:5px;
+  margin-bottom:0;
 
-	background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb));
+  background: -webkit-gradient(linear, left top, left bottom,    from(rgba(255,255,255,0)), to(#dbdbdb));
 }
 .linux .update img.avatar,  .linux .update img.ravatar {
-	margin-top:5px;
-	 -webkit-box-shadow:-1px 1px 3px rbga(0,0,0,0.5) ;
+  margin-top:5px;
+   -webkit-box-shadow:-1px 1px 3px rbga(0,0,0,0.5) ;
 
 }
 .linux .button {
-	-webkit-box-shadow: -1px 1px 3px rbga(0,0,0,0.7) ;
+  -webkit-box-shadow: -1px 1px 3px rbga(0,0,0,0.7) ;
 }

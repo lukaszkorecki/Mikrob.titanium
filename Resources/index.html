@@ -1,80 +1,80 @@
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />	
-	<!-- prototype stuff -->
-	<script type="text/javascript" src="libs/prototype.js"></script>
-	<script type="text/javascript" src="libs/effects.js"></script>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />  
+  <!-- prototype stuff -->
+  <script type="text/javascript" src="libs/prototype.js"></script>
+  <script type="text/javascript" src="libs/effects.js"></script>
 
-	<!-- cool stuff -->
-	<script src="class/application/application.js" type="text/javascript" charset="utf-8"></script>
-	<!-- classess -->
-	<script src="class/application/http_connector.js" type="text/javascript" charset="utf-8"></script>
-	<script src="class/application/database_connector.js" type="text/javascript" charset="utf-8"></script>
-	<script src="class/application/service.js" type="text/javascript" charset="utf-8"></script>
-	<script src="class/application/interface.js" type="text/javascript" charset="utf-8"></script>
-	<script src="class/application/blip.interface.js" type="text/javascript" charset="utf-8"></script>
-	<script src="class/application/twitter.interface.js" type="text/javascript" charset="utf-8"></script>
-	<!-- blip stuff -->
-	<script src="class/blip/blip.js" type="text/javascript" charset="utf-8"></script>
-	<script src="class/blip/blipi.js" type="text/javascript" charset="utf-8"></script>
-	<script src="blipi_api_key.js" type="text/javascript" charset="utf-8"></script>
-	<script src="class/blip/updates.js" type="text/javascript" charset="utf-8"></script>
-	<!-- flaker stuff -->
-	<script src="class/flaker/flaker.js" type="text/javascript" charset="utf-8"></script>
-	<!-- twitter stuff -->
-	<script src="class/twitter/twitter.js" type="text/javascript" charset="utf-8"></script>
-	<script src="class/twitter/status.js" type="text/javascript" charset="utf-8"></script>
+  <!-- cool stuff -->
+  <script src="class/application/application.js" type="text/javascript" charset="utf-8"></script>
+  <!-- classess -->
+  <script src="class/application/http_connector.js" type="text/javascript" charset="utf-8"></script>
+  <script src="class/application/database_connector.js" type="text/javascript" charset="utf-8"></script>
+  <script src="class/application/service.js" type="text/javascript" charset="utf-8"></script>
+  <script src="class/application/interface.js" type="text/javascript" charset="utf-8"></script>
+  <script src="class/application/blip.interface.js" type="text/javascript" charset="utf-8"></script>
+  <script src="class/application/twitter.interface.js" type="text/javascript" charset="utf-8"></script>
+  <!-- blip stuff -->
+  <script src="class/blip/blip.js" type="text/javascript" charset="utf-8"></script>
+  <script src="class/blip/blipi.js" type="text/javascript" charset="utf-8"></script>
+  <script src="blipi_api_key.js" type="text/javascript" charset="utf-8"></script>
+  <script src="class/blip/updates.js" type="text/javascript" charset="utf-8"></script>
+  <!-- flaker stuff -->
+  <script src="class/flaker/flaker.js" type="text/javascript" charset="utf-8"></script>
+  <!-- twitter stuff -->
+  <script src="class/twitter/twitter.js" type="text/javascript" charset="utf-8"></script>
+  <script src="class/twitter/status.js" type="text/javascript" charset="utf-8"></script>
 
-	<!-- events and startup stuff -->
-	<script src="index.js" type="text/javascript" charset="utf-8"></script>
-	<link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8"/>
-	<link rel="stylesheet" href="win32.css" type="text/css" media="screen" charset="utf-8"/>
-	<link rel="stylesheet" href="linux.css" type="text/css" media="screen" charset="utf-8"/>
+  <!-- events and startup stuff -->
+  <script src="index.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8"/>
+  <link rel="stylesheet" href="win32.css" type="text/css" media="screen" charset="utf-8"/>
+  <link rel="stylesheet" href="linux.css" type="text/css" media="screen" charset="utf-8"/>
 </head>
 <body>
-	<div id="wrapper">
+  <div id="wrapper">
 
 
-		<div id="controls">
-			<!-- login form -->
-			<form action="#" method="" accept-charset="utf-8" id="login_form">
-				<!--
-				<label for="Login">Login</label>
-					<input type="text" name="username" value=""/>
-				<label for="pass">Hasło</label>
-					<input type="password" name="pass" value=""/>
-				-->
-				<input type="submit" class="button" value="Zaloguj się do swoich kont &rarr;">
-			</form>
-		<!-- update content form -->
-	<div id="paginator">
-		<!--
-.		<a class="button" href="#" id="previous_page">&larr;</a>
-		<a class="button" href="#" id="home_link">Kokpit</a>
-		<a class="button" href="#" id="next_page">&rarr;</a>
-		<span id="current_page" class="button"></span>
-		-->
-		<a href="#" class="button small" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
-		<select  id="change_service">
-		</select>
-	</div>
-		<form action="#" method="" id="sender" accept-charset="utf-8">
-			<textarea  id="main_textarea" name="content" rows="3"  ></textarea>
-			<div>
-				<span id="charcount" class="button sender_item">0</span>
-				<a href="#" class="button small sender_item" title="Zmienia wiadomość na prywatną" id="make_private">Sprywatyzuj</a>
-				<a href="#" class="button small sender_item" title="Skraca wszystkie linki, które wpisano" id="shorten_links">Skróć linki</a>
-			</div>
-<!--			<input type="submit" class="button" value="Dodaj Obraz"> -->
-<!--			<input type="submit" class="button" value="Wyślij &rarr;"> -->
-			</form>
-			<!-- controlls -->
-			<div id="throbber"><img src="app://icons/anim.gif" /></div>
-		</div>
-		<!-- here b columns -->
-		<div id="dash0" class="column"></div>
-		<div id="dash1" class="column"></div>
-		<div id="dash2" class="column"></div>
-	</div>
+    <div id="controls">
+      <!-- login form -->
+      <form action="#" method="" accept-charset="utf-8" id="login_form">
+        <!--
+        <label for="Login">Login</label>
+          <input type="text" name="username" value=""/>
+        <label for="pass">Hasło</label>
+          <input type="password" name="pass" value=""/>
+        -->
+        <input type="submit" class="button" value="Zaloguj się do swoich kont &rarr;">
+      </form>
+    <!-- update content form -->
+  <div id="paginator">
+    <!--
+.    <a class="button" href="#" id="previous_page">&larr;</a>
+    <a class="button" href="#" id="home_link">Kokpit</a>
+    <a class="button" href="#" id="next_page">&rarr;</a>
+    <span id="current_page" class="button"></span>
+    -->
+    <a href="#" class="button small" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
+    <select  id="change_service">
+    </select>
+  </div>
+    <form action="#" method="" id="sender" accept-charset="utf-8">
+      <textarea  id="main_textarea" name="content" rows="3"  ></textarea>
+      <div>
+        <span id="charcount" class="button sender_item">0</span>
+        <a href="#" class="button small sender_item" title="Zmienia wiadomość na prywatną" id="make_private">Sprywatyzuj</a>
+        <a href="#" class="button small sender_item" title="Skraca wszystkie linki, które wpisano" id="shorten_links">Skróć linki</a>
+      </div>
+<!--      <input type="submit" class="button" value="Dodaj Obraz"> -->
+<!--      <input type="submit" class="button" value="Wyślij &rarr;"> -->
+      </form>
+      <!-- controlls -->
+      <div id="throbber"><img src="app://icons/anim.gif" /></div>
+    </div>
+    <!-- here b columns -->
+    <div id="dash0" class="column"></div>
+    <div id="dash1" class="column"></div>
+    <div id="dash2" class="column"></div>
+  </div>
 </body>
 </html>

@@ -1,153 +1,153 @@
 body {
-	font-family:helvetica;
-	font-size:10pt;
-	color:#000;
-	overflow:hidden;
-	 text-#333px 1px 3px;
-	margin:0;
-	padding:0;
-	-webkit-user-select:none;
+  font-family:helvetica;
+  font-size:10pt;
+  color:#000;
+  overflow:hidden;
+   text-#333px 1px 3px;
+  margin:0;
+  padding:0;
+  -webkit-user-select:none;
  -webkit-word-wrap: break-word; 
  word-wrap: break-word; 
 }
 a  {
-	color:#333;
-	text-decoration:none;
-	
+  color:#333;
+  text-decoration:none;
+  
 }
 p { -webkit-word-wrap: break-word; } /* fix them things */
 a:hover {
-	background:#222;
-	color:#eee
+  background:#222;
+  color:#eee
 }
 .update {
-	margin-bottom:10px;
-	padding:4px;
-	padding-top:0;
-	border-bottom:1px solid #eee;
+  margin-bottom:10px;
+  padding:4px;
+  padding-top:0;
+  border-bottom:1px solid #eee;
 
 }
 .update p {
-	/*
-	background: -webkit-gradient(linear, left top, left bottom,    from(#fff), to(#dbdbdb), color-stop(0.5, ##aaa);
-	*/
-	background:#eee;
-	/*-webkit-border-radius:10px;*/
-	padding:4px;
-	margin:5px;
-	margin-left:40px;
-	min-height:30px;
-	width:85%;
-	padding:5px;
-	position: relative;
-	box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
-	-webkit-border-radius:4px;
-	color:#888;
-	z-index:1;
+  /*
+  background: -webkit-gradient(linear, left top, left bottom,    from(#fff), to(#dbdbdb), color-stop(0.5, ##aaa);
+  */
+  background:#eee;
+  /*-webkit-border-radius:10px;*/
+  padding:4px;
+  margin:5px;
+  margin-left:40px;
+  min-height:30px;
+  width:85%;
+  padding:5px;
+  position: relative;
+  box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
+  -webkit-border-radius:4px;
+  color:#888;
+  z-index:1;
 }
 .update .avatar_container {
-	float:left;
-	display:block;
-			z-index:10;
+  float:left;
+  display:block;
+      z-index:10;
 }
 .update .avatar_container .avatar {
-	display: block;
-	width: 30px;
-	height: 30px;
-	background-image: url(app://icons/nn_nano.png);
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-image: url(app://icons/nn_nano.png);
 }
 .quoted {
-	-webkit-border-radius:4px;
-	background:#eee;
-	padding:5px;
-	width:80%;
-	margin-top:10px;
-	margin-left:40px;
-	display:block;
-	color:#888;
-	box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
+  -webkit-border-radius:4px;
+  background:#eee;
+  padding:5px;
+  width:80%;
+  margin-top:10px;
+  margin-left:40px;
+  display:block;
+  color:#888;
+  box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
 }
 .quoted:hover a{
-	color:#000;
-	background:#fff;
+  color:#000;
+  background:#fff;
 }
 .own p { margin-left:5px; margin-right:40px;}
 .own .avatar_container {float: right;}
 .update img.avatar,  .update img.ravatar {
-	border:4px solid #eee;
-	-webkit-border-radius:5px;
-	box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
+  border:4px solid #eee;
+  -webkit-border-radius:5px;
+  box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
 
 }
 .update_picture {
-	position:absolute;
-	right:-5%;
+  position:absolute;
+  right:-5%;
 /*display:block; margin:0 auto;*/
 }
 .update_picture  img {
-	border:4px solid #000;
-	-webkit-border-radius:5px;
-	-webkit-transform:rotate(8deg)  scale(0.5); 
-	
+  border:4px solid #000;
+  -webkit-border-radius:5px;
+  -webkit-transform:rotate(8deg)  scale(0.5); 
+  
 }
 .column {
-	/*
-	border-top:2px solid #333;
-	border-bottom:2px solid #333;
-	*/
-	position:absolute;
-	overflow-x:hidden;
-	overflow-y:auto;
-	top:0;
-	bottom:120px;
-	padding:0px;
-	max-width:400px;
-	border-bottom: 2px solid #888;
+  /*
+  border-top:2px solid #333;
+  border-bottom:2px solid #333;
+  */
+  position:absolute;
+  overflow-x:hidden;
+  overflow-y:auto;
+  top:0;
+  bottom:120px;
+  padding:0px;
+  max-width:400px;
+  border-bottom: 2px solid #888;
 }
 #dash1 { left: 405px;}
 #dash2 { left: 810px;}
 .user, .recipient {
-	font-weight:bold;
-	margin:1px 4px 1px 4px;
-	background:#aaa;
-	-webkit-border-radius:4px;
+  font-weight:bold;
+  margin:1px 4px 1px 4px;
+  background:#aaa;
+  -webkit-border-radius:4px;
 }
 .actions {
-	margin-top:15px;
-	margin-bottom:5px;
-	clear:both;
+  margin-top:15px;
+  margin-bottom:5px;
+  clear:both;
 }
 .button {
-	font-weight:bold;
-	padding:2px;
+  font-weight:bold;
+  padding:2px;
 
-	box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
-	border:1px solid #888;
-	-webkit-border-radius:4px;
-	margin: 3px;
-	background:#eee;
+  box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
+  border:1px solid #888;
+  -webkit-border-radius:4px;
+  margin: 3px;
+  background:#eee;
 }
 .actions span {
-	margin-top:10px;
-	margin-bottom:10px;
-/*	display:block; */
+  margin-top:10px;
+  margin-bottom:10px;
+/*  display:block; */
 }
 input, textarea {
-	-webkit-border-readius:6px;
+  -webkit-border-readius:6px;
 
 }
 textarea { font-family:helvetica; }
 #controls {
-	position:fixed;
-	padding-bottom:10px;
-	height:110px;
-	bottom:0;
-	left:0;
-	width:100%;
+  position:fixed;
+  padding-bottom:10px;
+  height:110px;
+  bottom:0;
+  left:0;
+  width:100%;
 }
 input[type="text"], input[type="password"] {
-	width: 100%;
-	display:block;
+  width: 100%;
+  display:block;
 }
 #login_form {
     width:50%;
@@ -156,43 +156,43 @@ input[type="text"], input[type="password"] {
     left:24%;
 }
 #add_service_form input, #add_service_form label {
-	width:50%;
-	display:block;
+  width:50%;
+  display:block;
 }
 
 #throbber { 
-	position:fixed;
-	bottom:5px;
-	right:10px;
-	background:#888;
-	padding:2px;
-	-webkit-border-radius:3px;
+  position:fixed;
+  bottom:5px;
+  right:10px;
+  background:#888;
+  padding:2px;
+  -webkit-border-radius:3px;
 }
 /* specific */
 .notice p {
-	margin-left:4px;
-	min-height:10px;
+  margin-left:4px;
+  min-height:10px;
     width:90%;
 }
 
 .unread p{
-	color:#000;
+  color:#000;
 }
 .priv_t { border:red;}
 .small { font-size:80%;}
 /* sender form */
 textarea {
-	width:70% !important;
-	float:left;
-	height:70px;
+  width:70% !important;
+  float:left;
+  height:70px;
 margin:5px 0 0 10px;
 }
 #sender  div {
-	float: left;
-	margin-left: 10px;
-	margin-top: 2px;
-	width: 23%;
+  float: left;
+  margin-left: 10px;
+  margin-top: 2px;
+  width: 23%;
 
 }
 #sender div .sender_item { display:block; width: 70%; }
-	#unread_count { text-align:center}
+  #unread_count { text-align:center}
