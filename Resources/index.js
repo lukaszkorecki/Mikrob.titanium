@@ -16,6 +16,9 @@ Titanium.API.addEventListener(Titanium.OPEN,function(event) {
   console.dir(event);
   Application.loadWindowSettings();
 });
+Titanium.API.addEventListener(Titanium.CLOSE,function() { 
+  Application.populateAccountSwitcher();
+});
 // globalz
 var interfaces = new Array();
 // TODO this should come from the DB

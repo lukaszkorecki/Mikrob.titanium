@@ -83,7 +83,6 @@ var Application = {
     account_switcher.insert(el);
   },
   activateService : function(old_service_id, new_service_id) {
-
     $('dash'+old_service_id).fade();
     $('dash'+new_service_id).appear();
   },

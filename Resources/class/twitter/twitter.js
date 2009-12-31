@@ -11,7 +11,9 @@ var Twitter = new Class.create(Service, {
   dashboardGet : function(offset) {
     var self = this;
     var url = self.api_root+"/statuses/home_timeline.json";
+    var is_update = false;
     if(self.dashboard_last_id !== 0) {
+      is_update = true;
       url += "?since_id="+self.dashboard_last_id;
     }
     req = new HttpConnector(self.commonHeaders);
@@ -21,13 +23,14 @@ var Twitter = new Class.create(Service, {
       var ob = {};
       if(response != undefined) {
         ob = Titanium.JSON.parse(response);
+        console.dir(ob)
       } else {
         console.log(status);
         console.log(response);
         interfaces[self.service_id].notify("BŁĄŽ", "NIE POBRAŁEM!");
       }
       if(ob.length > 0) {
-        self.dashboardProcess(ob, false);
+        self.dashboardProcess(ob, is_update);
         self.dashboard_last_id = ob[0].id;
       } else {
         interfaces[self.service_id].notify("Błąd", "Błąd pobierania, spróbuj później");
