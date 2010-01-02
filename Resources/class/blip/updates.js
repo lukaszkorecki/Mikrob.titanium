@@ -203,8 +203,8 @@ var Update = new Class.create({
 });
 
 var Message = new Class.create(Update, {
-  initialize : function($super, obj, isPrivate, owner_service_id) {
-    $super(obj, owner_service_id);
+  initialize : function($super, obj, isPrivate, owner_service_id, username) {
+    $super(obj, owner_service_id, username);
     this.recipient = obj.recipient;
     this.isPrivate = isPrivate;
     this.separator = new Element('span').insert('<strong>→</strong>');

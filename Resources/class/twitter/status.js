@@ -8,9 +8,37 @@ var TwitterStatus = new Class.create({
     this.body = obj.text;
     this.created_at = obj.created_at;
   },
-  userLink : function() { return ""; },
-  quoteLink : function() { return ""; },
-  messageLink : function() { return ""; },
+  userLink : function() {
+    var self = this;
+    var ulink= new Element('a', {'href':'#', 'class': 'button', 'title' : self.user.screen_name}).update(self.user.name);
+    ulink.observe('click',function(event){
+    try{ 
+      Titanium.Desktop.openURL('http://twitter.com/'+self.user.screen_name);
+    } catch(err) { console.dir(err); }
+      event.preventDefault();
+    });
+    return ulink;
+  },
+  messageLink : function() {
+    var self = this;
+    var link = new Element('a', {'href' : '#' , 'class' : 'msg button small'}).update("Wiadomość");
+    link.observe('click', function(event) {
+      interfaces[self.owner_service_id].setAreaContent("d "+self.user.screen_name,true);
+      event.preventDefault();
+      });
+    return link;
+  },
+  replyLink : function() {
+    var self = this;
+    var link = new Element('a', {'href' : '#' , 'class' : 'msg button small'}).update("Odpowiedz");
+    link.observe('click', function(event) {
+      interfaces[self.owner_service_id].setAreaContent("@"+self.user.screen_name,true);
+      // TODO implement this:
+      // interfaces[self.service_id].setAreaParam("id", self.id);
+      event.preventDefault();
+      });
+    return link;
+  },
   createdAt : function() {
     return this.created_at.substr(this.created_at.indexOf(" "));
   },
@@ -20,13 +48,12 @@ var TwitterStatus = new Class.create({
     var actions = new Element('div',{'class':'actions'});
     actions.insert(self.userLink());
     actions.insert(self.permaLink());
-    actions.insert(self.quoteLink());
+    actions.insert(self.replyLink());
     actions.insert(self.messageLink());
     actions.insert(self.createdAt());
     return actions;
   },
   permaLink : function() {
-        
     var self = this;
     var url = 'http://twitter.com/'+self.user.screen_name+'/status/'+self.id;
     var link = new Element('a', {'href':url,'class':'button small', 'title':self.id}).update('Link');

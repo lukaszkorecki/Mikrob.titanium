@@ -960,8 +960,26 @@ Logger.NOTSET   = 0;
         params = params.slice(0);
         params.unshift(template);
         c[method].apply(c, params);
+        if (Titanium) {
+          try {
+            Titanium.API[method](template);
+          } catch(ti_err) {
+            Titanium.API.debug(template);
+          }
+
+        }
       } else {
         c[method](template);
+        // use titanium's logging functionality
+        // supports all levels
+        if (Titanium) {
+          try {
+            Titanium.API[method](template);
+          } catch(ti_err) {
+            Titanium.API.debug(template);
+          }
+
+        }
       }
     }
   }

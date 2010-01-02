@@ -24,6 +24,13 @@ var Application = {
     }
     this.services = serv;
   },
+  refreshServices : function() {
+    for(var y=0;i<this.services.length;i++) {
+     var obj = this.returnServiceObjects(this.services[i], i);
+     interfaces.push(obj.interFace);
+     services.push (obj.service);
+    }
+  },
   saveService : function(login, password, type, api_url) {
     var a_u = api_url || "";
     var new_serv = { fields : {
@@ -83,6 +90,9 @@ var Application = {
     account_switcher.insert(el);
   },
   activateService : function(old_service_id, new_service_id) {
+    var w = Titanium.UI.getCurrentWindow();
+    var title_string = Titanium.App.getName() + " : " + this.services[new_service_id].login.capitalize() + " ("+this.services[new_service_id].type.capitalize()+")";
+    w.setTitle(title_string);
     $('dash'+old_service_id).fade();
     $('dash'+new_service_id).appear();
   },

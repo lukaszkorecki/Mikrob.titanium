@@ -17,7 +17,7 @@ var BlipInterface = new Class.create(Interface, {
         single_status = new Message(blip, false, this.service_id);
         break;
       default:
-        single_status = new Update(blip, this.service_id);
+        single_status = new Update(blip, this.service_id, services[this.service_id].login);
         break;
     }
     return single_status;

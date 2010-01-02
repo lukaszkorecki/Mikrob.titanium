@@ -18,6 +18,7 @@ Titanium.API.addEventListener(Titanium.OPEN,function(event) {
 });
 Titanium.API.addEventListener(Titanium.CLOSE,function() { 
   Application.populateAccountSwitcher();
+  Application.refreshServices();
 });
 // globalz
 var interfaces = new Array();
@@ -44,8 +45,11 @@ document.observe('dom:loaded',function(){
       services[active_service].dashboardGet();
       interfaces[active_service].notify(Titanium.App.getName(),'Pobieram kokpit');
 
-
-      loop1 = new PeriodicalExecuter(run_loop1,20);
+      var how_often = 15
+      if(service.type != 'blip') {
+        how_often = 30;
+      }
+      loop1 = new PeriodicalExecuter(run_loop1,how_often);
       function run_loop1() {
         $('throbber').toggle();
         services[active_service].dashboardGet();

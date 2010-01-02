@@ -8,6 +8,26 @@ var Twitter = new Class.create(Service, {
   commonHeaders :  {
     'Accept' : 'application/json'
   },
+  checkUsage : function() {
+    var self = this;
+    var url = this.api_root+"/account/rate_limit_status.json";
+    var req = new HttpConnector(self.commonHeaders);
+
+    req.setUserCred(self.login, self.password);
+
+    req.get(url);
+    req.onSuccess = function(status, response) { 
+      console.log(status);
+      response = Titanium.JSON.parse(response);
+      console.dir(response);
+    };
+    req.onFail = function(status, response) {
+      console.log(status);
+      response = Titanium.JSON.parse(response);
+      console.dir(response);
+
+    };
+  },
   dashboardGet : function(offset) {
     var self = this;
     var url = self.api_root+"/statuses/home_timeline.json";
@@ -16,6 +36,7 @@ var Twitter = new Class.create(Service, {
       is_update = true;
       url += "?since_id="+self.dashboard_last_id;
     }
+    console.log(url);
     req = new HttpConnector(self.commonHeaders);
     req.setUserCred(self.login, self.password);
     req.get(url);
@@ -23,7 +44,6 @@ var Twitter = new Class.create(Service, {
       var ob = {};
       if(response != undefined) {
         ob = Titanium.JSON.parse(response);
-        console.dir(ob)
       } else {
         console.log(status);
         console.log(response);
@@ -41,6 +61,7 @@ var Twitter = new Class.create(Service, {
       console.log(response);
       interfaces[self.service_id].notify("Błąd", "Błąd połączenia z API: " + status);
     };
+    self.checkUsage();
   },
   dashboardProcess :function(response_obj,is_update){
 
@@ -58,8 +79,9 @@ var Twitter = new Class.create(Service, {
       interfaces[self.service_id].notify("Błąd!", "Coś tam!");
       self.afterSend(resp, false);
     };
+    self.checkUsage();
   },
   afterSend :  function(response_obj){
     interfaces[this.service_id].afterSend(response_obj);
-  },
+  }
 });
