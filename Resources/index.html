@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="pl">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />  
   <!-- prototype stuff -->
@@ -32,6 +33,9 @@
   <link rel="stylesheet" href="linux.css" type="text/css" media="screen" charset="utf-8"/>
 </head>
 <body>
+<!--
+  <div id="big_load"> <img alt="Ładuję, proszę czekać" src="app://icons/big_load.gif"  /> </div>
+  -->
   <div id="wrapper">
 
 
@@ -55,11 +59,12 @@
     <span id="current_page" class="button"></span>
     -->
     <a href="#" class="button small" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
+    <a href="#" class="button small" id="archive_button">Archiwum</a>
     <select  id="change_service">
     </select>
   </div>
     <form action="#" method="" id="sender" accept-charset="utf-8">
-      <textarea  id="main_textarea" name="content" rows="3"  ></textarea>
+      <textarea  id="main_textarea" name="content" rows="3" placeholder="Co teraz robisz? O czym myślisz? Dokąd zmierzamy?" autofocus ></textarea>
       <div>
         <span id="charcount" class="button sender_item">0</span>
         <a href="#" class="button small sender_item" title="Zmienia wiadomość na prywatną" id="make_private">Sprywatyzuj</a>

@@ -59,7 +59,10 @@ var BlipInterface = new Class.create(Interface, {
         self.expandLink('quoted_link');
       if (i<4) {
         try {
-          var av = 'http://blip.pl'+single_status.user.avatar.url_50 || false;
+        var av =  'app://icons/nn_nano.png';
+        if(single_status.user.avatar) {
+          av = 'http://blip.pl'+single_status.user.avatar.url_50;
+        }
           self.notify(single_status.user.login, single_status.raw_body, av );
         }
         catch (notifyerr) {
@@ -68,19 +71,18 @@ var BlipInterface = new Class.create(Interface, {
         single_status = null;
       }
       i++;
-      
     });
 
     if (  is_update ===0) {
       $$(self.container_id+' .unread').each(function(el) { el.removeClassName('unread'); } );
-      self.interface.setUnreadCount('0');
+      self.setUnreadCount('0');
     } else {
       var unr = $$(self.container_id + ' .unread').length;
-      self.setUnreadCount(""+unr+"");
+      self.setUnreadCount(""+unr);
 
     }
     self.throbber.toggle();
-  }  ,
+  },
   expandLink : function(target_class) {
     var els = $$('.'+target_class);
     els.each(function(el) {

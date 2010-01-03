@@ -37,7 +37,7 @@ var Blip = new Class.create(Service,{
   //  else {
   //    url += '&offset=0';
   //  }
-    req = new HttpConnector(self.commonHeaders());
+    var req = new HttpConnector(self.commonHeaders());
     req.setUserCred(self.login, self.password);
     req.get(url);
     req.onSuccess = function(status,response) {
@@ -63,7 +63,7 @@ var Blip = new Class.create(Service,{
   },
   post : function(str) {
     var self = this;
-    req = new HttpConnector(self.commonHeaders());
+    var req = new HttpConnector(self.commonHeaders());
     req.setUserCred(self.login, self.password);
     try {
       req.post(self.api_root+'/updates','update[body]='+encodeURIComponent(str));
@@ -77,7 +77,7 @@ var Blip = new Class.create(Service,{
   },
   getBlip : function(blipid) {
     var self = this;
-    req = new HttpConnector(self.commonHeaders());
+    var req = new HttpConnector(self.commonHeaders());
     req.setUserCred(self.login, self.password);
     req.get(self.api_root+'/updates/'+blipid+self.include_string_full);
     req.onSuccess = function(st, resp) {
@@ -92,7 +92,7 @@ var Blip = new Class.create(Service,{
    },
   shortenLink : function(url) {
     var self = this;
-    req = new HttpConnector(self.commonHeaders());
+    var req = new HttpConnector(self.commonHeaders());
     req.setUserCred(self.login, self.password);
     req.post(self.api_root+'/shortlinks', 'shortlink[original_link]='+url);
     req.onSuccess = function(st, resp) {
@@ -105,7 +105,7 @@ var Blip = new Class.create(Service,{
   },
   expandLink : function(id) {
     var self = this;
-    req = new HttpConnector(self.commonHeaders());
+    var req = new HttpConnector(self.commonHeaders());
     req.setUserCred(self.login, self.password);
     req.get(self.api_root+'/shortlinks/'+id);
     req.onSuccess = function(st, resp) {
@@ -116,5 +116,68 @@ var Blip = new Class.create(Service,{
       console.log(st);
       interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiedło");
     };
+  },
+  getPrivateMessages : function() {
+    var self = this;
+    var req = new HttpConnector(self.commonHeaders());
+    req.setUserCred(self.login, self.password);
+    var private_messages_url = self.api_root+"/private_messages"+self.include_string_full+"&limit=20";
+
+    req.get(private_messages_url);
+
+    req.onSuccess = function(st, resp) {
+      console.log('getPrivateMessages');
+      var obj = Titanium.JSON.parse(resp);
+      self.onArchiveComplete(obj);
+    };
+    req.onFail = function(st, resp) {
+      console.log('getPrivateMessages fail');
+      console.log(st); console.log(resp);
+    };
+  },
+  getDirectMessages : function() {
+    var self = this;
+    var req = new HttpConnector(self.commonHeaders());
+    req.setUserCred(self.login, self.password);
+    var direct_messages_url = self.api_root+"/directed_messages"+self.include_string_full+"&limit=20";
+
+    req.get(direct_messages_url);
+
+    req.onSuccess = function(st, resp) {
+      console.log('getDirectMessages');
+      var obj = Titanium.JSON.parse(resp);
+      self.onArchiveComplete(obj);
+    };
+    req.onFail = function(st, resp) {
+      console.log('getDirectMessages fail');
+      console.log(st); console.log(resp);
+    };
+  },
+  getNotices: function() {
+    var self = this;
+    var req = new HttpConnector(self.commonHeaders());
+    req.setUserCred(self.login, self.password);
+    var notices_url = self.api_root+"/notices"+self.include_string_full+"&limit=20";
+
+    req.get(notices_url);
+
+    req.onSuccess = function(st, resp) {
+      console.log('getNotices');
+      var obj = Titanium.JSON.parse(resp);
+      self.onArchiveComplete(obj);
+    };
+    req.onFail = function(st, resp) {
+      console.log('getNotices fail');
+      console.log(st); console.log(resp);
+    };
+  },
+  getArchive : function() {
+    this.getPrivateMessages();
+    this.getDirectMessages();
+    this.getNotices();
+  },
+  onArchiveComplete : function(objects) {
+    console.dir(objects);
   }
+
 });

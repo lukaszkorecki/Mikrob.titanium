@@ -198,3 +198,10 @@ margin:5px 0 0 10px;
 }
 #sender div .sender_item { display:block; width: 70%; }
   #unread_count { text-align:center}
+#big_load { 
+position: fixed; top:50%; left:40%; background:#444;
+padding:20px;
+-webkit-border-radius: 10px;
+}
+
+.archive_column { top: 30px; bottom: 4px; }

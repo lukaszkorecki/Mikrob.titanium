@@ -36,18 +36,15 @@ document.observe('dom:loaded',function(){
       Application.openAddServiceWindow();
     
     } else {
+      Application.refreshServices();
+      Application.populateAccountSwitcher();
       active_service = 0;
-      for (var i = 0; i < Application.services.length; i++) {
-        var obj = Application.returnServiceObjects(Application.services[i], i);
-        interfaces.push ( obj.interFace);
-        services.push ( obj.service);
-      }
       services[active_service].dashboardGet();
       interfaces[active_service].notify(Titanium.App.getName(),'Pobieram kokpit');
 
-      var how_often = 15
-      if(service.type != 'blip') {
-        how_often = 30;
+      var how_often = 15;
+      if(services[active_service].type != 'blip') {
+      how_often = 30;
       }
       loop1 = new PeriodicalExecuter(run_loop1,how_often);
       function run_loop1() {
@@ -55,7 +52,6 @@ document.observe('dom:loaded',function(){
         services[active_service].dashboardGet();
       }
 
-      Application.populateAccountSwitcher();
 
       // Clean up old stuff
       Titanium.App.Properties.setString('username',"");
@@ -127,5 +123,9 @@ document.observe('dom:loaded',function(){
       }
     }
 
+  });
+  Element.observe('archive_button','click',function(event) {
+      event.preventDefault();
+      Application.openArchiveWindow('blip');
   });
 });

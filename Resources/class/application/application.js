@@ -25,10 +25,10 @@ var Application = {
     this.services = serv;
   },
   refreshServices : function() {
-    for(var y=0;i<this.services.length;i++) {
-     var obj = this.returnServiceObjects(this.services[i], i);
-     interfaces.push(obj.interFace);
-     services.push (obj.service);
+    for(var i=0;i<this.services.length;i++) {
+      var obj = this.returnServiceObjects(this.services[i], i);
+      interfaces.push(obj.interFace);
+      services.push (obj.service);
     }
   },
   saveService : function(login, password, type, api_url) {
@@ -49,6 +49,20 @@ var Application = {
     
     w2.setHeight(300);
     w2.setWidth(400);
+    w2.setResizable(true);
+    w2.open();
+  },
+  openArchiveWindow : function() {
+    var s = {
+      login : services[active_service].login,
+      password : services[active_service].password
+    };
+    Titanium.API.set("active_service", s);
+    var win = Titanium.UI.getCurrentWindow();
+    var w2 = win.createWindow('app://archive_blip.html');
+    
+    w2.setHeight(400);
+    w2.setWidth(300);
     w2.setResizable(true);
     w2.open();
   },
