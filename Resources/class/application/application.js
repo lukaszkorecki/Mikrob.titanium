@@ -59,12 +59,16 @@ var Application = {
     };
     Titanium.API.set("active_service", s);
     var win = Titanium.UI.getCurrentWindow();
-    var w2 = win.createWindow('app://archive_blip.html');
-    
-    w2.setHeight(400);
-    w2.setWidth(300);
-    w2.setResizable(true);
-    w2.open();
+    if (services[active_service].api_root.match(/blip/gi) !==null) {
+      var w2 = win.createWindow('app://archive_blip.html');
+      
+      w2.setHeight(400);
+      w2.setWidth(300);
+      w2.setResizable(true);
+      w2.open();
+    } else {
+      alert("Archiwum jest póki co tylko dostępne dla kont w usłudze Blip.pl");
+    }
   },
   returnServiceObjects : function(service_row, index) {
     var obj = {

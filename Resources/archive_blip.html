@@ -20,6 +20,7 @@
   <script type="text/javascript" charset="utf-8">
 var service;
 var updates = new Array();
+var offset = false;
   document.observe('dom:loaded',function() {
     var active_service = Titanium.API.get('active_service');
     var counter = 0;
@@ -37,9 +38,9 @@ var updates = new Array();
       }
     };
 
-    service.getNotices();
-    service.getPrivateMessages();
-    service.getDirectMessages();
+    service.getArchive('pm');
+    service.getArchive('dm');
+    service.getArchive('n');
   });
 function render_updates(updates) {
 //  updates.sortBy(function(el){

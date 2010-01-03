@@ -117,64 +117,40 @@ var Blip = new Class.create(Service,{
       interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiedło");
     };
   },
-  getPrivateMessages : function() {
+  getArchive : function(resource, offset) {
     var self = this;
     var req = new HttpConnector(self.commonHeaders());
     req.setUserCred(self.login, self.password);
-    var private_messages_url = self.api_root+"/private_messages"+self.include_string_full+"&limit=20";
+    var url = self.api_root;
+    switch(resource) {
+      case 'pm':
+        url += '/private_messages';
+        break;
+      case 'dm':
+        url += '/directed_messages';
+        break;
+      case 'n':
+        url += '/notices';
+        break;
+      default:
+        url += '/dashboard';
+        break;
+    }
+    url += self.include_string_full+"&limit=10";
+    if (offset) {
+      url += "&offset="+offset;
+    }
 
-    req.get(private_messages_url);
+    req.get(url);
 
     req.onSuccess = function(st, resp) {
-      console.log('getPrivateMessages');
       var obj = Titanium.JSON.parse(resp);
       self.onArchiveComplete(obj);
     };
     req.onFail = function(st, resp) {
-      console.log('getPrivateMessages fail');
+      console.log('getArchive fail ' + resource);
       console.log(st); console.log(resp);
     };
-  },
-  getDirectMessages : function() {
-    var self = this;
-    var req = new HttpConnector(self.commonHeaders());
-    req.setUserCred(self.login, self.password);
-    var direct_messages_url = self.api_root+"/directed_messages"+self.include_string_full+"&limit=20";
-
-    req.get(direct_messages_url);
-
-    req.onSuccess = function(st, resp) {
-      console.log('getDirectMessages');
-      var obj = Titanium.JSON.parse(resp);
-      self.onArchiveComplete(obj);
-    };
-    req.onFail = function(st, resp) {
-      console.log('getDirectMessages fail');
-      console.log(st); console.log(resp);
-    };
-  },
-  getNotices: function() {
-    var self = this;
-    var req = new HttpConnector(self.commonHeaders());
-    req.setUserCred(self.login, self.password);
-    var notices_url = self.api_root+"/notices"+self.include_string_full+"&limit=20";
-
-    req.get(notices_url);
-
-    req.onSuccess = function(st, resp) {
-      console.log('getNotices');
-      var obj = Titanium.JSON.parse(resp);
-      self.onArchiveComplete(obj);
-    };
-    req.onFail = function(st, resp) {
-      console.log('getNotices fail');
-      console.log(st); console.log(resp);
-    };
-  },
-  getArchive : function() {
-    this.getPrivateMessages();
-    this.getDirectMessages();
-    this.getNotices();
   },
   onArchiveComplete : function(objects) {
     console.dir(objects);
