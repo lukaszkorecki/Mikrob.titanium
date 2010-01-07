@@ -77,7 +77,7 @@ var Application = {
     };
     switch(service_row.type) {
       case 'blip':
-        obj.service = new Blip(service_row.login, service_row.password, index);
+        obj.service = new Blip(service_row.login, service_row.password, index, service_row.api_url);
         obj.interFace = new BlipInterface('dash'+index, index);
         break;
       case 'twitter':

@@ -5,10 +5,10 @@
  * definition 
  */
 var Blip = new Class.create(Service,{
-  initialize : function($super, login, password, service_id) {
+  initialize : function($super, login, password, service_id, api_root) {
     $super(login, password, service_id);
+    this.api_root = api_root || 'http://api.blip.pl';
   },
-  api_root : 'http://api.blip.pl',
   dashboard_last_id : 0,
   bliposphere_last_id : 0,
   tag_last_id : 0,
