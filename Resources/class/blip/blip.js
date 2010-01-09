@@ -20,7 +20,7 @@ var Blip = new Class.create(Service,{
     return {
         'X-blip-api' : '0.02',
         'Accept' : 'application/json',
-        'User-Agent' : Titanium.App.getName()+" "+Titanium.App.getVersion(),
+        'User-Agent' : Titanium.App.getName()+" "+Titanium.App.getVersion() + " ",
         "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
 //        'Authorization' : 'Basic '+self.credentials
       };
@@ -41,16 +41,23 @@ var Blip = new Class.create(Service,{
     req.setUserCred(self.login, self.password);
     req.get(url);
     req.onSuccess = function(status,response) {
-      var ob = Titanium.JSON.parse(response);
-      if(ob.length >0) {
-        self.dashboard_last_id= ob[0].id;
-        self.dashboardProcess(ob,self.dashboard_last_id);
+      // handle blip.pl error after redirect - should be 503, but instead you get 302
+      // and everything appears to be a-ok
+      console.log(response.match(/^\[/) );
+      if (response.match(/^\[/) === null) {
+        this.onFail(status, response);
+      } else {
+        var ob = Titanium.JSON.parse(response);
+        if(ob.length >0) {
+          self.dashboard_last_id= ob[0].id;
+          self.dashboardProcess(ob,self.dashboard_last_id);
+        }
       }
     };
     req.onFail = function(status, response) {
       interfaces[self.service_id].notify('Błąd', 'Błąd połączenia z API: '+status);
-      console.log("błąd!");
-      self.loginFail();
+      console.log("błąd! " + status + "\n" + response);
+      if(status == 403) self.loginFail();
       console.log("brak statusów");
     };
   },

@@ -47,9 +47,9 @@ var Application = {
     var win = Titanium.UI.getCurrentWindow();
     var w2 = win.createWindow('app://add_service.html');
     
+    w2.setToolWindow(true);
     w2.setHeight(300);
     w2.setWidth(400);
-    w2.setResizable(true);
     w2.open();
   },
   openArchiveWindow : function() {

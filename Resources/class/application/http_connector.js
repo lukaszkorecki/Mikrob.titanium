@@ -37,8 +37,12 @@ var HttpConnector = new Class.create({
          break;
        case 401:
        case 403:
+       case 404:
        case 501:
        case 503:
+         self.onFail(status, response_object.responseText);
+         break;
+       default:
          self.onFail(status, response_object.responseText);
          break;
      }
@@ -128,29 +132,26 @@ var HttpConnector = new Class.create({
  * XXX not tested!
  * @param string resource - '/somewhere'
  * @param file file - file to be sent
- * @param string data -  object literal of post data to be sent {var : val}
+ * @param string data -  object literal of post data to be sent {"name" : "dupiszon"}
  */
-  postFile : function(url,file, data) {
+  postFile : function(url,file, file_var, data, additional_headers) {
     var self = this;
     var t=(new Date()).getTime();
     var boundary = '----kawusia-i-ciasteczka-'+t;
     var header ='';
-
+    var post_file_var = file_var || file.split('/').last();
     for (v in data) {
       header += "--" + boundary + "\r\n" + "Content-Disposition: form-data; name=\""+v+"\"\r\n\r\n" + data[v] + "\r\n";
     }
 
-//    header += "--" + boundary + "\r\n" + "Content-Disposition: form-data; name=\"var1\"\r\n\r\n" + var1 + "\r\n";
-//    header += "--" + boundary + "\r\n" + "Content-Disposition: form-data; name=\"var2\"\r\n\r\n" + var2 + "\r\n";
-//    header += "--" + boundary + "\r\n" + "Content-Disposition: form-data; name=\"var3\"\r\n\r\n" + var3 + "\r\n";
     header += "--" + boundary + "\r\n";
-    header += "Content-Disposition: form-data; name=\"" + name + "\";";
-    header += "filename=\"" + filename + "\"\r\n"; //";
+    header += "Content-Disposition: form-data; name=\"" + post_file_var + "\"; ";
+    header += "filename=\"" + file.split('/').last() + "\"\r\n"; //";
     header += "Content-Type: application/octet-stream\r\n\r\n";
 
-    // TODO workout the path
-    var userDir = Titanium.Filesystem.getUserDirectory();  
-    var uploadFile = Titanium.Filesystem.getFile(userDir, 'test.txt');  
+
+
+    var uploadFile = Titanium.Filesystem.getFile(file);  
     var uploadStream = Titanium.Filesystem.getFileStream(uploadFile);  
 
     uploadStream.open(Titanium.Filesystem.FILESTREAM_MODE_READ);  
@@ -160,12 +161,14 @@ var HttpConnector = new Class.create({
     var fullContent = header + content + "\r\n--" + boundary + "--";  
 
 
+    self.setRequestHeaders(additional_headers );
      var h = {
        "Content-type": "multipart/form-data; boundary=\"" + boundary + "\"",
        "Connection": "close"
     };
     self.setRequestHeaders(h);
     self.client.onreadystatechange = function() {
+      console.log(this.readyState);
       if(this.readyState == self.client.DONE) {
         self.handleResponse(self.client.status, self.client);
         self.debug_response('post with file', url, self.client);  

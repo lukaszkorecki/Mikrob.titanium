@@ -28,7 +28,6 @@ var DatabaseConnectorTest = Evidence.TestCase.extend("DatabaseConnectorTest",{
           hit_count : 0
         }
       });
-    console.log(this.test_db.find().length);
 
   },
   tearDown : function() {

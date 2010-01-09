@@ -50,9 +50,9 @@ var Interface = new Class.create({
     },
   loginFail : function() {
     console.log("LOGIN FAIL");
-    $('login_form').show();
-    $('throbber').toggle();
-    $('sender').toggle();
+   // $('login_form').show();
+   // $('throbber').toggle();
+   // $('sender').toggle();
   },
   setAreaContent : function(string, is_prepend) {
     var mt = $('main_textarea');

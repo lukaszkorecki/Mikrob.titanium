@@ -56,8 +56,6 @@ var BlipUpdatesTest = Evidence.TestCase.extend("BlipUpdatesTest",{
       }
     };
 
-    console.log(this.s.user.login);
-    console.log(this.s_with_pic.user.login);
     this.status = new Update(this.s);
     this.own_status = new Update(this.s,0, this.s.user.login);
     this.status_with_pic = new Update(this.s_with_pic);
@@ -102,12 +100,10 @@ var BlipUpdatesTest = Evidence.TestCase.extend("BlipUpdatesTest",{
     // strange JS bug - the same regexp produces strange results
     // @see http://log.coffeesounds.com/ech 
     var reg = /own/gi;
-    console.log(this.own_status.cclass);
     var res = reg.test(this.own_status.cclass);
     this.assertTrue(res);
     var reg2 = /own/gi;
 
-    console.log(this.own_status_with_pic.cclass);
     res2 = reg2.test(this.own_status_with_pic.cclass);
     this.assertTrue(res2);
   }

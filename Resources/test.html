@@ -4,6 +4,10 @@
 
   <title>Test Env</title>
   
+  <script type="text/javascript" charset="utf-8">
+  __console = console;
+  console = undefined;
+  </script>
   <script src="tests/evidence.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" src="libs/prototype.js"></script>
   <script type="text/javascript" src="libs/effects.js"></script>
@@ -25,19 +29,11 @@
   <script src="tests/tests_http_connector.js" type="text/javascript" charset="utf-8"></script>
   <script src="tests/tests_blip_updates.js" type="text/javascript" charset="utf-8"></script>
   <script src="tests/tests_database_connector.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" charset="utf-8">
-  document.observe('dom:ready',function(){
-    // run unit tests here
-    // automatically
-      DatabaseConnectorTest.run();
-  //    BlipUpdatesTest.run();
-  //    HttpConnectorTest.run();
-  });
-  </script>
 </head>
 <body>
-  <div id="console">
-    
-  </div>
 </body>
+<script type="text/javascript" charset="utf-8">
+  var win = Titanium.UI.getCurrentWindow();
+  win.close();
+</script>
 </html>
