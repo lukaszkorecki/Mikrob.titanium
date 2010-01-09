@@ -37,7 +37,27 @@
   }
   </style>
   <script type="text/javascript" charset="utf-8">
+function services_interface() {
+    var db = new DatabaseConnector('mikrob', 'services');
+    var services = db.find();
+    var container = $('services');
+    container.update();
+    console.dir(services);
+    services.each(function(serva) { 
+      var el = new Element('div', {  'class' : 'update'}).update( new Element('p').update(serva.row.login+ " " + serva.row.type));
+      var remo = new Element('span').update('USUŃ');
+      remo.observe('click', function(event){
+        db.remove( { id : serva.row.id });
+        this.remove();
+        event.preventDefault();
+      services_interface();
+      });
+      el.insert(remo);
+      container.insert(el)
+    });
+}
   document.observe('dom:loaded',function(){
+      services_interface();
     Application.getServices();
     var serv = Application.buildServices();
     console.dir(serv);
@@ -86,6 +106,9 @@
     
     <p><input type="submit" value="+ Dodaj konto"></p>
     </form>
+  </div>
+  <div id="services">
+    
   </div>
 </body>
 </html>
