@@ -30,6 +30,10 @@
 
     -webkit-border-radius:10px;
     broder:2px solid #555;
+
+    width:75%;
+    height:75%;
+    margin:0 auto;
   }
   </style>
   <script type="text/javascript" charset="utf-8">
@@ -42,7 +46,6 @@
       var password = $F(this['password']);
       var type = $F(this['type']);
       var api_root = $F(this['api_root']);
-      console.log(login + " " + password + " " + type + " " + api_root);
       event.preventDefault();
       if(login !== "" && password !== "" && type !=="") {
         Application.saveService(login, password, type, api_root);
@@ -56,13 +59,14 @@
 </head>
 <body>
 <div id="wrapper">
-
+<!--
   <p>Mikrob obecnie wspiera następujące serwisy/usługi:</p>
   <ul>
     <li>Blip.pl (90%)</li>
     <li>Twitter (50%)</li>
     <li>Kompatybilne z Twitter (Status.net, identi.ca, laconi.ca, blip-twitter.heroku.com itp) (30%)</li>
   </ul>
+-->
     <form id="add_service_form" accept-charset="utf-8">
       <label>Login</label>
     <input type="text" name="login" value=""/>
@@ -72,11 +76,10 @@
     <select name="type" id="type">
       <option value="blip">Blip.pl</option>
       <option value="twitter">Twitter</option>
-      <option value="custom_twitter">Kompatybilny z Twitter.com (identi.ca itp)</option>
     </select>
     
-    <label>Adres API jeśli używasz usługi kompatybilnej z Twitter'em
-    (np. <tt>http://identi.ca/api</tt>)  lub Blip'em
+    <label>Adres API jeśli używasz usługi kompatybilnej z Twitterem
+    (np. <tt>http://identi.ca/api</tt>)  lub Blipem
     (<tt>cambler.pl</tt>). Jeśli nie podasz żadnej Mikrob użyje
     <tt>http://twitter.com</tt> albo <tt>http://blip.pl</tt>.</label>
     <input type="text" name="api_root" value=""/ >
