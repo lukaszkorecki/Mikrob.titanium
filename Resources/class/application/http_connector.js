@@ -66,8 +66,8 @@ var HttpConnector = new Class.create({
  */
   debug_response : function(method, url, client) {
    
-    console.log("HttpConnector: \n" + url + "\nmethod: "+method+"\nstatus: ");
-    console.log(client.status + " " + client.statusText);
+  //  console.log("HttpConnector: \n" + url + "\nmethod: "+method+"\nstatus: ");
+  //  console.log(client.status + " " + client.statusText);
   },
   get : function(url) {
     var self = this;

@@ -24,7 +24,7 @@ Titanium.API.addEventListener(Titanium.CLOSE,function() {
 var interfaces = new Array();
 // TODO this should come from the DB
 var services = new Array();
-var username,loop1,active_service =0;
+var username,loop1,active_service,archive_opened =0;
 document.observe('dom:loaded',function(){
   Application.loadWindowSettings();
   $('sender').toggle();
@@ -129,6 +129,14 @@ document.observe('dom:loaded',function(){
   });
   Element.observe('archive_button','click',function(event) {
       event.preventDefault();
-      Application.openArchiveWindow('blip');
+      if (archive_opened !== 0) {
+        Application.closeArchiveWindow();
+        this.update("Archiwum");
+        archive_opened = 0;
+      } else {
+        archive_opened = 1;
+        this.update("Zamknij archiwum");
+        Application.openArchiveWindow('blip');
+      }
   });
 });

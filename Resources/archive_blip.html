@@ -43,9 +43,7 @@ var offset = false;
     service.getArchive('n');
   });
 function render_updates(updates) {
-//  updates.sortBy(function(el){
-//    return el.id;
-//  });
+
   updates.sort(function(a,b){
       if(a.id > b.id) return -1;
       if(a.id < b.id) return 1;

@@ -14,13 +14,13 @@
 <title>Mikrob</title>
 <url>app://index.html</url>
 <width>410</width>
-<max-width>1410</max-width>
+<max-width>820</max-width>
 <min-width>410</min-width>
 <height>600</height>
 <max-height>3000</max-height>
 <min-height>100</min-height>
 <fullscreen>false</fullscreen>
-<resizable>true</resizable>
+<resizable>false</resizable>
 <chrome scrollbars="true">true</chrome>
 <maximizable>true</maximizable>
 <minimizable>true</minimizable>

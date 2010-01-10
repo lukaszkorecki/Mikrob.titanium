@@ -7,6 +7,7 @@
 var Blip = new Class.create(Service,{
   initialize : function($super, login, password, service_id, api_root) {
     $super(login, password, service_id);
+    console.log("api_root " + api_root);
     this.api_root = api_root || 'http://api.blip.pl';
   },
   dashboard_last_id : 0,
@@ -45,7 +46,7 @@ var Blip = new Class.create(Service,{
       // and everything appears to be a-ok
       console.log(response.match(/^\[/) );
       if (response.match(/^\[/) === null) {
-        this.onFail(status, response);
+        self.onFail(status, response);
       } else {
         var ob = Titanium.JSON.parse(response);
         if(ob.length >0) {
@@ -55,10 +56,9 @@ var Blip = new Class.create(Service,{
       }
     };
     req.onFail = function(status, response) {
-      interfaces[self.service_id].notify('Błąd', 'Błąd połączenia z API: '+status, 'fail');
+      interfaces[self.service_id].notify('Błąd', 'Błąd połączenia z API, próbujemy dalej...', 'fail');
       console.log("błąd! " + status + "\n" + response);
       if(status == 403) self.loginFail();
-      console.log("brak statusów");
     };
   },
   dashboardProcess :function(response_obj,is_update){
@@ -125,10 +125,10 @@ var Blip = new Class.create(Service,{
     };
   },
   getArchive : function(resource, offset) {
-    var self = this;
-    var req = new HttpConnector(self.commonHeaders());
-    req.setUserCred(self.login, self.password);
-    var url = self.api_root;
+    var req = new HttpConnector(this.commonHeaders());
+    req.setUserCred(this.login, this.password);
+    var url = this.api_root;
+    url = "http://api.blip.pl";
     switch(resource) {
       case 'pm':
         url += '/private_messages';
@@ -143,13 +143,14 @@ var Blip = new Class.create(Service,{
         url += '/dashboard';
         break;
     }
-    url += self.include_string_full+"&limit=10";
+    url += this.include_string_full+"&limit=10";
     if (offset) {
       url += "&offset="+offset;
     }
 
     req.get(url);
 
+    var self = this;
     req.onSuccess = function(st, resp) {
       var obj = Titanium.JSON.parse(resp);
       self.onArchiveComplete(obj);

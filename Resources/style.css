@@ -104,10 +104,7 @@ a:hover {
   max-width:400px;
   border-bottom: 2px solid #888;
 }
-/*
-#dash1 { left: 405px;}
-#dash2 { left: 810px;}
-*/
+#archive { left: 410px;}
 .user, .recipient {
   font-weight:bold;
   margin:1px 4px 1px 4px;
@@ -202,6 +199,7 @@ margin:5px 0 0 10px;
 position: fixed; top:50%; left:40%; background:#444;
 padding:20px;
 -webkit-border-radius: 10px;
+z-index:666;
 }
 
 .archive_column { top: 30px; bottom: 4px; }

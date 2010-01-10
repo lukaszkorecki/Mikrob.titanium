@@ -56,7 +56,7 @@ var BlipInterface = new Class.create(Interface, {
           dash.insert({'bottom': single_status});
         }
         self.expandLink('quoted_link');
-      if (i<4) {
+      if (i>16) {
         try {
         var av =  'app://icons/nn_nano.png';
         if(single_status.user.avatar) {

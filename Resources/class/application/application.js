@@ -54,22 +54,41 @@ var Application = {
     w2.open();
   },
   openArchiveWindow : function() {
-    var s = {
-      login : services[active_service].login,
-      password : services[active_service].password
-    };
-    Titanium.API.set("active_service", s);
+    var updates = new Array();
+    var counter = 0;
     var win = Titanium.UI.getCurrentWindow();
     if (services[active_service].api_root.match(/blip/gi) !==null) {
-      var w2 = win.createWindow('app://archive_blip.html');
-      
-      w2.setHeight(400);
-      w2.setWidth(300);
-      w2.setResizable(true);
-      w2.open();
+      win.setWidth(win.getWidth() + 420);
+      services[active_service].onArchiveComplete = function(resp) {
+        var up =  updates.concat(resp);
+        updates = up;
+        counter++;
+        render_updates(updates);
+      };
+      services[active_service].getArchive('pm');
+      services[active_service].getArchive('dm');
+      services[active_service].getArchive('n');
+      function render_updates(updates) {
+
+        $('archive').update();
+        updates.sort(function(a,b){
+            if(a.id > b.id) return -1;
+            if(a.id < b.id) return 1;
+            if(a.id == b.id) return 0;
+        });
+        updates.each(function(status) {
+            var element = interfaces[active_service].getUpdateObject(status);
+            $('archive').insert(element);
+        });
+      }
     } else {
-      alert("Archiwum jest póki co tylko dostępne dla kont w usłudze Blip.pl");
+      interfaces[active_service].notify('Fail', "Archiwum jest póki co tylko dostępne dla kont w usłudze Blip.pl", 'fail');
     }
+  },
+  closeArchiveWindow : function() {
+    var win = Titanium.UI.getCurrentWindow();
+    win.setWidth(win.getWidth() - 420);
+    $('archive').update();
   },
   returnServiceObjects : function(service_row, index) {
     var obj = {
