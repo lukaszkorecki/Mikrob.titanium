@@ -35,7 +35,6 @@ var BlipInterface = new Class.create(Interface, {
       self.expandLink('quoted_link');
       
     });
-    $$('#'+self.container_id+' .unread').each(function(el) { el.removeClassName('unread'); } );
     // not very clever way of scrolling up ;-)
     dash.scrollByLines(-(dash.scrollHeight));
     self.throbber.toggle();
@@ -74,7 +73,6 @@ var BlipInterface = new Class.create(Interface, {
     });
 
     if (  is_update ===0) {
-      $$('#'+self.container_id+' .unread').each(function(el) { el.removeClassName('unread'); } );
       self.setUnreadCount('0');
     } else {
       var unr = $$('#'+self.container_id + ' .unread').length;

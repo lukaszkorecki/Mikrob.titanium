@@ -92,13 +92,16 @@ document.observe('dom:loaded',function(){
   });
   Element.observe('mark_as_read_button','click',function(event){
     event.preventDefault();
-    var unread = $$('#dash'+active_service +' .unread');
-
-    for(var i=19, l = unread.length;i<l;i++) {
-      unread[i].remove();
-    }
-    unread.each(function(el) { el.removeClassName('unread'); } );
     interfaces[active_service].setUnreadCount('0');
+    $$('#dash'+active_service + ' .update').each(function(el, index) {
+      if (el.hasClassName('unread')) {
+        el.removeClassName('unread');
+      };
+      if (index>19) {
+        el.remove();
+      }
+    });
+
   });
   Element.observe('make_private','click',function(event){
     interfaces[active_service].setAreaContent('>',true);
