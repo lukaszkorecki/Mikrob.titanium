@@ -92,7 +92,7 @@ document.observe('dom:loaded',function(){
   });
   Element.observe('mark_as_read_button','click',function(event){
     event.preventDefault();
-    var unread = $$('dash'+active_service +' .unread');
+    var unread = $$('#dash'+active_service +' .unread');
 
     for(var i=19, l = unread.length;i<l;i++) {
       unread[i].remove();
