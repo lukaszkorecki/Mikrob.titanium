@@ -51,7 +51,6 @@ var Blip = new Class.create(Service,{
         if(ob.length >0) {
           self.dashboard_last_id= ob[0].id;
           self.dashboardProcess(ob,self.dashboard_last_id);
-          interfaces[self.service_id].notify("Pobrano", ob.length + " nowych blipnięć", 'ok');
         }
       }
     };
@@ -78,7 +77,7 @@ var Blip = new Class.create(Service,{
     } catch (no_encodeuri_compononent) { console.dir(no_encodeuri_compononent); }
     req.onSuccess = function(resp) { self.afterSend(resp); };
     req.onFail = function(resp) {
-      interfaces[self.service_id].notify('Błąd', 'Nie ma takiego użytkownika', 'fail');
+      interfaces[self.service_id].notify('Błąd', 'Błąd wysyłania... ' + resp, 'fail');
       self.afterSend(resp);
     };
   
