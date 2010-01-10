@@ -9,14 +9,13 @@
 var HttpConnector = new Class.create({
   initialize : function(options) {
     this.client = Titanium.Network.createHTTPClient();
+    this.client.setTimeout(2500);
     // TODO add custom user agent
     this.headers = this.setRequestHeaders(options || {});
     // overrrrrrride the UA (http headers seem to have no effect)
-    // this
-    // is
-    // awesome
-    // -----------------------------------------------------------------------------------------------------------------\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-
-    this.client.userAgent = Titanium.App.getName()+" "+Titanium.App.getVersion() + " ["+Titanium.App.getPublisher()+" "+Titanium.App.getID().split('.').reverse().join('.').replace('.','@',1)+"]";
+    var ua =  Titanium.App.getName()+" "+Titanium.App.getVersion() + " ["+Titanium.App.getPublisher()+" "+Titanium.App.getID().split('.').reverse().join('.').replace('.','@',1)+"]";
+    console.log(ua);
+    this.client.userAgent =ua;
 //    this.client.userAgent = 'deskBlip 0.7.9';
  
   },
@@ -180,6 +179,20 @@ var HttpConnector = new Class.create({
     };
       self.client.open("POST",url);
       self.client.send(fullContent);
+  },
+  postFile2 : function(url, file) {
+
+    var uploadFile = Titanium.Filesystem.getFile(file);  
+    var self = this;
+    self.client.onreadystatechange = function() {
+      if(this.readyState == self.client.DONE) {
+        self.handleResponse(self.client.status, self.client);
+        self.debug_response('post', url, self.client);  
+      }
+    };
+      self.client.open("POST",url);
+      self.client.send(uploadFile);
+
   },
 /**
  * Fired when request was successfull

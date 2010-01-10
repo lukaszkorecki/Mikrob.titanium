@@ -51,11 +51,12 @@ var Blip = new Class.create(Service,{
         if(ob.length >0) {
           self.dashboard_last_id= ob[0].id;
           self.dashboardProcess(ob,self.dashboard_last_id);
+          interfaces[self.service_id].notify("Pobrano", ob.length + " nowych blipnięć", 'ok');
         }
       }
     };
     req.onFail = function(status, response) {
-      interfaces[self.service_id].notify('Błąd', 'Błąd połączenia z API: '+status);
+      interfaces[self.service_id].notify('Błąd', 'Błąd połączenia z API: '+status, 'fail');
       console.log("błąd! " + status + "\n" + response);
       if(status == 403) self.loginFail();
       console.log("brak statusów");
@@ -77,7 +78,7 @@ var Blip = new Class.create(Service,{
     } catch (no_encodeuri_compononent) { console.dir(no_encodeuri_compononent); }
     req.onSuccess = function(resp) { self.afterSend(resp); };
     req.onFail = function(resp) {
-      interfaces[self.service_id].notify('Błąd', 'Nie ma takiego użytkownika');
+      interfaces[self.service_id].notify('Błąd', 'Nie ma takiego użytkownika', 'fail');
       self.afterSend(resp);
     };
   
@@ -93,7 +94,7 @@ var Blip = new Class.create(Service,{
     };
     req.onFail = function(st, resp) {
       console.log(st);
-      interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiedło");
+      interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
     };
 
    },
@@ -107,7 +108,7 @@ var Blip = new Class.create(Service,{
       interfaces[self.service_id].replaceLinks(url, obj.url);
     }; 
     req.onFail = function(st, resp) {
-      interfaces[self.service_id].notify("Błąd","Tworzenie linka się nie powiedło");
+      interfaces[self.service_id].notify("Błąd","Tworzenie linka się nie powiodło", 'fail');
     };
   },
   expandLink : function(id) {
@@ -121,7 +122,7 @@ var Blip = new Class.create(Service,{
     };
     req.onFail = function(st, resp) {
       console.log(st);
-      interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiedło");
+      interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
     };
   },
   getArchive : function(resource, offset) {

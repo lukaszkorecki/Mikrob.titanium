@@ -15,11 +15,14 @@ var Interface = new Class.create({
     this.throbber = $('throbber');
     this.character_limit = 140;
 
+    this.ok_image = "app://mikrob_icon_ok.png";
+    this.not_ok_image = "app://mikrob_icon_error.png";
+
   },
   afterSend : function(resp) {
     var self =this;
     self.throbber.toggle();
-    self.notify(Titanium.App.getName(),'Wysłano');
+    self.notify(Titanium.App.getName(),'Wysłano','ok');
     $('sender').enable();
     $('charcount').update('0');
     self.setAreaContent();
@@ -30,8 +33,18 @@ var Interface = new Class.create({
       var note = Titanium.Notification.createNotification(window);
       note.setTitle(login); //Add the title;
       note.setMessage(body); //Add the message;
-      if(img) {
-        note.setIcon(img);
+      switch(img) {
+        case 'ok':
+          note.setIcon(this.ok_image);
+          break;
+        case 'fail':
+          note.setIcon(this.not_ok_image);
+          break;
+        default:
+          if (img) {
+            note.setIcon(img);
+          }
+          break;
       }
       note.show();//Make it appear with the default timings.
     } catch(err) {
