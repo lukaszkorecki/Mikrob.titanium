@@ -3,11 +3,11 @@
 <!-- These values are edited/maintained by Titanium Developer -->
 <id>com.coffeesounds.mikrob</id>
 <name>Mikrob</name>
-<version>0.1 alpha</version>
+<version>0.1</version>
 <publisher>Łukasz Korecki</publisher>
 <url>http://coffeesounds.com</url>
 <icon>mikrob_icon.png</icon>
-<copyright>2009 by lukasz korecki</copyright>
+<copyright>2009 by Łukasz Korecki</copyright>
 <!-- Window Definition - these values can be edited -->
 <window>
 <id>initial</id>

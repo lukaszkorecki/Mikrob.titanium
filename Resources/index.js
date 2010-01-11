@@ -131,11 +131,11 @@ document.observe('dom:loaded',function(){
       event.preventDefault();
       if (archive_opened !== 0) {
         Application.closeArchiveWindow();
-        this.update("Archiwum");
+        this.update("Wiadomości");
         archive_opened = 0;
       } else {
         archive_opened = 1;
-        this.update("Zamknij archiwum");
+        this.update("Zamknij wiadomości");
         Application.openArchiveWindow('blip');
       }
   });
