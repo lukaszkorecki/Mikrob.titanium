@@ -46,7 +46,7 @@ var BlipInterface = new Class.create(Interface, {
     var i=0;
     var dash = $(self.container_id);
     if(is_update !==0) updates.reverse();
-    updates.each(function(blip){
+    updates.each(function(blip, index){
       try {
         var single_status = self.getUpdateObject(blip);
       } catch (guo_err) { console.dir(guo_err); }
@@ -56,7 +56,8 @@ var BlipInterface = new Class.create(Interface, {
           dash.insert({'bottom': single_status});
         }
         self.expandLink('quoted_link');
-      if (i>16) {
+	
+ if (index < 5 ) {
         try {
         var av =  'app://icons/nn_nano.png';
         if(single_status.user.avatar) {
