@@ -88,11 +88,13 @@ document.observe('dom:loaded',function(){
         interfaces[active_service].notify("Błęd", "Treść za długa o "+(content.length - interfaces[active_service].character_limit)+" znaków");
       }
     }
-    $('charcount').update(content.length);
+    len =content.length;
+    if (len == 0) len="";
+      $('charcount').update(len);
   });
   Element.observe('mark_as_read_button','click',function(event){
     event.preventDefault();
-    interfaces[active_service].setUnreadCount('0');
+    interfaces[active_service].setUnreadCount(" 0");
     $$('#dash'+active_service + ' .update').each(function(el, index) {
       if (el.hasClassName('unread')) {
         el.removeClassName('unread');
@@ -131,11 +133,11 @@ document.observe('dom:loaded',function(){
       event.preventDefault();
       if (archive_opened !== 0) {
         Application.closeArchiveWindow();
-        this.update("Wiadomości");
+        this.update("✉");
         archive_opened = 0;
       } else {
         archive_opened = 1;
-        this.update("Zamknij wiadomości");
+        this.update("⬅");
         Application.openArchiveWindow('blip');
       }
   });

@@ -33,40 +33,23 @@
   <link rel="stylesheet" href="linux.css" type="text/css" media="screen" charset="utf-8"/>
 </head>
 <body>
-<!--
-  <div id="big_load"> <img alt="Ładuję, proszę czekać" src="app://icons/big_load.gif"  /> </div>
-  -->
   <div id="wrapper">
 
 
     <div id="controls">
-      <!-- login form -->
       <form action="#" method="" accept-charset="utf-8" id="login_form">
-        <!--
-        <label for="Login">Login</label>
-          <input type="text" name="username" value=""/>
-        <label for="pass">Hasło</label>
-          <input type="password" name="pass" value=""/>
-        -->
         <input type="submit" class="button" value="Zaloguj się do swoich kont &rarr;">
       </form>
     <!-- update content form -->
-  <div id="paginator">
-    <!--
-.    <a class="button" href="#" id="previous_page">&larr;</a>
-    <a class="button" href="#" id="home_link">Kokpit</a>
-    <a class="button" href="#" id="next_page">&rarr;</a>
-    <span id="current_page" class="button"></span>
-    -->
-    <a href="#" class="button small" id="mark_as_read_button">Oznacz jako przeczytane [<span id="unread_count"></span>]</a>
-    <a href="#" class="button small" id="archive_button">Wiadomości</a>
-    <select  id="change_service">
-    </select>
+  <div id="toolbar">
+    <span class="square_button"><select  id="change_service"></select></span>
+    <a href="#" class="button small square" id="mark_as_read_button" title="Oznacz jako przeczytane"><span id="unread_count"></span></a>
+    <a href="#" class="button small square" id="archive_button" title="Wiadomości">✉</a>
   </div>
     <form action="#" method="" id="sender" accept-charset="utf-8">
       <textarea  id="main_textarea" name="content" rows="3" placeholder="Co teraz robisz? O czym myślisz? Dokąd zmierzamy?" autofocus ></textarea>
       <div>
-        <span id="charcount" class="button sender_item">0</span>
+        <span id="charcount" class="sender_item">0</span>
         <a href="#" class="button small sender_item" title="Zmienia wiadomość na prywatną" id="make_private">Sprywatyzuj</a>
         <a href="#" class="button small sender_item" title="Skraca wszystkie linki, które wpisano" id="shorten_links">Skróć linki</a>
       </div>

@@ -56,14 +56,16 @@ var Application = {
   openArchiveWindow : function() {
     var updates = new Array();
     var counter = 0;
-    var win = Titanium.UI.getCurrentWindow();
     if (services[active_service].api_root.match(/blip/gi) !==null) {
-      win.setWidth(win.getWidth() + 420);
       services[active_service].onArchiveComplete = function(resp) {
         var up =  updates.concat(resp);
         updates = up;
         counter++;
         render_updates(updates);
+        if(counter > 1) { 
+          $('dash'+active_service).fade();
+          $('archive').appear();
+        }
       };
       services[active_service].getArchive('pm');
       services[active_service].getArchive('dm');
@@ -86,9 +88,9 @@ var Application = {
     }
   },
   closeArchiveWindow : function() {
-    var win = Titanium.UI.getCurrentWindow();
-    win.setWidth(win.getWidth() - 420);
     $('archive').update();
+    $('archive').fade();
+    $('dash'+active_service).appear();
   },
   returnServiceObjects : function(service_row, index) {
     var obj = {

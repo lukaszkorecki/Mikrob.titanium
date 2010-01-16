@@ -54,10 +54,11 @@ var Interface = new Class.create({
    },
     setUnreadCount : function(count_str) {
      if(count_str =='0') {
-       count_str ="";
+       count_str ="0";
      }
        $('unread_count').update(count_str);
        try {
+         if(count_str=="0") count_str ="";
            Titanium.UI.setBadge(count_str);
        } catch (badge_err) { console.log(badge_err); }
     },
@@ -80,6 +81,9 @@ var Interface = new Class.create({
     } else {
       mt.setValue("");
     }
+    mt.select();
+    mt.selectionEnd = mt.getValue().length;
+    mt.focus();
   },
   cacheImage : function(url) {
      var home_dir = Titanium.Filesystem.getUserDirectory();
