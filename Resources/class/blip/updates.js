@@ -51,7 +51,8 @@ var Update = new Class.create({
         var link = new Element('a',{'href':img_link});
         link.observe('click',function(event) {
           event.preventDefault();
-          Titanium.Desktop.openURL(img_link);
+          Application.openImageWindow(img_link);
+         // Titanium.Desktop.openURL(img_link);
 
         });
         n_img_link = img_link.replace('.jpg','_standard.jpg');
@@ -69,7 +70,8 @@ var Update = new Class.create({
         link = new Element('a',{'href':img_link});
         link.observe('click',function(event) {
           event.preventDefault();
-          Titanium.Desktop.openURL(img_link);
+          Application.openImageWindow(img_link);
+          // Titanium.Desktop.openURL(img_link);
 
         });
         link.update('[Pic]');

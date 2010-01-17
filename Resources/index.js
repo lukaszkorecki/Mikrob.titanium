@@ -13,7 +13,6 @@ Titanium.API.addEventListener(Titanium.EXIT,function() {
   Application.saveWindowSettings();
 });
 Titanium.API.addEventListener(Titanium.OPEN,function(event) { 
-  console.dir(event);
   Application.loadWindowSettings();
 });
 Titanium.API.addEventListener(Titanium.CLOSE,function() { 
@@ -112,7 +111,6 @@ document.observe('dom:loaded',function(){
   Element.observe('shorten_links','click',function(event){
     event.preventDefault();
     var content = $('main_textarea').getValue();
-    console.log("tresc z element.observe.click\n\t"+content);
     interfaces[active_service].shortenLinksInString(content, services[active_service].shortenLink);
 
   });

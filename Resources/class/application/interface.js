@@ -19,13 +19,13 @@ var Interface = new Class.create({
     this.not_ok_image = "app://mikrob_icon_error.png";
 
   },
-  afterSend : function(resp) {
+  afterSend : function(resp, was_success) {
     var self =this;
     self.throbber.toggle();
     self.notify(Titanium.App.getName(),'Wysłano','ok');
     $('sender').enable();
     $('charcount').update('0');
-    self.setAreaContent();
+    if (was_success)    self.setAreaContent();
   },
   notify : function(login, body,img) {
     try {

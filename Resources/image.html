@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8"/>
+  <link rel="stylesheet" href="win32.css" type="text/css" media="screen" charset="utf-8"/>
+  <link rel="stylesheet" href="linux.css" type="text/css" media="screen" charset="utf-8"/>
+
+  <title>Image</title>
+  
+  <script type="text/javascript" src="libs/prototype.js"></script>
+  <script type="text/javascript" charset="utf-8">
+  document.observe('dom:loaded',function(){ 
+      var image_url = Titanium.API.get('image_url');
+      var loader = $('cont').down('img',0);
+      var img = $('cont').down('img',1);
+      img.toggle();
+      img.setAttribute('src', image_url);
+      function resize_window() {
+        var win = Titanium.UI.getCurrentWindow();
+
+        win.width = img.width;
+        win.height = img.height;
+        img.toggle();
+        loader.toggle();
+        win.setResizable(false);
+
+      }
+      resize_window.delay(1);
+
+
+  });
+  </script>
+</head>
+<body>
+  <div id="cont">
+    <img id="big_load" alt="Loading" src="app://icons/big_load.gif" />
+    <img alt="Obrazek" src="" />
+  </div>
+</body>
+</html>

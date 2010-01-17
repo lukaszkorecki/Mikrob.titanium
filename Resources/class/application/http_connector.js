@@ -14,7 +14,6 @@ var HttpConnector = new Class.create({
     this.headers = this.setRequestHeaders(options || {});
     // overrrrrrride the UA (http headers seem to have no effect)
     var ua =  Titanium.App.getName()+" "+Titanium.App.getVersion() + " ["+Titanium.App.getPublisher()+" "+Titanium.App.getID().split('.').reverse().join('.').replace('.','@',1)+"]";
-    console.log(ua);
     this.client.userAgent =ua;
 //    this.client.userAgent = 'deskBlip 0.7.9';
  

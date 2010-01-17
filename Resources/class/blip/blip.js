@@ -7,7 +7,6 @@
 var Blip = new Class.create(Service,{
   initialize : function($super, login, password, service_id, api_root) {
     $super(login, password, service_id);
-    console.log("api_root " + api_root);
     this.api_root = api_root || 'http://api.blip.pl';
   },
   dashboard_last_id : 0,
@@ -44,7 +43,6 @@ var Blip = new Class.create(Service,{
     req.onSuccess = function(status,response) {
       // handle blip.pl error after redirect - should be 503, but instead you get 302
       // and everything appears to be a-ok
-      console.log(response.match(/^\[/) );
       if (response.match(/^\[/) === null) {
         self.onFail(status, response);
       } else {
@@ -65,8 +63,8 @@ var Blip = new Class.create(Service,{
 
     interfaces[this.service_id].draw(response_obj, is_update);
   },
-  afterSend :  function(response_obj){
-    interfaces[this.service_id].afterSend(response_obj);
+  afterSend :  function(response_obj, was_success){
+    interfaces[this.service_id].afterSend(response_obj, was_success);
   },
   post : function(str) {
     var self = this;
@@ -75,10 +73,10 @@ var Blip = new Class.create(Service,{
     try {
       req.post(self.api_root+'/updates','update[body]='+encodeURIComponent(str));
     } catch (no_encodeuri_compononent) { console.dir(no_encodeuri_compononent); }
-    req.onSuccess = function(resp) { self.afterSend(resp); };
+    req.onSuccess = function(resp) { self.afterSend(resp, true); };
     req.onFail = function(resp) {
       interfaces[self.service_id].notify('Błąd', 'Błąd wysyłania... ' + resp, 'fail');
-      self.afterSend(resp);
+      self.afterSend(resp, false);
     };
   
   },

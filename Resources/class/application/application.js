@@ -39,7 +39,6 @@ var Application = {
       'type' : type,
       'api_url' : api_url
      }};
-    console.dir(new_serv);
     this.db.save(new_serv);
 
   },
@@ -139,7 +138,6 @@ var Application = {
   saveWindowSettings : function() {
     var win = Titanium.UI.getCurrentWindow();
     var bounds = win.getBounds();
-    console.dir(bounds);
     Titanium.App.Properties.setInt("width", bounds.width);
     Titanium.App.Properties.setInt("height", bounds.height);
     Titanium.App.Properties.setInt("x", bounds.x);
@@ -159,5 +157,16 @@ var Application = {
       console.log('unable to get props');
     }
       win.setBounds(bounds);
+  },
+  openImageWindow : function(image_url) {
+    Titanium.API.set('image_url', image_url);
+    var win = Titanium.UI.getCurrentWindow();
+    var w2 = win.createWindow('app://image.html');
+
+    w2.setToolWindow(true);
+    w2.setResizable(true);
+    w2.setHeight(150);
+    w2.setWidth(150);
+    w2.open();
   }
 };
