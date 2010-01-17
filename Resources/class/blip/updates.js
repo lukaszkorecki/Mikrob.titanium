@@ -15,14 +15,12 @@ var Update = new Class.create({
     {
       this.pictures= false;
     }
-    
     this.type = obj.type;
 
     switch(obj.type) {
       case 'DirectedMessage':
         this.short_type = 'dm';
         break;
-        
       case 'PrivateMessage':
         this.short_type = 'pm';
       break;
@@ -161,8 +159,8 @@ var Update = new Class.create({
  */
   parseBody : function(body) {
     function formatLinks(txt) {
-      var findLinks = /http:\/\/\S+/gi;
-      return txt.replace(findLinks, '<a class="quoted_link" target="_blank" href="$&" title="$&">$&</a>');
+      var findLinks = /http(s)*:\/\/[ 0-9 a-z \/\.\-\&\=\?\% ]+/gi;
+      return  txt.replace(findLinks, '<a class="quoted_link" target="_blank" href="$&" title="$&">$&</a>');
     }
     function formatUsers(txt) {
       var findUsers = /\^([\w]{1,})/gi;

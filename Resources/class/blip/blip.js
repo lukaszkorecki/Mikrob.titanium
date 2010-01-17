@@ -76,7 +76,16 @@ var Blip = new Class.create(Service,{
     req.onSuccess = function(resp) { self.afterSend(resp, true); };
     req.onFail = function(resp) {
       interfaces[self.service_id].notify('Błąd', 'Błąd wysyłania... ' + resp, 'fail');
-      self.afterSend(resp, false);
+
+      var was_success = true
+      // these are real failures according to BLIPAPI
+      // at this point - user's input should be kept in the
+      // textarea - sending failed because of reasons like
+      // server error or the recipient of the message doesn't exist
+      if (resp == 500 || resp == 403 || resp == 401) {
+        was_success = false;
+      }
+      self.afterSend(resp, was_success);
     };
   
   },
@@ -110,6 +119,7 @@ var Blip = new Class.create(Service,{
   },
   expandLink : function(id) {
     var self = this;
+    id = id.replace(/\W/gi,'');
     var req = new HttpConnector(self.commonHeaders());
     req.setUserCred(self.login, self.password);
     req.get(self.api_root+'/shortlinks/'+id);
