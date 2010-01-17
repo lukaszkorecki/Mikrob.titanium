@@ -105,6 +105,10 @@ var Application = {
         obj.service = new Twitter(service_row.login, service_row.password, index);
         obj.interFace = new TwitterInterface('dash'+index,index);
         break;
+      case 'flaker':
+        obj.service = new Flaker(service_row.login, service_row.password, index);
+        obj.interFace = new FlakerInterface('dash'+index,index);
+        break;
       case 'custom_twitter':
         obj.service = new Twitter(service_row.login, service_row.password, index , service_row.api_url );
         obj.interFace = new TwitterInterface('dash'+index,index);

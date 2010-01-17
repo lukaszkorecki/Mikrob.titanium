@@ -43,6 +43,7 @@ var Blip = new Class.create(Service,{
     req.onSuccess = function(status,response) {
       // handle blip.pl error after redirect - should be 503, but instead you get 302
       // and everything appears to be a-ok
+      // while it is not...
       if (response.match(/^\[/) === null) {
         self.onFail(status, response);
       } else {
@@ -77,7 +78,7 @@ var Blip = new Class.create(Service,{
     req.onFail = function(resp) {
       interfaces[self.service_id].notify('Błąd', 'Błąd wysyłania... ' + resp, 'fail');
 
-      var was_success = true
+      var was_success = true;
       // these are real failures according to BLIPAPI
       // at this point - user's input should be kept in the
       // textarea - sending failed because of reasons like

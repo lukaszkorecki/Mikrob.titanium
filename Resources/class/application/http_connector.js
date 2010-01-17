@@ -118,6 +118,7 @@ var HttpConnector = new Class.create({
  */
   post : function(url, data) {
     var self = this;
+    console.dir({ 'url' : url, 'data' : data}); 
     self.client.onreadystatechange = function() {
       if(this.readyState == self.client.DONE) {
         self.handleResponse(self.client.status, self.client);

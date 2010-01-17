@@ -58,8 +58,12 @@ var Interface = new Class.create({
      }
        $('unread_count').update(count_str);
        try {
-         if(count_str=="0") count_str ="";
+          console.log(count_str);
+         if(count_str=="0") {
+           Titanium.UI.setBadge();
+         } else {
            Titanium.UI.setBadge(count_str);
+         }
        } catch (badge_err) { console.log(badge_err); }
     },
   loginFail : function() {
