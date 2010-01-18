@@ -5,3 +5,4 @@ LICENSE.txt
 Resources/MikrobTestEnv/dist
 *.sw?
 *.?
+#*

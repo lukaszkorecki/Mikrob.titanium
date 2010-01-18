@@ -47,7 +47,7 @@ var Application = {
     var w2 = win.createWindow('app://add_service.html');
     
     w2.setToolWindow(true);
-    w2.setResizable(false);
+    w2.setResizable(true);
     w2.setHeight(550);
     w2.setWidth(400);
     w2.open();
