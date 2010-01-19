@@ -55,7 +55,7 @@ var Application = {
   openArchiveWindow : function() {
     var updates = new Array();
     var counter = 0;
-    if (services[active_service].api_root.match(/blip/gi) !==null) {
+    if (services[active_service].type == 'Blip') {
       services[active_service].onArchiveComplete = function(resp) {
         var up =  updates.concat(resp);
         updates = up;
@@ -83,7 +83,7 @@ var Application = {
         });
       }
     } else {
-      interfaces[active_service].notify('Fail', "Archiwum jest póki co tylko dostępne dla kont w usłudze Blip.pl", 'fail');
+      interfaces[active_service].notify('Fail', "Wiadomości są tylko dostępne tylko dla Blipa", 'fail');
     }
   },
   closeArchiveWindow : function() {

@@ -31,7 +31,7 @@ var Interface = new Class.create({
     try {
       var window = Titanium.UI.getMainWindow(); // get the main window
       var note = Titanium.Notification.createNotification(window);
-      note.setTitle(login); //Add the title;
+      note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;
       note.setMessage(body); //Add the message;
       switch(img) {
         case 'ok':

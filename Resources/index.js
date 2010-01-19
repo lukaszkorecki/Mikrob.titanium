@@ -76,7 +76,7 @@ document.observe('dom:loaded',function(){
   });
   Element.observe('main_textarea','keydown',function(event){
     var content = this.getValue();
-    if(event.keyCode == 13) {
+    if(event.keyCode == 13 && services[active_service].type != 'Flaker') {
       content.length = content.length-1;
       if( content.length <= interfaces[active_service].character_limit){
         event.preventDefault();
@@ -88,7 +88,7 @@ document.observe('dom:loaded',function(){
       }
     }
     len =content.length;
-    if (len == 0) len="";
+    if (len === 0) len="";
       $('charcount').update(len);
   });
   Element.observe('mark_as_read_button','click',function(event){
@@ -97,7 +97,7 @@ document.observe('dom:loaded',function(){
     $$('#dash'+active_service + ' .update').each(function(el, index) {
       if (el.hasClassName('unread')) {
         el.removeClassName('unread');
-      };
+      }
       if (index>19) {
         el.remove();
       }
@@ -136,7 +136,12 @@ document.observe('dom:loaded',function(){
       } else {
         archive_opened = 1;
         this.update("⬅");
-        Application.openArchiveWindow('blip');
+        Application.openArchiveWindow();
       }
+  });
+  Element.observe('home_button','click',function(event) {
+      event.preventDefault();
+      $('archive').hide();
+      $('dash'+active_service).show();
   });
 });

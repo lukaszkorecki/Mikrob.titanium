@@ -8,6 +8,7 @@ var Blip = new Class.create(Service,{
   initialize : function($super, login, password, service_id, api_root) {
     $super(login, password, service_id);
     this.api_root = api_root || 'http://api.blip.pl';
+    this.type = "Blip";
   },
   dashboard_last_id : 0,
   bliposphere_last_id : 0,

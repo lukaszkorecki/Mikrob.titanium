@@ -45,6 +45,7 @@
     <!-- update content form -->
   <div id="toolbar">
     <span class="square_button"><select  id="change_service"></select></span>
+    <a href="#" class="button small square" id="home_button" title="Domek">&larr;</a>
     <a href="#" class="button small square" id="mark_as_read_button" title="Oznacz jako przeczytane"><span id="unread_count"></span></a>
     <a href="#" class="button small square" id="archive_button" title="Wiadomości">✉</a>
   </div>
@@ -52,6 +53,7 @@
       <textarea  id="main_textarea" name="content" rows="3" placeholder="Co teraz robisz? O czym myślisz? Dokąd zmierzamy?" autofocus ></textarea>
       <div>
         <span id="charcount" class="sender_item">0</span>
+        <input type="submit" name="submit" value="Wyślij" />
         <a href="#" class="button small sender_item" title="Zmienia wiadomość na prywatną" id="make_private">Sprywatyzuj</a>
         <a href="#" class="button small sender_item" title="Skraca wszystkie linki, które wpisano" id="shorten_links">Skróć linki</a>
       </div>

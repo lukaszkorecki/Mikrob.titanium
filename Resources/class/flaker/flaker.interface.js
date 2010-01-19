@@ -7,10 +7,11 @@ draw : function(updates, is_update) {
     var self = this;
     var len = updates.length;
     var dash = $(self.container_id);
+    dash.update();
 
     if(is_update !==0) updates.reverse();
     updates.each(function(single, index){
-      var flak = new Flak(single);
+      var flak = new Flak(single, self.service_id);
       dash.insert({top: flak});
       if (index < 5 ) {
         var av =  'app://icons/nn_nano.png';
@@ -31,5 +32,20 @@ draw : function(updates, is_update) {
     }
     self.throbber.toggle();
 
-}
+},
+openFlak : function(id) {
+    var self = this;
+    self.notify("Mikrob", "Pobieram flaka");
+    $(self.container_id).fade();
+    $('archive').show();
+    services[self.service_id].getFlak(id);
+  },
+showFlak: function(flak,was_succses) {
+    console.dir(flak);
+    console.log(was_succses);
+    $('archive').insert(new Flak(flak.entries[0], self.service_id));
+    flak.entries[0].comments.each(function(comment){
+        $('archive').insert(new Flak(comment, self.service_id));
     });
+  }
+});

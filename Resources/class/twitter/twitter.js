@@ -2,6 +2,7 @@ var Twitter = new Class.create(Service, {
   initialize : function($super, login, password, service_id, api_root) {
     $super(login, password, service_id);
     this.api_root  = (api_root) ? api_root : 'https://twitter.com/';
+    this.type = "Twitter";
   },
   dashboard_last_id : 0,
   current_page : 0,

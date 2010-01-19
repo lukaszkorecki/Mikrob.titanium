@@ -40,6 +40,7 @@ var HttpConnector = new Class.create({
        case 401:
        case 403:
        case 404:
+       case 500:
        case 501:
        case 503:
          self.onFail(status, response_object.responseText);

@@ -1,6 +1,7 @@
 var Flak = new Class.create({
-  initialize : function(flak) {
+  initialize : function(flak, owner_service_id) {
     this.created_at = flak.datetime;
+    this.owner_service_id = owner_service_id;
     this.id = flak.id;
     this.link = flak.link;
     this.body = flak.text;
@@ -12,6 +13,7 @@ var Flak = new Class.create({
     this.source = flak.source;
     this.permalink = flak.permalink;
     this.tags = flak.tags;
+    this.comments = flak.comments;
     this.cclass = "f"+this.id+" update";
     if(this.user.login == this.username)
     {
@@ -21,9 +23,15 @@ var Flak = new Class.create({
       this.cclass += " unread";
     }
 
+    console.dir(flak);
   },
   createdAt : function() {
     return this.created_at;
+  },
+  getSourceIcon : function(source_id) {
+   var path = 'app://icons/flaker_sources/'+source_id+'.gif';
+   if (source_id == 'flaker') {path=  path.replace('gif', 'png');}
+    return new Element('img', { src : path, alt : source_id});
   },
   commentLink : function() {
     var self = this;
@@ -35,11 +43,21 @@ var Flak = new Class.create({
         });
     return link;
 
-},
+  },
+  commentsSingleView : function() {
+    var self = this;
+    var link = new Element('a', {'href':'#', 'class':'msg button small', 'title' : 'Otwórz całą dyskusję git'}).update(self.comments.length);
+    link.observe('click',function(event) {
+        interfaces[self.owner_service_id].openFlak(self.id);
+        event.preventDefault();
+    });
+    return link;
+
+  },
   permaLink : function() {
         
     var self = this;
-    var link = new Element('a', {'href':self.permalink,'class':'button small', 'title':self.id, 'title' : 'Permalink'}).update('#');
+    var link = new Element('a', {"target": "_blank", 'href':self.permalink,'class':'button small', 'title':self.id, 'title' : 'Permalink'}).update('#');
     link.observe('click',function(event) {
       Titanium.Desktop.openURL(url);
       event.preventDefault();
@@ -65,10 +83,11 @@ var Flak = new Class.create({
   var self = this;
     var actions = new Element('div',{'class':'actions'});
     actions.insert(self.userLink());
+    actions.insert(self.getSourceIcon(self.source));
     actions.insert(self.permaLink());
     actions.insert(self.commentLink());
+    actions.insert(self.commentsSingleView())
     actions.insert(self.createdAt());
-    actions.insert(self.source);
     return actions;
   },
   parseBody : function(body) {
