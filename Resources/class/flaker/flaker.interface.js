@@ -39,13 +39,32 @@ openFlak : function(id) {
     $(self.container_id).fade();
     $('archive').show();
     services[self.service_id].getFlak(id);
+        archive_opened = 1;
   },
 showFlak: function(flak,was_succses) {
+    var self=  this;
+    var arch=$('archive');
+    arch.update();
+    var refr = new Element('a', { "class" : 'button'}).update('Odśwież');
+    refr.observe('click', function(event){
+        event.preventDefault();
+        self.openFlak(flak.entries[0].id);
+    });
+    // good way of auto-refreshing new comments
+    // think of a way of making it safe and cause memory leaks
+    loop2 = new PeriodicalExecuter(function() {
+        if(archive_opened == 1) {
+          self.notify('Mikrob', 'Sprawdzam komentarze');
+          self.openFlak(flak.entries[0].id);
+        }
+      },20);
+    arch.insert(refr);
     console.dir(flak);
     console.log(was_succses);
-    $('archive').insert(new Flak(flak.entries[0], self.service_id));
+    arch.insert(new Flak(flak.entries[0], self.service_id));
+    arch.insert(new Element('h2').update('Komentarze'));
     flak.entries[0].comments.each(function(comment){
-        $('archive').insert(new Flak(comment, self.service_id));
+        arch.insert(new Flak(comment, self.service_id));
     });
   }
 });

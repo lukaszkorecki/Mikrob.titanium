@@ -1,19 +1,19 @@
 var Flak = new Class.create({
   initialize : function(flak, owner_service_id) {
-    this.created_at = flak.datetime;
-    this.owner_service_id = owner_service_id;
-    this.id = flak.id;
-    this.link = flak.link;
-    this.body = flak.text;
+    this.created_at = flak.datetime || "";
+    this.owner_service_id = owner_service_id || "";
+    this.id = flak.id || "";
+    this.link = flak.link || "";
+    this.body = flak.text || "";
     if(this.body ==="") this.body += this.link;
     this.body = this.parseBody(this.body);
-    this.raw_body = flak.text.substring(0, 160);
-    this.user = flak.user;
-    this.timestamp = flak.timestamp;
-    this.source = flak.source;
-    this.permalink = flak.permalink;
-    this.tags = flak.tags;
-    this.comments = flak.comments;
+    this.raw_body = flak.text.substring(0, 160) || "";
+    this.user = flak.user || "";
+    this.timestamp = flak.timestamp || "";
+    this.source = flak.source || "";
+    this.permalink = flak.permalink || "";
+    this.tags = flak.tags || "";
+    this.comments = flak.comments || "";
     this.cclass = "f"+this.id+" update";
     if(this.user.login == this.username)
     {
@@ -23,15 +23,19 @@ var Flak = new Class.create({
       this.cclass += " unread";
     }
 
-    console.dir(flak);
+    //console.dir(flak);
   },
   createdAt : function() {
     return this.created_at;
   },
   getSourceIcon : function(source_id) {
-   var path = 'app://icons/flaker_sources/'+source_id+'.gif';
-   if (source_id == 'flaker') {path=  path.replace('gif', 'png');}
-    return new Element('img', { src : path, alt : source_id});
+    if(source_id) {
+     var path = 'app://icons/flaker_sources/'+source_id+'.gif';
+     if (source_id == 'flaker') {path=  path.replace('gif', 'png');}
+      return new Element('img', { src : path, alt : source_id});
+    } else {
+      return false;
+    }
   },
   commentLink : function() {
     var self = this;
@@ -86,7 +90,7 @@ var Flak = new Class.create({
     actions.insert(self.getSourceIcon(self.source));
     actions.insert(self.permaLink());
     actions.insert(self.commentLink());
-    actions.insert(self.commentsSingleView())
+    actions.insert(self.commentsSingleView());
     actions.insert(self.createdAt());
     return actions;
   },

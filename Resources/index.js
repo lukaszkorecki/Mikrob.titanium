@@ -143,5 +143,6 @@ document.observe('dom:loaded',function(){
       event.preventDefault();
       $('archive').hide();
       $('dash'+active_service).show();
+        archive_opened = 0;
   });
 });
