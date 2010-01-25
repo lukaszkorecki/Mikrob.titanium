@@ -35,7 +35,7 @@ a:hover {
   width:85%;
   padding:5px;
   position: relative;
-  box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
   -webkit-border-radius:4px;
   color:#888;
   z-index:1;
@@ -60,7 +60,7 @@ a:hover {
   margin-left:40px;
   display:block;
   color:#888;
-  box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
 }
 .quoted:hover a{
   color:#000;
@@ -71,7 +71,7 @@ a:hover {
 .update img.avatar,  .update img.ravatar {
   border:4px solid #eee;
   -webkit-border-radius:5px;
-  box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
 
 }
 .update_picture {
@@ -115,8 +115,7 @@ a:hover {
   font-weight:bold;
   padding:2px;
 
-  box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
-  border:1px solid #888;
+  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
   -webkit-border-radius:4px;
   margin: 3px;
   background:#eee;
@@ -176,7 +175,7 @@ input[type="text"], input[type="password"] {
 .small { font-size:80%;}
 /* sender form */
 textarea {
-  width:100% !important;
+  width:99% !important;
   height:70px;
 }
 #sender  div {
@@ -187,10 +186,15 @@ left:5px;
 }
 #unread_count { text-align:center}
 #big_load { 
-position: fixed; top:50%; left:40%; background:#444;
-padding:20px;
--webkit-border-radius: 10px;
-z-index:666;
+  position: fixed;
+  top:25%;
+  left:25%;
+  background:#444;
+  padding:20px;
+  -webkit-border-radius: 10px;
+  z-index:666;
+  width:50%;
+  height:50%;
 }
 
 .archive_column { top: 30px; bottom: 4px; }
