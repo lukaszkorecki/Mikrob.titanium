@@ -16,7 +16,7 @@ Jeśli używasz OSX potrzebujesz [Growl](http://growl.info) - ale z pewnością 
 
 Użytkownicy Linuxa nie musza nic robić oprócz działającej instalacji libnotify.
 
-Wszelkie informacje odnośnie oficjalnego wydania aplikacji oraz nowych funkcjach itd można znaleźć bezpośrednio [u mnie na blipie](http://plugawy.blip.pl).
+Wszelkie informacje odnośnie oficjalnego wydania aplikacji oraz nowych funkcjach itd można znaleźć bezpośrednio [u mnie na blipie](http://plugawy.blip.pl). Warto także obserwować [mikrobowego bota na blipie](http://mikrob.blip.pl).
 
 ### Jak tego używać
 
@@ -26,8 +26,43 @@ Cytowane statusy możesz przejrzeć klikając na `[Blip]` (możesz je potem prze
 
 Paginacja działa mniej więcej tak jak na stronie www blipa (choć czasami może się spsuć).
 
+### Oprócz blipa....
+
+Mikrob wspiera także [Flaker.pl](http://flaker.pl) - obecnie pracuję nad 100% wsparciem dla tego serwisu (oraz oczywiście `blip.pl`).
+
+
+### Progress
+* Blip.pl 90% (brak subskrybowania oraz wysyłania plików graficznych)
+* Flaker.pl 50% (brak subskrybcji, wysyłania oraz pobierania informacji nt. załączonych obrazków we flaknięciach)
+* Twitter.com 10% - pobieranie subskrybcji oraz wysyłanie nowych tweetów
+
+### TODO
+
+* 100% wsparcie API Blip.pl (i kompatybilnych)
+* 100% wsparcie API Flaker.pl
+* 100% wsparcie API Twitter.com (i kompatybilnych)
+* Implementacja nowego interface'u
+* Squash all bugz!
+
+
+### Pobocznie
+
+W trakcie tworzenia Mikroba stworzyłem 2 biblioteki, które mogą być użyteczne - `HttpConnector` oraz `DatabaseConnector`.
+
+
+#### HttpConnector
+
+Jest to wrapper dla klasy `Titanium.Network.httpClient`, który jest wygodniejszy w obsłudze niż standardowy `XMLHttpRequest`. Więcej informacji można znaleźć w samym kodzie klasy oraz dedkowanym jej testom jednostkowym
+
+#### DatabaseConnector
+
+Jest to wrapper dla klasy `Titanium.Databse`. `DatabaseConnector` jest luźno wzorowany na `ActiveRecord` i innych ORMach. Obecnie współpracuje tylko z bazą danych wspieraną przez Titanium, ale implementacja wsparcia dla HTML5/localStorage jest trywialna i spodziewana już niedługo ;-)
+
+Więcej informacji można znaleźć w samym kodzie klasy oraz dedkowanym jej testom jednostkowym
+
 ## English
-*Warning* - this project is quite experimental. The user interface will change for sure.
+
+If you aren't a Polish speaking person - probably you won't find Mikrob useful, sorry.
 
 Mikrob is built using [Appcelerator's Titanium](http://appcelerator.com) and as such represents the so called Rich Internet Applications on the Desktop.
 
