@@ -8,12 +8,14 @@ function run_tests() {
   w2.open();
 
 }
+var open_event_id=0;
 // Window settings (position, size)
 Titanium.API.addEventListener(Titanium.EXIT,function() { 
   Application.saveWindowSettings();
 });
-Titanium.API.addEventListener(Titanium.OPEN,function(event) { 
+open_event_id =Titanium.API.addEventListener(Titanium.OPEN,function(event) { 
   Application.loadWindowSettings();
+	Titanium.API.removeEventListener(Titanium.OPEN);
 });
 Titanium.API.addEventListener(Titanium.CLOSE,function() { 
   Application.populateAccountSwitcher();

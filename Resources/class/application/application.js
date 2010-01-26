@@ -1,6 +1,7 @@
 /* here b sth, dunno wat */
 var Application = {
   db : "",
+  window_resized : false,
   services : [],
   getServices : function() {
     var services = { 
@@ -149,18 +150,20 @@ var Application = {
 
   },
   loadWindowSettings : function() {
-          
-    var win = Titanium.UI.getCurrentWindow();
-    var bounds = win.getBounds();
-    try {
-      bounds.width = Titanium.App.Properties.getInt("width");
-      bounds.height = Titanium.App.Properties.getInt("height");
-      bounds.x = Titanium.App.Properties.getInt("x");
-      bounds.y = Titanium.App.Properties.getInt("y");
-    } catch (get_props) {
-      console.log('unable to get props');
-    }
-      win.setBounds(bounds);
+	 if(this.window_resized === false) {
+	     var win = Titanium.UI.getCurrentWindow();
+	     var bounds = win.getBounds();
+	     try {
+		 bounds.width = Titanium.App.Properties.getInt("width");
+		 bounds.height = Titanium.App.Properties.getInt("height");
+		 bounds.x = Titanium.App.Properties.getInt("x");
+		 bounds.y = Titanium.App.Properties.getInt("y");
+	     } catch (get_props) {
+		 console.log('unable to get props');
+	     }
+	     win.setBounds(bounds);
+	 }
+    this.window_resized = true;
   },
   openImageWindow : function(image_url) {
     Titanium.API.set('image_url', image_url);
