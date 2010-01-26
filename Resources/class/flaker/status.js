@@ -32,7 +32,7 @@ var Flak = new Class.create({
     if(source_id) {
      var path = 'app://icons/flaker_sources/'+source_id+'.gif';
      if (source_id == 'flaker') {path=  path.replace('gif', 'png');}
-      return new Element('img', { src : path, alt : source_id});
+      return new Element('img', {'class' : 'button small', src : path, alt : source_id});
     } else {
       return false;
     }
@@ -87,16 +87,16 @@ var Flak = new Class.create({
   var self = this;
     var actions = new Element('div',{'class':'actions'});
     actions.insert(self.userLink());
-    actions.insert(self.getSourceIcon(self.source));
     actions.insert(self.permaLink());
     actions.insert(self.commentLink());
     actions.insert(self.commentsSingleView());
+    actions.insert(self.getSourceIcon(self.source));
     actions.insert(self.createdAt());
     return actions;
   },
   parseBody : function(body) {
     function formatLinks(txt) {
-      var findLinks = /http(s)*:\/\/[0-9a-z\/\.\-\&\=\?\%]+/gi;
+      var findLinks = /http(s)*:\/\/[0-9a-z\,\_\/\.\-\&\=\?\%]+/gi;
       return  txt.replace(findLinks, '<a class="quoted_link" target="_blank" href="$&" title="$&">$&</a>');
     }
     function formatUsers(txt) {

@@ -159,7 +159,7 @@ var Update = new Class.create({
  */
   parseBody : function(body) {
     function formatLinks(txt) {
-      var findLinks = /http(s)*:\/\/[0-9a-z\/\.\-\&\=\?\%]+/gi;
+      var findLinks = /http(s)*:\/\/[0-9a-z\,\_\/\.\-\&\=\?\%]+/gi;
       return  txt.replace(findLinks, '<a class="quoted_link" target="_blank" href="$&" title="$&">$&</a>');
     }
     function formatUsers(txt) {

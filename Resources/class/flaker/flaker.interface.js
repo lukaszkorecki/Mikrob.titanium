@@ -7,7 +7,7 @@ draw : function(updates, is_update) {
     var self = this;
     var len = updates.length;
     var dash = $(self.container_id);
-    dash.update();
+//   dash.update();
 
     if(is_update !==0) updates.reverse();
     updates.each(function(single, index){
@@ -52,17 +52,19 @@ showFlak: function(flak,was_succses) {
     });
     // good way of auto-refreshing new comments
     // think of a way of making it safe and cause memory leaks
+    /*
     loop2 = new PeriodicalExecuter(function() {
         if(archive_opened == 1) {
           self.notify('Mikrob', 'Sprawdzam komentarze');
           self.openFlak(flak.entries[0].id);
         }
       },20);
-    arch.insert(refr);
+      */
     console.dir(flak);
     console.log(was_succses);
     arch.insert(new Flak(flak.entries[0], self.service_id));
-    arch.insert(new Element('h2').update('Komentarze'));
+    arch.insert(new Element('h3', { 'class' : 'button'}).update('Komentarze'));
+    arch.insert(refr);
     flak.entries[0].comments.each(function(comment){
         arch.insert(new Flak(comment, self.service_id));
     });
