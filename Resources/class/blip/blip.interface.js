@@ -116,6 +116,7 @@ var BlipInterface = new Class.create(Interface, {
         if(elem) {
           elem.insert({'after':contents});
         }
+        el.stopObserving();
         el.remove();
         self.expandLink('quoted_link');
       });
