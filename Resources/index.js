@@ -99,7 +99,8 @@ document.observe('dom:loaded',function(){
         el.removeClassName('unread');
       }
       if (index>19) {
-        el.remove();
+        el.descendants().invoke('stopObserving');
+        el.stopObserving().remove();
       }
     });
 
