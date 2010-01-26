@@ -19,11 +19,11 @@ var Blip = new Class.create(Service,{
   commonHeaders : function() {
     var self = this;
     return {
+//        'Authorization' : 'Basic '+self.credentials,
         'X-blip-api' : '0.02',
         'Accept' : 'application/json',
         'User-Agent' : Titanium.App.getName()+" "+Titanium.App.getVersion() + " ",
         "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
-//        'Authorization' : 'Basic '+self.credentials
       };
   },
   dashboardGet : function(offset) {
@@ -46,6 +46,7 @@ var Blip = new Class.create(Service,{
       // and everything appears to be a-ok
       // while it is not...
       if (response.match(/^\[/) === null) {
+        console.log('fail even though it was 200/301');
         self.onFail(status, response);
       } else {
         var ob = Titanium.JSON.parse(response);
@@ -58,7 +59,7 @@ var Blip = new Class.create(Service,{
     req.onFail = function(status, response) {
       interfaces[self.service_id].notify('Błąd', 'Błąd połączenia z API, próbujemy dalej...', 'fail');
       console.log("błąd! " + status + "\n" + response);
-      if(status == 403) self.loginFail();
+      if(status == 403 || status==401) self.loginFail();
     };
   },
   dashboardProcess :function(response_obj,is_update){
@@ -84,7 +85,7 @@ var Blip = new Class.create(Service,{
       // at this point - user's input should be kept in the
       // textarea - sending failed because of reasons like
       // server error or the recipient of the message doesn't exist
-      if (resp == 500 || resp == 403 || resp == 401) {
+      if (resp == 501 || resp == 503 || resp == 500 || resp == 403 || resp == 401) {
         was_success = false;
       }
       self.afterSend(resp, was_success);
@@ -101,7 +102,7 @@ var Blip = new Class.create(Service,{
       interfaces[self.service_id].injectQuotedBlip(blipid,obj);
     };
     req.onFail = function(st, resp) {
-      console.log(st);
+      console.log('getBlip: ' + st);
       interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
     };
 

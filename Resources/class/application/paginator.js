@@ -1,4 +1,4 @@
-function setup {
+function setup() {
 
   Element.observe('home_link','click',function(event) {
     services[active_service].dashboard_last_id=0;

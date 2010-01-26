@@ -108,6 +108,7 @@ var BlipInterface = new Class.create(Interface, {
       el.update('[Blip]');
       el.observe('click', function(event) {
         event.preventDefault();
+        console.log('expanding!');
         var blip = self.getUpdateObject(obj);
         var contents = blip.toQuoted();
         contents.addClassName('quoted');
