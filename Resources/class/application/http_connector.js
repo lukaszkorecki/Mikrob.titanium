@@ -9,7 +9,7 @@
 var HttpConnector = new Class.create({
   initialize : function(options) {
     this.client = Titanium.Network.createHTTPClient();
-    this.client.setTimeout(5500);
+    this.client.setTimeout(15000);
     // TODO add custom user agent
     this.headers = this.setRequestHeaders(options || {});
     // overrrrrrride the UA (http headers seem to have no effect)
@@ -57,7 +57,7 @@ var HttpConnector = new Class.create({
  *  @param string password
  */
   setUserCred : function(login, pass) {
-    console.log('sertting user cred: ' + login);
+    
     this.login = login;
     this.password = pass;
     this.client.setBasicCredentials(login,pass);
@@ -69,13 +69,13 @@ var HttpConnector = new Class.create({
  * @param string resource i.e. '/users/get/id'
  */
   debug_response : function(method, url, client) {
-   
+   return true;
     console.log("HttpConnector: \n" + url + "\nmethod: "+method+"\nstatus: ");
     console.log(this.client.status + " " + this.client.statusText);
   },
   get : function(url) {
     var self = this;
-    console.dir(self.client);
+
     self.client.onreadystatechange = function() {
       if(this.readyState == self.client.DONE) {
         self.handleResponse(self.client.status, self.client);
@@ -136,7 +136,7 @@ var HttpConnector = new Class.create({
  */
   post : function(url, data) {
     var self = this;
-    console.dir({ 'url' : url, 'data' : data}); 
+    
     self.client.onreadystatechange = function() {
       if(this.readyState == self.client.DONE) {
         self.handleResponse(self.client.status, self.client);
@@ -193,7 +193,7 @@ var HttpConnector = new Class.create({
     };
     self.setRequestHeaders(h);
     self.client.onreadystatechange = function() {
-      console.log(this.readyState);
+
       if(this.readyState == self.client.DONE) {
         self.handleResponse(self.client.status, self.client);
         self.debug_response('post with file', url, self.client);  

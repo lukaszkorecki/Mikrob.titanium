@@ -3,7 +3,8 @@ var BlipInterface = new Class.create(Interface, {
     $super(container_id, service_id);
     this.character_limit = 160;
   },
-
+	status_lis : [],
+																			 
   getUpdateObject : function(blip) {
     var single_status = {};
     switch(blip.type) {
@@ -57,7 +58,7 @@ var BlipInterface = new Class.create(Interface, {
         }
         self.expandLink('quoted_link');
 	
- if (index < 5 ) {
+			 if (index < 5 ) {
         try {
         var av =  'app://icons/nn_nano.png';
         if(single_status.user.avatar) {
@@ -68,9 +69,10 @@ var BlipInterface = new Class.create(Interface, {
         catch (notifyerr) {
           console.dir(notifyerr);
         }
-        single_status = null;
+
       }
       i++;
+  single_status = null;
     });
 
     if (  is_update ===0) {
@@ -80,6 +82,9 @@ var BlipInterface = new Class.create(Interface, {
       self.setUnreadCount(""+unr);
 
     }
+
+
+	
     self.throbber.toggle();
   },
   expandLink : function(target_class) {
@@ -108,7 +113,7 @@ var BlipInterface = new Class.create(Interface, {
       el.update('[Blip]');
       el.observe('click', function(event) {
         event.preventDefault();
-        console.log('expanding!');
+        
         var blip = self.getUpdateObject(obj);
         var contents = blip.toQuoted();
         contents.addClassName('quoted');

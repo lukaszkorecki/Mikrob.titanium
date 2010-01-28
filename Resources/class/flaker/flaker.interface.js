@@ -60,8 +60,8 @@ showFlak: function(flak,was_succses) {
         }
       },20);
       */
-    console.dir(flak);
-    console.log(was_succses);
+    
+    
     arch.insert(new Flak(flak.entries[0], self.service_id));
     arch.insert(new Element('h3', { 'class' : 'button'}).update('Komentarze'));
     arch.insert(refr);

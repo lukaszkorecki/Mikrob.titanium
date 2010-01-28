@@ -46,7 +46,7 @@ var Blip = new Class.create(Service,{
       // and everything appears to be a-ok
       // while it is not...
       if (response.match(/^\[/) === null) {
-        console.log('fail even though it was 200/301');
+        
         self.onFail(status, response);
       } else {
         var ob = Titanium.JSON.parse(response);
@@ -73,9 +73,9 @@ var Blip = new Class.create(Service,{
     var self = this;
     var req = new HttpConnector(self.commonHeaders());
     req.setUserCred(self.login, self.password);
-    try {
-      req.post(self.api_root+'/updates','update[body]='+encodeURIComponent(str));
-    } catch (no_encodeuri_compononent) { console.dir(no_encodeuri_compononent); }
+
+		req.post(self.api_root+'/updates','update[body]='+encodeURIComponent(str));
+
     req.onSuccess = function(resp) { self.afterSend(resp, true); };
     req.onFail = function(resp) {
       interfaces[self.service_id].notify('Błąd', 'Błąd wysyłania... ' + resp, 'fail');

@@ -58,7 +58,7 @@ var Interface = new Class.create({
      }
        $('unread_count').update(count_str);
        try {
-          console.log(count_str);
+
          if(count_str=="0") {
            Titanium.UI.setBadge();
          } else {
@@ -67,7 +67,7 @@ var Interface = new Class.create({
        } catch (badge_err) { console.log(badge_err); }
     },
   loginFail : function() {
-    console.log("LOGIN FAIL");
+
    // $('login_form').show();
    // $('throbber').toggle();
    // $('sender').toggle();

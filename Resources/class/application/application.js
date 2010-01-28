@@ -159,7 +159,7 @@ var Application = {
 		 bounds.x = Titanium.App.Properties.getInt("x");
 		 bounds.y = Titanium.App.Properties.getInt("y");
 	     } catch (get_props) {
-		 console.log('unable to get props');
+				 console.log('unable to get props');
 	     }
 	     win.setBounds(bounds);
 	 }
