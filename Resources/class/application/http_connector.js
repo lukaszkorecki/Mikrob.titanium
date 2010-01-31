@@ -9,7 +9,7 @@
 var HttpConnector = new Class.create({
   initialize : function(options) {
     this.client = Titanium.Network.createHTTPClient();
-    this.client.setTimeout(5500);
+    this.client.setTimeout(7500);
     // TODO add custom user agent
     this.headers = this.setRequestHeaders(options || {});
     // overrrrrrride the UA (http headers seem to have no effect)

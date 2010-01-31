@@ -30,6 +30,11 @@ Paginacja działa mniej więcej tak jak na stronie www blipa (choć czasami moż
 
 Mikrob wspiera także [Flaker.pl](http://flaker.pl) - obecnie pracuję nad 100% wsparciem dla tego serwisu (oraz oczywiście `blip.pl`).
 
+### Credit, where credit's due
+
+Ikony: [http://dryicons.com](http://dryicons.com)
+
+Logo/ikona/maskotka/nowy interfejs: [^joszko](http://joszko.blip.pl)
 
 ### Progress
 * Blip.pl 90% (brak subskrybowania oraz wysyłania plików graficznych)
@@ -41,7 +46,7 @@ Mikrob wspiera także [Flaker.pl](http://flaker.pl) - obecnie pracuję nad 100% 
 * 100% wsparcie API Blip.pl (i kompatybilnych)
 * 100% wsparcie API Flaker.pl
 * 100% wsparcie API Twitter.com (i kompatybilnych)
-* Implementacja nowego interface'u
+* Implementacja nowego interface'u by [^joszko](http://joszko.blip.pl)
 * Squash all bugz!
 
 

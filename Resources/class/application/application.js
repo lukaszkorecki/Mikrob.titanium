@@ -177,3 +177,27 @@ var Application = {
     w2.open();
   }
 };
+
+var AppIcons = {
+	"small" : {
+		comment : "app://icons/dryicons-colorful-sketches/16/cloud_comment.png",
+		quote : "app://icons/dryicons-colorful-sketches/16/refresh.png",
+		message : "app://icons/dryicons-colorful-sketches/16/mail.png",
+		permalink : "app://icons/dryicons-colorful-sketches/16/tag.png",
+		refresh : "app://icons/dryicons-colorful-sketches/16/refresh.png",
+		lock: "app://icons/dryicons-colorful-sketches/16/lock.png"
+	},
+	"medium" : {
+		"new" : "app://icons/dryicons-colorful-sketches/16/new.png"	
+	},
+	"big" : {
+		attachment : "app://icons/dryicons-colorful-sketches/48/attachment.png",
+		email : "app://icons/dryicons-colorful-sketches/48/email.png",
+		favorite : "app://icons/dryicons-colorful-sketches/48/favorite.png",
+		mail_receive : "app://icons/dryicons-colorful-sketches/48/mail_receive.png",
+		mail : "app://icons/dryicons-colorful-sketches/48/mail.png",
+		promotion_new : "app://icons/dryicons-colorful-sketches/48/promotion_new.png",
+		search : "app://icons/dryicons-colorful-sketches/48/search.png",
+		tools : "app://icons/dryicons-colorful-sketches/48/tools.png"
+	}
+};

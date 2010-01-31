@@ -7,13 +7,14 @@ body {
   margin:0;
   padding:0;
   -webkit-user-select:none;
- -webkit-word-wrap: break-word; 
- word-wrap: break-word; 
+ -webkit-word-wrap: break-word;
+ word-wrap: break-word;
 }
+img { vertical-align:bottom; }
 a  {
   color:#333;
   text-decoration:none;
-  
+
 }
 p { -webkit-word-wrap: break-word; } /* fix them things */
 a:hover {
@@ -82,8 +83,8 @@ a:hover {
 .update_picture  img {
   border:4px solid #000;
   -webkit-border-radius:5px;
-  -webkit-transform:rotate(8deg)  scale(0.5); 
-  
+  -webkit-transform:rotate(8deg)  scale(0.5);
+
 }
 .column {
   border-top:1px solid #333;
@@ -153,7 +154,7 @@ input[type="text"], input[type="password"] {
   display:block;
 }
 
-#throbber { 
+#throbber {
   position:fixed;
   bottom:5px;
   right:10px;
@@ -170,6 +171,10 @@ input[type="text"], input[type="password"] {
 
 .unread p{
   color:#000;
+
+ background-image : url("app://icons/dryicons-colorful-sketches/24/new.png");
+background-position: bottom right;
+background-repeat: no-repeat;
 }
 .priv_t { border:red;}
 .small { font-size:80%;}
@@ -185,7 +190,7 @@ left:5px;
 
 }
 #unread_count { text-align:center}
-#big_load { 
+#big_load {
   position: fixed;
   top:25%;
   left:25%;
