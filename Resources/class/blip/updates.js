@@ -112,9 +112,20 @@ var Update = new Class.create({
     });
     return link;
   },
+  threadLink : function() {
+        var self = this;
+        var url = "http://blip-thread.heroku.com/threads/"+self.id;
+        var link = new Element('a', {'href': url, 'class':'button small', 'title':'Otwórz konwersacje'}).update('Konwersacja');
+        link.observe('click', function(event){
+                Titanium.Desktop.openURL(url);
+                event.preventDefault();
+        });
+        return link;
+  },
   deleteLink : function() {
 
   },
+
   userLink : function() {
     var self = this;
     var ulink= new Element('a', {'href':'#', 'class': 'button'}).update('^'+self.user.login);
@@ -141,6 +152,7 @@ var Update = new Class.create({
     actions.insert(self.permaLink());
     actions.insert(self.quoteLink());
     actions.insert(self.messageLink());
+        actions.insert(self.threadLink());
     actions.insert(self.createdAt());
     return actions;
   },
