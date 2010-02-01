@@ -46,8 +46,8 @@ var Blip = new Class.create(Service,{
       // and everything appears to be a-ok
       // while it is not...
       if (response.match(/^\[/) === null) {
-        
-        self.onFail(status, response);
+       // this causes Titanium to crash... 
+     //   self.onFail(status, response);
       } else {
         var ob = Titanium.JSON.parse(response);
         if(ob.length >0) {

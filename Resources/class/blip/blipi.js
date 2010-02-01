@@ -24,16 +24,19 @@ var Blipi = new Class.create({
    * @param string http response code (201 etc)
    * @param string encoded JSON object (needs to be parsed)
    */
-  onSuccess : function(response) {
-    console.dir(status);
+  onSuccess : function(state, response) {
+    console.dir(response);
+    console.dir(state);
   },
   /**
    * Failure handler - needs to be defined from outside
    * @param string http response code (404 etc)
    * @param string encoded JSON object (needs to be parsed)
    */
-  onFailure : function( response) {
-    console.dir(Titanium.JSON.parse(response));
+  onFailure : function(state,  response) {
+    console.dir(state);
+    console.dir(response);
+    //  console.dir(Titanium.JSON.parse(response));
   },
   /**
    * Retrieves user rank in Blipi Stats
@@ -42,17 +45,18 @@ var Blipi = new Class.create({
    */
   userRank : function(user_name) {
     var url = this.api_root+this.api_key+'/minirank/'+user_name;
+/*
     new Ajax.Request('GET' ,url, {
       onSuccess : this.onSuccess,
       onFailure : this.onFailure
     } );
 
-    /*
+ */
     req = new HttpConnector();
     req.get(url);
     req.onSuccess = this.onSuccess;
     req.onFailure = this.onFailure;
-    */
+  
   },
 
   /**
@@ -62,16 +66,17 @@ var Blipi = new Class.create({
    */
   followerCount : function(user_name) {
     var url = this.api_root+this.api_key+'/licznik/'+user_name;
+/*
     new Ajax.Request('GET' ,url, {
       onSuccess : this.onSuccess,
       onFailure : this.onFailure
     } );
-/*
+*/
     req = new HttpConnector();
     req.get(url);
     req.onSuccess = this.onSuccess;
     req.onFailure = this.onFailure;
-*/
+
   },
 
   /**
@@ -82,16 +87,17 @@ var Blipi = new Class.create({
   search : function(term) {
     var s_term = encodeURIComponent(term);
     var url = this.api_root+this.api_key+'/szukaj/'+s_term;
+/*
     new Ajax.Request('GET' ,url, {
       onSuccess : this.onSuccess,
       onFailure : this.onFailure
     } );
-/*
+*/
     req = new HttpConnector();
     req.get(url);
     req.onSuccess = this.onSuccess;
     req.onFailure = this.onFailure;
-*/
+
   }
 
 });
