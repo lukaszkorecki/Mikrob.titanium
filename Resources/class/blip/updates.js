@@ -78,7 +78,8 @@ var Update = new Class.create({
   },
   messageLink : function() {
       var self = this;
-      var link = new Element('a', {'href':'#', 'class':'msg button small', 'title' : 'Wiadomość'}).update('✉');
+			var icon = new Element("img", {src : AppIcons.small.message});
+      var link = new Element('a', {'href':'#', 'class':'msg button small', 'title' : 'Wiadomość'}).update(icon);
       link.observe('click',function(event) {
           var pointer = '>';
           if(self.type=='PrivateMessage') pointer = '>>';
@@ -89,7 +90,8 @@ var Update = new Class.create({
   },
   quoteLink : function() {
     var self = this;
-    var link = new Element('a', {'href':'#', 'class':'quote button small', 'title' : 'Cytuj'}).update('♻');
+			var icon = new Element("img", {src : AppIcons.small.quote});
+    var link = new Element('a', {'href':'#', 'class':'quote button small', 'title' : 'Cytuj'}).update(icon);
     link.observe('click',function(event) {
     
       interfaces[self.owner_service_id].setAreaContent('http://blip.pl/'+self.short_type+'/'+self.id);
@@ -101,7 +103,9 @@ var Update = new Class.create({
         
     var self = this;
     var url = 'http://blip.pl/'+self.short_type+'/'+self.id;
-    var link = new Element('a', {'href':url,'class':'button small', 'title':self.id, 'title' : 'Permalink'}).update('#');
+			var icon = new Element("img", {src : AppIcons.small.permalink});
+
+    var link = new Element('a', {'href':url,'class':'button small', 'title':self.id, 'title' : 'Permalink'}).update(icon);
     link.observe('click',function(event) {
       Titanium.Desktop.openURL(url);
       event.preventDefault();

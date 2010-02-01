@@ -39,7 +39,8 @@ var Flak = new Class.create({
   },
   commentLink : function() {
     var self = this;
-    var link = new Element('a', {'href':'#', 'class':'msg button small', 'title' : 'Skomentuj'}).update('✉');
+			var icon = new Element("img", {src : AppIcons.small.message});
+    var link = new Element('a', {'href':'#', 'class':'msg button small', 'title' : 'Skomentuj'}).update(icon);
     link.observe('click',function(event) {
         var pointer = '@';
         interfaces[self.owner_service_id].setAreaContent(pointer+self.id +" "+pointer+self.user.login, true);
@@ -61,7 +62,8 @@ var Flak = new Class.create({
   permaLink : function() {
         
     var self = this;
-    var link = new Element('a', {"target": "_blank", 'href':self.permalink,'class':'button small', 'title':self.id, 'title' : 'Permalink'}).update('#');
+			var icon = new Element("img", {src : AppIcons.small.permalink});
+    var link = new Element('a', {"target": "_blank", 'href':self.permalink,'class':'button small', 'title':self.id, 'title' : 'Permalink'}).update(icon);
     link.observe('click',function(event) {
       Titanium.Desktop.openURL(url);
       event.preventDefault();

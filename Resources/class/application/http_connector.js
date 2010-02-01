@@ -9,6 +9,7 @@
 var HttpConnector = new Class.create({
   initialize : function(options) {
     this.client = Titanium.Network.createHTTPClient();
+
     this.client.setTimeout(15000);
     // TODO add custom user agent
     this.headers = this.setRequestHeaders(options || {});

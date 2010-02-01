@@ -134,11 +134,13 @@ document.observe('dom:loaded',function(){
       event.preventDefault();
       if (archive_opened !== 0) {
         Application.closeArchiveWindow();
-        this.update("✉");
+
+        this.update(new Element("img", {"src" : AppIcons.big.mail }));
         archive_opened = 0;
       } else {
         archive_opened = 1;
-        this.update("⬅");
+        this.update(new Element("img", {"src" : AppIcons.big.mail_receive }));
+
         Application.openArchiveWindow();
       }
   });
