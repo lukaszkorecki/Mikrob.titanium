@@ -33,8 +33,8 @@ var Update = new Class.create({
     if(this.user.login == this.username)
     {
       this.cclass += " own";
-    } 
-    else { 
+    }
+    else {
       this.cclass += " unread";
     }
   },
@@ -44,15 +44,9 @@ var Update = new Class.create({
   updatePicture : function() {
     var self = this;
     var pic = false;
-    if (self.pictures !==false && self.pictures[0] != undefined) {
-        var img_link = self.pictures[0].url;
-        var link = new Element('a',{'href':img_link});
-        link.observe('click',function(event) {
-          event.preventDefault();
-          Application.openImageWindow(img_link);
-         // Titanium.Desktop.openURL(img_link);
-
-        });
+    if (this.pictures !==false && this.pictures[0] != undefined) {
+        var img_link = this.pictures[0].url;
+        var link = new Element('a',{'href':img_link, "class" : "update_picture_link"});
         n_img_link = img_link.replace('.jpg','_standard.jpg');
         if(n_img_link.match('secure_picture')) n_img_link += 'standard';
         var img = new Element('img',{'src':n_img_link});
@@ -61,65 +55,46 @@ var Update = new Class.create({
     return pic;
    },
   updatePictureLink : function() {
-    var self = this;
-    var link = false;
-    if (self.pictures !==false && self.pictures[0] != undefined) {
-        var img_link = self.pictures[0].url;
-        link = new Element('a',{'href':img_link});
-        link.observe('click',function(event) {
-          event.preventDefault();
-          Application.openImageWindow(img_link);
-          // Titanium.Desktop.openURL(img_link);
 
-        });
+    var link = false;
+    if (this.pictures !==false && this.pictures[0] != undefined) {
+        var img_link = this.pictures[0].url;
+        link = new Element('a',{'href':img_link, "class" : "update_picture_link"});
+
         link.update('[Pic]');
     }
     return link;
   },
   messageLink : function() {
-      var self = this;
+
 			var icon = new Element("img", {src : AppIcons.small.message});
-      var link = new Element('a', {'href':'#', 'class':'msg button small', 'title' : 'Wiadomość'}).update(icon);
-      link.observe('click',function(event) {
-          var pointer = '>';
-          if(self.type=='PrivateMessage') pointer = '>>';
-          interfaces[self.owner_service_id].setAreaContent(pointer+self.user.login, true);
-          event.preventDefault();
-          });
+      var link = new Element('a', {'href':'#', 'class':'msg button small message_link', 'title' : 'Wiadomość'}).update(icon);
+
       return link;
   },
   quoteLink : function() {
-    var self = this;
+
 			var icon = new Element("img", {src : AppIcons.small.quote});
-    var link = new Element('a', {'href':'#', 'class':'quote button small', 'title' : 'Cytuj'}).update(icon);
-    link.observe('click',function(event) {
-    
-      interfaces[self.owner_service_id].setAreaContent('http://blip.pl/'+self.short_type+'/'+self.id);
-      event.preventDefault();
-    });
+    var link = new Element('a', {'href':'#', 'class':'quote button small quote_link', 'title' : 'Cytuj'}).update(icon);
+
     return link;
   },
   permaLink : function() {
-        
-    var self = this;
-    var url = 'http://blip.pl/'+self.short_type+'/'+self.id;
+
+
+    var url = 'http://blip.pl/'+this.short_type+'/'+this.id;
 			var icon = new Element("img", {src : AppIcons.small.permalink});
 
-    var link = new Element('a', {'href':url,'class':'button small', 'title':self.id, 'title' : 'Permalink'}).update(icon);
-    link.observe('click',function(event) {
-      Titanium.Desktop.openURL(url);
-      event.preventDefault();
-    });
+    var link = new Element('a', {'href':url,'class':'button small premanent_link', 'title':this.id, 'title' : 'Permalink'}).update(icon);
+
     return link;
   },
   threadLink : function() {
-        var self = this;
-        var url = "http://blip-thread.heroku.com/threads/"+self.id;
-        var link = new Element('a', {'href': url, 'class':'button small', 'title':'Otwórz konwersacje'}).update('Konwersacja');
-        link.observe('click', function(event){
-                Titanium.Desktop.openURL(url);
-                event.preventDefault();
-        });
+
+        var url = "http://blip-thread.heroku.com/threads/"+this.id;
+			var icon = new Element("img", {src : AppIcons.small.comment});
+        var link = new Element('a', {'href': url, 'class':'button small thread_link', 'title':'Otwórz konwersacje'}).update(icon);
+
         return link;
   },
   deleteLink : function() {
@@ -127,45 +102,40 @@ var Update = new Class.create({
   },
 
   userLink : function() {
-    var self = this;
-    var ulink= new Element('a', {'href':'#', 'class': 'button'}).update('^'+self.user.login);
-    ulink.observe('click',function(event){
-    try{ 
-      Titanium.Desktop.openURL('http://'+self.user.login+'.blip.pl');
-    } catch(err) { console.dir(err); }
-      event.preventDefault();
-    });
+
+    var ulink= new Element('a', {'href':'#', 'class': 'button user_link'}).update('^'+this.user.login);
+
     return ulink;
   },
   userAvatar : function(size) {
-    var self = this;
+
 
     if ( ! size) size="30";
-    var avid= self.user.avatar ? self.user.avatar['url_'+size] : "";
+    var avid= this.user.avatar ? this.user.avatar['url_'+size] : "";
     var avatar = "http://blip.pl" + avid;
     return new Element('img',{'src': avatar, 'class':'avatar'});
   },
   getActions: function() {
-  var self = this;
+
     var actions = new Element('div',{'class':'actions'});
-    actions.insert(self.userLink());
-    actions.insert(self.permaLink());
-    actions.insert(self.quoteLink());
-    actions.insert(self.messageLink());
-        actions.insert(self.threadLink());
-    actions.insert(self.createdAt());
+    actions.insert(this.userLink());
+    actions.insert(this.permaLink());
+    actions.insert(this.quoteLink());
+    actions.insert(this.messageLink());
+        actions.insert(this.threadLink());
+    actions.insert(this.createdAt());
     return actions;
   },
   toElement : function() {
-    var self = this;
-    var container = new Element('div', {'class':self.cclass});
+
+    var container = new Element('div', {'class':this.cclass});
     var p = new Element('p');
     var av_container = new Element('div', {'class': 'avatar_container'});
-    container.insert(av_container.update(self.userAvatar()));
-    p.insert(self.body);
-    if(self.pictures !== false) p.insert(self.updatePicture());
+    container.insert(av_container.update(this.userAvatar()));
+    p.insert(this.body);
+    if(this.pictures !== false) p.insert(this.updatePicture());
     container.insert(p);
-    container.insert(self.getActions());
+    container.insert(this.getActions());
     return container;
   },
 
@@ -203,17 +173,17 @@ var Update = new Class.create({
 
     },
     toQuoted : function() {
-       var self = this;
+
        var sztrong = new Element('strong');
-       sztrong.insert(self.userAvatar('15'));
-       sztrong.insert(self.userLink());
+       sztrong.insert(this.userAvatar('15'));
+       sztrong.insert(this.userLink());
        var container = new Element('span');
        container.insert(sztrong);
-       container.insert(self.body);
-       container.insert(self.updatePictureLink());
-       container.insert(self.quoteLink());
-       container.insert(self.permaLink());
-       container.insert(self.createdAt());
+       container.insert(this.body);
+       container.insert(this.updatePictureLink());
+       container.insert(this.quoteLink());
+       container.insert(this.permaLink());
+       container.insert(this.createdAt());
        return container;
   }
 });
@@ -231,67 +201,64 @@ var Message = new Class.create(Update, {
     }
   },
   recipientLink : function() {
-    var self = this;
-    var recipient_link = new Element('a', {'href':'#', 'class':'button'}).update(self.recipient.login);
-    recipient_link.observe('click',function(event){
-      event.preventDefault();
-      Titanium.Desktop.openURL('http://'+self.recipient.login+'.blip.pl');
-    });
+
+    var recipient_link = new Element('a', {'href':'#', 'class':'button'}).update(this.recipient.login);
+
     return recipient_link;
   },
   recipientAvatar: function(size) {
-    var self = this;
+
     if (! size) {size="30";}
-    var ravid= self.recipient.avatar ? self.recipient.avatar['url_'+size] : "";
+    var ravid= this.recipient.avatar ? this.recipient.avatar['url_'+size] : "";
     var ravatar = "http://blip.pl" + ravid;
     return new Element('img',{'src': ravatar, 'class':'ravatar'});
   },
   getActions :function() {
-  var self = this;
+
     var actions = new Element('div',{'class':'actions'});
-    actions.insert(self.userLink());
-    actions.insert(self.separator);
-    actions.insert(self.recipientLink());
-    actions.insert(self.permaLink());
-    actions.insert(self.quoteLink());
-    actions.insert(self.messageLink());
-    actions.insert(self.createdAt());
+    actions.insert(this.userLink());
+    actions.insert(this.separator);
+    actions.insert(this.recipientLink());
+    actions.insert(this.permaLink());
+    actions.insert(this.quoteLink());
+    actions.insert(this.messageLink());
+    actions.insert(this.createdAt());
     return actions;
 
   },
   toElement : function(){
-    var self = this;
 
 
-    var container = new Element('div', {'class':self.cclass+' '+self.mclass});
+
+    var container = new Element('div', {'class':this.cclass+' '+this.mclass});
     var p = new Element('p');
     var av_container = new Element('div', {'class': 'avatar_container'});
-    av_container.insert(self.userAvatar());
+    av_container.insert(this.userAvatar());
     av_container.insert('<br />');
-    av_container.insert(self.recipientAvatar());
+    av_container.insert(this.recipientAvatar());
     container.insert(av_container);
-    p.insert(self.body);
+    p.insert(this.body);
 
-    if(self.pictures !== false) p.insert(self.updatePicture());
+    if(this.pictures !== false) p.insert(this.updatePicture());
     container.insert(p);
-    container.insert(self.getActions());
+    container.insert(this.getActions());
     return container;
   },
     toQuoted : function() {
-      var self = this;
+
       var sztrong = new Element('strong');
-      sztrong.insert(self.userAvatar('15'));
-      sztrong.insert(self.userLink());
-      sztrong.insert(self.separator);
-      sztrong.insert(self.recipientAvatar('15'));
-      sztrong.insert(self.recipientLink());
+      sztrong.insert(this.userAvatar('15'));
+      sztrong.insert(this.userLink());
+      sztrong.insert(this.separator);
+      sztrong.insert(this.recipientAvatar('15'));
+      sztrong.insert(this.recipientLink());
       var container = new Element('span');
       container.insert(sztrong);
-      container.insert(self.body);
-      container.insert(self.updatePictureLink());
-      container.insert(self.quoteLink());
-      container.insert(self.permaLink());
-      container.insert(self.createdAt());
+      container.insert(this.body);
+      container.insert(this.updatePictureLink());
+      container.insert(this.quoteLink());
+      container.insert(this.permaLink());
+      container.insert(this.createdAt());
       return container;
   }
 });
@@ -300,18 +267,18 @@ var TwitterBlip = new Class.create(Update,{
     $super(obj, owner_service_id);
   },
   toElement : function() {
-    var self = this;
-    var container = new Element('div', {'class': self.cclass + ' twitter'});
+
+    var container = new Element('div', {'class': this.cclass + ' twitter'});
     // TODO this is saying avatar, because eventually it will
     // render an avatar
-    var body = self.body;
+    var body = this.body;
     var p = new Element('p');
     var av_container = new Element('div', {'class': 'avatar_container'});
-    container.insert(av_container.update(self.userAvatar()));
+    container.insert(av_container.update(this.userAvatar()));
     p.insert(body);
     container.insert(p);
     // TODO create different actions
-    container.insert(self.getActions());
+    container.insert(this.getActions());
     return container;
   }
 });
@@ -320,17 +287,17 @@ var Notice = new Class.create(Update,{
     $super(obj, owner_service_id);
   },
   toElement : function() {
-    var self = this;
+
     // TODO this is saying avatar, because eventually it will
     // render an avatar
-    var container = new Element('div', {'class': self.cclass+' notice'});
-    var body = self.body;
+    var container = new Element('div', {'class': this.cclass+' notice'});
+    var body = this.body;
     var p = new Element('p');
     var av_container = new Element('div', {'class': 'avatar_container'});
-    container.insert(av_container.update(self.userAvatar()));
+    container.insert(av_container.update(this.userAvatar()));
     p.insert(body);
     container.update(p);
-    //container.insert(self.getActions());
+    //container.insert(this.getActions());
     return container;
   }
 });

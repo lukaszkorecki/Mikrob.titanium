@@ -18,8 +18,8 @@ var Flak = new Class.create({
     if(this.user.login == this.username)
     {
       this.cclass += " own";
-    } 
-    else { 
+    }
+    else {
       this.cclass += " unread";
     }
 
@@ -38,62 +38,49 @@ var Flak = new Class.create({
     }
   },
   commentLink : function() {
-    var self = this;
 			var icon = new Element("img", {src : AppIcons.small.message});
     var link = new Element('a', {'href':'#', 'class':'msg button small', 'title' : 'Skomentuj'}).update(icon);
-    link.observe('click',function(event) {
-        var pointer = '@';
-        interfaces[self.owner_service_id].setAreaContent(pointer+self.id +" "+pointer+self.user.login, true);
-        event.preventDefault();
-        });
     return link;
 
   },
   commentsSingleView : function() {
-    var self = this;
-    var link = new Element('a', {'href':'#', 'class':'msg button small', 'title' : 'Otwórz całą dyskusję git'}).update(self.comments.length);
-    link.observe('click',function(event) {
-        interfaces[self.owner_service_id].openFlak(self.id);
-        event.preventDefault();
-    });
+
+    var link = new Element('a', {'href':'#', 'class':'msg button small', 'title' : 'Otwórz całą dyskusję git'}).update(this.comments.length);
     return link;
 
   },
   permaLink : function() {
-        
-    var self = this;
+
+
 			var icon = new Element("img", {src : AppIcons.small.permalink});
-    var link = new Element('a', {"target": "_blank", 'href':self.permalink,'class':'button small', 'title':self.id, 'title' : 'Permalink'}).update(icon);
-    link.observe('click',function(event) {
-      Titanium.Desktop.openURL(url);
-      event.preventDefault();
-    });
+    var link = new Element('a', {"target": "_blank", 'href':this.permalink,'class':'button small', 'title':this.id, 'title' : 'Permalink'}).update(icon);
+//    link.observe('click',function(event) {
+//      Titanium.Desktop.openURL(url);
+//      event.preventDefault();
+//    });
     return link;
   },
   userLink : function() {
-    var self = this;
-    var ulink= new Element('a', {'href':'#', 'class': 'button'}).update('@'+self.user.login);
-    ulink.observe('click',function(event){
-    try{ 
-      Titanium.Desktop.openURL('http://flaker.pl/'+self.user.login);
-    } catch(err) { console.dir(err); }
-      event.preventDefault();
-    });
+    var ulink= new Element('a', {'href':'#', 'class': 'button'}).update('@'+this.user.login);
+//    ulink.observe('click',function(event){
+//    try{
+//      Titanium.Desktop.openURL('http://flaker.pl/'+this.user.login);
+//    } catch(err) { console.dir(err); }
+//      event.preventDefault();
+//    });
     return ulink;
   },
   userAvatar : function(size) {
-    var self = this;
-    return new Element('img',{'src': self.user.avatar, 'class':'avatar'});
+    return new Element('img',{'src': this.user.avatar, 'class':'avatar'});
   },
   getActions: function() {
-  var self = this;
     var actions = new Element('div',{'class':'actions'});
-    actions.insert(self.userLink());
-    actions.insert(self.permaLink());
-    actions.insert(self.commentLink());
-    actions.insert(self.commentsSingleView());
-    actions.insert(self.getSourceIcon(self.source));
-    actions.insert(self.createdAt());
+    actions.insert(this.userLink());
+    actions.insert(this.permaLink());
+    actions.insert(this.commentLink());
+    actions.insert(this.commentsSingleView());
+    actions.insert(this.getSourceIcon(this.source));
+    actions.insert(this.createdAt());
     return actions;
   },
   parseBody : function(body) {
@@ -120,14 +107,14 @@ var Flak = new Class.create({
 
   },
   toElement : function() {
-    var self = this;
-    var container = new Element('div', {'class':self.cclass});
+
+    var container = new Element('div', {'class':this.cclass});
     var p = new Element('p');
     var av_container = new Element('div', {'class': 'avatar_container'});
-    container.insert(av_container.update(self.userAvatar()));
-    p.insert(self.body);
+    container.insert(av_container.update(this.userAvatar()));
+    p.insert(this.body);
     container.insert(p);
-    container.insert(self.getActions());
+    container.insert(this.getActions());
     return container;
     }
 });
