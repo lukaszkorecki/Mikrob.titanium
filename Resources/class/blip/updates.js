@@ -67,15 +67,19 @@ var Update = new Class.create({
   },
   messageLink : function() {
 
-			var icon = new Element("img", {src : AppIcons.small.message});
-      var link = new Element('a', {'href':'#', 'class':'msg button small message_link', 'title' : 'Wiadomość'}).update(icon);
+			var icon = new Element("img", {src : AppIcons.small.message, "class" : "message_link_img"});
+var prefix = ">";
+if(this.type == "PrivateMessage") {
+	prefix = ">>";
+}
+      var link = new Element('a', {'href':'#', "data" : prefix+this.user.login,  'class':'msg button small message_link', 'title' : 'Wiadomość'}).update(icon);
 
       return link;
   },
   quoteLink : function() {
 
-			var icon = new Element("img", {src : AppIcons.small.quote});
-    var link = new Element('a', {'href':'#', 'class':'quote button small quote_link', 'title' : 'Cytuj'}).update(icon);
+			var icon = new Element("img", {src : AppIcons.small.quote ,  "class" : "quote_link_img" });
+    var link = new Element('a', {'href':'#', 'class':'quote button small quote_link', 'title' : 'Cytuj', "data" : "http://blip.pl/"+this.short_type+"/"+this.id}).update(icon);
 
     return link;
   },
@@ -85,7 +89,7 @@ var Update = new Class.create({
     var url = 'http://blip.pl/'+this.short_type+'/'+this.id;
 			var icon = new Element("img", {src : AppIcons.small.permalink});
 
-    var link = new Element('a', {'href':url,'class':'button small premanent_link', 'title':this.id, 'title' : 'Permalink'}).update(icon);
+    var link = new Element('a', {'href':url,'class':'button small premanent_link', "target" : "_blank",    'title' : 'Permalink'}).update(icon);
 
     return link;
   },
@@ -93,7 +97,7 @@ var Update = new Class.create({
 
         var url = "http://blip-thread.heroku.com/threads/"+this.id;
 			var icon = new Element("img", {src : AppIcons.small.comment});
-        var link = new Element('a', {'href': url, 'class':'button small thread_link', 'title':'Otwórz konwersacje'}).update(icon);
+        var link = new Element('a', {'href': url, 'class':'button small thread_link', "target" : "_blank",  'title':'Otwórz konwersacje'}).update(icon);
 
         return link;
   },
@@ -150,15 +154,15 @@ var Update = new Class.create({
     }
     function formatUsers(txt) {
       var findUsers = /\^([\w]{1,})/gi;
-      return txt.replace(findUsers, '<a target="_blank" class="externalLink" title="$&" href="http://$&.blip.pl"><span class="linksFirstLetter">^</span>$1</a>');
+      return txt.replace(findUsers, '<a target="_blank" class="external_link" title="$&" href="http://$&.blip.pl"><span class="linksFirstLetter">^</span>$1</a>');
     }
     function formatUsersTwitter(txt) {
       var findUsers = /\@([\w]{1,})/gi;
-      return txt.replace(findUsers, '<a target="_blank" class="externalLink" title="$&" href="http://$&.blip.pl"><span class="linksFirstLetter">@</span>$1</a>');
+      return txt.replace(findUsers, '<a target="_blank" class="external_link" title="$&" href="http://$&.blip.pl"><span class="linksFirstLetter">@</span>$1</a>');
     }
     function formatTags(txt) {
       var findTags = /#[a-zA-Z0-9ęóąśłżźćń_\-☺☻☹★✩✫♫♪♥♦♣♠✿❀❁❄☾☂☀☁☃☄☮☯☎❦♀♂☚☛☠☢☣☤✌✍✎✂✆✈✉✔✘☥☸☦☧☨✝☩☪☭♚♛♜♝♞♟®™♈♉♊♋♌♍♎♏♐♑♒♓…∞¥€£≤≥«»≠≈∫∑∏µ∆øπΩ•÷‰⇐⇒⇔√˚]*/gi;
-      return txt.replace(findTags, '<a target="_blank" class="externalLink tagLink" title="$&" href="http://blip.pl/tags/$&">$&</a>');
+      return txt.replace(findTags, '<a target="_blank" class="external_link tagLink" title="$&" href="http://blip.pl/tags/$&">$&</a>');
     }
     body = body.replace('&', '&amp;');
     body = body.replace(/\>/gi, '&gt;');
@@ -166,7 +170,7 @@ var Update = new Class.create({
 
     //var text2 = formatBlipZnaczki(body);
     var text1 = formatLinks(body);
-    text2 = formatTags(text1).replace(/\/#/g, '/');
+    var text2 = formatTags(text1).replace(/\/#/g, '/');
     text1 = formatUsers(text2).replace(/\/\^/g, '/');
     text2 = formatUsersTwitter(text1).replace(/\/\@/g, '/');
     return text2;

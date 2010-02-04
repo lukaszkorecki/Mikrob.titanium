@@ -1,7 +1,7 @@
 /**
  *
- * Interface singleton - manages the tabs, views, columns and single purpose windows/sections 
- * TODO this object needs to be turned into a class and service specific functions need to go to 
+ * Interface singleton - manages the tabs, views, columns and single purpose windows/sections
+ * TODO this object needs to be turned into a class and service specific functions need to go to
  * its subclasses
  * @package mikrob.class.interface
  * @author Lukasz
@@ -49,14 +49,14 @@ var Interface = new Class.create({
       note.show();//Make it appear with the default timings.
     } catch(err) {
       console.dir(err);
-    } 
-       
+    }
+
    },
     setUnreadCount : function(count_str) {
      if(count_str =='0') {
        count_str ="0";
      }
-       $('unread_count').update(count_str);
+       $('mark_as_read_button').update(count_str);
        try {
 
          if(count_str=="0") {
@@ -77,9 +77,9 @@ var Interface = new Class.create({
     if (string) {
       var old = mt.getValue();
       if(is_prepend) {
-        mt.setValue(string+old);
+        mt.setValue(string+" "+old);
       } else {
-        mt.setValue(old+string);
+        mt.setValue(old+" "+string);
       }
       mt.focus();
     } else {

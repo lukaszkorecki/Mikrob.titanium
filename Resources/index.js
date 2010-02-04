@@ -11,18 +11,6 @@ function run_tests() {
 
 GLOBAL_EVENT = [];
 var open_event_id=0;
-// Window settings (position, size)
-//Titanium.API.addEventListener(Titanium.EXIT,function() {
-//  Application.saveWindowSettings();
-//});
-//open_event_id =Titanium.API.addEventListener(Titanium.OPEN,function(event) {
-//  Application.loadWindowSettings();
-// 	Titanium.API.removeEventListener(Titanium.OPEN);
-//});
-//Titanium.API.addEventListener(Titanium.CLOSE,function() {
-//  Application.populateAccountSwitcher();
-//  Application.refreshServices();
-//});
 // globalz
 var interfaces = new Array();
 // TODO this should come from the DB
@@ -34,77 +22,62 @@ document.observe('dom:loaded',function(){
   $('throbber').toggle();
 
 
- // Element.observe('change_service', 'change', function(event){
- //   var old = active_service;
- //   active_service = event.target.value || 0 ;
- //   if(old != active_service) {
- //     if(active_service == 'change') {
- //       active_service = old;
- //       Application.openAddServiceWindow();
- //     } else {
- //       Application.activateService(old, active_service);
- //     }
- //   }
- //
- // });
-
-
-
 	Element.observe('main_textarea','keydown',main_text_area_handler);
 	Element.observe('wrapper', 'submit',function(event){
-
-		console.dir(event);
-		console.dir(event.target);
-		console.log($(event.target).identify());
 		if($(event.target).identify() == 'login_button') {
 			login_in();
 		}
-	event.preventDefault();
-	});
-	Element.observe('wrapper', 'click',
-	function(event){
-		var element = $(event.target);
-		console.dir(event);
-
-
-		switch(		element.identify()) {
-		case 'login_button':
-			console.log('>>login_button');
-			login_in(event.target.up());
-			break;
-		case 'mark_as_read_button':
-			console.log('>>mark_as_read_button');
-			main_text_area_handler();
-			break;
-		case 'make_private':
-			console.log('>>make_private');
-			make_private_handler();
-			break;
-		case 'shorten_links':
-			console.log('>>shorten_links');
-			shorten_links_handler();
-			break;
-		case 'unread_count':
-			console.log('>>unread_count');
-			clear_unread();
-			break;
-		case 'change_service':
-			change_service_handler();
-			break;
-		default:
-//			console.dir(event.target.up());
-			console.log(element.identify());
-			console.dir(element.parentElement);
-			break;
-		}
-
 		event.preventDefault();
 	});
 
-
+// TEH DISPACHA
+	Element.observe('wrapper', 'click',
+	function(event){
+		dispatcher(event);
+		event.preventDefault();
 	});
 
-function login_in(target) {
+});
+
+// for dispatcher to work few conventions need to followed:
+// element name can be what ever, like "blomp" or "blamp_user"
+// the event handler *needs* to have a _handler suffix, so:
+// for elemen/button "blomp_user" the event hadnler will be "blomp_user_handler"
+// and it has to exist in global namespace
+// if the link/button is containing an image (as a icon), the img elements
+// id will be "blomp_user_img"
+// that's it, the rest is magic
+function dispatcher( event) {
+
+	var element = $(event.target);
+	// get the id of clicked element
+	var id = element.identify();
+	console.log("ID:::: " + id);
+	// if the clicked element doesn't have an id
+	// i.e. is an "anon" element, use the last class name
+	// by convention it works as a id
+	if(id.startsWith("anonymous_")) {
+		id = element.className.strip().split(" ").last();
+		console.log("anon id: " + id);
+	}
+	// if it's an image for the link, fix the id
+	if(id.endsWith("_img") ) {
+		id = id.replace("_img", "");
+		event.up_target = event.target.up();
+
+	} else {
+		console.log("NOT FOUND");
+	}
+
+	console.log("FINAL ID: "+id);
+	// now... DISPATCH! ;-)
+	if(window[id+"_handler"] !== undefined) {
+		window[id+"_handler"](event);
+	}
+}
+
+// EVENT HANDLERS
+function login_button_handler() {
 	Application.getServices();
   if(Application.services.length === 0) {
     Application.openAddServiceWindow();
@@ -136,7 +109,7 @@ function login_in(target) {
 }
 
 function main_text_area_handler(event) {
-	var content = event.target.getValue();
+	var content = (event.up_target || event.target).getValue();
 	if(event.keyCode == 13 && services[active_service].type != 'Flaker') {
 		content.length = content.length-1;
 		if( content.length <= interfaces[active_service].character_limit){
@@ -153,19 +126,20 @@ function main_text_area_handler(event) {
 	$('charcount').update(len);
 }
 
-function new_status_submit_handler(target) {
+function new_status_submit_handler(event) {
+	var target = event.up_target || event.target;
   if($F(target['content']).length <= interfaces[active_service].character_limit) {
     $('throbber').toggle();
     target.disable();
-    var blyp = $F(targeet['content']);
+    var blyp = $F(target['content']);
     services[active_service].post(blyp);
   } else {
-    yy = $F(target['content']).length - interfaces[active_service].character_limit;
+    var yy = $F(target['content']).length - interfaces[active_service].character_limit;
     interfaces[active_service].notify("Błęd", "Treść za długa o "+yy+" znaków");
 	}
 }
 
-function clear_unread(target) {
+function mark_as_read_button_handler() {
 	interfaces[active_service].setUnreadCount(" 0");
 	$$('#dash'+active_service + ' .update').each(
 		function(el, index) {
@@ -191,15 +165,16 @@ function shorten_links_handler() {
 	interfaces[active_service].shortenLinksInString(content, services[active_service].shortenLink);
 }
 
-function archive_button_hadnler(target) {
+function archive_button_handler(event) {
+	var target = $(event.up_target || event.target);
 	if (archive_opened !== 0) {
 		Application.closeArchiveWindow();
 
-		this.update(new Element("img", {"src" : AppIcons.big.mail }));
+		target.update(new Element("img", {"src" : AppIcons.big.mail }));
 		archive_opened = 0;
 	} else {
 		archive_opened = 1;
-		this.update(new Element("img", {"src" : AppIcons.big.mail_receive }));
+		target.update(new Element("img", {"src" : AppIcons.big.mail_receive }));
 
 		Application.openArchiveWindow();
 	}
@@ -213,7 +188,7 @@ function home_button_handler() {
 
 function change_service_handler() {
  var old = active_service;
- active_service = event.target.value || 0 ;
+ active_service = (event.up_target || event.target).value || 0 ;
  if(old != active_service) {
 	 if(active_service == 'change') {
 		 active_service = old;
@@ -222,4 +197,15 @@ function change_service_handler() {
 		 Application.activateService(old, active_service);
 	 }
  }
+}
+
+
+
+function quote_link_handler(event) {
+	interfaces[active_service].setAreaContent($(event.up_target||event.target).getAttribute("data"), false);
+
+}
+function message_link_handler(event) {
+	interfaces[active_service].setAreaContent($(event.up_target||event.target).getAttribute("data"), true);
+
 }
