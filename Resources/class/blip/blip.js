@@ -90,7 +90,7 @@ var Blip = new Class.create(Service,{
       }
       self.afterSend(resp, was_success);
     };
-  
+
   },
   getBlip : function(blipid) {
     var self = this;
@@ -98,8 +98,14 @@ var Blip = new Class.create(Service,{
     req.setUserCred(self.login, self.password);
     req.get(self.api_root+'/updates/'+blipid+self.include_string_full);
     req.onSuccess = function(st, resp) {
-      var obj = Titanium.JSON.parse(resp);
-      interfaces[self.service_id].injectQuotedBlip(blipid,obj);
+			try {
+				var obj = Titanium.JSON.parse(resp);
+				interfaces[self.service_id].injectQuotedBlip(blipid,obj);
+			} catch(parse_Error) {
+				 interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
+			}
+
+
     };
     req.onFail = function(st, resp) {
       console.log('getBlip: ' + st);
@@ -113,9 +119,14 @@ var Blip = new Class.create(Service,{
     req.setUserCred(self.login, self.password);
     req.post(self.api_root+'/shortlinks', 'shortlink[original_link]='+url);
     req.onSuccess = function(st, resp) {
+			try {
       var obj = Titanium.JSON.parse(resp);
       interfaces[self.service_id].replaceLinks(url, obj.url);
-    }; 
+			} catch (link_shorting_error) {
+      interfaces[self.service_id].notify("Błąd","Tworzenie linka się nie powiodło", 'fail');
+			}
+
+    };
     req.onFail = function(st, resp) {
       interfaces[self.service_id].notify("Błąd","Tworzenie linka się nie powiodło", 'fail');
     };
@@ -127,8 +138,14 @@ var Blip = new Class.create(Service,{
     req.setUserCred(self.login, self.password);
     req.get(self.api_root+'/shortlinks/'+id);
     req.onSuccess = function(st, resp) {
-      var obj = Titanium.JSON.parse(resp);
-      interfaces[self.service_id].expandShortenUrl(id,obj);
+			try {
+				var obj = Titanium.JSON.parse(resp);
+				interfaces[self.service_id].expandShortenUrl(id,obj);
+			} catch (expand_link_error) {
+				console.log(st);
+				interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
+			}
+
     };
     req.onFail = function(st, resp) {
       console.log(st);
@@ -163,8 +180,14 @@ var Blip = new Class.create(Service,{
 
     var self = this;
     req.onSuccess = function(st, resp) {
-      var obj = Titanium.JSON.parse(resp);
-      self.onArchiveComplete(obj);
+			try {
+			  var obj = Titanium.JSON.parse(resp);
+			  self.onArchiveComplete(obj);
+			} catch (archive_get_error) {
+			 	console.log('getArchive fail ' + resource);
+			  console.log(st); console.log(resp);
+			}
+
     };
     req.onFail = function(st, resp) {
       console.log('getArchive fail ' + resource);
