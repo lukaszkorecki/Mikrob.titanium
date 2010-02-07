@@ -49,7 +49,7 @@ var Update = new Class.create({
         var link = new Element('a',{'href':img_link, "class" : "update_picture_link"});
         n_img_link = img_link.replace('.jpg','_standard.jpg');
         if(n_img_link.match('secure_picture')) n_img_link += 'standard';
-        var img = new Element('img',{'src':n_img_link});
+        var img = new Element('img',{'src':n_img_link, "class" : "update_picture_link_img"});
         pic = new Element('span',{'class':'update_picture'}).update(link.update(img));
     }
     return pic;
@@ -89,14 +89,14 @@ if(this.type == "PrivateMessage") {
     var url = 'http://blip.pl/'+this.short_type+'/'+this.id;
 			var icon = new Element("img", {src : AppIcons.small.permalink});
 
-    var link = new Element('a', {'href':url,'class':'button small premanent_link', "target" : "_blank",    'title' : 'Permalink'}).update(icon);
+    var link = new Element('a', {'href':url,'class':'button small permanent_link', "target" : "_blank",    'title' : 'Permalink'}).update(icon);
 
     return link;
   },
   threadLink : function() {
 
         var url = "http://blip-thread.heroku.com/threads/"+this.id;
-			var icon = new Element("img", {src : AppIcons.small.comment});
+			var icon = new Element("img", {src : AppIcons.small.comment, "clas" : "thread_link_img"});
         var link = new Element('a', {'href': url, 'class':'button small thread_link', "target" : "_blank",  'title':'Otwórz konwersacje'}).update(icon);
 
         return link;
