@@ -9,7 +9,7 @@ function run_tests() {
 
 }
 
-GLOBAL_EVENT = [];
+
 var open_event_id=0;
 // globalz
 var interfaces = new Array();
@@ -22,13 +22,13 @@ document.observe('dom:loaded',function(){
   $('throbber').toggle();
 
 
-	Element.observe('main_textarea','keydown',Events.main_text_area);
-	Element.observe('wrapper', 'submit',function(event){
-    console.log('heeee');
-      var id = $(event.target).identify();
-			Events[id]();
-		event.preventDefault();
-	});
+//	Element.observe('main_textarea','keydown',Events.main_text_area);
+ // Element.observe('wrapper', 'submit',function(event){
+ //   console.log('heeee');
+ //     var id = $(event.target).identify();
+ // 		Events[id]();
+ // 	event.preventDefault();
+ // });
 
 // TEH DISPACHA
 
@@ -38,35 +38,42 @@ document.observe('dom:loaded',function(){
 // if the link/button is containing an image (as a icon), the img elements
 // id will be "blomp_user_img"
 // that's it, the rest is magic
+
+  document.getElementById('main_textarea').addEventListener('keydown', Events.main_text_area);
 	document.getElementById('wrapper').addEventListener('click',dispatcher);
+	document.getElementById('wrapper').addEventListener('submit',dispatcher);
 
 
 });
 
 function dispatcher(event){
 	event.preventDefault();
+    console.log("event start -------");
 	var element = $(event.target);
 	// get the id of clicked element
 	var id = element.identify();
+    console.log(id);
 	// if the clicked element doesn't have an id
 	// i.e. is an "anon" element, use the last class name
 	// by convention it works as a id
 	if(id.startsWith("anonymous_")) {
 		id = element.className.strip().split(" ").last();
 	}
+    console.log(id);
 	// if it's an image for the link, fix the id
 	if(id.endsWith("_img") ) {
 		id = id.replace("_img", "");
 		event.target_up = event.target.up();
 	}
+    console.log(id);
 	console.log("Should dispatch: Events."+ id );
 	// now... DISPATCH! ;-)
 	if(Events[id] !== undefined) {
 		Events[id](event);
 	} else {
-		console.log("No such function: " + id+"_handler");
+		console.log("No such function: Events." + id);
     return false;
 	}
-
+    console.log("event end  -------");
   return false;
 };

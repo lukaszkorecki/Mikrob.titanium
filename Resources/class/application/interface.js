@@ -66,6 +66,11 @@ var Interface = new Class.create({
          }
        } catch (badge_err) { console.log(badge_err); }
     },
+    setUserAvatar : function(av_ob) {
+        var av = av_ob.url || "app://icons/nn_standard.png";
+        var av_el = new Element("img", { width: "40px", height : "40px", "class" : "home_button_img", "src" : av});
+        $('home_button').update(av_el);
+    },
   loginFail : function() {
 
    // $('login_form').show();

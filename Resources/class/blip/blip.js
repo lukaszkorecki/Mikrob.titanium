@@ -1,8 +1,8 @@
 /**
- * BlipApi class, extends Service class 
+ * BlipApi class, extends Service class
  * TODO make HttpConnector a class variable
  * FIXME all onSuccess and onFail callbacks should be defined outside of the class
- * definition 
+ * definition
  */
 var Blip = new Class.create(Service,{
   initialize : function($super, login, password, service_id, api_root) {
@@ -46,7 +46,7 @@ var Blip = new Class.create(Service,{
       // and everything appears to be a-ok
       // while it is not...
       if (response.match(/^\[/) === null) {
-       // this causes Titanium to crash... 
+       // this causes Titanium to crash...
      //   self.onFail(status, response);
       } else {
         var ob = Titanium.JSON.parse(response);
@@ -196,6 +196,22 @@ var Blip = new Class.create(Service,{
   },
   onArchiveComplete : function(objects) {
     console.dir(objects);
+  },
+  getUserAvatar : function() {
+      var req = new HttpConnector(this.commonHeaders());
+      var self = this;
+      req.get(this.api_root+"/users/"+this.login+"/avatar");
+      req.onSuccess = function(st, resp) {
+          try {
+              var obj = Titanium.JSON.parse(resp);
+              interfaces[self.service_id].setUserAvatar(obj);
+          } catch (parse_Error) {
+              console.dir(parse_Error);
+          }
+      };
+      req.onFail = function(st, resp) {
+          interfaces[self.service_id].notify("Problem", "buuuuu");
+      }
   }
 
 });

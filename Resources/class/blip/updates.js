@@ -87,7 +87,7 @@ if(this.type == "PrivateMessage") {
 
 
     var url = 'http://blip.pl/'+this.short_type+'/'+this.id;
-			var icon = new Element("img", {src : AppIcons.small.permalink});
+			var icon = new Element("img", {src : AppIcons.small.permalink,"class" : "permanent_link_img"});
 
     var link = new Element('a', {'href':url,'class':'button small permanent_link', "target" : "_blank",    'title' : 'Permalink'}).update(icon);
 
@@ -96,7 +96,7 @@ if(this.type == "PrivateMessage") {
   threadLink : function() {
 
         var url = "http://blip-thread.heroku.com/threads/"+this.id;
-			var icon = new Element("img", {src : AppIcons.small.comment, "clas" : "thread_link_img"});
+			var icon = new Element("img", {src : AppIcons.small.comment, "class" : "thread_link_img"});
         var link = new Element('a', {'href': url, 'class':'button small thread_link', "target" : "_blank",  'title':'Otwórz konwersacje'}).update(icon);
 
         return link;
@@ -162,7 +162,7 @@ if(this.type == "PrivateMessage") {
     }
     function formatTags(txt) {
       var findTags = /#[a-zA-Z0-9ęóąśłżźćń_\-☺☻☹★✩✫♫♪♥♦♣♠✿❀❁❄☾☂☀☁☃☄☮☯☎❦♀♂☚☛☠☢☣☤✌✍✎✂✆✈✉✔✘☥☸☦☧☨✝☩☪☭♚♛♜♝♞♟®™♈♉♊♋♌♍♎♏♐♑♒♓…∞¥€£≤≥«»≠≈∫∑∏µ∆øπΩ•÷‰⇐⇒⇔√˚]*/gi;
-      return txt.replace(findTags, '<a target="_blank" class="external_link tagLink" title="$&" href="http://blip.pl/tags/$&">$&</a>');
+      return txt.replace(findTags, '<a target="_blank" class=" tagLink external_link" title="$&" href="http://blip.pl/tags/$&">$&</a>');
     }
     body = body.replace('&', '&amp;');
     body = body.replace(/\>/gi, '&gt;');

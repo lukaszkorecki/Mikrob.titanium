@@ -4,7 +4,7 @@ var BlipInterface = new Class.create(Interface, {
     this.character_limit = 160;
   },
 	status_lis : [],
-																			 
+
   getUpdateObject : function(blip) {
     var single_status = {};
     switch(blip.type) {
@@ -22,19 +22,19 @@ var BlipInterface = new Class.create(Interface, {
         break;
     }
     return single_status;
-            
+
   },
   drawPage : function(updates) {
     var self = this;
     var len = updates.length;
-    
+
     var dash = $(self.container_id);
     dash.update();
     updates.each(function(blip){
       var single_status = self.getUpdateObject(blip);
       dash.insert({'bottom': single_status});
       self.expandLink('quoted_link');
-      
+
     });
     // not very clever way of scrolling up ;-)
     dash.scrollByLines(-(dash.scrollHeight));
@@ -43,7 +43,7 @@ var BlipInterface = new Class.create(Interface, {
   draw : function(updates,is_update) {
     var self = this;
     var len = updates.length;
-    
+
     var i=0;
     var dash = $(self.container_id);
     if(is_update !==0) updates.reverse();
@@ -57,7 +57,7 @@ var BlipInterface = new Class.create(Interface, {
           dash.insert({'bottom': single_status});
         }
         self.expandLink('quoted_link');
-	
+
 			 if (index < 5 ) {
         try {
         var av =  'app://icons/nn_nano.png';
@@ -84,7 +84,7 @@ var BlipInterface = new Class.create(Interface, {
     }
 
 
-	
+
     self.throbber.toggle();
   },
   expandLink : function(target_class) {
@@ -98,7 +98,7 @@ var BlipInterface = new Class.create(Interface, {
         el.addClassName('s'+id);
       }
       if (blip_link.search('rdir') != -1) {
-        
+
         id = blip_link.split('/').last();
         services[0].expandLink(id);
         el.addClassName('r'+id);
@@ -113,7 +113,7 @@ var BlipInterface = new Class.create(Interface, {
       el.update('[Blip]');
       el.observe('click', function(event) {
         event.preventDefault();
-        
+
         var blip = self.getUpdateObject(obj);
         var contents = blip.toQuoted();
         contents.addClassName('quoted');
@@ -136,12 +136,13 @@ var BlipInterface = new Class.create(Interface, {
       el.insert(']');
       var stats_link = new Element('a',{
         'href':'http://rdir.pl/'+id+'/stats',
-        'class':'small',
+        'class':'small external_link',
         'target':'_blank'
         }
       ).update('s' + '('+obj.hit_count+')');
       el.insert({'after':stats_link});
       el.removeClassName('r'+id);
+      el.addClassName('external_link');
     });
 
   },

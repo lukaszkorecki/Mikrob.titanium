@@ -9,6 +9,7 @@ var Events = (function() {
 						Application.refreshServices();
 						Application.populateAccountSwitcher();
 						active_service = 0;
+            services[active_service].getUserAvatar();
 						services[active_service].dashboardGet();
 						interfaces[active_service].notify(Titanium.App.getName(),'Pobieram kokpit');
 
@@ -149,7 +150,10 @@ var Events = (function() {
 	  }
 
 	  function external_link (event) {
+        console.log('external_link');
 			  var url = $(event.target_up || event.target).getAttribute("href");
+
+        console.log(url);
 			  Titanium.Desktop.openURL(url);
 	  }
 
@@ -158,6 +162,9 @@ var Events = (function() {
 			  Application.openImageWindow(image_url);
 	  }
 
+    function quoted_link(event) {
+
+    }
 		return {
 				login_button : login_button,
         login_form : login_button,
@@ -174,8 +181,10 @@ var Events = (function() {
 				 user_link  : external_link ,
 				 thread_link  : external_link ,
 				 tag_link  : external_link ,
+				 tagLink  : external_link ,
 				 external_link  : external_link ,
-				 update_picture_link  : update_picture_link
+				 update_picture_link  : update_picture_link,
+        permanent_link : external_link
 
 		 };
 })();
