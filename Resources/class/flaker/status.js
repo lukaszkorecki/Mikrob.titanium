@@ -38,8 +38,8 @@ var Flak = new Class.create({
     }
   },
   commentLink : function() {
-			var icon = new Element("img", {src : AppIcons.small.message});
-    var link = new Element('a', {'href':'#', 'class':'msg button small', 'title' : 'Skomentuj'}).update(icon);
+			var icon = new Element("img", {src : AppIcons.small.message, "class": "message_link_img"});
+    var link = new Element('a', {'href':'#', 'class':'msg button small message_link ', 'title' : 'Skomentuj'}).update(icon);
     return link;
 
   },
@@ -52,22 +52,14 @@ var Flak = new Class.create({
   permaLink : function() {
 
 
-			var icon = new Element("img", {src : AppIcons.small.permalink});
-    var link = new Element('a', {"target": "_blank", 'href':this.permalink,'class':'button small', 'title':this.id, 'title' : 'Permalink'}).update(icon);
-//    link.observe('click',function(event) {
-//      Titanium.Desktop.openURL(url);
-//      event.preventDefault();
-//    });
+			var icon = new Element("img", {src : AppIcons.small.permalink, "class" : "permanent_link_img"});
+    var link = new Element('a', {"target": "_blank", 'href':this.permalink,'class':'button small permanent_link', 'title':this.id, 'title' : 'Permalink'}).update(icon);
+
     return link;
   },
   userLink : function() {
-    var ulink= new Element('a', {'href':'#', 'class': 'button'}).update('@'+this.user.login);
-//    ulink.observe('click',function(event){
-//    try{
-//      Titanium.Desktop.openURL('http://flaker.pl/'+this.user.login);
-//    } catch(err) { console.dir(err); }
-//      event.preventDefault();
-//    });
+    var ulink= new Element('a', {'href':'#', 'class': 'button user_link'}).update('@'+this.user.login);
+
     return ulink;
   },
   userAvatar : function(size) {

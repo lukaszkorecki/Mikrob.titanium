@@ -182,6 +182,7 @@ var Events = (function() {
 				 thread_link  : external_link ,
 				 tag_link  : external_link ,
 				 tagLink  : external_link ,
+        quoted_link : external_link,
 				 external_link  : external_link ,
 				 update_picture_link  : update_picture_link,
         permanent_link : external_link
