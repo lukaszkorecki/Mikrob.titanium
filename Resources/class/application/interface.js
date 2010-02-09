@@ -104,3 +104,29 @@ var Interface = new Class.create({
   }
 
 });
+
+var utfs = "☺☻☹★✩✫♫♪♥♦♣♠✿❀❁❄☾☂☀☁☃☄☮☯☎❦♀♂☚☛☠☢☣☤✌✍✎✂✆✈✉✔✘☥☸☦☧☨✝☩☪☭♚♛♜♝♞♟®™♈♉♊♋♌♍♎♏♐♑♒♓…∞¥€£≤≥«»≠≈∫∑∏µ∆øπΩ•÷‰⇐⇒⇔√";
+
+
+var BodyParser =
+  (function() {
+     var findLinks = /http(s)*:\/\/[0-9a-z\,\_\/\.\-\&\=\?\%]+/gi;
+
+     var findUsers = /(\^|\@)\w{1,}/g;
+
+     var findTags = /#[a-zA-Z0-9ęóąśłżźćń_\-]*/gi;
+
+     function userLink(body,  element, class_name) {
+
+       var users = body.match(findUsers);
+       users.each(function(user){
+         body.replace(user, element.update(user).toString());
+       });
+
+     }
+
+     return {
+       userLink : userLink
+     };
+   })();
+
