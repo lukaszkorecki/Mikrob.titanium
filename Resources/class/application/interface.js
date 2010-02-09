@@ -116,17 +116,39 @@ var BodyParser =
 
      var findTags = /#[a-zA-Z0-9ęóąśłżźćń_\-]*/gi;
 
-     function userLink(body,  element, class_name) {
-
+     function userLink(body,   domain) {
+       var element = new Element("a", {"class" : "user_link"});
        var users = body.match(findUsers);
-       users.each(function(user){
-         body.replace(user, element.update(user).toString());
+       users.each(
+         function(user){
+           element.update(user);
+           var url = "http://"+domain+"/"+user.substring(1);
+           if(user.startsWith("^")) {
+             url += "/dashboard";
+           }
+           element.setAttribute("href",url);
+           body = body.replace(user, element.outerHTML);
        });
+       return body;
 
+     }
+     function tagLink(body,  domain) {
+       var element = new Element("a", {"class" : "tag_link"});
+       var url = "http://"+domain+"/";
+       var tags = body.match(findTags);
+       tags.each(
+         function(tag){
+           url += tag.substring(1);
+           element.setAttribute("href",url);
+           element.update(tag);
+           body = body.replace(tag, element.outerHTML);
+       });
+       return body;
      }
 
      return {
-       userLink : userLink
+       userLink : userLink,
+       tagLink : tagLink
      };
    })();
 

@@ -148,8 +148,10 @@ if(this.type == "PrivateMessage") {
  * instead of using only simple textreplacements
  */
   parseBody : function(body) {
+
+    var findLinks = /http(s)*:\/\/[0-9a-z\,\_\/\.\-\&\=\?\%]+/gi;
     function formatLinks(txt) {
-      var findLinks = /http(s)*:\/\/[0-9a-z\,\_\/\.\-\&\=\?\%]+/gi;
+
       return  txt.replace(findLinks, '<a class="quoted_link" target="_blank" href="$&" title="$&">$&</a>');
     }
     function formatUsers(txt) {
@@ -161,12 +163,15 @@ if(this.type == "PrivateMessage") {
       return txt.replace(findUsers, '<a target="_blank" class="external_link" title="$&" href="http://$&.blip.pl"><span class="linksFirstLetter">@</span>$1</a>');
     }
     function formatTags(txt) {
-      var findTags = /#[a-zA-Z0-9ęóąśłżźćń_\-☺☻☹★✩✫♫♪♥♦♣♠✿❀❁❄☾☂☀☁☃☄☮☯☎❦♀♂☚☛☠☢☣☤✌✍✎✂✆✈✉✔✘☥☸☦☧☨✝☩☪☭♚♛♜♝♞♟®™♈♉♊♋♌♍♎♏♐♑♒♓…∞¥€£≤≥«»≠≈∫∑∏µ∆øπΩ•÷‰⇐⇒⇔√˚]*/gi;
+      var findTags = /#[a-zA-Z0-9ęóąśłżźćń_\-/gi;
       return txt.replace(findTags, '<a target="_blank" class=" tagLink external_link" title="$&" href="http://blip.pl/tags/$&">$&</a>');
     }
-    body = body.replace('&', '&amp;');
-    body = body.replace(/\>/gi, '&gt;');
-    body = body.replace(/\</gi, '&lt;');
+
+/*
+    body = BodyParser.userLink(body);
+    body = BodyParser.tagLink(body);
+*/
+    body = body.replace('&', '&amp;').replace(/\>/gi, '&gt;').replace(/\</gi, '&lt;');
 
     //var text2 = formatBlipZnaczki(body);
     var text1 = formatLinks(body);
