@@ -110,7 +110,7 @@ var utfs = "☺☻☹★✩✫♫♪♥♦♣♠✿❀❁❄☾☂☀☁☃☄�
 
 var BodyParser =
   (function() {
-     var findLinks = /http(s)*:\/\/[0-9a-z\,\_\/\.\-\&\=\?\%]+/gi;
+     var findLinks = /http(s)*:\/\/[0-9a-z\,\;\_\/\.\-\&\=\?\%]+/gi;
 
      var findUsers = /(\^|\@)\w{1,}/g;
 
@@ -119,7 +119,7 @@ var BodyParser =
      function userLink(body,   domain) {
        var element = new Element("a", {"class" : "user_link"});
        var users = body.match(findUsers);
-       users.each(
+       (users || []).each(
          function(user){
            element.update(user);
            var url = "http://"+domain+"/"+user.substring(1);
@@ -134,20 +134,32 @@ var BodyParser =
      }
      function tagLink(body,  domain) {
        var element = new Element("a", {"class" : "tag_link"});
-       var url = "http://"+domain+"/";
+
        var tags = body.match(findTags);
-       tags.each(
+       (tags || []).each(
          function(tag){
-           url += tag.substring(1);
+	   var url = "http://"+domain+"/"+tag.substring(1);
            element.setAttribute("href",url);
            element.update(tag);
            body = body.replace(tag, element.outerHTML);
        });
        return body;
      }
+     function justLink(body) {
+       var element = new Element("a", {"class" : "external_link"});
+       var links = body.match(findLinks);
+       (links || []).each(
+         function(link){
+           element.setAttribute("href",link);
+           element.update(link);
+           body = body.replace(link, element.outerHTML);
+       });
+       return body;
+     }
 
      return {
        userLink : userLink,
+       justLink : justLink,
        tagLink : tagLink
      };
    })();

@@ -148,38 +148,14 @@ if(this.type == "PrivateMessage") {
  * instead of using only simple textreplacements
  */
   parseBody : function(body) {
+    body = body.replace('&', '&amp;').replace(/\>/gi, '&gt;').replace(/\</gi, '&lt;')
+;
+    body = BodyParser.justLink(body);
+    body = BodyParser.userLink(body, "blip.pl/users");
+    body = BodyParser.tagLink(body, "blip.pl/tags");
 
-    var findLinks = /http(s)*:\/\/[0-9a-z\,\_\/\.\-\&\=\?\%]+/gi;
-    function formatLinks(txt) {
 
-      return  txt.replace(findLinks, '<a class="quoted_link" target="_blank" href="$&" title="$&">$&</a>');
-    }
-    function formatUsers(txt) {
-      var findUsers = /\^([\w]{1,})/gi;
-      return txt.replace(findUsers, '<a target="_blank" class="external_link" title="$&" href="http://$&.blip.pl"><span class="linksFirstLetter">^</span>$1</a>');
-    }
-    function formatUsersTwitter(txt) {
-      var findUsers = /\@([\w]{1,})/gi;
-      return txt.replace(findUsers, '<a target="_blank" class="external_link" title="$&" href="http://$&.blip.pl"><span class="linksFirstLetter">@</span>$1</a>');
-    }
-    function formatTags(txt) {
-      var findTags = /#[a-zA-Z0-9ęóąśłżźćń_\-/gi;
-      return txt.replace(findTags, '<a target="_blank" class=" tagLink external_link" title="$&" href="http://blip.pl/tags/$&">$&</a>');
-    }
-
-/*
-    body = BodyParser.userLink(body);
-    body = BodyParser.tagLink(body);
-*/
-    body = body.replace('&', '&amp;').replace(/\>/gi, '&gt;').replace(/\</gi, '&lt;');
-
-    //var text2 = formatBlipZnaczki(body);
-    var text1 = formatLinks(body);
-    var text2 = formatTags(text1).replace(/\/#/g, '/');
-    text1 = formatUsers(text2).replace(/\/\^/g, '/');
-    text2 = formatUsersTwitter(text1).replace(/\/\@/g, '/');
-    return text2;
-
+    return body;
     },
     toQuoted : function() {
 
