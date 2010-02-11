@@ -33,7 +33,7 @@ var BlipInterface = new Class.create(Interface, {
     updates.each(function(blip){
       var single_status = self.getUpdateObject(blip);
       dash.insert({'bottom': single_status});
-//      self.expandLink('quoted_link');
+      self.expandLink('quoted_link');
 
     });
     // not very clever way of scrolling up ;-)
@@ -56,7 +56,7 @@ var BlipInterface = new Class.create(Interface, {
         } else {
           dash.insert({'bottom': single_status});
         }
-//        self.expandLink('quoted_link');
+        self.expandLink('quoted_link');
 
 			 if (index < 5 ) {
         try {
@@ -111,7 +111,7 @@ var BlipInterface = new Class.create(Interface, {
     var els = $$('.s'+target_class);
     els.each(function(el) {
       el.update('[Blip]');
-      el.observe('click', function(event) {
+      el.observe('quoted_link:clicked', function(event) {
         event.preventDefault();
 
         var blip = self.getUpdateObject(obj);

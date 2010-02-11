@@ -152,6 +152,7 @@ var BodyParser =
          function(link){
            element.setAttribute("href",link);
            element.update(link);
+           if(link.match('/blip.pl/') != null) element.addClassName("quoted_link");
            body = body.replace(link, element.outerHTML);
        });
        return body;
