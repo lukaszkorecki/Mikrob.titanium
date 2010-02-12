@@ -47,7 +47,7 @@ document.observe('dom:loaded',function(){
 });
 
 function dispatcher(event){
-	event.preventDefault();
+
     console.log("event start -------");
 	var element = $(event.target);
 	// get the id of clicked element
@@ -72,8 +72,9 @@ function dispatcher(event){
 		Events[id](event);
 	} else {
 		console.log("No such function: Events." + id);
-    return false;
+//    return false;
 	}
     console.log("event end  -------");
+	event.preventDefault();
   return false;
 };

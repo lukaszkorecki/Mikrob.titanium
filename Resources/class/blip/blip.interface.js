@@ -95,7 +95,7 @@ var BlipInterface = new Class.create(Interface, {
       if(blip_link.search('blip') != -1) {
         id = blip_link.split('/').last();
         services[0].getBlip(id);
-        el.addClassName('s'+id);
+        el.addClassName('s'+id +" expanded_link");
       }
       if (blip_link.search('rdir') != -1) {
 
@@ -111,7 +111,7 @@ var BlipInterface = new Class.create(Interface, {
     var els = $$('.s'+target_class);
     els.each(function(el) {
       el.update('[Blip]');
-      el.observe('quoted_link:clicked', function(event) {
+      el.observe('click', function(event) {
         event.preventDefault();
 
         var blip = self.getUpdateObject(obj);
