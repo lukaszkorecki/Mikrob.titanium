@@ -30,7 +30,6 @@ var Interface = new Class.create({
     var self =this;
     self.throbber.toggle();
     self.notify(Titanium.App.getName(),'Wysłano','ok');
-    $('sender').enable();
     $('charcount').update('0');
     if (was_success)    self.setAreaContent();
   },
@@ -38,6 +37,8 @@ var Interface = new Class.create({
       this.note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;
     console.log("Notification img: "+ img);
       this.note.setMessage(body); //Add the message;
+            this.note.setIcon(img);
+/*
       switch(img) {
         case 'ok':
           this.note.setIcon(this.ok_image);
@@ -47,10 +48,11 @@ var Interface = new Class.create({
           break;
         default:
           if (img) {
-            this.note.setIcon(img);
+
           }
           break;
       }
+*/
       this.note.show();//Make it appear with the default timings.
 
    },
@@ -69,15 +71,15 @@ var Interface = new Class.create({
        } catch (badge_err) { console.log(badge_err); }
     },
     setUserAvatar : function(av_ob) {
-        var av = av_ob.url || "app://icons/nn_standard.png";
-        var av_el = new Element("img", { width: "40px", height : "40px", "class" : "home_button_img", "src" : av});
-        $('home_button').update(av_el);
+      var av = av_ob.url || "app://icons/nn_standard.png";
+      var av_el = new Element("img", { width: "24px", height : "24px", "class" : "home_button_img", "src" : av});
+      $('user_icon').update(av_el);
     },
   loginFail : function() {
 
    // $('login_form').show();
    // $('throbber').toggle();
-   // $('sender').toggle();
+
   },
   setAreaContent : function(string, is_prepend) {
     var mt = $('main_textarea');

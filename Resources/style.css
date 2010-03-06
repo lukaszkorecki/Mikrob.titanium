@@ -86,21 +86,55 @@ a:hover {
   -webkit-transform:rotate(8deg)  scale(0.5);
 
 }
-.column {
-  border-top:1px solid #333;
-  border-left:1px solid #333;
-  border-bottom:2px solid #333;
+#content_container {
+  border-top:1px solid #666;
+  border-left:1px solid #666;
+  border-bottom:2px solid #666;
   position:absolute;
   overflow-x:hidden;
   overflow-y:auto;
-  top:30px;
-  left:69px;
-  bottom:110px;
+  top:0px;
+  left:135px;
+  bottom:25px;
   padding:0px;
   max-width:400px;
-  border-bottom: 2px solid #888;
+
   background: rgb(210,210,210);
 }
+
+.content_container_max {
+   left:0;
+   max-width:500px;
+}
+
+#sidebar {
+   position: absolute;
+   top: 0;
+   left:0;
+   bottom:25px;
+   width:135px;
+   border-top:1px solid #666;
+   border-left:1px solid #666;
+   border-bottom:2px solid #666;
+   background-color:#ededed;
+}
+#sidebar ul li, #sidebar ul {
+   list-style:none;
+   margin:0;
+   padding:0;
+   padding-left:5px;
+   margin-bottom:10px;
+}
+#global_actions {
+   position:absolute;
+   bottom:2px;
+   left:10px;
+max-width:400px;
+}
+#global_actions .change_service_container {
+   text-align:right;
+}
+
 .user, .recipient {
   font-weight:bold;
   margin:1px 4px 1px 4px;
@@ -157,7 +191,7 @@ input[type="text"], input[type="password"] {
 #throbber {
   position:fixed;
   bottom:5px;
-  right:10px;
+  right:20px;
   background:#888;
   padding:2px;
   -webkit-border-radius:3px;

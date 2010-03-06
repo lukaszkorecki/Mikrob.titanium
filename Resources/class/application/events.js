@@ -1,34 +1,34 @@
 // EVENT HANDLERS
 var Events = (function() {
-		function login_button () {
-				Application.getServices();
-				if(Application.services.length === 0) {
-						Application.openAddServiceWindow();
+    function login_button () {
+			Application.getServices();
+			if(Application.services.length === 0) {
+					Application.openAddServiceWindow();
 
 				} else {
-						Application.refreshServices();
-						Application.populateAccountSwitcher();
-						active_service = 0;
-            services[active_service].getUserAvatar();
-						services[active_service].dashboardGet();
-						interfaces[active_service].notify(Titanium.App.getName(),'Pobieram kokpit');
+					Application.refreshServices();
+					Application.populateAccountSwitcher();
+					active_service = 0;
+          services[active_service].getUserAvatar();
+					services[active_service].dashboardGet();
+					interfaces[active_service].notify(Titanium.App.getName(),'Pobieram kokpit');
 
-						var how_often = 30;
-						if(services[active_service].type != 'twitter') {
-								how_often = 15;
+					var how_often = 30;
+					if(services[active_service].type != 'twitter') {
+							how_often = 15;
 						}
-						loop1 = new PeriodicalExecuter(run_loop1,how_often);
-						function run_loop1() {
-								$('throbber').toggle();
-								services[active_service].dashboardGet();
+					loop1 = new PeriodicalExecuter(run_loop1,how_often);
+					function run_loop1() {
+							$('throbber').toggle();
+							services[active_service].dashboardGet();
 						}
-						// Clean up old stuff
-						Titanium.App.Properties.setString('username',"");
-						Titanium.App.Properties.setString('password',"");
+					// Clean up old stuff
+					Titanium.App.Properties.setString('username',"");
+					Titanium.App.Properties.setString('password',"");
 
-						$('login_form').fade();
-						$('throbber').toggle();
-						$('sender').toggle();
+					$('login_form').fade();
+					$('throbber').toggle();
+          $('sidebar').toggle();
 				}
 		}
 
@@ -39,7 +39,6 @@ var Events = (function() {
 						if( content.length <= interfaces[active_service].character_limit){
 
 								$('throbber').toggle();
-								$('sender').disable();
 								services[active_service].post(content);
 						} else {
 								interfaces[active_service].notify("Błęd", "Treść za długa o "+(content.length - interfaces[active_service].character_limit)+" znaków");
@@ -123,7 +122,10 @@ var Events = (function() {
 				}
 		}
 
+    function open_sender(event){
+      Application.openSenderWindow();
 
+    }
 
 		function quote_link (event) {
 				interfaces[active_service].setAreaContent($(event.target_up||event.target).getAttribute("data"), false);
@@ -137,16 +139,16 @@ var Events = (function() {
 	  // eventualy each one of these functions will do something else! :-)
 	  function user_link (event) {
 			  var url = $(event.target_up || event.target).getAttribute("href");
-			  Titanium.Desktop.openURL(url);
+			  Application.openUrl(url);
 	  }
 	  function thread_link (event) {
 			  var url = $(event.target_up || event.target).getAttribute("href");
-			  Titanium.Desktop.openURL(url);
+			  Application.openUrl(url);
 	  }
 
 	  function tag_link (event) {
 			  var url = $(event.target_up || event.target).getAttribute("href");
-			  Titanium.Desktop.openURL(url);
+			  Application.openUrl(url);
 	  }
 
 	  function external_link (event) {
@@ -154,7 +156,7 @@ var Events = (function() {
 			  var url = $(event.target_up || event.target).getAttribute("href");
 
         console.log(url);
-			  Titanium.Desktop.openURL(url);
+			  Application.openUrl(url);
 	  }
 
 	  function update_picture_link (event) {
@@ -166,26 +168,27 @@ var Events = (function() {
 
     }
 		return {
-				login_button : login_button,
-        login_form : login_button,
-				 main_text_area  : main_text_area ,
-				 new_status_submit  : new_status_submit ,
-				 mark_as_read_button  : mark_as_read_button ,
-				 make_private  : make_private ,
-				 shorten_links  : shorten_links ,
-				 archive_button  : archive_button ,
-				 home_button  : home_button ,
-				 change_service  : change_service ,
-				 quote_link  : quote_link ,
-				 message_link  : message_link ,
-				 user_link  : external_link ,
-				 thread_link  : external_link ,
-				 tag_link  : external_link ,
-				 tagLink  : external_link ,
-        quoted_link : external_link,
-				 external_link  : external_link ,
-				 update_picture_link  : update_picture_link,
-        permanent_link : external_link
+			login_button : login_button,
+      login_form : login_button,
+			main_text_area  : main_text_area ,
+			new_status_submit  : new_status_submit ,
+			mark_as_read_button  : mark_as_read_button ,
+			make_private  : make_private ,
+			shorten_links  : shorten_links ,
+			archive_button  : archive_button ,
+			home_button  : home_button ,
+			change_service  : change_service ,
+			quote_link  : quote_link ,
+			message_link  : message_link ,
+			user_link  : external_link ,
+			thread_link  : external_link ,
+			tag_link  : external_link ,
+			tagLink  : external_link ,
+      quoted_link : external_link,
+			external_link  : external_link ,
+			update_picture_link  : update_picture_link,
+      permanent_link : external_link,
+      open_sender : open_sender
 
 		 };
 })();

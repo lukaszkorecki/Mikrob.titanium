@@ -18,17 +18,14 @@ var services = new Array();
 var username,loop1,active_service,archive_opened =0;
 document.observe('dom:loaded',function(){
   Application.loadWindowSettings();
-  $('sender').toggle();
+try {
+  $('sidebar').toggle();
   $('throbber').toggle();
+} catch(orr) {
+  // orr
+}
 
 
-//	Element.observe('main_textarea','keydown',Events.main_text_area);
- // Element.observe('wrapper', 'submit',function(event){
- //   console.log('heeee');
- //     var id = $(event.target).identify();
- // 		Events[id]();
- // 	event.preventDefault();
- // });
 
 // TEH DISPACHA
 
@@ -39,20 +36,22 @@ document.observe('dom:loaded',function(){
 // id will be "blomp_user_img"
 // that's it, the rest is magic
 
-  document.getElementById('main_textarea').addEventListener('keydown', Events.main_text_area);
+//
+try {
 	document.getElementById('wrapper').addEventListener('click',dispatcher);
 	document.getElementById('wrapper').addEventListener('submit',dispatcher);
+
+} catch(err) {
+  // ignore
+}
 
 
 });
 
 function dispatcher(event){
-
-    console.log("event start -------");
 	var element = $(event.target);
 	// get the id of clicked element
 	var id = element.identify();
-    console.log(id);
 	// if the clicked element doesn't have an id
 	// i.e. is an "anon" element, use the last class name
 	// by convention it works as a id
@@ -72,9 +71,7 @@ function dispatcher(event){
 		Events[id](event);
 	} else {
 		console.log("No such function: Events." + id);
-//    return false;
 	}
-    console.log("event end  -------");
 	event.preventDefault();
   return false;
 };

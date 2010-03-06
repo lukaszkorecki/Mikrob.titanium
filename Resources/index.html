@@ -1,77 +1,93 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <!-- prototype stuff -->
-  <script type="text/javascript" src="libs/prototype.js"></script>
-  <script type="text/javascript" src="libs/effects.js"></script>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <!-- prototype stuff -->
+    <script type="text/javascript" src="libs/prototype.js"></script>
+    <script type="text/javascript" src="libs/effects.js"></script>
 
-  <!-- cool stuff -->
-  <script src="class/application/events.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/application/application.js" type="text/javascript" charset="utf-8"></script>
-  <!-- classess -->
-  <script src="class/application/http_connector.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/application/database_connector.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/application/service.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/application/interface.js" type="text/javascript" charset="utf-8"></script>
-  <!-- blip stuff -->
-  <script src="class/blip/blip.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/blip/blip.interface.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/blip/blipi.js" type="text/javascript" charset="utf-8"></script>
-  <script src="blipi_api_key.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/blip/updates.js" type="text/javascript" charset="utf-8"></script>
-  <!-- flaker stuff -->
-  <script src="class/flaker/flaker.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/flaker/flaker.interface.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/flaker/status.js" type="text/javascript" charset="utf-8"></script>
-  <!-- twitter stuff -->
-  <script src="class/twitter/twitter.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/twitter/twitter.interface.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/twitter/status.js" type="text/javascript" charset="utf-8"></script>
+    <!-- cool stuff -->
+    <script src="class/application/events.js" type="text/javascript" charset="utf-8"></script>
+    <script src="class/application/application.js" type="text/javascript" charset="utf-8"></script>
+    <!-- classess -->
+    <script src="class/application/http_connector.js" type="text/javascript" charset="utf-8"></script>
+    <script src="class/application/database_connector.js" type="text/javascript" charset="utf-8"></script>
+    <script src="class/application/service.js" type="text/javascript" charset="utf-8"></script>
+    <script src="class/application/interface.js" type="text/javascript" charset="utf-8"></script>
+    <!-- blip stuff -->
+    <script src="class/blip/blip.js" type="text/javascript" charset="utf-8"></script>
+    <script src="class/blip/blip.interface.js" type="text/javascript" charset="utf-8"></script>
+    <script src="class/blip/blipi.js" type="text/javascript" charset="utf-8"></script>
+    <script src="blipi_api_key.js" type="text/javascript" charset="utf-8"></script>
+    <script src="class/blip/updates.js" type="text/javascript" charset="utf-8"></script>
+    <!-- flaker stuff -->
+    <script src="class/flaker/flaker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="class/flaker/flaker.interface.js" type="text/javascript" charset="utf-8"></script>
+    <script src="class/flaker/status.js" type="text/javascript" charset="utf-8"></script>
+    <!-- twitter stuff -->
+    <script src="class/twitter/twitter.js" type="text/javascript" charset="utf-8"></script>
+    <script src="class/twitter/twitter.interface.js" type="text/javascript" charset="utf-8"></script>
+    <script src="class/twitter/status.js" type="text/javascript" charset="utf-8"></script>
 
-  <!-- events and startup stuff -->
-  <script src="index.js" type="text/javascript" charset="utf-8"></script>
-  <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8"/>
-  <link rel="stylesheet" href="win32.css" type="text/css" media="screen" charset="utf-8"/>
-  <link rel="stylesheet" href="linux.css" type="text/css" media="screen" charset="utf-8"/>
-</head>
-<body>
-  <div id="wrapper">
-
-
-    <div id="controls">
-      <form action="#" method="" accept-charset="utf-8" id="login_form">
-        <input type="submit" id="login_button" class="button" value="Zaloguj się do swoich kont &rarr;">
-      </form>
-    <!-- update content form -->
-  <div id="toolbar">
-    <span class="square_button"><select  id="change_service"></select></span>
-    <a href="#" class="button small square" id="home_button" title="Domek">&larr;</a>
-    <a href="#" class="button small square" id="mark_as_read_button" title="Oznacz jako przeczytane"></a>
-    <a href="#" class="button small square" id="archive_button" title="Wiadomości"><img id="archive_button_img" src="app://icons/dryicons-colorful-sketches/48/mail_receive.png" /></a>
-  </div>
-    <form action="#" method="" id="sender" accept-charset="utf-8">
-      <textarea  id="main_textarea" name="content" rows="3" placeholder="Co teraz robisz? O czym myślisz? Dokąd zmierzamy?" autofocus ></textarea>
-      <div>
-        <span id="charcount" class="sender_item">0</span>
-        <button  class="button small sender_item" name="submit" value="" ><img src="app://icons/dryicons-colorful-sketches/16/mail.png">Wyślij</button>
-        <a href="#" class="button small sender_item" title="Zmienia wiadomość na prywatną" id="make_private"><img src="app://icons/dryicons-colorful-sketches/24/lock.png">Sprywatyzuj</a>
-        <a href="#" class="button small sender_item" title="Skraca wszystkie linki, które wpisano" id="shorten_links">Skróć linki</a>
-      </div>
-<!--      <input type="submit" class="button" value="Dodaj Obraz"> -->
-<!--      <input type="submit" class="button" value="Wyślij &rarr;"> -->
-      </form>
-      <!-- controlls -->
+    <!-- events and startup stuff -->
+    <script src="index.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="win32.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="linux.css" type="text/css" media="screen" charset="utf-8"/>
+  </head>
+  <body>
+    <div id="wrapper">
       <div id="throbber"><img src="app://icons/anim.gif" /></div>
-    </div>
-    <!-- here b columns -->
-    <div id="dash0" class="column"></div>
-    <div id="dash1" class="column"></div>
 
-    <div id="dash2" class="column"></div>
-    <div id="dash3" class="column"></div>
-    <div id="dash4" class="column"></div>
-    <div id="archive" class="column"></div>
-  </div>
+      <div id="controls">
+        <form action="#" method="" accept-charset="utf-8" id="login_form">
+          <input type="submit" id="login_button" class="button" value="Zaloguj się do swoich kont &rarr;">
+        </form>
+      </div><!-- end controls -->
+
+
+      <div id="application">
+        <div id="sidebar">
+          <ul>
+            <li>
+              <span class="button small">
+                <span id="user_icon"></span><span id="user_name"></span>
+              </span>
+            </li>
+            <li><a href="#" class="button small" id="home_button" title="Domek"><img src="app://icons/dryicons-colorful-sketches/48/home.png" widh="24px" height="24px" class="" alt="" />  Kokpit</a></li>
+           <li><a href="#" class="button small" id="archive_button" title="Wiadomości"><img src="app://icons/dryicons-colorful-sketches/48/mail.png" widh="24px" height="24px" class="" alt="" /> Wiadomosci</a>            </li>
+            <li><a href="#" class="button small" id="home_button" title="Domek"><img src="app://icons/dryicons-colorful-sketches/48/search.png" widh="24px" height="24px" class="" alt="" /> Szukaj</a></li>
+         </ul>
+
+        </div> <!-- end sidebar -->
+
+
+        <div id="content_container">
+          <div id="dash0" class="column"></div>
+          <div id="dash1" class="column"></div>
+
+          <div id="dash2" class="column"></div>
+          <div id="dash3" class="column"></div>
+          <div id="dash4" class="column"></div>
+          <div id="archive" class="column"></div>
+        </div> <!-- end content -->
+<!-- woop -->
+        <div id="global_actions">
+
+          <span>
+          <a href="#" class="button small" id="open_sender" title="">Nowe!</a>
+        </span>
+        <span>
+          <a href="#" class="button small" id="mark_as_read_button" title="Oznacz jako przeczytane">Oznacz jako przeczytane</a>
+        </span>
+          <span class="change_service_container"><select  id="change_service"></select></span>
+        </div>
+<!-- end woop -->
+      </div><!-- end application -->
+
+
+
+    </div> <!-- end wrapper -->
+
 </body>
 </html>

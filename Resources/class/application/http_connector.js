@@ -17,7 +17,7 @@ var HttpConnector = new Class.create({
     var ua =  Titanium.App.getName()+" "+Titanium.App.getVersion() + " ["+Titanium.App.getPublisher()+" "+Titanium.App.getID().split('.').reverse().join('.').replace('.','@',1)+"]";
     this.client.userAgent =ua;
 //    this.client.userAgent = 'deskBlip 0.7.9';
- 
+
   },
 /**
  * @param object - Object literal representing request headers (i.e{'Content-Type':'application/json'});
@@ -32,11 +32,14 @@ var HttpConnector = new Class.create({
   },
   handleResponse : function(status,response_object) {
      var self = this;
-  
+
      switch(status) {
        case 200:
        case 201:
          self.onSuccess(status, response_object.responseText);
+         break;
+       case 204:
+        // do nothing :-)
          break;
        case 401:
        case 403:
@@ -58,7 +61,7 @@ var HttpConnector = new Class.create({
  *  @param string password
  */
   setUserCred : function(login, pass) {
-    
+
     this.login = login;
     this.password = pass;
     this.client.setBasicCredentials(login,pass);
@@ -66,7 +69,7 @@ var HttpConnector = new Class.create({
     return btoa(login+":"+pass);
   },
 /**
- * GET request to a given resource 
+ * GET request to a given resource
  * @param string resource i.e. '/users/get/id'
  */
   debug_response : function(method, url, client) {
@@ -80,7 +83,7 @@ var HttpConnector = new Class.create({
     self.client.onreadystatechange = function() {
       if(this.readyState == self.client.DONE) {
         self.handleResponse(self.client.status, self.client);
-        self.debug_response('get', url, self.client);  
+        self.debug_response('get', url, self.client);
       }
     };
     if(self.login && self.password) {
@@ -91,17 +94,17 @@ var HttpConnector = new Class.create({
       self.client.send(null);
   },
 /**
- * DELETE request to a given resource 
+ * DELETE request to a given resource
  * @param string resource i.e. '/users/get/id'
  */
   'delete' : function(url) {
     var self = this;
- 
+
     self.client.onreadystatechange = function() {
       if(this.readyState == self.client.DONE) {
 
         self.handleResponse(self.client.status, self.client);
-        self.debug_response('delete', url, self.client);  
+        self.debug_response('delete', url, self.client);
       }
   };
     if(self.login && self.password) {
@@ -112,7 +115,7 @@ var HttpConnector = new Class.create({
     self.client.send(null);
   },
 /**
- * PUT request to a given resource 
+ * PUT request to a given resource
  * @param string resource i.e. '/users/get/id'
  */
   put : function(url) {
@@ -120,7 +123,7 @@ var HttpConnector = new Class.create({
     self.client.onreadystatechange = function() {
       if(this.readyState == self.client.DONE) {
         self.handleResponse(self.client.status, self.client);
-        self.debug_response('put', url, self.client);  
+        self.debug_response('put', url, self.client);
       }
     };
     if(self.login && self.password) {
@@ -131,17 +134,17 @@ var HttpConnector = new Class.create({
       self.client.send(null);
   },
 /**
- * POST request to a resource 
+ * POST request to a resource
  * @param string resource - '/somewhere'
  * @param string data - post data to be sent - needs to be a query string and URIencoded
  */
   post : function(url, data) {
     var self = this;
-    
+
     self.client.onreadystatechange = function() {
       if(this.readyState == self.client.DONE) {
         self.handleResponse(self.client.status, self.client);
-        self.debug_response('post', url, self.client);  
+        self.debug_response('post', url, self.client);
       }
     };
     if(self.login && self.password) {
@@ -177,14 +180,14 @@ var HttpConnector = new Class.create({
 
 
 
-    var uploadFile = Titanium.Filesystem.getFile(file);  
-    var uploadStream = Titanium.Filesystem.getFileStream(uploadFile);  
+    var uploadFile = Titanium.Filesystem.getFile(file);
+    var uploadStream = Titanium.Filesystem.getFileStream(uploadFile);
 
-    uploadStream.open(Titanium.Filesystem.FILESTREAM_MODE_READ);  
+    uploadStream.open(Titanium.Filesystem.FILESTREAM_MODE_READ);
     content = uploadStream.read();
-    uploadStream.close();  
+    uploadStream.close();
 
-    var fullContent = header + content + "\r\n--" + boundary + "--";  
+    var fullContent = header + content + "\r\n--" + boundary + "--";
 
 
     self.setRequestHeaders(additional_headers );
@@ -197,7 +200,7 @@ var HttpConnector = new Class.create({
 
       if(this.readyState == self.client.DONE) {
         self.handleResponse(self.client.status, self.client);
-        self.debug_response('post with file', url, self.client);  
+        self.debug_response('post with file', url, self.client);
       }
     };
       self.client.open("POST",url);
@@ -205,12 +208,12 @@ var HttpConnector = new Class.create({
   },
   postFile2 : function(url, file) {
 
-    var uploadFile = Titanium.Filesystem.getFile(file);  
+    var uploadFile = Titanium.Filesystem.getFile(file);
     var self = this;
     self.client.onreadystatechange = function() {
       if(this.readyState == self.client.DONE) {
         self.handleResponse(self.client.status, self.client);
-        self.debug_response('post', url, self.client);  
+        self.debug_response('post', url, self.client);
       }
     };
       self.client.open("POST",url);
