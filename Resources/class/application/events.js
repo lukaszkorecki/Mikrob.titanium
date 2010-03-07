@@ -167,7 +167,11 @@ var Events = (function() {
     function quoted_link(event) {
 
     }
+    function sidebar_toggle() {
+      interfaces[active_service].sidebar_toggle();
+    }
 		return {
+      sidebar_toggle : sidebar_toggle,
 			login_button : login_button,
       login_form : login_button,
 			main_text_area  : main_text_area ,

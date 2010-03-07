@@ -161,11 +161,21 @@ var BodyParser =
        });
        return body;
      }
-
+     function sidebar_toggle() {
+       var sidebar = $("sidebar");
+       if(sidebar.visible) {
+         sidebar.toggle();
+         $("content_container").addClassName("content_container_max");
+       } else {
+         sidebar.toggle();
+         $("content_container").removeClassName("content_container_max");
+       }
+     }
      return {
        userLink : userLink,
        justLink : justLink,
-       tagLink : tagLink
+       tagLink : tagLink,
+       sidebar_toggle : sidebar_toggle
      };
    })();
 

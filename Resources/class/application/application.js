@@ -207,24 +207,24 @@ var Application = (function() {
 
 var AppIcons = {
 	"small" : {
-		comment : "app://icons/dryicons-colorful-sketches/16/cloud_comment.png",
-		quote : "app://icons/dryicons-colorful-sketches/16/refresh.png",
-		message : "app://icons/dryicons-colorful-sketches/16/mail.png",
-		permalink : "app://icons/dryicons-colorful-sketches/16/tag.png",
-		refresh : "app://icons/dryicons-colorful-sketches/16/refresh.png",
-		lock: "app://icons/dryicons-colorful-sketches/16/lock.png"
+		comment : "app://icons/ui/16_thread.png",
+		quote : "app://icons/ui/16_retweet.png",
+		message : "app://icons/ui/16_message.png",
+		permalink : "app://icons/ui/16_permalink.png",
+		refresh : "app://icons/ui/16_retweet.png",
+		lock: "app://icons/ui/16_private.png"
 	},
 	"medium" : {
-		"new" : "app://icons/dryicons-colorful-sketches/16/new.png"
+		"new" : "app://icons/ui/24_new.png"
 	},
 	"big" : {
-		attachment : "app://icons/dryicons-colorful-sketches/48/attachment.png",
-		email : "app://icons/dryicons-colorful-sketches/48/email.png",
-		favorite : "app://icons/dryicons-colorful-sketches/48/favorite.png",
-		mail_receive : "app://icons/dryicons-colorful-sketches/48/mail_receive.png",
-		mail : "app://icons/dryicons-colorful-sketches/48/mail.png",
-		promotion_new : "app://icons/dryicons-colorful-sketches/48/promotion_new.png",
-		search : "app://icons/dryicons-colorful-sketches/48/search.png",
-		tools : "app://icons/dryicons-colorful-sketches/48/tools.png"
+		attachment : "app://icons/ui/48_attachment.png",
+		email : "app://icons/ui/48_email.png",
+		favorite : "app://icons/ui/48_favorite.png",
+		mail_receive : "app://icons/ui/48_mail_receive.png",
+		mail : "app://icons/ui/48_mail.png",
+		promotion_new : "app://icons/ui/48_promotion_new.png",
+		search : "app://icons/ui/48_search.png",
+		tools : "app://icons/ui/48_tools.png"
 	}
 };

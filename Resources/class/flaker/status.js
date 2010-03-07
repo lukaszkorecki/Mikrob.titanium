@@ -32,14 +32,15 @@ var Flak = new Class.create({
     if(source_id) {
      var path = 'app://icons/flaker_sources/'+source_id+'.gif';
      if (source_id == 'flaker') {path=  path.replace('gif', 'png');}
-      return new Element('img', {'class' : 'button small', src : path, alt : source_id});
+      var img = new Element('img', {src : path, alt : source_id, "width": "16px", "height" : "16px"});
+      return new Element("a", {'class' : 'button small', "href" : "http://flaker.pl/"+this.user.login+"/"+source_id}).update(img);
     } else {
       return false;
     }
   },
   commentLink : function() {
 			var icon = new Element("img", {src : AppIcons.small.message, "class": "message_link_img"});
-    var link = new Element('a', {'href':'#', 'class':'msg button small message_link ', 'title' : 'Skomentuj'}).update(icon);
+    var link = new Element('a', {'href':'#', 'class':'msg button small external_link ', 'title' : 'Skomentuj'}).update(icon);
     return link;
 
   },
