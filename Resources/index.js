@@ -17,13 +17,14 @@ var interfaces = new Array();
 var services = new Array();
 var username,loop1,active_service,archive_opened =0;
 document.observe('dom:loaded',function(){
-  Application.loadWindowSettings();
-try {
-  $('sidebar').toggle();
-  $('throbber').toggle();
-} catch(orr) {
-  // orr
-}
+                   Application.loadWindowSettings();
+                   try {
+                     $('sidebar').toggle(); // <- this needs to be a function
+                     $('throbber').toggle(); // <- this needs to be a function
+                     $('input_area').toggle(); // <- this needs to be a function
+                   } catch(orr) {
+                     // orr
+                   }
 
 
 
@@ -68,19 +69,16 @@ function dispatcher(event){
 	if(id.startsWith("anonymous_")) {
 		id = element.className.strip().split(" ").last();
 	}
-    console.log(id);
 	// if it's an image for the link, fix the id
 	if(id.endsWith("_img") ) {
 		id = id.replace("_img", "");
 		event.target_up = event.target.up();
 	}
-    console.log(id);
-	console.log("Should dispatch: Events."+ id );
 	// now... DISPATCH! ;-)
 	if(Events[id] !== undefined) {
 		Events[id](event);
 	} else {
-		console.log("No such function: Events." + id);
+		console.log("No such function: Events." + (id || "missing id"));
 	}
 	event.preventDefault();
   return false;

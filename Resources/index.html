@@ -92,7 +92,19 @@
         </div> <!-- end content -->
 <!-- woop -->
         <div id="global_actions">
-
+          <div id="input_area">
+            <form action="#" method="" id="sender" accept-charset="utf-8">
+              <textarea  id="main_textarea" name="content" rows="3" placeholder="Co teraz robisz? O czym myślisz? Dokąd zmierzamy?" autofocus ></textarea>
+              <div>
+                <span id="charcount" class="sender_item">0</span>
+                <button  class="button small sender_item" name="submit" value="">
+                  <img src="app://icons/ui/48_inbox_empty.png" width="16px" heigth="16px"> Wyślij
+                </button>
+                <a href="#" class="button small sender_item" title="Zmienia wiadomość na prywatną" id="make_private"><img src="app://icons/ui/24_private.png">Sprywatyzuj</a>
+                <a href="#" class="button small sender_item" title="Skraca wszystkie linki, które wpisano" id="shorten_links">Skróć linki</a>
+              </div>
+            </form>
+          </div> <!-- end input_area -->
           <span>
           <a href="#" class="button small" id="open_sender" title="Dodaj nowy wpis">
             <img src="app://icons/ui/48_add.png" width="20px" height="20px" class="open_sender_img" alt="" />

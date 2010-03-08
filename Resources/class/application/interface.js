@@ -8,109 +8,102 @@
  */
 
 var Interface = new Class.create({
-  initialize :function(container_id, service_id) {
-    this.container_id = container_id;
-    this.service_id = service_id;
-    this.globalLimit = 20;
-    this.throbber = $('throbber');
-    this.character_limit = 140;
+    initialize :function(container_id, service_id) {
+      this.container_id = container_id;
+      this.service_id = service_id;
+      this.globalLimit = 20;
+      this.throbber = $('throbber');
+      this.character_limit = 140;
 
-    this.ok_image = "app://mikrob_icon_ok.png";
-    this.not_ok_image = "app://mikrob_icon_error.png";
-    try {
-      var window = Titanium.UI.getMainWindow(); // get the main window
-      this.note = Titanium.Notification.createNotification(window);
-    } catch (notify_error) {
-      // who cares?
-    }
-
-
-  },
-  afterSend : function(resp, was_success) {
-
-    this.throbber.toggle();
-    this.notify(Titanium.App.getName(),'Wysłano','ok');
-    try {
-      $('charcount').update('0');
-    } catch (no_ch_err){ console.dir(no_ch_err); }
-
-    if (was_success)    this.setAreaContent();
-  },
-  notify : function(login, body,img) {
-      this.note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;
-    console.log("Notification img: "+ img);
-      this.note.setMessage(body); //Add the message;
-            this.note.setIcon(img);
-/*
-      switch(img) {
-        case 'ok':
-          this.note.setIcon(this.ok_image);
-          break;
-        case 'fail':
-          this.note.setIcon(this.not_ok_image);
-          break;
-        default:
-          if (img) {
-
-          }
-          break;
+      this.ok_image = "app://mikrob_icon_ok.png";
+      this.not_ok_image = "app://mikrob_icon_error.png";
+      try {
+        var window = Titanium.UI.getMainWindow(); // get the main window
+        this.note = Titanium.Notification.createNotification(window);
+      } catch (notify_error) {
+        // who cares?
       }
-*/
+
+
+    },
+    afterSend : function(resp, was_success) {
+      console.log("afterSend");
+      this.throbber.toggle();
+      this.notify(Titanium.App.getName(),'Wysłano','ok');
+      try {
+        $('charcount').update('0');
+      } catch (no_ch_err){ console.dir(no_ch_err); }
+
+      if (was_success)    this.setAreaContent();
+    },
+    notify : function(login, body,img) {
+      this.note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;
+      console.log("Notification img: "+ img);
+      this.note.setMessage(body); //Add the message;
+      this.note.setIcon(img);
+
       this.note.show();//Make it appear with the default timings.
 
-   },
+    },
     setUnreadCount : function(count_str) {
-     if(count_str =='0') {
-       count_str ="0";
-     }
-       $('mark_as_read_button').update(count_str);
-       try {
+      if(count_str =='0') {
+        count_str ="0";
+      }
+      $('mark_as_read_button').update(count_str);
+      try {
 
-         if(count_str=="0") {
-           Titanium.UI.setBadge();
-         } else {
-           Titanium.UI.setBadge(count_str);
-         }
-       } catch (badge_err) { console.log(badge_err); }
+        if(count_str=="0") {
+          Titanium.UI.setBadge();
+        } else {
+          Titanium.UI.setBadge(count_str);
+        }
+      } catch (badge_err) { console.log(badge_err); }
     },
     setUserAvatar : function(av_ob) {
       var av = av_ob.url || "app://icons/nn_standard.png";
       var av_el = new Element("img", { width: "24px", height : "24px", "class" : "home_button_img", "src" : av});
       $('user_icon').update(av_el);
+      $('user_login').update(login);
     },
-  loginFail : function() {
+    loginFail : function() {
 
-   // $('login_form').show();
-   // $('throbber').toggle();
+      // $('login_form').show();
+      // $('throbber').toggle();
 
-  },
-  setAreaContent : function(string, is_prepend) {
-    var mt = $('main_textarea');
-    if (string) {
-      var old = mt.getValue();
-      if(is_prepend) {
-        mt.setValue(string+" "+old);
-      } else {
-        mt.setValue(old+" "+string);
+    },
+    setAreaContent : function(string, is_prepend) {
+      try {
+        var mt = $('main_textarea');
+        if (string) {
+          var old = mt.getValue();
+          if(is_prepend) {
+            mt.setValue(string+" "+old);
+          } else {
+            mt.setValue(old+" "+string);
+          }
+          mt.focus();
+        } else {
+          mt.setValue("");
+        }
+        mt.select();
+        mt.selectionEnd = mt.getValue().length;
+        mt.focus();
+      } catch(no_mt) {
+        console.dir(no_mt);
       }
-      mt.focus();
-    } else {
-      mt.setValue("");
-    }
-    mt.select();
-    mt.selectionEnd = mt.getValue().length;
-    mt.focus();
-  },
-  cacheImage : function(url) {
-     var home_dir = Titanium.Filesystem.getUserDirectory();
-     var Sep = Titanium.Filesystem.getSeparator();
-     var name = '.mikrob_img_cache';
-     var img_cache_dir = home_dir+Sep+name+Sep;
-  },
-  getImageFromCache : function(name) {
-  }
 
-});
+    },
+    cacheImage : function(url) {
+      var home_dir = Titanium.Filesystem.getUserDirectory();
+      var Sep = Titanium.Filesystem.getSeparator();
+      var name = '.mikrob_img_cache';
+      var img_cache_dir = home_dir+Sep+name+Sep;
+    },
+    getImageFromCache : function(name) {
+    }
+
+  });
+// why this is here?
 
 var utfs = "☺☻☹★✩✫♫♪♥♦♣♠✿❀❁❄☾☂☀☁☃☄☮☯☎❦♀♂☚☛☠☢☣☤✌✍✎✂✆✈✉✔✘☥☸☦☧☨✝☩☪☭♚♛♜♝♞♟®™♈♉♊♋♌♍♎♏♐♑♒♓…∞¥€£≤≥«»≠≈∫∑∏µ∆øπΩ•÷‰⇐⇒⇔√";
 
@@ -135,7 +128,7 @@ var BodyParser =
            }
            element.setAttribute("href",url);
            body = body.replace(user, element.outerHTML);
-       });
+         });
        return body;
 
      }
@@ -145,11 +138,11 @@ var BodyParser =
        var tags = body.match(findTags);
        (tags || []).each(
          function(tag){
-	   var url = "http://"+domain+"/"+tag.substring(1);
+	         var url = "http://"+domain+"/"+tag.substring(1);
            element.setAttribute("href",url);
            element.update(tag);
            body = body.replace(tag, element.outerHTML);
-       });
+         });
        return body;
      }
      function justLink(body) {
@@ -161,7 +154,7 @@ var BodyParser =
            element.update(link);
            if(link.match('/blip.pl/') != null) element.addClassName("quoted_link");
            body = body.replace(link, element.outerHTML);
-       });
+         });
        return body;
      }
      function sidebar_toggle() {
@@ -181,4 +174,3 @@ var BodyParser =
        sidebar_toggle : sidebar_toggle
      };
    })();
-
