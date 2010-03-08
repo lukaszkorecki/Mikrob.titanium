@@ -27,11 +27,14 @@ var Interface = new Class.create({
 
   },
   afterSend : function(resp, was_success) {
-    var self =this;
-    self.throbber.toggle();
-    self.notify(Titanium.App.getName(),'Wysłano','ok');
-    $('charcount').update('0');
-    if (was_success)    self.setAreaContent();
+
+    this.throbber.toggle();
+    this.notify(Titanium.App.getName(),'Wysłano','ok');
+    try {
+      $('charcount').update('0');
+    } catch (no_ch_err){ console.dir(no_ch_err); }
+
+    if (was_success)    this.setAreaContent();
   },
   notify : function(login, body,img) {
       this.note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;

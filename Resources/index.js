@@ -39,7 +39,17 @@ try {
 //
 try {
 	document.getElementById('wrapper').addEventListener('click',dispatcher);
+} catch(err) {
+  // ignore
+}
+try {
 	document.getElementById('wrapper').addEventListener('submit',dispatcher);
+
+} catch(err) {
+  // ignore
+}
+try {
+	document.getElementById('main_textarea').addEventListener('keyup',dispatcher);
 
 } catch(err) {
   // ignore
