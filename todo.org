@@ -1,0 +1,44 @@
+* UI
+  - Note taken on [2010-03-12 pią 22:28] \\
+    All tasks related to the User Interface
+** TODO make sidebar service-specific
+** TODO make entry-box service-specific
+   - Note taken on [2010-03-12 pią 22:39] \\
+     blip:
+     - shorten link
+     - add/send image
+
+     flaker:
+     - add/send image
+
+     twitter
+     - shorten link (from available services)
+     - add/send image (from available services)
+** TODO clever (and efficient!) service-switching
+** TODO preferences window
+** TODO services management windo in preferences!
+* Code
+** Application
+   - Note taken on [2010-03-12 pią 22:29] \\
+     Application-wide objects: App singleton, HTTP lib, DB ORM and UI object
+*** TODO better service management
+*** TODO window position/size management - investigate the proper EXIT/CLOSE event handling
+** Services
+   - Note taken on [2010-03-12 pią 22:30] \\
+     Issues related to services - both UI and API
+*** Blip
+**** TODO shortened urls aren't expanded (but quote-links are)
+**** TODO sending images
+**** TODO break down the old achrive into separate groups (messages, private messages, notices)
+**** TODO "new" archive allows to view the dashboard in the simillar way as blip.pl www interface
+**** TODO integration with blipi.pl (search and extended user profiles)
+*** Flaker
+**** TODO search
+**** TODO pagination
+**** TODO better single flak view
+*** Twitter
+**** TODO *working* home_timeline
+**** TODO DMs
+**** TODO @replies
+**** TODO search
+**** TODO image upload?
