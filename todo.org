@@ -2,6 +2,8 @@
   - Note taken on [2010-03-12 pią 22:28] \\
     All tasks related to the User Interface
 ** TODO make sidebar service-specific
+** DONE fix entry-box
+   CLOSED: [2010-03-13 sob 17:54]
 ** TODO make entry-box service-specific
    - Note taken on [2010-03-12 pią 22:39] \\
      blip:
@@ -22,6 +24,7 @@
    - Note taken on [2010-03-12 pią 22:29] \\
      Application-wide objects: App singleton, HTTP lib, DB ORM and UI object
 *** TODO better service management
+*** TODO fix missing avatars in growl/libnotify/snarl notifications
 *** TODO window position/size management - investigate the proper EXIT/CLOSE event handling
 ** Services
    - Note taken on [2010-03-12 pią 22:30] \\

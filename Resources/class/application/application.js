@@ -175,12 +175,7 @@ var Application = (function() {
        w2.open();
      }
      function openSenderWindow() {
-       var newWindow = Titanium.UI.createWindow('app://sender.html');
-       newWindow.setHeight(100);
-       newWindow.setWidth(400);
-       newWindow.setToolWindow(true);
-       newWindow.setResizable(false);
-       newWindow.open();
+       $("input_area").toggle();
 
      }
      function openUrl(url){

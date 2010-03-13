@@ -168,7 +168,26 @@ input, textarea {
    -webkit-border-readius:6px;
 
 }
-textarea { font-family:helvetica; }
+#input_area {
+
+   background-color: white;
+   opacity: 0,8;
+
+   position: fixed;
+   left: 5px;
+   bottom:30px;
+   width: 90%;
+   z-index: 32;
+
+   padding: 10px;
+   -webkit-border-readius: 5px;
+}
+/* sender form */
+#input_area textarea {
+   width:99% !important;
+   height:70px;
+   font-family:helvetica;
+ }
 #controls {
    position:fixed;
    padding-bottom:10px;
@@ -216,11 +235,7 @@ input[type="text"], input[type="password"] {
 }
 .priv_t { border:red;}
 .small { font-size:80%;}
-/* sender form */
-textarea {
-   width:99% !important;
-   height:70px;
-}
+
 #sender  div {
    position: absolute;
    bottom: 10px;

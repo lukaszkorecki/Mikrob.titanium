@@ -151,6 +151,7 @@ var BodyParser =
        (links || []).each(
          function(link){
            element.setAttribute("href",link);
+           element.addClassName(attach_special_class(link));
            element.update(link);
            if(link.match('/blip.pl/') != null) element.addClassName("quoted_link");
            body = body.replace(link, element.outerHTML);
@@ -166,6 +167,15 @@ var BodyParser =
          sidebar.toggle();
          $("content_container").removeClassName("content_container_max");
        }
+     }
+     function attach_special_class(url) {
+        // it would be cool to have some ruby here...
+       // but we'll do it differently
+       var prefix = "special_";
+       if(url.match("/wrzuta/gi")) { return prefix+"wrzuta"; }
+       if(url.match("/youtube/gi")) { return prefix+"youtube"; }
+       if(url.match("/vimeo/gi")) { return prefix+"vimeo"; }
+       return "";
      }
      return {
        userLink : userLink,
