@@ -1,22 +1,23 @@
 namespace :assets do
-  def haml_parse(files)
-    files.each do |file|
-      `haml #{file} > #{file.sub("haml","html")}`
-    end
+  def haml_parse(file)
+    `haml #{file} > #{file.sub("haml","html")}`
   end
-  def sass_parse(files)
-    files.each do |file|
-      `sass #{file} > #{file.sub("sass","css")}`
-    end
+  def sass_parse(file)
+    `sass #{file} > #{file.sub("sass","css")}`
   end
+
 
   desc "generate html and css from haml and sass files"
   task :generate do
     # TODO add automatic file discovery, k?
-    haml_parse ["Resources/index.haml", "Resources/image.haml"]
-    sass_parse ["Resources/application.sass"]
-
+    Dir["Resources/"].each do |file|
+      case file
+      when /haml$/ then haml_parse file
+      when /sass$/ then sass_parse file
+      end
+    end
   end
+
 end
 namespace :source do
   desc "Check the JavaScript source with JSLint - exit with status 1 if any of the files fail."
