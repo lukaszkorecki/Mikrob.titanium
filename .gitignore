@@ -3,6 +3,7 @@ tmp
 CHANGELOG.txt
 LICENSE.txt
 Resources/MikrobTestEnv/dist
+.sass-cache/
 *.sw?
 *.?
 #*
