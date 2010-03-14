@@ -33,8 +33,7 @@ var BlipInterface = new Class.create(Interface, {
     updates.each(function(blip){
       var single_status = self.getUpdateObject(blip);
       dash.insert({'bottom': single_status});
-//      self.expandLink('quoted_link');
-
+      self.expandLink('quoted_link');
     });
     // not very clever way of scrolling up ;-)
     dash.scrollByLines(-(dash.scrollHeight));
@@ -43,27 +42,25 @@ var BlipInterface = new Class.create(Interface, {
   draw : function(updates,is_update) {
     var self = this;
     var len = updates.length;
-
-    var i=0;
     var dash = $(self.container_id);
     if(is_update !==0) updates.reverse();
     updates.each(function(blip, index){
+     var single_status=null;
       try {
-        var single_status = self.getUpdateObject(blip);
+        single_status = self.getUpdateObject(blip);
       } catch (guo_err) { console.dir(guo_err); }
         if(is_update !== 0) {
           dash.insert({'top': single_status});
         } else {
           dash.insert({'bottom': single_status});
         }
-//        self.expandLink('quoted_link');
-
-			 if (index < 5 ) {
-        try {
+        self.expandLink('quoted_link');
+			 if (index < 5  && is_update !== 0) {
         var av =  'app://icons/nn_nano.png';
         if(single_status.user.avatar) {
           av = 'http://blip.pl'+single_status.user.avatar.url_50;
         }
+        try {
           self.notify(single_status.user.login, single_status.raw_body, av );
         }
         catch (notifyerr) {
@@ -71,35 +68,32 @@ var BlipInterface = new Class.create(Interface, {
         }
 
       }
-      i++;
-  single_status = null;
+
+
     });
+    self.expandLink("rdir_link");
 
     if (  is_update ===0) {
       self.setUnreadCount('0');
     } else {
       var unr = $$('#'+self.container_id + ' .unread').length;
       self.setUnreadCount(""+unr);
-
     }
-
-
-
     self.throbber.toggle();
   },
   expandLink : function(target_class) {
     var els = $$('.'+target_class);
     els.each(function(el) {
-      var blip_link = el.readAttribute('href');
-      var id="";
-      if(blip_link.search('blip') != -1) {
-        id = blip_link.split('/').last();
+      var _link = el.readAttribute('href');
+      var id=null;
+      if(_link.search('blip') != -1) {
+        id = _link.split('/').last();
         services[0].getBlip(id);
         el.addClassName('s'+id +" expanded_link");
       }
-      if (blip_link.search('rdir') != -1) {
+      if (_link.search('rdir') != -1) {
 
-        id = blip_link.split('/').last();
+        id = _link.split('/').last();
         services[0].expandLink(id);
         el.addClassName('r'+id);
       }

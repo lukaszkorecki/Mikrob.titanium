@@ -59,7 +59,7 @@ var Interface = new Class.create({
         }
       } catch (badge_err) { console.log(badge_err); }
     },
-    setUserAvatar : function(av_ob) {
+    setUserAvatar : function(av_ob,login) {
       var av = av_ob.url || "app://icons/nn_standard.png";
       var av_el = new Element("img", { width: "24px", height : "24px", "class" : "home_button_img", "src" : av});
       $('user_icon').update(av_el);
@@ -154,6 +154,7 @@ var BodyParser =
            element.addClassName(attach_special_class(link));
            element.update(link);
            if(link.match('/blip.pl/') != null) element.addClassName("quoted_link");
+           if(link.match('/rdir.pl/') != null) element.addClassName("rdir_link");
            body = body.replace(link, element.outerHTML);
          });
        return body;

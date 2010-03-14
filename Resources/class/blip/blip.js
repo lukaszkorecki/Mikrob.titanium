@@ -204,14 +204,14 @@ var Blip = new Class.create(Service,{
       req.onSuccess = function(st, resp) {
           try {
               var obj = Titanium.JSON.parse(resp);
-              interfaces[self.service_id].setUserAvatar(obj);
+              interfaces[self.service_id].setUserAvatar(obj, self.login);
           } catch (parse_Error) {
               console.dir(parse_Error);
           }
       };
       req.onFail = function(st, resp) {
           interfaces[self.service_id].notify("Problem", "buuuuu");
-      }
+      };
   }
 
 });

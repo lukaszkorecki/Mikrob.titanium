@@ -97,13 +97,7 @@ var Events = (
 			var target = $(event.target_up || event.target);
 			if (archive_opened !== 0) {
 				Application.closeArchiveWindow();
-
-				target.update(new Element("img", {"src" : AppIcons.big.mail }));
-				archive_opened = 0;
 			} else {
-				archive_opened = 1;
-				target.update(new Element("img", {"src" : AppIcons.big.mail_receive }));
-
 				Application.openArchiveWindow();
 			}
 		}
@@ -175,6 +169,10 @@ var Events = (
     function sidebar_toggle() {
       interfaces[active_service].sidebar_toggle();
     }
+    // ignore event delegation and use attached event
+    function expanded_link() {
+      return true;
+    }
 		return {
       sidebar_toggle : sidebar_toggle,
 			login_button : login_button,
@@ -197,7 +195,8 @@ var Events = (
 			external_link  : external_link ,
 			update_picture_link  : update_picture_link,
       permanent_link : external_link,
-      open_sender : open_sender
+      open_sender : open_sender,
+      expanded_link : expanded_link
 
 		};
   })();

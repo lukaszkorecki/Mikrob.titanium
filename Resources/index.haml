@@ -19,13 +19,14 @@
         %img{ :src => "app://icons/anim.gif" }
       #controls
         %form#login_form{ :method => "", :action => "#", "accept-charset" => "utf-8" }
-          %input#login_button.button{ :type => "submit", :value => "Zaloguj się do swoich kont &rarr;" }
+          %button#login_button._button{ :name => "submit", :value => "" }
+            Zaloguj się do swoich kont &rarr;
 
       #application
         #sidebar
           %ul
             %li.account
-              %span.button.small
+              %span._button.small
                 %span#user_icon
                 %span#user_login
             %li
@@ -46,7 +47,7 @@
                 Znajomi
             %li
               %a#my_stuff_button._button.small{ :href => "#" , :title => "Moje" }
-                %img{ :src => "app://icons/ui/48_users.png", :width => "24px", :height => "24px", :alt => "" }
+                %img{ :src => "app://icons/ui/48_mine.png", :width => "24px", :height => "24px", :alt => "" }
                 Moje
             %li
               %a#search_button._button.small{ :href => "#",  :title => "Szukaj" }
@@ -65,25 +66,27 @@
 
         #global_actions
           #input_area
+            %span#charcount.sender_item 0
             %form#sender{ :method => "", :action => "#", "accept-charset" => "utf-8" }
               %textarea#main_textarea{ :name => "content", :autofocus => "", :rows => "3", :placeholder => "Co teraz robisz? O czym myślisz? Dokąd zmierzamy?" }
               %div
-                %span#charcount.sender_item
-                  0
-                %button.button.small.sender_item{ :name => "submit", :value => "" }
-                  %img{ :src => "app://icons/ui/48_inbox_empty.png", :heigth => "16px", :width => "16px" }
+                %button._button.small.sender_item{ :name => "submit", :value => "" }
+                  %img{ :src => "app://icons/ui/16_message.png", :width => "12px", :height => "12px" }
                   Wyślij
-                %a#make_private.button.small.sender_item{ :href => "#", :title => "Zmienia wiadomość na prywatną" }
-                  %img{ :src => "app://icons/ui/24_private.png" }
+                %button#make_private._button.small.sender_item{ :href => "#", :title => "Zmienia wiadomość na prywatną" }
+                  %img{ :src => "app://icons/ui/24_private.png", :width => "12px", :height => "12px" }
                   Sprywatyzuj
-                %a#shorten_links.button.small.sender_item{ :href => "#", :title => "Skraca wszystkie linki" }
+                %button#shorten_links._button.small.sender_item{ :href => "#", :title => "Skraca wszystkie linki" }
+                  %img{ :src => "app://icons/ui/48_tools.png", :width => "12px", :height => "12px" }
                   Skróć linki
 
           %span
-            %a#open_sender.button.small{ :href => "#", :title => "Dodaj nowy wpis" }
-              %img.open_sender_img{ :src => "app://icons/ui/48_add.png", :height => "20px", :alt => "", :width => "20px" }
+            %button#open_sender._button.small
+              %img.open_sender_img{ :src => "app://icons/ui/48_add.png", :height => "12px", :alt => "", :width => "12px" }
+                Dodaj
           %span
-            %a#mark_as_read_button.button.small{ :href => "#", :title => "Oznacz jako przeczytane" }
-              %img{ :src => "app://icons/ui/48_new.png", :height => "20px", :alt => "", :width => "20px" }
+            %button#mark_as_read_button._button.small
+              %img{ :src => "app://icons/ui/48_new.png", :height => "12px", :alt => "", :width => "12px" }
+              Oznacz jako przeczytane
           %span.change_service_container
             %select#change_service

@@ -41,7 +41,7 @@ namespace :source do
     jsl_path = "jsl" # get jsl bin from http://javascriptlint.com
     failed_files = []
 
-    Dir['Resources/class/**/*.js'].reject{|path| path =~ /javascripts.js/ }.each do |fname|
+    Dir['Resources/class/**/*.js'].each do |fname|
       cmd = "#{jsl_path} -nologo -nocontext -nofilelisting -process #{fname} | grep err"
       results = %x{#{cmd}}
       puts "#{fname} | " << results

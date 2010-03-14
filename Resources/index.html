@@ -33,14 +33,16 @@
       </div>
       <div id='controls'>
         <form accept-charset='utf-8' action='#' id='login_form' method=''>
-          <input class='button' id='login_button' type='submit' value='Zaloguj się do swoich kont &rarr;' />
+          <button class='_button' id='login_button' name='submit' value=''>
+            Zaloguj się do swoich kont &rarr;
+          </button>
         </form>
       </div>
       <div id='application'>
         <div id='sidebar'>
           <ul>
             <li class='account'>
-              <span class='button small'>
+              <span class='_button small'>
                 <span id='user_icon'></span>
                 <span id='user_login'></span>
               </span>
@@ -71,7 +73,7 @@
             </li>
             <li>
               <a class='_button small' href='#' id='my_stuff_button' title='Moje'>
-                <img alt='' height='24px' src='app://icons/ui/48_users.png' width='24px' />
+                <img alt='' height='24px' src='app://icons/ui/48_mine.png' width='24px' />
                 Moje
               </a>
             </li>
@@ -96,35 +98,37 @@
         </div>
         <div id='global_actions'>
           <div id='input_area'>
+            <span class='sender_item' id='charcount'>0</span>
             <form accept-charset='utf-8' action='#' id='sender' method=''>
               <textarea autofocus='' id='main_textarea' name='content' placeholder='Co teraz robisz? O czym myślisz? Dokąd zmierzamy?' rows='3'></textarea>
               <div>
-                <span class='sender_item' id='charcount'>
-                  0
-                </span>
-                <button class='button small sender_item' name='submit' value=''>
-                  <img heigth='16px' src='app://icons/ui/48_inbox_empty.png' width='16px' />
+                <button class='_button small sender_item' name='submit' value=''>
+                  <img height='12px' src='app://icons/ui/16_message.png' width='12px' />
                   Wyślij
                 </button>
-                <a class='button small sender_item' href='#' id='make_private' title='Zmienia wiadomość na prywatną'>
-                  <img src='app://icons/ui/24_private.png' />
+                <button class='_button small sender_item' href='#' id='make_private' title='Zmienia wiadomość na prywatną'>
+                  <img height='12px' src='app://icons/ui/24_private.png' width='12px' />
                   Sprywatyzuj
-                </a>
-                <a class='button small sender_item' href='#' id='shorten_links' title='Skraca wszystkie linki'>
+                </button>
+                <button class='_button small sender_item' href='#' id='shorten_links' title='Skraca wszystkie linki'>
+                  <img height='12px' src='app://icons/ui/48_tools.png' width='12px' />
                   Skróć linki
-                </a>
+                </button>
               </div>
             </form>
           </div>
           <span>
-            <a class='button small' href='#' id='open_sender' title='Dodaj nowy wpis'>
-              <img alt='' class='open_sender_img' height='20px' src='app://icons/ui/48_add.png' width='20px' />
-            </a>
+            <button class='_button small' id='open_sender'>
+              <img alt='' class='open_sender_img' height='12px' src='app://icons/ui/48_add.png' width='12px'>
+                Dodaj
+              </img>
+            </button>
           </span>
           <span>
-            <a class='button small' href='#' id='mark_as_read_button' title='Oznacz jako przeczytane'>
-              <img alt='' height='20px' src='app://icons/ui/48_new.png' width='20px' />
-            </a>
+            <button class='_button small' id='mark_as_read_button'>
+              <img alt='' height='12px' src='app://icons/ui/48_new.png' width='12px' />
+              Oznacz jako przeczytane
+            </button>
           </span>
           <span class='change_service_container'>
             <select id='change_service'></select>

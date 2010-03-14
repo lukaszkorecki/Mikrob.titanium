@@ -2,31 +2,12 @@
 <html>
   <head>
     <meta content='text/html; charset=utf-8' http-equiv='content-type' />
-    <link charset='utf-8' href='style.css' media='screen' rel='stylesheet' type='text/css' />
-    <link charset='utf-8' href='win32.css' media='screen' rel='stylesheet' type='text/css' />
-    <link charset='utf-8' href='linux.css' media='screen' rel='stylesheet' type='text/css' />
+    <link charset='utf-8' href='application.css' media='screen' rel='stylesheet' type='text/css' />
     <title>
-      Image
+      Obrazek
     </title>
     <script src='libs/prototype.js' type='text/javascript'></script>
-    <script charset='utf-8' type='text/javascript'>
-      document.observe('dom:loaded',function(){
-      var image_url = Titanium.API.get('image_url');
-      var loader = $('cont').down('img',0);
-      var img = $('cont').down('img',1);
-      img.toggle();
-      img.setAttribute('src', image_url);
-      function resize_window() {
-      var win = Titanium.UI.getCurrentWindow();
-      win.width = img.width;
-      win.height = img.height;
-      img.toggle();
-      loader.toggle();
-      win.setResizable(false);
-      }
-      resize_window.delay(1);
-      });
-    </script>
+    <script charset='utf-8' src='image.js' type='text/javascript'></script>
   </head>
   <body>
     <div id='cont'>

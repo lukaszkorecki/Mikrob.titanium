@@ -166,7 +166,7 @@ input, textarea {
 
 #input_area {
   background-color: white;
-  opacity: 0,8;
+  opacity: 0.8;
   position: fixed;
   left: 5px;
   bottom: 30px;
@@ -265,7 +265,7 @@ input[type="text"], input[type="password"] {
   text-align: center; }
 
 #charcount {
-  position: fixed;
+  position: absolute;
   bottom: 30px;
   right: 10px;
   font-size: 40px;
