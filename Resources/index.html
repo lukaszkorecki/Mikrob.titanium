@@ -1,127 +1,134 @@
-<!DOCTYPE html>
-<html lang="pl">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='pl'>
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <!-- prototype stuff -->
-    <script type="text/javascript" src="libs/prototype.js"></script>
-    <script type="text/javascript" src="libs/effects.js"></script>
-
-    <!-- cool stuff -->
-    <script src="class/application/events.js" type="text/javascript" charset="utf-8"></script>
-    <script src="class/application/application.js" type="text/javascript" charset="utf-8"></script>
-    <!-- classess -->
-    <script src="class/application/http_connector.js" type="text/javascript" charset="utf-8"></script>
-    <script src="class/application/database_connector.js" type="text/javascript" charset="utf-8"></script>
-    <script src="class/application/service.js" type="text/javascript" charset="utf-8"></script>
-    <script src="class/application/interface.js" type="text/javascript" charset="utf-8"></script>
-    <!-- blip stuff -->
-    <script src="class/blip/blip.js" type="text/javascript" charset="utf-8"></script>
-    <script src="class/blip/blip.interface.js" type="text/javascript" charset="utf-8"></script>
-    <script src="class/blip/blipi.js" type="text/javascript" charset="utf-8"></script>
-    <script src="blipi_api_key.js" type="text/javascript" charset="utf-8"></script>
-    <script src="class/blip/updates.js" type="text/javascript" charset="utf-8"></script>
-    <!-- flaker stuff -->
-    <script src="class/flaker/flaker.js" type="text/javascript" charset="utf-8"></script>
-    <script src="class/flaker/flaker.interface.js" type="text/javascript" charset="utf-8"></script>
-    <script src="class/flaker/status.js" type="text/javascript" charset="utf-8"></script>
-    <!-- twitter stuff -->
-    <script src="class/twitter/twitter.js" type="text/javascript" charset="utf-8"></script>
-    <script src="class/twitter/twitter.interface.js" type="text/javascript" charset="utf-8"></script>
-    <script src="class/twitter/status.js" type="text/javascript" charset="utf-8"></script>
-
-    <!-- events and startup stuff -->
-    <script src="index.js" type="text/javascript" charset="utf-8"></script>
-    <link rel="stylesheet" href="application.css" type="text/css" media="screen" charset="utf-8"/>
-
+    <meta content='text/html; charset=UTF-8' http-equiv='content-type' />
+    <script src='libs/prototype.js' type='text/javascript'></script>
+    <script src='libs/effects.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/application/events.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/application/application.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/application/http_connector.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/application/database_connector.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/application/service.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/application/interface.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/blip/blip.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/blip/blip.interface.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/blip/blipi.js' type='text/javascript'></script>
+    <script charset='utf-8' src='blipi_api_key.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/blip/updates.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/flaker/flaker.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/flaker/flaker.interface.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/flaker/status.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/twitter/twitter.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/twitter/twitter.interface.js' type='text/javascript'></script>
+    <script charset='utf-8' src='class/twitter/status.js' type='text/javascript'></script>
+    <script charset='utf-8' src='index.js' type='text/javascript'></script>
+    <link charset='utf-8' href='application.css' media='screen' rel='stylesheet' type='text/css' />
   </head>
   <body>
-    <div id="wrapper">
-      <div id="throbber"><img src="app://icons/anim.gif" /></div>
-
-      <div id="controls">
-        <form action="#" method="" accept-charset="utf-8" id="login_form">
-          <input type="submit" id="login_button" class="button" value="Zaloguj się do swoich kont &rarr;">
+    <div id='wrapper'>
+      <div id='throbber'>
+        <img src='app://icons/anim.gif' />
+      </div>
+      <div id='controls'>
+        <form accept-charset='utf-8' action='#' id='login_form' method=''>
+          <input class='button' id='login_button' type='submit' value='Zaloguj się do swoich kont &rarr;' />
         </form>
-      </div><!-- end controls -->
-
-
-      <div id="application">
-        <div id="sidebar">
+      </div>
+      <div id='application'>
+        <div id='sidebar'>
           <ul>
-            <li class="account">
-              <span class="button small">
-                <span id="user_icon"></span><span id="user_login"></span>
+            <li class='account'>
+              <span class='button small'>
+                <span id='user_icon'></span>
+                <span id='user_login'></span>
               </span>
             </li>
-            <li><a href="#" class="_button small" id="home_button" title="Domek">
-                <img src="app://icons/ui/48_home.png"
-                   widh="24px" height="24px" class="" alt="" /> Kokpit</a>
+            <li>
+              <a class='_button small' href='#' id='home_button' title='Domek'>
+                <img alt='' height='24px' src='app://icons/ui/48_home.png' widh='24px' />
+                Kokpit
+              </a>
             </li>
-            <li><a href="#" class="_button small" id="archive_button" title="Wiadomości">
-                <img src="app://icons/ui/48_inbox_empty.png" widh="24px" height="24px" class="" alt="" /> Wiadomosci</a>
+            <li>
+              <a class='_button small' href='#' id='archive_button' title='Wiadomości'>
+                <img alt='' height='24px' src='app://icons/ui/48_inbox_empty.png' widh='24px' />
+                Wiadomosci
+              </a>
             </li>
-            <li><a href="#" class="_button small" id="notifications_button" title="Powiadomienia">
-                <img src="app://icons/ui/48_notifications.png" widh="24px" height="24px" class="" alt="" /> Powiadomienia</a>
+            <li>
+              <a class='_button small' href='#' id='notifications_button' title='Powiadomienia'>
+                <img alt='' height='24px' src='app://icons/ui/48_notifications.png' widh='24px' />
+                Powiadomienia
+              </a>
             </li>
-            <li><a href="#" class="_button small" id="friends_button" title="Znajomi">
-                <img src="app://icons/ui/48_users.png" widh="24px" height="24px" class="" alt="" /> Znajomi</a>
+            <li>
+              <a class='_button small' href='#' id='friends_button' title='Znajomi'>
+                <img alt='' height='24px' src='app://icons/ui/48_users.png' widh='24px' />
+                Znajomi
+              </a>
             </li>
-            <li><a href="#" class="_button small" id="my_stuff_button" title="Moje">
-                <img src="app://icons/ui/48_users.png" widh="24px" height="24px" class="" alt="" /> Moje</a>
+            <li>
+              <a class='_button small' href='#' id='my_stuff_button' title='Moje'>
+                <img alt='' height='24px' src='app://icons/ui/48_users.png' widh='24px' />
+                Moje
+              </a>
             </li>
-            <li><a href="#" class="_button small" id="search_button" title="Szukaj">
-                <img src="app://icons/ui/48_search.png" widh="24px" height="24px" class="" alt="" /> Szukaj</a>
+            <li>
+              <a class='_button small' href='#' id='search_button' title='Szukaj'>
+                <img alt='' height='24px' src='app://icons/ui/48_search.png' widh='24px' />
+                Szukaj
+              </a>
             </li>
-         </ul>
-
-         <a href="#" id="sidebar_toggle" title="Schowaj sidebar">
-           <img src="app://icons/ui/48_arr_left.png" width="24px" height="24px"/>
-         </a>
-        </div> <!-- end sidebar -->
-
-
-        <div id="content_container">
-          <div id="dash0" class="column"></div>
-          <div id="dash1" class="column"></div>
-
-          <div id="dash2" class="column"></div>
-          <div id="dash3" class="column"></div>
-          <div id="dash4" class="column"></div>
-          <div id="archive" class="column"></div>
-        </div> <!-- end content -->
-<!-- woop -->
-        <div id="global_actions">
-          <div id="input_area">
-            <form action="#" method="" id="sender" accept-charset="utf-8">
-              <textarea  id="main_textarea" name="content" rows="3" placeholder="Co teraz robisz? O czym myślisz? Dokąd zmierzamy?" autofocus ></textarea>
+          </ul>
+          <a href='#' id='sidebar_toggle' title='Schowaj sidebar'>
+            <img height='24px' src='app://icons/ui/48_arr_left.png' width='24px' />
+          </a>
+        </div>
+        <div id='content_container'>
+          <div class='column' id='dash0'></div>
+          <div class='column' id='dash1'></div>
+          <div class='column' id='dash2'></div>
+          <div class='column' id='dash3'></div>
+          <div class='column' id='dash4'></div>
+          <div class='column' id='archive'></div>
+        </div>
+        <div id='global_actions'>
+          <div id='input_area'>
+            <form accept-charset='utf-8' action='#' id='sender' method=''>
+              <textarea autofocus='' id='main_textarea' name='content' placeholder='Co teraz robisz? O czym myślisz? Dokąd zmierzamy?' rows='3'></textarea>
               <div>
-                <span id="charcount" class="sender_item">0</span>
-                <button  class="button small sender_item" name="submit" value="">
-                  <img src="app://icons/ui/48_inbox_empty.png" width="16px" heigth="16px"> Wyślij
+                <span class='sender_item' id='charcount'>
+                  0
+                </span>
+                <button class='button small sender_item' name='submit' value=''>
+                  <img heigth='16px' src='app://icons/ui/48_inbox_empty.png' width='16px' />
+                  Wyślij
                 </button>
-                <a href="#" class="button small sender_item" title="Zmienia wiadomość na prywatną" id="make_private"><img src="app://icons/ui/24_private.png">Sprywatyzuj</a>
-                <a href="#" class="button small sender_item" title="Skraca wszystkie linki, które wpisano" id="shorten_links">Skróć linki</a>
+                <a class='button small sender_item' href='#' id='make_private' title='Zmienia wiadomość na prywatną'>
+                  <img src='app://icons/ui/24_private.png' />
+                  Sprywatyzuj
+                </a>
+                <a class='button small sender_item' href='#' id='shorten_links' title='Skraca wszystkie linki, które wpisano'>
+                  Skróć linki
+                </a>
               </div>
             </form>
-          </div> <!-- end input_area -->
+          </div>
           <span>
-          <a href="#" class="button small" id="open_sender" title="Dodaj nowy wpis">
-            <img src="app://icons/ui/48_add.png" width="20px" height="20px" class="open_sender_img" alt="" />
-          </a>
-        </span>
-        <span>
-          <a href="#" class="button small" id="mark_as_read_button" title="Oznacz jako przeczytane">
-            <img src="app://icons/ui/48_new.png" width="20px" height="20px" class="" alt="" />
-          </a>
-        </span>
-          <span class="change_service_container"><select  id="change_service"></select></span>
+            <a class='button small' href='#' id='open_sender' title='Dodaj nowy wpis'>
+              <img alt='' class='open_sender_img' height='20px' src='app://icons/ui/48_add.png' width='20px' />
+            </a>
+          </span>
+          <span>
+            <a class='button small' href='#' id='mark_as_read_button' title='Oznacz jako przeczytane'>
+              <img alt='' height='20px' src='app://icons/ui/48_new.png' width='20px' />
+            </a>
+          </span>
+          <span class='change_service_container'>
+            <select id='change_service'></select>
+          </span>
         </div>
-<!-- end woop -->
-      </div><!-- end application -->
-
-
-
-    </div> <!-- end wrapper -->
-
-</body>
+      </div>
+    </div>
+  </body>
 </html>

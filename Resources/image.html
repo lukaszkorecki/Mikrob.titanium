@@ -1,41 +1,37 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8"/>
-  <link rel="stylesheet" href="win32.css" type="text/css" media="screen" charset="utf-8"/>
-  <link rel="stylesheet" href="linux.css" type="text/css" media="screen" charset="utf-8"/>
-
-  <title>Image</title>
-  
-  <script type="text/javascript" src="libs/prototype.js"></script>
-  <script type="text/javascript" charset="utf-8">
-  document.observe('dom:loaded',function(){ 
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='content-type' />
+    <link charset='utf-8' href='style.css' media='screen' rel='stylesheet' type='text/css' />
+    <link charset='utf-8' href='win32.css' media='screen' rel='stylesheet' type='text/css' />
+    <link charset='utf-8' href='linux.css' media='screen' rel='stylesheet' type='text/css' />
+    <title>
+      Image
+    </title>
+    <script src='libs/prototype.js' type='text/javascript'></script>
+    <script charset='utf-8' type='text/javascript'>
+      document.observe('dom:loaded',function(){
       var image_url = Titanium.API.get('image_url');
       var loader = $('cont').down('img',0);
       var img = $('cont').down('img',1);
       img.toggle();
       img.setAttribute('src', image_url);
       function resize_window() {
-        var win = Titanium.UI.getCurrentWindow();
-
-        win.width = img.width;
-        win.height = img.height;
-        img.toggle();
-        loader.toggle();
-        win.setResizable(false);
-
+      var win = Titanium.UI.getCurrentWindow();
+      win.width = img.width;
+      win.height = img.height;
+      img.toggle();
+      loader.toggle();
+      win.setResizable(false);
       }
       resize_window.delay(1);
-
-
-  });
-  </script>
-</head>
-<body>
-  <div id="cont">
-    <img id="big_load" alt="Loading" src="app://icons/big_load.gif" />
-    <img alt="Obrazek" src="" />
-  </div>
-</body>
+      });
+    </script>
+  </head>
+  <body>
+    <div id='cont'>
+      <img alt='Loading' id='big_load' src='app://icons/big_load.gif' />
+      <img alt='Obrazek' src='' />
+    </div>
+  </body>
 </html>

@@ -1,0 +1,105 @@
+!!!
+%html{ :lang => "pl" }
+  %head
+    %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "content-type" }
+
+    %script{ :src => "libs/prototype.js", :type => "text/javascript" }
+    %script{ :src => "libs/effects.js", :type => "text/javascript" }
+
+    %script{ :src => "class/application/events.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "class/application/application.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "class/application/http_connector.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "class/application/database_connector.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "class/application/service.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "class/application/interface.js", :type => "text/javascript", :charset => "utf-8" }
+
+    %script{ :src => "class/blip/blip.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "class/blip/blip.interface.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "class/blip/blipi.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "blipi_api_key.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "class/blip/updates.js", :type => "text/javascript", :charset => "utf-8" }
+
+    %script{ :src => "class/flaker/flaker.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "class/flaker/flaker.interface.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "class/flaker/status.js", :type => "text/javascript", :charset => "utf-8" }
+
+    %script{ :src => "class/twitter/twitter.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "class/twitter/twitter.interface.js", :type => "text/javascript", :charset => "utf-8" }
+    %script{ :src => "class/twitter/status.js", :type => "text/javascript", :charset => "utf-8" }
+
+    %script{ :src => "index.js", :type => "text/javascript", :charset => "utf-8" }
+    %link{ :href => "application.css", :rel => "stylesheet", :type => "text/css", :media => "screen", :charset => "utf-8" }
+  %body
+    #wrapper
+      #throbber
+        %img{ :src => "app://icons/anim.gif" }
+      #controls
+        %form#login_form{ :method => "", :action => "#", "accept-charset" => "utf-8" }
+          %input#login_button.button{ :type => "submit", :value => "Zaloguj si\304\231 do swoich kont &rarr;" }
+
+      #application
+        #sidebar
+          %ul
+            %li.account
+              %span.button.small
+                %span#user_icon
+                %span#user_login
+            %li
+              %a#home_button._button.small{ :href => "#", :title => "Domek" }
+                %img{ :src => "app://icons/ui/48_home.png", :widh => "24px", :height => "24px", :alt => "" }
+                Kokpit
+            %li
+              %a#archive_button._button.small{ :href => "#", :title => "Wiadomo\305\233ci" }
+                %img{ :src => "app://icons/ui/48_inbox_empty.png", :widh => "24px", :height => "24px", :alt => "" }
+                Wiadomosci
+            %li
+              %a#notifications_button._button.small{ :href => "#", :title => "Powiadomienia" }
+                %img{ :src => "app://icons/ui/48_notifications.png", :widh => "24px", :height => "24px", :alt => "" }
+                Powiadomienia
+            %li
+              %a#friends_button._button.small{ :href => "#", :title => "Znajomi" }
+                %img{ :src => "app://icons/ui/48_users.png", :widh => "24px", :height => "24px", :alt => "" }
+                Znajomi
+            %li
+              %a#my_stuff_button._button.small{ :href => "#", :title => "Moje" }
+                %img{ :src => "app://icons/ui/48_users.png", :widh => "24px", :height => "24px", :alt => "" }
+                Moje
+            %li
+              %a#search_button._button.small{ :href => "#", :title => "Szukaj" }
+                %img{ :src => "app://icons/ui/48_search.png", :widh => "24px", :height => "24px", :alt => "" }
+                Szukaj
+          %a#sidebar_toggle{ :href => "#", :title => "Schowaj sidebar" }
+            %img{ :src => "app://icons/ui/48_arr_left.png", :height => "24px", :width => "24px" }
+
+        #content_container
+          #dash0.column
+          #dash1.column
+          #dash2.column
+          #dash3.column
+          #dash4.column
+          #archive.column
+
+        #global_actions
+          #input_area
+            %form#sender{ :method => "", :action => "#", "accept-charset" => "utf-8" }
+              %textarea#main_textarea{ :name => "content", :autofocus => "", :rows => "3", :placeholder => "Co teraz robisz? O czym my\305\233lisz? Dok\304\205d zmierzamy?" }
+              %div
+                %span#charcount.sender_item
+                  0
+                %button.button.small.sender_item{ :name => "submit", :value => "" }
+                  %img{ :src => "app://icons/ui/48_inbox_empty.png", :heigth => "16px", :width => "16px" }
+                  Wyślij
+                %a#make_private.button.small.sender_item{ :href => "#", :title => "Zmienia wiadomo\305\233\304\207 na prywatn\304\205" }
+                  %img{ :src => "app://icons/ui/24_private.png" }
+                  Sprywatyzuj
+                %a#shorten_links.button.small.sender_item{ :href => "#", :title => "Skraca wszystkie linki, kt\303\263re wpisano" }
+                  Skróć linki
+
+          %span
+            %a#open_sender.button.small{ :href => "#", :title => "Dodaj nowy wpis" }
+              %img.open_sender_img{ :src => "app://icons/ui/48_add.png", :height => "20px", :alt => "", :width => "20px" }
+          %span
+            %a#mark_as_read_button.button.small{ :href => "#", :title => "Oznacz jako przeczytane" }
+              %img{ :src => "app://icons/ui/48_new.png", :height => "20px", :alt => "", :width => "20px" }
+          %span.change_service_container
+            %select#change_service
