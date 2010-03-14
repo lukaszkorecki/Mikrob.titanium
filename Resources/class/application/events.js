@@ -14,6 +14,7 @@ var Events = (
 				services[active_service].dashboardGet();
 				interfaces[active_service].notify(Titanium.App.getName(),'Pobieram kokpit');
 
+        // TODO make this a preference!
 				var how_often = 30;
 				if(services[active_service].type != 'twitter') {
 					how_often = 15;
@@ -41,7 +42,7 @@ var Events = (
 				if( content.length <= interfaces[active_service].character_limit){
 					interfaces[active_service].throbber.toggle();
           services[active_service].post(content);
-
+          return false;
 
 				} else {
 					interfaces[active_service].notify("Błęd", "Treść za długa o "+(content.length - interfaces[active_service].character_limit)+" znaków");
@@ -51,7 +52,7 @@ var Events = (
 			var len =content.length;
 			if (len === 0) len=interfaces[active_service].character_limit;
 			$('charcount').update(interfaces[active_service].character_limit-len);
-
+      return true;
 		}
 
 		function new_status_submit (event) {
