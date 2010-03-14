@@ -3,25 +3,27 @@
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='content-type' />
     <script src='libs/prototype.js' type='text/javascript'></script>
+    <script src='index.js' type='text/javascript'></script>
     <script src='libs/effects.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/application/events.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/application/application.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/application/http_connector.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/application/database_connector.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/application/service.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/application/interface.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/blip/blip.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/blip/blip.interface.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/blip/blipi.js' type='text/javascript'></script>
-    <script charset='utf-8' src='blipi_api_key.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/blip/updates.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/flaker/flaker.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/flaker/flaker.interface.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/flaker/status.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/twitter/twitter.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/twitter/twitter.interface.js' type='text/javascript'></script>
-    <script charset='utf-8' src='class/twitter/status.js' type='text/javascript'></script>
-    <script charset='utf-8' src='index.js' type='text/javascript'></script>
+    <script src='libs/delegate.js' type='text/javascript'></script>
+    <script src='libs/controls.js' type='text/javascript'></script>
+    <script src='class/application/application.js' type='text/javascript'></script>
+    <script src='class/application/database_connector.js' type='text/javascript'></script>
+    <script src='class/application/events.js' type='text/javascript'></script>
+    <script src='class/application/http_connector.js' type='text/javascript'></script>
+    <script src='class/application/interface.js' type='text/javascript'></script>
+    <script src='class/application/paginator.js' type='text/javascript'></script>
+    <script src='class/application/service.js' type='text/javascript'></script>
+    <script src='class/blip/blip.interface.js' type='text/javascript'></script>
+    <script src='class/blip/blip.js' type='text/javascript'></script>
+    <script src='class/blip/blipi.js' type='text/javascript'></script>
+    <script src='class/blip/updates.js' type='text/javascript'></script>
+    <script src='class/flaker/flaker.interface.js' type='text/javascript'></script>
+    <script src='class/flaker/flaker.js' type='text/javascript'></script>
+    <script src='class/flaker/status.js' type='text/javascript'></script>
+    <script src='class/twitter/status.js' type='text/javascript'></script>
+    <script src='class/twitter/twitter.interface.js' type='text/javascript'></script>
+    <script src='class/twitter/twitter.js' type='text/javascript'></script>
     <link charset='utf-8' href='application.css' media='screen' rel='stylesheet' type='text/css' />
   </head>
   <body>
@@ -45,42 +47,42 @@
             </li>
             <li>
               <a class='_button small' href='#' id='home_button' title='Domek'>
-                <img alt='' height='24px' src='app://icons/ui/48_home.png' widh='24px' />
+                <img alt='' height='24px' src='app://icons/ui/48_home.png' width='24px' />
                 Kokpit
               </a>
             </li>
             <li>
               <a class='_button small' href='#' id='archive_button' title='Wiadomości'>
-                <img alt='' height='24px' src='app://icons/ui/48_inbox_empty.png' widh='24px' />
-                Wiadomosci
+                <img alt='' height='24px' src='app://icons/ui/48_inbox_empty.png' width='24px' />
+                Wiadomości
               </a>
             </li>
             <li>
               <a class='_button small' href='#' id='notifications_button' title='Powiadomienia'>
-                <img alt='' height='24px' src='app://icons/ui/48_notifications.png' widh='24px' />
+                <img alt='' height='24px' src='app://icons/ui/48_notifications.png' width='24px' />
                 Powiadomienia
               </a>
             </li>
             <li>
               <a class='_button small' href='#' id='friends_button' title='Znajomi'>
-                <img alt='' height='24px' src='app://icons/ui/48_users.png' widh='24px' />
+                <img alt='' height='24px' src='app://icons/ui/48_users.png' width='24px' />
                 Znajomi
               </a>
             </li>
             <li>
               <a class='_button small' href='#' id='my_stuff_button' title='Moje'>
-                <img alt='' height='24px' src='app://icons/ui/48_users.png' widh='24px' />
+                <img alt='' height='24px' src='app://icons/ui/48_users.png' width='24px' />
                 Moje
               </a>
             </li>
             <li>
               <a class='_button small' href='#' id='search_button' title='Szukaj'>
-                <img alt='' height='24px' src='app://icons/ui/48_search.png' widh='24px' />
+                <img alt='' height='24px' src='app://icons/ui/48_search.png' width='24px' />
                 Szukaj
               </a>
             </li>
           </ul>
-          <a href='#' id='sidebar_toggle' title='Schowaj sidebar'>
+          <a href='#' id='sidebar_toggle' title='Schowaj'>
             <img height='24px' src='app://icons/ui/48_arr_left.png' width='24px' />
           </a>
         </div>
@@ -108,7 +110,7 @@
                   <img src='app://icons/ui/24_private.png' />
                   Sprywatyzuj
                 </a>
-                <a class='button small sender_item' href='#' id='shorten_links' title='Skraca wszystkie linki, które wpisano'>
+                <a class='button small sender_item' href='#' id='shorten_links' title='Skraca wszystkie linki'>
                   Skróć linki
                 </a>
               </div>

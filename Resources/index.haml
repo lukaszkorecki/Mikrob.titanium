@@ -3,31 +3,15 @@
   %head
     %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "content-type" }
 
-    %script{ :src => "libs/prototype.js", :type => "text/javascript" }
-    %script{ :src => "libs/effects.js", :type => "text/javascript" }
+    %script{:src=>"libs/prototype.js", :type => "text/javascript"}
+    %script{:src=>"index.js", :type => "text/javascript"}
+    -#%script{:src=>"libs/scriptaculous.js", :type => "text/javascript"}
+    - Dir["Resources/libs/**/*.js"].reject{|l| l=~ /scriptaculous|prototype/}.sort.reverse.each do |file|
+      %script{:src => file.sub("Resources/",""), :type => "text/javascript"}
 
-    %script{ :src => "class/application/events.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "class/application/application.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "class/application/http_connector.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "class/application/database_connector.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "class/application/service.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "class/application/interface.js", :type => "text/javascript", :charset => "utf-8" }
+    - Dir["Resources/class/**/*.js"].each do |file|
+      %script{:src => file.sub("Resources/",""), :type => "text/javascript"}
 
-    %script{ :src => "class/blip/blip.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "class/blip/blip.interface.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "class/blip/blipi.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "blipi_api_key.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "class/blip/updates.js", :type => "text/javascript", :charset => "utf-8" }
-
-    %script{ :src => "class/flaker/flaker.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "class/flaker/flaker.interface.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "class/flaker/status.js", :type => "text/javascript", :charset => "utf-8" }
-
-    %script{ :src => "class/twitter/twitter.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "class/twitter/twitter.interface.js", :type => "text/javascript", :charset => "utf-8" }
-    %script{ :src => "class/twitter/status.js", :type => "text/javascript", :charset => "utf-8" }
-
-    %script{ :src => "index.js", :type => "text/javascript", :charset => "utf-8" }
     %link{ :href => "application.css", :rel => "stylesheet", :type => "text/css", :media => "screen", :charset => "utf-8" }
   %body
     #wrapper

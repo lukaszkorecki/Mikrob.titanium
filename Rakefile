@@ -1,21 +1,37 @@
 namespace :assets do
+  require 'haml'
+  require 'sass'
   def haml_parse(file)
-    `haml #{file} > #{file.sub("haml","html")}`
+    out = File.open file.sub("haml", "html"), "w"
+    out.write Haml::Engine.new(File.read(file)).render
+    out.close
+
   end
   def sass_parse(file)
-    `sass #{file} > #{file.sub("sass","css")}`
+    out = File.open file.sub("sass", "css"), "w"
+    out.write Sass::Engine.new(File.read(file)).render
+    out.close
   end
 
 
   desc "generate html and css from haml and sass files"
-  task :generate do
+  task :generate => [:haml, :sass]
+
+  desc "convert haml to html"
+  task :haml do
     # TODO add automatic file discovery, k?
-    Dir["Resources/"].each do |file|
-      case file
-      when /haml$/ then haml_parse file
-      when /sass$/ then sass_parse file
-      end
+    Dir["Resources/*.haml"].each do |file|
+      puts "Hamling: #{file} => #{file.sub("haml", "html")}"
+      haml_parse file
     end
+  end
+  desc "convert sass to css"
+  task :sass do
+    Dir["Resources/*.sass"].each do |file|
+      puts "Sassing: #{file} => #{file.sub("sass", "css")}"
+      sass_parse file
+    end
+
   end
 
 end
