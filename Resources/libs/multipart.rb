@@ -4,8 +4,6 @@
 # Author:: Cody Brimhall <mailto:cbrimhall@ucdavis.edu>
 # Created:: 22 Feb 2008
 
-require 'rubygems'
-require 'mime/types'
 require 'cgi'
 
 
@@ -72,9 +70,9 @@ module Multipart
     def to_multipart
       # If we can tell the possible mime-type from the filename, use the
       # first in the list; otherwise, use "application/octet-stream"
-      mime_type = MIME::Types.type_for(filename)[0] || MIME::Types["application/octet-stream"][0]
+      mime_type = "application/octet-stream"
       return "Content-Disposition: form-data; name=\"#{CGI::escape(k)}\"; filename=\"#{ filename }\"\r\n" +
-             "Content-Type: #{ mime_type.simplified }\r\n\r\n#{ content }\r\n"
+             "Content-Type: #{ mime_type }\r\n\r\n#{ content }\r\n"
     end
   end
 end
