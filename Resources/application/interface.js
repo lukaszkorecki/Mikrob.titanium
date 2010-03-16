@@ -100,7 +100,28 @@ var Interface = new Class.create({
       var img_cache_dir = home_dir+Sep+name+Sep;
     },
     getImageFromCache : function(name) {
-    }
+    },
+      sidebar_toggle: function() {
+      var sidebar = $('sidebar');
+      var toggled = {
+        "left" : "0px",
+        "max-width" : "475px"
+      };
+      var visible = {
+        "left" : "135px",
+        "max-width" : "400px"
+      };
+      if(sidebar.visible()){
+        sidebar.toggle();
+        $('content_container').setStyle(toggled);
+        $('sidebar_toggle').down('img').setAttribute("href", "app://icons/ui/48_arr_right.png");
+
+      } else {
+        sidebar.toggle();
+        $('content_container').setStyle(visible);
+        $('sidebar_toggle').down('img').setAttribute("href", "app://icons/ui/48_arr_left.png");
+      }
+     }
 
   });
 // why this is here?
@@ -159,16 +180,7 @@ var BodyParser =
          });
        return body;
      }
-     function sidebar_toggle() {
-       var sidebar = $("sidebar");
-       if(sidebar.visible) {
-         sidebar.toggle();
-         $("content_container").addClassName("content_container_max");
-       } else {
-         sidebar.toggle();
-         $("content_container").removeClassName("content_container_max");
-       }
-     }
+
      function attach_special_class(url) {
         // it would be cool to have some ruby here...
        // but we'll do it differently
@@ -181,7 +193,6 @@ var BodyParser =
      return {
        userLink : userLink,
        justLink : justLink,
-       tagLink : tagLink,
-       sidebar_toggle : sidebar_toggle
+       tagLink : tagLink
      };
    })();

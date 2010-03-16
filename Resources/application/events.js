@@ -174,6 +174,7 @@ var Events = (
     function expanded_link() {
       return true;
     }
+
 		return {
       sidebar_toggle : sidebar_toggle,
 			login_button : login_button,

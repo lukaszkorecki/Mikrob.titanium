@@ -29,30 +29,28 @@
                 %span#user_login
             %li
               %a#home_button._button.small{ :href => "#", :title => "Domek" }
-                %img{ :src => "app://icons/ui/48_home.png", :width => "24px", :height => "24px", :alt => "" }
+                %img.home_button_img{ :src => "app://icons/ui/48_home.png", :width => "24px", :height => "24px", :alt => "" }
                 Kokpit
             %li
               %a#archive_button._button.small{ :href => "#", :title => "Wiadomości" }
-                %img{ :src => "app://icons/ui/48_inbox_empty.png", :width => "24px", :height => "24px", :alt => "" }
+                %img.archive_button_img{ :src => "app://icons/ui/48_inbox_empty.png", :width => "24px", :height => "24px", :alt => "" }
                 Wiadomości
             %li
               %a#notifications_button._button.small{ :href => "#", :title => "Powiadomienia" }
-                %img{ :src => "app://icons/ui/48_notifications.png", :width => "24px", :height => "24px", :alt => "" }
+                %img.notifications_button_img{ :src => "app://icons/ui/48_notifications.png", :width => "24px", :height => "24px", :alt => "" }
                 Powiadomienia
             %li
               %a#friends_button._button.small{ :href => "#", :title => "Znajomi" }
-                %img{ :src => "app://icons/ui/48_users.png", :width => "24px", :height => "24px", :alt => "" }
+                %img.friends_button_img{ :src => "app://icons/ui/48_users.png", :width => "24px", :height => "24px", :alt => "" }
                 Znajomi
             %li
               %a#my_stuff_button._button.small{ :href => "#" , :title => "Moje" }
-                %img{ :src => "app://icons/ui/48_mine.png", :width => "24px", :height => "24px", :alt => "" }
+                %img.my_stuff_button_img{ :src => "app://icons/ui/48_mine.png", :width => "24px", :height => "24px", :alt => "" }
                 Moje
             %li
               %a#search_button._button.small{ :href => "#",  :title => "Szukaj" }
-                %img{ :src => "app://icons/ui/48_search.png", :width => "24px", :height => "24px", :alt => "" }
+                %img.search_button.img{ :src => "app://icons/ui/48_search.png", :width => "24px", :height => "24px", :alt => "" }
                 Szukaj
-          %a#sidebar_toggle{ :href => "#", :title => "Schowaj" }
-            %img{ :src => "app://icons/ui/48_arr_left.png", :height => "24px", :width => "24px" }
 
         #content_container
           #dash0.column
@@ -63,6 +61,7 @@
           #archive.column
 
         #global_actions
+
           #input_area
             %span#charcount.sender_item 0
             %form#sender{ :method => "", :action => "#", "accept-charset" => "utf-8" }
@@ -77,6 +76,10 @@
                 %button#shorten_links._button.small.sender_item{ :href => "#", :title => "Skraca wszystkie linki" }
                   %img{ :src => "app://icons/ui/48_tools.png", :width => "12px", :height => "12px" }
                   Skróć linki
+
+          %span
+            %button#sidebar_toggle.small
+              %img.sidebar_toggle_img{ :src => "app://icons/ui/48_arr_left.png" }
 
           %span
             %button#open_sender._button.small

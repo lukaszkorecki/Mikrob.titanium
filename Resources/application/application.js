@@ -53,6 +53,7 @@ var Application = (
       w2.setWidth(400);
       w2.open();
     }
+
     function openArchiveWindow() {
       var updates = new Array();
       var counter = 0;
