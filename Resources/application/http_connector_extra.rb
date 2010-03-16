@@ -11,13 +11,22 @@ module HttpConnectorExtra
     end
 
     def upload
-      data, headers = Multipart::Post.prepqre_query @data
+      data, headers = Multipart::Post.prepare_query @data
       headers["X-blip-api"] = "0.02"
       headers["Accept"] = "application/json"
-      headers["Authentication"] = "Basic " + @user
-      upload_uri = URI.parse(@url)
-      http = Net::HTTP.new(upload_uri.host, 80)
-      res = http.start {|con| con.post(upload_uri.path, data, headers) }
+
+      upload_uri = URI.parse @url
+      req = Net::HTTP::Post.new upload_uri.path, headers
+      req.basic_auth @user["login"], @user["password"]
+      req.set_form_data data
+
+      begin
+        Net::HTTP.new(upload_uri.host, 80).start do |con|
+          con.request req
+        end
+      rescue => err
+        puts err
+      end
     end
 
   end
