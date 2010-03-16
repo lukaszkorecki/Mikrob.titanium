@@ -102,28 +102,32 @@ var Interface = new Class.create({
     getImageFromCache : function(name) {
     },
       sidebar_toggle: function() {
-      var sidebar = $('sidebar');
-      var toggled = {
-        "left" : "0px",
-        "max-width" : "475px"
-      };
-      var visible = {
-        "left" : "135px",
-        "max-width" : "400px"
-      };
-      if(sidebar.visible()){
-        sidebar.toggle();
-        $('content_container').setStyle(toggled);
-        $('sidebar_toggle').down('img').setAttribute("href", "app://icons/ui/48_arr_right.png");
+        var sidebar = $('sidebar');
+        var toggled = {
+          "left" : "0px",
+          "max-width" : "475px"
+        };
+        var visible = {
+          "left" : "135px",
+          "max-width" : "400px"
+        };
+        var config = {
+          duration : 0.5
+        };
+        if(sidebar.visible()){
+          config.style = toggled;
+          config.afterFinish = function() {sidebar.toggle(); };
+          new Effect.Morph('content_container',config);
+          $('sidebar_toggle').down('img').setAttribute("src", "app://icons/ui/48_arr_right.png");
 
-      } else {
-        sidebar.toggle();
-        $('content_container').setStyle(visible);
-        $('sidebar_toggle').down('img').setAttribute("href", "app://icons/ui/48_arr_left.png");
+        } else {
+          sidebar.toggle();
+          config.style = visible;
+          new Effect.Morph('content_container',config);
+          $('sidebar_toggle').down('img').setAttribute("src", "app://icons/ui/48_arr_left.png");
+        }
       }
-     }
-
-  });
+    });
 // why this is here?
 
 var utfs = "☺☻☹★✩✫♫♪♥♦♣♠✿❀❁❄☾☂☀☁☃☄☮☯☎❦♀♂☚☛☠☢☣☤✌✍✎✂✆✈✉✔✘☥☸☦☧☨✝☩☪☭♚♛♜♝♞♟®™♈♉♊♋♌♍♎♏♐♑♒♓…∞¥€£≤≥«»≠≈∫∑∏µ∆øπΩ•÷‰⇐⇒⇔√";

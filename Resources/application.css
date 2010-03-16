@@ -84,14 +84,6 @@ a:hover {
     -webkit-border-radius: 5px;
     -webkit-transform: rotate(8deg)  scale(0.5); }
 
-#sidebar_toggle {
-  position: fixed;
-  bottom: 5px;
-  right: 5px; }
-  #sidebar_toggle img {
-    width: 12px;
-    height: 12px; }
-
 #content_container {
   border-top: 1px solid #666;
   border-left: 1px solid #666;
@@ -105,10 +97,6 @@ a:hover {
   padding: 0px;
   max-width: 400px;
   background: rgb(210,210,210); }
-
-.content_container_max {
-  left: 0;
-  max-width: 500px; }
 
 #sidebar {
   position: absolute;
@@ -140,6 +128,8 @@ a:hover {
   bottom: 2px;
   left: 10px;
   max-width: 400px; }
+  #global_actions span button {
+    min-height: 20; }
   #global_actions .change_service_container {
     text-align: right; }
 
