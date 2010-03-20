@@ -45,12 +45,18 @@ var Update = new Class.create({
     var self = this;
     var pic = false;
     if (this.pictures !==false && this.pictures[0] != undefined) {
-        var img_link = this.pictures[0].url;
-        var link = new Element('a',{'href':img_link, "class" : "update_picture_link"});
-        n_img_link = img_link.replace('.jpg','_standard.jpg');
-        if(n_img_link.match('secure_picture')) n_img_link += 'standard';
+      var img_link = this.pictures[0].url;
+      var link = new Element('a',{'href':img_link, "class" : "update_picture_link"});
+      var n_img_link = img_link.replace('.jpg','_standard.jpg');
         var img = new Element('img',{'src':n_img_link, "class" : "update_picture_link_img"});
-        pic = new Element('span',{'class':'update_picture'}).update(link.update(img));
+      if(  n_img_link.match('secure_picture')) {
+        img.setAttribute("src", "app://icons/ui/48_warning.png");
+        link.setAttribute("title", "Prywatny obrazek");
+        link.addClassName("external_link");
+        img.addClassName("external_link_img");
+      }
+
+      pic = new Element('span',{'class':'update_picture'}).update(link.update(img));
     }
     return pic;
    },

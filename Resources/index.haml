@@ -10,6 +10,7 @@
     - Dir["Resources/**/*.js"].reject{|l| l=~ /libs|test|image/ }.sort.each do |file|
       %script{:src => file.sub("Resources/",""), :type => "text/javascript"}
 
+      %script{:src=>"Resources/application/http_connector_extra.rb", :type=>"text/ruby"}
     %link{ :href => "application.css", :rel => "stylesheet", :type => "text/css", :media => "screen", :charset => "utf-8" }
   %body
     #wrapper
