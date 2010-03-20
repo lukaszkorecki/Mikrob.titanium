@@ -2,7 +2,7 @@
 %html{ :lang => "pl" }
   %head
     %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "content-type" }
-
+    %script{:src=>"/blip/blip.uploader.rb", :type=>"text/ruby"}
     %script{:src=>"libs/prototype.js", :type => "text/javascript"}
     - Dir["Resources/libs/**/*.js"].reject{|l| l=~ /scriptaculous|prototype/}.reverse.each do |file|
       %script{:src => file.sub("Resources/",""), :type => "text/javascript"}
@@ -10,7 +10,7 @@
     - Dir["Resources/**/*.js"].reject{|l| l=~ /libs|test|image/ }.sort.each do |file|
       %script{:src => file.sub("Resources/",""), :type => "text/javascript"}
 
-      %script{:src=>"Resources/application/http_connector_extra.rb", :type=>"text/ruby"}
+
     %link{ :href => "application.css", :rel => "stylesheet", :type => "text/css", :media => "screen", :charset => "utf-8" }
   %body
     #wrapper

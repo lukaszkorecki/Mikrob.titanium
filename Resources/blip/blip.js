@@ -92,6 +92,16 @@ var Blip = new Class.create(Service,{
     };
 
   },
+  postWithFile: function(str, file) {
+    var res = blip_post_file(
+      this.api_root+"/updates",
+      this.login,
+      this.password,
+      str,
+      file
+    );
+    alert(res);
+  },
   getBlip : function(blipid) {
     var self = this;
     var req = new HttpConnector(self.commonHeaders());
