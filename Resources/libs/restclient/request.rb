@@ -1,5 +1,5 @@
 require 'tempfile'
-require 'mime/types'
+# require 'mime/types'
 
 module RestClient
   # This class is used internally by RestClient to send the request, but you can also

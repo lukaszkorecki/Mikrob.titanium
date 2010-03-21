@@ -1,6 +1,6 @@
 require 'tempfile'
 require 'stringio'
-require 'mime/types'
+#require 'mime/types'
 
 module RestClient
   module Payload
