@@ -4,6 +4,7 @@ var Application = (
     db = "";
     window_resized = false;
     services = [];
+    attachment="";
     function getServices() {
       var services = {
         // minified for clarity ;-)

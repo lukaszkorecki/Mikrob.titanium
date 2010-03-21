@@ -41,7 +41,17 @@ var Events = (
 				content.length = content.length-1;
 				if( content.length <= interfaces[active_service].character_limit){
 					interfaces[active_service].throbber.toggle();
-          services[active_service].post(content);
+          if(attachment == "") {
+            services[active_service].post(content);
+          } else {
+            try {
+              services[active_service].postWithFile(content, attachment);
+            } catch(no_post_with_file) {
+              console.dir(no_post_with_file);
+            }
+
+          }
+
           return false;
 
 				} else {
@@ -174,7 +184,10 @@ var Events = (
     function expanded_link() {
       return true;
     }
-
+    function attach_file() {
+//      Application.attachFile();
+      interfaces[active_service].attach_file();
+    }
 		return {
       sidebar_toggle : sidebar_toggle,
 			login_button : login_button,
@@ -198,7 +211,8 @@ var Events = (
 			update_picture_link  : update_picture_link,
       permanent_link : external_link,
       open_sender : open_sender,
-      expanded_link : expanded_link
+      expanded_link : expanded_link,
+      attach_file : attach_file
 
 		};
   })();

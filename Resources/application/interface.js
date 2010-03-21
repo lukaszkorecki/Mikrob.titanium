@@ -30,6 +30,10 @@ var Interface = new Class.create({
       console.log("afterSend");
       this.throbber.toggle();
       this.notify(Titanium.App.getName(),'Wysłano','ok');
+      if(attachment != "") {
+        $('attach_file').update("Dodaj plik");
+        attachment = "";
+      }
       try {
         $('charcount').update('0');
       } catch (no_ch_err){ console.dir(no_ch_err); }
@@ -100,6 +104,24 @@ var Interface = new Class.create({
       var img_cache_dir = home_dir+Sep+name+Sep;
     },
     getImageFromCache : function(name) {
+    },
+    attach_file : function() {
+      var uwin = Titanium.UI.getCurrentWindow();
+      var element = $('attach_file');
+      if(attachment == "") {
+        uwin.openFileChooserDialog(
+          function(file){
+            attachment = file[0];
+            console.log(attachment);
+            element.update("Dodano");
+            element.setAttribute("title", attachment);
+        });
+      } else {
+        attachment = "";
+        element.update("Dodaj plik");
+        element.setAttribute("title", "");
+      }
+
     },
       sidebar_toggle: function() {
         var sidebar = $('sidebar');

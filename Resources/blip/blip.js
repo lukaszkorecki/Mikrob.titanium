@@ -93,14 +93,12 @@ var Blip = new Class.create(Service,{
 
   },
   postWithFile: function(str, file) {
-    var res = blip_post_file(
-      this.api_root+"/updates",
-      this.login,
-      this.password,
-      str,
-      file
-    );
-    alert(res);
+    var res = blip_post_file(this.api_root+"/updates", this.login, this.password, str, file);
+    var response = 201;
+    if( !res) {
+      response = 503;
+    }
+    this.afterSend(res, response);
   },
   getBlip : function(blipid) {
     var self = this;
