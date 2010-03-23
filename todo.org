@@ -30,8 +30,10 @@
    - Note taken on [2010-03-12 pią 22:30] \\
      Issues related to services - both UI and API
 *** Blip
-**** TODO shortened urls aren't expanded (but quote-links are)
-**** TODO sending images
+**** DONE shortened urls aren't expanded (but quote-links are)
+     CLOSED: [2010-03-23 wto 21:15]
+**** DONE sending images
+     CLOSED: [2010-03-23 wto 21:15]
 **** TODO break down the old achrive into separate groups (messages, private messages, notices)
 **** TODO "new" archive allows to view the dashboard in the simillar way as blip.pl www interface
 **** TODO integration with blipi.pl (search and extended user profiles)

@@ -35,6 +35,29 @@ var Events = (
 			}
 		}
 
+    function sender_item(event) {
+      var content = $('main_textarea').getValue();
+			var len =content.length;
+      if(len <= interfaces[active_service].character_limit) {
+	      interfaces[active_service].throbber.toggle();
+        if(attachment == "") {
+          services[active_service].post(content);
+        } else {
+          try {
+            services[active_service].postWithFile(content, attachment);
+          } catch(no_post_with_file) {
+            console.dir(no_post_with_file);
+          }
+        }
+        return false;
+      } else {
+        interfaces[active_service].notify("Błęd", "Treść za długa o "+(content.length - interfaces[active_service].character_limit)+" znaków");
+      }
+
+			if (len === 0) len=interfaces[active_service].character_limit;
+			$('charcount').update(interfaces[active_service].character_limit-len);
+      return true;
+    }
 		function main_textarea (event) {
 			var content = (event.target_up || event.target).getValue();
 			if(event.keyCode == 13 && services[active_service].type != 'Flaker') { // this needs to be service specific!
@@ -194,6 +217,7 @@ var Events = (
 			login_button : login_button,
       login_form : login_button,
 			main_textarea  : main_textarea ,
+      sender_item : sender_item,
 			new_status_submit  : new_status_submit ,
 			mark_as_read_button  : mark_as_read_button ,
 			make_private  : make_private ,

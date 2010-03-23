@@ -21,7 +21,7 @@ document.observe('dom:loaded',function(){
                    try {
                      $('sidebar').toggle(); // <- this needs to be a function
                      $('throbber').toggle(); // <- this needs to be a function
-                     $('input_area').toggle(); // <- this needs to be a function
+//                     $('input_area').toggle(); // <- this needs to be a function
                    } catch(orr) {
                      // orr
                    }

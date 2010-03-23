@@ -94,6 +94,7 @@ a:hover {
   top: 0px;
   left: 35px;
   bottom: 25px;
+  top: 90px;
   padding: 0px;
   max-width: 400px;
   background: rgb(210,210,210); }
@@ -105,7 +106,7 @@ a:hover {
   bottom: 25px;
   width: 35px;
   border-top: 1px solid #666;
-  border-left: 1px solid #666;
+  border-right: 1px solid #666;
   border-bottom: 2px solid #666;
   background-color: #ededed; }
   #sidebar ul {
@@ -161,19 +162,22 @@ input, textarea {
   -webkit-border-readius: 6px; }
 
 #input_area {
-  background-color: white;
   opacity: 0.8;
   position: fixed;
-  left: 5px;
-  bottom: 30px;
-  width: 90%;
-  z-index: 32;
-  padding: 10px;
-  -webkit-border-readius: 5px; }
+  left: 35px;
+  top: 0px;
+  width: 100%;
+  height: 100px;
+  z-index: 32; }
   #input_area textarea {
-    width: 99% !important;
+    width: 78% !important;
     height: 70px;
+    margin-left: 10%;
+    margin-top: 7px;
     font-family: helvetica; }
+  #input_area div {
+    width: 15%;
+    float: left; }
 
 #controls {
   position: fixed;
@@ -262,15 +266,14 @@ input[type="text"], input[type="password"] {
 
 #charcount {
   position: absolute;
-  bottom: 30px;
+  bottom: 10px;
   right: 10px;
   font-size: 40px;
   opacity: 0.5;
   z-index: 20; }
 
-body.linux {
+.linux body {
   background: #222; }
-
 .linux .column {
   background: #ddd; }
 .linux #controls {
@@ -284,9 +287,8 @@ body.linux {
 .linux .button {
   -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
 
-body.win32 {
+.win32 body {
   background: #222; }
-
 .win32 .column {
   background: #ddd; }
 .win32 #controls {
