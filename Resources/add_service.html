@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="pl">
   <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />  
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <!-- prototype stuff -->
   <script type="text/javascript" src="libs/prototype.js"></script>
   <script type="text/javascript" src="libs/effects.js"></script>
 
   <!-- cool stuff -->
-  <script src="class/application/application.js" type="text/javascript" charset="utf-8"></script>
+  <script src="application/application.js" type="text/javascript" charset="utf-8"></script>
   <!-- classess -->
-  <script src="class/application/http_connector.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/application/database_connector.js" type="text/javascript" charset="utf-8"></script>
-  <script src="class/application/service.js" type="text/javascript" charset="utf-8"></script>
+  <script src="application/http_connector.js" type="text/javascript" charset="utf-8"></script>
+  <script src="application/database_connector.js" type="text/javascript" charset="utf-8"></script>
+  <script src="application/service.js" type="text/javascript" charset="utf-8"></script>
   <!-- blip stuff -->
-  <script src="class/blip/blip.js" type="text/javascript" charset="utf-8"></script>
+  <script src="blip/blip.js" type="text/javascript" charset="utf-8"></script>
   <!-- flaker stuff -->
-  <script src="class/flaker/flaker.js" type="text/javascript" charset="utf-8"></script>
+  <script src="flaker/flaker.js" type="text/javascript" charset="utf-8"></script>
   <!-- twitter stuff -->
-  <script src="class/twitter/twitter.js" type="text/javascript" charset="utf-8"></script>
+  <script src="twitter/twitter.js" type="text/javascript" charset="utf-8"></script>
 
   <!-- events and startup stuff -->
   <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8"/>
@@ -43,7 +43,7 @@ function services_interface() {
     var container = $('services');
     container.update();
     console.dir(services);
-    services.each(function(serva) { 
+    services.each(function(serva) {
       var el = new Element('div', {  'class' : 'update'}).update( new Element('p').update(serva.row.login+ " " + serva.row.type));
       var remo = new Element('span').update('USUŃ');
       remo.observe('click', function(event){
@@ -96,18 +96,18 @@ function services_interface() {
       <option value="twitter">Twitter</option>
       <option value="flaker">Flaker</option>
     </select>
-    
+
     <label>Adres API jeśli używasz usługi kompatybilnej z Twitterem
     (np. <tt>http://identi.ca/api</tt>)  lub Blipem
     (<tt>cambler.pl</tt>). Jeśli nie podasz żadnej Mikrob użyje
     <tt>http://twitter.com</tt> albo <tt>http://blip.pl</tt>.</label>
     <input type="text" name="api_root" value=""/ >
-    
+
     <p><input type="submit" value="+ Dodaj konto"></p>
     </form>
   </div>
   <div id="services">
-    
+
   </div>
 </body>
 </html>

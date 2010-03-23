@@ -177,6 +177,7 @@ var Events = (
     function quoted_link(event) {
 
     }
+    function rdir_link(){}
     function sidebar_toggle() {
       interfaces[active_service].sidebar_toggle();
     }
@@ -205,6 +206,7 @@ var Events = (
 			user_link  : external_link ,
 			thread_link  : external_link ,
 			tag_link  : external_link ,
+      rdir_link  : external_link,
 			tagLink  : external_link ,
       quoted_link : external_link,
 			external_link  : external_link ,

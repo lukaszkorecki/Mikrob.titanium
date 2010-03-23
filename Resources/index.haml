@@ -29,13 +29,13 @@
                 %span#user_icon
                 %span#user_login
             %li
-              %a#home_button._button.small{ :href => "#", :title => "Domek" }
+              %a#home_button._button.small{ :href => "#", :title => "Kokpit" }
                 %img.home_button_img{ :src => "app://icons/ui/48_home.png", :width => "24px", :height => "24px", :alt => "" }
-                Kokpit
+
             %li
               %a#archive_button._button.small{ :href => "#", :title => "Wiadomości" }
                 %img.archive_button_img{ :src => "app://icons/ui/48_inbox_empty.png", :width => "24px", :height => "24px", :alt => "" }
-                Wiadomości
+          /
             %li
               %a#notifications_button._button.small{ :href => "#", :title => "Powiadomienia" }
                 %img.notifications_button_img{ :src => "app://icons/ui/48_notifications.png", :width => "24px", :height => "24px", :alt => "" }
@@ -83,12 +83,13 @@
                     Dodaj plik
 
           %span
-            %button#sidebar_toggle.small{:title => "Schowaj sidebar"}
-              %img.sidebar_toggle_img{ :src => "app://icons/ui/48_arr_left.png", :height => "12px", :alt => "", :width => "12px" }
+            /
+              %button#sidebar_toggle.small{:title => "Schowaj sidebar"}
+                %img.sidebar_toggle_img{ :src => "app://icons/ui/48_arr_left.png", :height => "12px", :alt => "", :width => "12px" }
 
             %button#open_sender._button.small
               %img.open_sender_img{ :src => "app://icons/ui/48_add.png", :height => "12px", :alt => "", :width => "12px" }
-                Dodaj
+              Dodaj
 
             %button#mark_as_read_button._button.small
               %img{ :src => "app://icons/ui/48_new.png", :height => "12px", :alt => "", :width => "12px" }
