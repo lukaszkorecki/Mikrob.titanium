@@ -18,6 +18,7 @@ var services = new Array();
 var username,loop1,active_service,archive_opened =0;
 document.observe('dom:loaded',function(){
                    Application.loadWindowSettings();
+                   Application.cache_start();
                    try {
                      $('sidebar').toggle(); // <- this needs to be a function
                      $('throbber').toggle(); // <- this needs to be a function

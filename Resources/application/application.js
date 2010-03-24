@@ -2,6 +2,8 @@
 var Application = (
   function() {
     db = "";
+
+
     window_resized = false;
     services = [];
     attachment="";
@@ -190,6 +192,20 @@ var Application = (
     function openUrl(url){
 			Titanium.Desktop.openURL(url);
     }
+    function cache_start() {
+      cache.setup();
+
+    }
+    function cache_io(url, type) {
+      var file = url.split("/").last();
+      var cached = cache.check(type,file);
+      if(cached) {
+        return cached;
+      } else {
+        return cache.store(url, type,file);
+      }
+    }
+
     return {
       getServices :getServices,
       buildServices :buildServices,
@@ -205,7 +221,9 @@ var Application = (
 	    loadWindowSettings :loadWindowSettings,
 	    openImageWindow :openImageWindow,
       openSenderWindow : openSenderWindow,
-      openUrl: openUrl
+      openUrl: openUrl,
+      cache_start : cache_start,
+      cache_io : cache_io
     };
   } )();
 
