@@ -20,7 +20,7 @@ class HttpConnectorExtraUploader
       "User-Agent" => "Mikrob 0.1"
     }
     header_string = headers.map{|k,v| "-H'#{k}: #{v}'"}.join " "
-    data_string = %{-F "update[body]=#{data[:data]['update[body]']}" -F"update[picture]=@#{data[:files]['update[picture]']}"}
+    data_string = %{-F "update[body]=#{(data[:data]['update[body]'] || " ")}" -F"update[picture]=@#{data[:files]['update[picture]']}"}
     user_string = %{-u #{@user[:login]}:#{@user[:password]}}
     out= `curl #{header_string} #{user_string} #{data_string} #{@url}`
     puts out
@@ -83,22 +83,6 @@ private
          "Content-Type: #{mime_type}\r\n" +
          "\r\n" +
          "#{content}\r\n"
-  end
-end
-
-class HttpConnectorExtraDownloader
-  require 'net/http'
-  def initialize url, target_name
-    @url = URI.parse url
-    @target = target_name
-  end
-  def get
-    Net::HTTP.start(@url.host) do |http|
-      resp = http.get(@url.path)
-      open(@target_name, "wb") do |file|
-        file.write(resp.body)
-      end
-    end
   end
 end
 
