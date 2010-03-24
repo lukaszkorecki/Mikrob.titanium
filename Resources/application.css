@@ -267,7 +267,7 @@ input[type="text"], input[type="password"] {
 #charcount {
   position: absolute;
   bottom: 10px;
-  right: 10px;
+  right: 50px;
   font-size: 40px;
   opacity: 0.5;
   z-index: 20; }
