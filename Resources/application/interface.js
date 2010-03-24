@@ -27,7 +27,7 @@ var Interface = new Class.create({
 
     },
     afterSend : function(resp, was_success) {
-      console.log("afterSend");
+
       this.throbber.toggle();
       this.notify(Titanium.App.getName(),'Wysłano','ok');
       if(attachment != "") {
@@ -42,10 +42,17 @@ var Interface = new Class.create({
     },
     notify : function(login, body,img) {
       this.note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;
-      console.log("Notification img: "+ img);
       this.note.setMessage(body); //Add the message;
-      this.note.setIcon(img);
+      try {
+        if(img != undefined && img.startsWith("http")) {
+          img = "file://"+Application.cache_io(img, "av");
+        }
+      } catch(ca_er) {
+        img = "app://mikrob_icon.png";
+        console.dir(ca_er);
+      }
 
+      this.note.setIcon(img);
       this.note.show();//Make it appear with the default timings.
 
     },
@@ -67,12 +74,8 @@ var Interface = new Class.create({
       var av = "http://blip.pl/user_generated/"+av_ob.url_30 || "app://icons/nn_standard.png";
       var av_el = new Element("img", { width: "24px", height : "24px", "class" : "home_button_img", "src" : av});
       $('user_icon').update(av_el);
-//      $('user_login').update(login);
     },
     loginFail : function() {
-
-      // $('login_form').show();
-      // $('throbber').toggle();
 
     },
     setAreaContent : function(string, is_prepend) {
@@ -97,14 +100,7 @@ var Interface = new Class.create({
       }
 
     },
-    cacheImage : function(url) {
-      var home_dir = Titanium.Filesystem.getUserDirectory();
-      var Sep = Titanium.Filesystem.getSeparator();
-      var name = '.mikrob_img_cache';
-      var img_cache_dir = home_dir+Sep+name+Sep;
-    },
-    getImageFromCache : function(name) {
-    },
+
     attach_file : function() {
       var uwin = Titanium.UI.getCurrentWindow();
       var element = $('attach_file');
@@ -113,12 +109,10 @@ var Interface = new Class.create({
           function(file){
             attachment = file[0];
             console.log(attachment);
-            element.update("Dodano");
             element.setAttribute("title", attachment);
         });
       } else {
         attachment = "";
-        element.update("Dodaj plik");
         element.setAttribute("title", "");
       }
 

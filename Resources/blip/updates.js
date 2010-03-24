@@ -122,7 +122,10 @@ if(this.type == "PrivateMessage") {
 
     if ( ! size) size="30";
     var avid= this.user.avatar ? this.user.avatar['url_'+size] : "";
-    var avatar = "http://blip.pl" + avid;
+    var avatar = "";
+    if(avid != "") {
+      avatar = "file://"+Application.cache_io("http://blip.pl" + avid,"av");
+    }
     return new Element('img',{'src': avatar, 'class':'avatar'});
   },
   getActions: function() {
@@ -132,7 +135,7 @@ if(this.type == "PrivateMessage") {
     actions.insert(this.permaLink());
     actions.insert(this.quoteLink());
     actions.insert(this.messageLink());
-        actions.insert(this.threadLink());
+    actions.insert(this.threadLink());
     actions.insert(this.createdAt());
     return actions;
   },
@@ -198,11 +201,14 @@ var Message = new Class.create(Update, {
     return recipient_link;
   },
   recipientAvatar: function(size) {
+    if ( ! size) size="30";
+    var avid= this.recipient.avatar ? this.recipient.avatar['url_'+size] : "";
+    var avatar = "";
+    if(avid != "") {
+      avatar = "file://"+Application.cache_io("http://blip.pl" + avid,"av");
+    }
+    return new Element('img',{'src': avatar, 'class':'avatar'});
 
-    if (! size) {size="30";}
-    var ravid= this.recipient.avatar ? this.recipient.avatar['url_'+size] : "";
-    var ravatar = "http://blip.pl" + ravid;
-    return new Element('img',{'src': ravatar, 'class':'ravatar'});
   },
   getActions :function() {
 
