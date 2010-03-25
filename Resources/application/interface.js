@@ -45,7 +45,7 @@ var Interface = new Class.create({
       this.note.setMessage(body); //Add the message;
       try {
         if(img != undefined && img.startsWith("http")) {
-          img = "file://"+Application.cache_io(img, "av");
+          img = Application.cache_io(img, "av"); // investigate linux
         }
       } catch(ca_er) {
         img = "app://mikrob_icon.png";
