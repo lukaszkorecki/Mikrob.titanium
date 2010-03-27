@@ -1,8 +1,9 @@
 // EVENT HANDLERS
 var Events = (
   function() {
-    function login_button () {
+    function login_button (event) {
 			Application.getServices();
+      event.target.setAttribute("disabled", "disabled");
 			if(Application.services.length === 0) {
 				Application.openAddServiceWindow();
 
@@ -37,6 +38,7 @@ var Events = (
 		}
 
     function sender_item(event) {
+      console.log("sender_item");
       var content = $('main_textarea').getValue();
 			var len =content.length;
       if(len <= interfaces[active_service].character_limit) {
@@ -60,8 +62,15 @@ var Events = (
       return true;
     }
 		function main_textarea (event) {
+      console.log("main_textarea");
 			var content = (event.target_up || event.target).getValue();
-			if(event.keyCode == 13 && services[active_service].type != 'Flaker') { // this needs to be service specific!
+      console.log(event.keyCode);
+      console.dir(event.keyCode);
+			if((event.keyCode == 13 || event.keyCode == 16 ) && services[active_service].type != 'Flaker') { // this needs to be service specific!
+
+        event.preventDefault();
+        console.dir(event);
+        event.cancelBubble();
 				content.length = content.length-1;
 				if( content.length <= interfaces[active_service].character_limit){
 					interfaces[active_service].throbber.toggle();
@@ -210,7 +219,7 @@ var Events = (
       return true;
     }
     function attach_file() {
-//      Application.attachFile();
+      //      Application.attachFile();
       interfaces[active_service].attach_file();
     }
 		return {

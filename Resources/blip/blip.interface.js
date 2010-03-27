@@ -55,18 +55,13 @@ var BlipInterface = new Class.create(Interface, {
           dash.insert({'bottom': single_status});
         }
         self.expandLink('quoted_link');
-			 if (index < 5  && is_update !== 0) {
+       console.log("is_update: "+ is_update);
+			 if (is_update !== 0) {
         var av =  'app://icons/nn_nano.png';
         if(single_status.user.avatar) {
           av = 'http://blip.pl'+single_status.user.avatar.url_50;
         }
-        try {
-          self.notify(single_status.user.login, single_status.raw_body, av );
-        }
-        catch (notifyerr) {
-          console.dir(notifyerr);
-        }
-
+         self.notify(single_status.user.login, single_status.raw_body, av );
       }
 
 
