@@ -62,16 +62,11 @@ var Events = (
       return true;
     }
 		function main_textarea (event) {
-      console.log("main_textarea");
 			var content = (event.target_up || event.target).getValue();
-      console.log(event.keyCode);
-      console.dir(event.keyCode);
-			if((event.keyCode == 13 || event.keyCode == 16 ) && services[active_service].type != 'Flaker') { // this needs to be service specific!
-
+			if((event.keyCode == 13 ) && services[active_service].type != 'Flaker') { // this needs to be service specific!
+        event.target.disable();
         event.preventDefault();
-        console.dir(event);
-        event.cancelBubble();
-				content.length = content.length-1;
+				--content.length;
 				if( content.length <= interfaces[active_service].character_limit){
 					interfaces[active_service].throbber.toggle();
           if(attachment == "") {
@@ -92,9 +87,8 @@ var Events = (
 				}
 			}
 
-			var len =content.length;
-			if (len === 0) len=interfaces[active_service].character_limit;
-			$('charcount').update(interfaces[active_service].character_limit-len);
+			if (content.length === 0) content.length=interfaces[active_service].character_limit;
+			$('charcount').update(interfaces[active_service].character_limit-content.length);
       return true;
 		}
 

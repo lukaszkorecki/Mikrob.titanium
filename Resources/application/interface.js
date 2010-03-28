@@ -31,14 +31,16 @@ var Interface = new Class.create({
       this.throbber.toggle();
       this.notify(Titanium.App.getName(),'Wysłano','ok');
       if(attachment != "") {
-        $('attach_file').update("Dodaj plik");
         attachment = "";
       }
       try {
         $('charcount').update('0');
       } catch (no_ch_err){ console.dir(no_ch_err); }
 
-      if (was_success)    this.setAreaContent();
+      if (was_success) {
+        this.setAreaContent();
+        $('main_textarea').enable();
+      }
     },
     notify : function(login, body,img) {
       this.note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;

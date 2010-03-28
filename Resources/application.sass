@@ -19,12 +19,11 @@ a
   color: #333
   text-decoration: none
 
+a:hover
+  color: #777
 p
   -webkit-word-wrap: break-word
 
-a:hover
-  background: #222
-  color: #eee
 
 .update
   margin-bottom: 10px
@@ -84,6 +83,7 @@ a:hover
     border: 4px solid #eee
     -webkit-border-radius: 5px
     -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5)
+
 .update_picture
   position: absolute
   right: -5%
@@ -93,10 +93,6 @@ a:hover
     -webkit-border-radius: 5px
     -webkit-transform: rotate(8deg)  scale(0.5)
 
-//#application
-//  position: fixed
-//  top: 100px
-//  left: 0px
 
 #content_container
   border-top: 1px solid #666
@@ -156,12 +152,15 @@ a:hover
   margin: 1px 4px 1px 4px
   background: #aaa
   -webkit-border-radius: 4px
-
+.user_link, .recipient_link
+  font-weight: bold
+  margin-right: 5px
 .actions
   margin-top: 15px
   margin-bottom: 5px
   clear: both
-
+.transport
+  margin-left: 10px
 
 .button
   font-weight: bold
@@ -171,6 +170,10 @@ a:hover
   margin: 3px
   background: #eee
 
+  &:hover
+    background: #fff
+.lite
+  font-weight: normal
 
 .actions span
   margin-top: 10px
@@ -263,6 +266,7 @@ input
   position: absolute
   bottom: 10px
   left: 5px
+  width: 10px
 
 
 #unread_count

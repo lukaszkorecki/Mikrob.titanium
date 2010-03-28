@@ -17,12 +17,11 @@ a {
   color: #333;
   text-decoration: none; }
 
+a:hover {
+  color: #777; }
+
 p {
   -webkit-word-wrap: break-word; }
-
-a:hover {
-  background: #222;
-  color: #eee; }
 
 .update {
   margin-bottom: 10px;
@@ -141,10 +140,17 @@ a:hover {
   background: #aaa;
   -webkit-border-radius: 4px; }
 
+.user_link, .recipient_link {
+  font-weight: bold;
+  margin-right: 5px; }
+
 .actions {
   margin-top: 15px;
   margin-bottom: 5px;
   clear: both; }
+
+.transport {
+  margin-left: 10px; }
 
 .button {
   font-weight: bold;
@@ -153,6 +159,11 @@ a:hover {
   -webkit-border-radius: 4px;
   margin: 3px;
   background: #eee; }
+  .button:hover {
+    background: #fff; }
+
+.lite {
+  font-weight: normal; }
 
 .actions span {
   margin-top: 10px;
@@ -229,7 +240,8 @@ input[type="text"], input[type="password"] {
 #sender div {
   position: absolute;
   bottom: 10px;
-  left: 5px; }
+  left: 5px;
+  width: 10px; }
 
 #unread_count {
   text-align: center; }

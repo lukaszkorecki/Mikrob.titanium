@@ -29,15 +29,13 @@ var Blip = new Class.create(Service,{
   dashboardGet : function(offset) {
     var self = this;
      var url = self.api_root+'/dashboard'+self.include_string_full;
-    if(self.dashboard_last_id !== 0) {
+    if(self.dashboard_last_id != 0) {
        url = self.api_root+'/dashboard/since/'+self.dashboard_last_id+self.include_string_full;
     }
     if(offset >= 0) {
       url += '&offset='+(offset * interfaces[self.service_id].globalLimit);
     }
-  //  else {
-  //    url += '&offset=0';
-  //  }
+
     var req = new HttpConnector(self.commonHeaders());
     req.setUserCred(self.login, self.password);
     req.get(url);
