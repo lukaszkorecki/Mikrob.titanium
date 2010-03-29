@@ -50,6 +50,7 @@ var Events = (
             services[active_service].postWithFile(content, attachment);
           } catch(no_post_with_file) {
             console.dir(no_post_with_file);
+            alert("Nie udało się wysłać statusu w plikiem, sry");
           }
         }
         return false;
@@ -63,11 +64,10 @@ var Events = (
     }
 		function main_textarea (event) {
 			var content = (event.target_up || event.target).getValue();
-			if((event.keyCode == 13 ) && services[active_service].type != 'Flaker') { // this needs to be service specific!
+			if(event.keyCode == 13  && services[active_service].type != 'Flaker') { // this needs to be service specific!
         event.target.disable();
-        event.preventDefault();
-				--content.length;
-				if( content.length <= interfaces[active_service].character_limit){
+
+				if( (content.length-1) <= interfaces[active_service].character_limit){
 					interfaces[active_service].throbber.toggle();
           if(attachment == "") {
             services[active_service].post(content);

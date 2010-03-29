@@ -8,8 +8,8 @@ var Update = new Class.create(
       this.body = this.parseBody(obj.body);
       this.raw_body = obj.body;
       this.created_at = obj.created_at;
-      this.transport = obj.transport.name;
-      if(obj.pictures !== undefined) {
+      this.transport = obj.transport.name || "?";
+      if(obj.pictures !== undefined && obj.pictures.length>1) {
         this.pictures = obj.pictures;
       } else {
         this.pictures= false;
@@ -39,7 +39,12 @@ var Update = new Class.create(
       obj = null;
     },
     transportName : function() {
-      return (new Element("span", {"class" : "button lite"}).update(this.transport));
+      if(this.transport) {
+        return (new Element("span", {"class" : "button lite"}).update(this.transport));
+      } else {
+        return "";
+      }
+
     },
     createdAt : function() {
       return (new Element("span", {"class" : "button lite"}).update(this.created_at.substr(this.created_at.indexOf(" "))));

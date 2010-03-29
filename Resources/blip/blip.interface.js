@@ -37,12 +37,15 @@ var BlipInterface = new Class.create(Interface, {
      var single_status=null;
       try {
         single_status = self.getUpdateObject(blip);
-      } catch (guo_err) { console.dir(guo_err); }
-        if(is_update !== 0) {
-          dash.insert({'top': single_status});
-        } else {
-          dash.insert({'bottom': single_status});
-        }
+      } catch (guo_err) { 
+        console.dir(guo_err); 
+        single_status = ""; 
+      }
+      if(is_update !== 0) {
+        dash.insert({'top': single_status});
+      } else {
+        dash.insert({'bottom': single_status});
+      }
         self.expandLink('quoted_link');
 			 if (can_notify) {
         var av =  'app://icons/nn_nano.png';
@@ -51,9 +54,9 @@ var BlipInterface = new Class.create(Interface, {
         }
          self.notify(single_status.user.login, single_status.raw_body, av );
       }
-      if(index == updates.length-1) {
-        self = null;
-      }
+//      if(index == updates.length-1) {
+//        self = null;
+//      }
     });
     this.expandLink("rdir_link");
     if (is_update ===0) {
