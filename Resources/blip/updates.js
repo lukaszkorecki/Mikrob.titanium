@@ -8,7 +8,7 @@ var Update = new Class.create(
       this.body = this.parseBody(obj.body);
       this.raw_body = obj.body;
       this.created_at = obj.created_at;
-      this.transport = obj.transport.name || "?";
+      this.transport = (obj.transport) ? obj.transport.name : "?";
       if(obj.pictures !== undefined && obj.pictures.length>1) {
         this.pictures = obj.pictures;
       } else {
