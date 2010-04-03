@@ -14,8 +14,8 @@
     <title>Mikrob</title>
     <url>app://index.html</url>
     <max-width>475</max-width>
-    <min-width>275</min-width>
-    <width>410</width>
+    <min-width>385</min-width>
+    <width>385</width>
     <height>600</height>
     <max-height>3000</max-height>
     <min-height>100</min-height>

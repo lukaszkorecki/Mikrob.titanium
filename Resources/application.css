@@ -27,6 +27,15 @@ p {
   margin-bottom: 10px;
   padding: 4px;
   padding-top: 0; }
+  .update .actions {
+    margin-top: 3px;
+    margin-bottom: 1px;
+    clear: both; }
+    .update .actions span {
+      margin-top: 10px;
+      margin-bottom: 10px; }
+    .update .actions button {
+      display: none; }
   .update p {
     background: rgb(241,241,241);
     padding: 4px;
@@ -49,6 +58,9 @@ p {
       width: 30px;
       height: 30px;
       background-image: url(app://icons/nn_nano.png); }
+
+.update:hover .actions button {
+  display: inline; }
 
 .quoted {
   -webkit-border-radius: 4px;
@@ -90,10 +102,9 @@ p {
   position: absolute;
   overflow-x: hidden;
   overflow-y: auto;
+  left: 40px;
+  bottom: 80px;
   top: 0px;
-  left: 35px;
-  bottom: 25px;
-  top: 90px;
   padding: 0px;
   max-width: 440px;
   background: rgb(210,210,210); }
@@ -102,8 +113,8 @@ p {
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 25px;
-  width: 35px;
+  bottom: 80px;
+  width: 40px;
   border-top: 1px solid #666;
   border-right: 1px solid #666;
   border-bottom: 2px solid #666;
@@ -129,10 +140,18 @@ p {
   bottom: 2px;
   left: 10px;
   max-width: 400px; }
-  #global_actions span button {
-    min-height: 20; }
+  #global_actions span {
+    display: block;
+    display-float: right; }
   #global_actions .change_service_container {
-    text-align: right; }
+    text-align: right;
+    position: fixed;
+    right: 4px;
+    top: 0px;
+    opacity: 0.5;
+    z-index: 64; }
+  #global_actions .change_service_container:hover {
+    opacity: 1; }
 
 .user, .recipient {
   font-weight: bold;
@@ -143,11 +162,6 @@ p {
 .user_link, .recipient_link {
   font-weight: bold;
   margin-right: 5px; }
-
-.actions {
-  margin-top: 15px;
-  margin-bottom: 5px;
-  clear: both; }
 
 .transport {
   margin-left: 10px; }
@@ -165,30 +179,22 @@ p {
 .lite {
   font-weight: normal; }
 
-.actions span {
-  margin-top: 10px;
-  margin-bottom: 10px; }
-
 input, textarea {
   -webkit-border-readius: 6px; }
 
 #input_area {
   opacity: 0.8;
   position: fixed;
-  left: 35px;
-  top: 0px;
+  left: 0;
+  bottom: 5px;
   width: 100%;
-  height: 100px;
+  height: 75px;
   z-index: 32; }
   #input_area textarea {
-    width: 78% !important;
-    height: 70px;
-    margin-left: 10%;
-    margin-top: 7px;
+    width: 100% !important;
+    height: 50px;
+    margin-top: 2px;
     font-family: helvetica; }
-  #input_area div {
-    width: 15%;
-    float: left; }
 
 #controls {
   position: fixed;
@@ -277,11 +283,11 @@ input[type="text"], input[type="password"] {
   text-align: center; }
 
 #charcount {
-  position: absolute;
-  bottom: 10px;
-  right: 50px;
+  bottom: 0px;
   font-size: 40px;
   opacity: 0.5;
+  position: absolute;
+  right: 2%;
   z-index: 20; }
 
 .linux body {
@@ -314,3 +320,9 @@ input[type="text"], input[type="password"] {
   -webkit-box-shadow: -1px 1px 3px rbga(0,0,0,0.5); }
 .win32 .button {
   -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
+
+button, .button {
+  -webkit-appearance: square-button !important; }
+
+select {
+  -webkit-appearance: menulist-button !important; }

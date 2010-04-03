@@ -9,8 +9,8 @@
     </script>
     <script src='libs/prototype.js' type='text/javascript'></script>
     <script src='libs/effects.js' type='text/javascript'></script>
-    <script src='libs/controls.js' type='text/javascript'></script>
     <script src='libs/delegate.js' type='text/javascript'></script>
+    <script src='libs/controls.js' type='text/javascript'></script>
     <script src='application/application.js' type='text/javascript'></script>
     <script src='application/database_connector.js' type='text/javascript'></script>
     <script src='application/events.js' type='text/javascript'></script>
@@ -63,6 +63,12 @@
                 <img alt='' class='archive_button_img' height='24px' src='app://icons/ui/48_inbox_empty.png' width='24px' />
               </a>
             </li>
+            <li>
+              <button class='_button small' id='mark_as_read_button' title='Oznacz jako przeczytane'>
+                <img alt='' height='12px' src='app://icons/ui/48_new.png' width='12px' />
+                0
+              </button>
+            </li>
           </ul>
           <!--
             <li>
@@ -104,26 +110,20 @@
             <span class='sender_item' id='charcount'>0</span>
             <form accept-charset='utf-8' action='#' id='sender' method=''>
               <textarea autofocus='' id='main_textarea' name='content' placeholder='Co teraz robisz? O czym myślisz? Dokąd zmierzamy?' rows='3'></textarea>
-              <div>
-                <button class='button_small sender_item' name='submit' value=''>
-                  <img height='12px' src='app://icons/ui/16_message.png' width='12px' />
-                  <!-- Wyślij -->
-                </button>
-                <button class='button_small' href='#' id='make_private' title='Zmienia wiadomość na prywatną'>
-                  <img height='12px' src='app://icons/ui/24_private.png' width='12px' />
-                  <!-- Sprywatyzuj -->
-                </button>
-                <button class='button_small' href='#' id='shorten_links' title='Skraca wszystkie linki'>
-                  <img height='12px' src='app://icons/ui/48_tools.png' width='12px' />
-                  <!-- Skróć linki -->
-                </button>
-                <button class='button_small' href='#' title='Dodaje plik'>
-                  <img height='12px' id='attach_file_img' src='app://icons/ui/48_attachment.png' width='12px' />
-                  <span id='attach_file'>
-                    <!-- Dodaj plik -->
-                  </span>
-                </button>
-              </div>
+              <button class='button_small sender_item' name='submit' value=''>
+                Wyślij
+              </button>
+              <button class='button_small' href='#' id='make_private' title='Zmienia wiadomość na prywatną'>
+                Sprywatyzuj
+              </button>
+              <button class='button_small' href='#' id='shorten_links' title='Skraca wszystkie linki'>
+                Skróć linki
+              </button>
+              <button class='button_small' href='#' title='Dodaje plik'>
+                <span id='attach_file'>
+                  Dodaj plik
+                </span>
+              </button>
             </form>
           </div>
           <span>
@@ -136,10 +136,6 @@
                 Dodaj
               </button>
             -->
-            <button class='_button small' id='mark_as_read_button'>
-              <img alt='' height='12px' src='app://icons/ui/48_new.png' width='12px' />
-              Oznacz jako przeczytane
-            </button>
             <span class='change_service_container'>
               <select id='change_service'></select>
             </span>

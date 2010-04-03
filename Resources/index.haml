@@ -42,6 +42,10 @@
             %li
               %a#archive_button._button.small{ :href => "#", :title => "Wiadomości" }
                 %img.archive_button_img{ :src => "app://icons/ui/48_inbox_empty.png", :width => "24px", :height => "24px", :alt => "" }
+            %li
+              %button#mark_as_read_button._button.small{:title => "Oznacz jako przeczytane"}
+                %img{ :src => "app://icons/ui/48_new.png", :height => "12px", :alt => "", :width => "12px" }
+                0
           /
             %li
               %a#notifications_button._button.small{ :href => "#", :title => "Powiadomienia" }
@@ -74,20 +78,15 @@
             %span#charcount.sender_item 0
             %form#sender{ :method => "", :action => "#", "accept-charset" => "utf-8" }
               %textarea#main_textarea{ :name => "content", :autofocus => "", :rows => "3", :placeholder => "Co teraz robisz? O czym myślisz? Dokąd zmierzamy?" }
-              %div
-                %button.button_small.sender_item{ :name => "submit", :value => "" }
-                  %img{ :src => "app://icons/ui/16_message.png", :width => "12px", :height => "12px" }
-                  / Wyślij
-                %button#make_private.button_small{ :href => "#", :title => "Zmienia wiadomość na prywatną" }
-                  %img{ :src => "app://icons/ui/24_private.png", :width => "12px", :height => "12px" }
-                  / Sprywatyzuj
-                %button#shorten_links.button_small{ :href => "#", :title => "Skraca wszystkie linki" }
-                  %img{ :src => "app://icons/ui/48_tools.png", :width => "12px", :height => "12px" }
-                  / Skróć linki
-                %button.button_small{ :href => "#", :title => "Dodaje plik" }
-                  %img{ :id => "attach_file_img", :src => "app://icons/ui/48_attachment.png", :width => "12px", :height => "12px" }
-                  %span#attach_file
-                    / Dodaj plik
+              %button.button_small.sender_item{ :name => "submit", :value => "" }
+                Wyślij
+              %button#make_private.button_small{ :href => "#", :title => "Zmienia wiadomość na prywatną" }
+                Sprywatyzuj
+              %button#shorten_links.button_small{ :href => "#", :title => "Skraca wszystkie linki" }
+                Skróć linki
+              %button.button_small{ :href => "#", :title => "Dodaje plik" }
+                %span#attach_file
+                  Dodaj plik
 
           %span
             /
@@ -97,8 +96,6 @@
                 %img.open_sender_img{ :src => "app://icons/ui/48_add.png", :height => "12px", :alt => "", :width => "12px" }
                 Dodaj
 
-            %button#mark_as_read_button._button.small
-              %img{ :src => "app://icons/ui/48_new.png", :height => "12px", :alt => "", :width => "12px" }
-              Oznacz jako przeczytane
+
             %span.change_service_container
               %select#change_service

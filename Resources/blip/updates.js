@@ -1,3 +1,4 @@
+
 var Update = new Class.create(
   {
     initialize : function(obj, owner_service_id, username)  {
@@ -40,14 +41,14 @@ var Update = new Class.create(
     },
     transportName : function() {
       if(this.transport) {
-        return (new Element("span", {"class" : "button lite"}).update(this.transport));
+        return (new Element("span").update(" "+this.transport));
       } else {
         return "";
       }
 
     },
     createdAt : function() {
-      return (new Element("span", {"class" : "button lite"}).update(this.created_at.substr(this.created_at.indexOf(" "))));
+      return (new Element("span").update(this.created_at.substr(this.created_at.indexOf(" ")).trim()));
     },
     updatePicture : function() {
       var pic = false;
@@ -76,20 +77,25 @@ var Update = new Class.create(
       return link;
     },
     messageLink : function() {
-      var icon = new Element("img", {src : AppIcons.small.message, "class" : "message_link_img"});
+      var icon = "Wiadomość";
       var prefix = ">";
       if(this.type == "PrivateMessage") {
 	      prefix = ">>";
       }
-      var link = new Element('a', {'href':'#', "data" : prefix+this.user.login,  'class':'msg button small message_link', 'title' : 'Wiadomość'}).update(icon);
+      var link = new Element('button', {
+                               'href':'#',
+                               "data" : prefix+this.user.login,
+                               'class':'msg  small message_link',
+                               'title' : 'Wiadomość'
+                             }).update(icon);
 
       return link;
     },
     quoteLink : function() {
-			var icon = new Element("img", {src : AppIcons.small.quote ,  "class" : "quote_link_img" });
-      var link = new Element('a', {
+      var icon = "Cytuj";
+      var link = new Element('button', {
                                'href':'#',
-                               'class':'quote button small quote_link',
+                               'class':'quote small quote_link',
                                'title' : 'Cytuj',
                                "data" : "http://blip.pl/"+this.short_type+"/"+this.id
                              }).update(icon);
@@ -97,10 +103,10 @@ var Update = new Class.create(
     },
     permaLink : function() {
       var url = 'http://blip.pl/'+this.short_type+'/'+this.id;
-			var icon = new Element("img", {src : AppIcons.small.permalink,"class" : "permanent_link_img"});
-      var link = new Element('a', {
+      var icon = "Link";
+      var link = new Element('button', {
                                'href':url,
-                               'class':'button small permanent_link',
+                               'class':' small permanent_link',
                                "target" : "_blank",
                                'title' : 'Permalink'
                              }).update(icon);
@@ -108,10 +114,10 @@ var Update = new Class.create(
     },
     threadLink : function() {
       var url = "http://blip-thread.heroku.com/threads/"+this.id;
-			var icon = new Element("img", {src : AppIcons.small.comment, "class" : "thread_link_img"});
-      var link = new Element('a', {
+      var icon = "Watek";
+      var link = new Element('button', {
                                'href': url,
-                               'class':'button small thread_link',
+                               'class':' small thread_link',
                                "target" : "_blank",
                                'title':'Otwórz konwersacje'
                              }).update(icon);
@@ -137,12 +143,13 @@ var Update = new Class.create(
     },
     getActions: function() {
       var actions = new Element('div',{'class':'actions'});
+      actions.insert(this.createdAt());
+      actions.insert(this.transportName());
       actions.insert(this.permaLink());
       actions.insert(this.quoteLink());
       actions.insert(this.messageLink());
       actions.insert(this.threadLink());
-      actions.insert(this.createdAt());
-      actions.insert(this.transportName());
+
       return actions;
     },
     toElement : function() {
@@ -217,12 +224,12 @@ var Message = new Class.create(
     getActions :function() {
 
       var actions = new Element('div',{'class':'actions'});
-
+      actions.insert(this.createdAt());
+      actions.insert(this.transportName());
       actions.insert(this.permaLink());
       actions.insert(this.quoteLink());
       actions.insert(this.messageLink());
-      actions.insert(this.createdAt());
-      actions.insert(this.transportName());
+
       return actions;
 
     },
@@ -300,9 +307,10 @@ var Notice = new Class.create(
 
       var p = new Element('p');
       var av_container = new Element('div', {'class': 'avatar_container'});
-      container.insert(av_container.update(this.userAvatar()));
+
       p.insert(this.body);
       container.insert(p);
+      container.insert(av_container.update(this.userAvatar()));
       //container.insert(this.getActions());
       return container;
     }
