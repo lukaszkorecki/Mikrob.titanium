@@ -24,7 +24,6 @@ p {
   -webkit-word-wrap: break-word; }
 
 .update {
-  margin-bottom: 10px;
   padding: 4px;
   padding-top: 0; }
   .update .actions {
@@ -36,8 +35,6 @@ p {
       margin-bottom: 10px; }
     .update .actions .buttons {
       margin: 0;
-      opacity: 0;
-      -webkit-transition: opacity 0.5s linear;
       display: none; }
   .update p {
     background: rgb(241,241,241);
@@ -57,7 +54,6 @@ p {
     z-index: 10; }
     .update .avatar_container .avatar {
       display: block;
-      opacity: 1;
       width: 30px;
       height: 30px;
       background-image: url(app://icons/nn_nano.png); }
@@ -68,6 +64,12 @@ p {
   bottom: -5px;
   right: 10px;
   text-align: right; }
+
+.directed p {
+  background-color: #c8e880; }
+
+.private p {
+  background-color: #d971bf; }
 
 .quoted {
   -webkit-border-radius: 4px;
@@ -88,6 +90,10 @@ p {
   margin-right: 40px; }
 .own .avatar_container {
   float: right; }
+
+.message .avatar_container {
+  width: 20px;
+  height: 20px; }
 
 .update img.avatar, .update img.ravatar {
   border: 4px solid #eee;
@@ -169,6 +175,14 @@ p {
 .user_link, .recipient_link {
   font-weight: bold;
   margin-right: 5px; }
+
+.avatar_container .recipient_avatar {
+  bottom: 10px;
+  float: left;
+  height: 15px !important;
+  margin-left: 15px;
+  position: relative;
+  width: 15px !important; }
 
 .transport {
   margin-left: 10px; }

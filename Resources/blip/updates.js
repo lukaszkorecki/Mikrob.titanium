@@ -10,7 +10,8 @@ var Update = new Class.create(
       this.raw_body = obj.body;
       this.created_at = obj.created_at;
       this.transport = (obj.transport) ? obj.transport.name : "?";
-      if(obj.pictures !== undefined && obj.pictures.length>1) {
+      console.dir(obj);
+      if(obj.pictures !== undefined && obj.pictures.length>0) {
         this.pictures = obj.pictures;
       } else {
         this.pictures= false;
@@ -149,7 +150,7 @@ var Update = new Class.create(
       buttons.insert(this.permaLink());
       buttons.insert(this.quoteLink());
       buttons.insert(this.messageLink());
-      buttons.insert(this.threadLink());
+//      buttons.insert(this.threadLink());
       actions.insert(buttons);
 
       return actions;
@@ -220,7 +221,7 @@ var Message = new Class.create(
       if(avid != "") {
         avatar = "file://"+Application.cache_io("http://blip.pl" + avid,"av");
       }
-      return new Element('img',{'src': avatar, 'class':'avatar'});
+      return new Element('img',{'src': avatar, 'class':'avatar recipient_avatar'});
 
     },
     getActions :function() {
