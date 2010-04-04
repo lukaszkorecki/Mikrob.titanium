@@ -74,13 +74,13 @@ var Interface = new Class.create({
     },
     disableInputArea : function() {
       $$('#input_area textarea')[0].disable();
-      $('#input_area button').each(function(elem) {
+      $$('#input_area button').each(function(elem) {
                                      elem.setAttribute("disabled", "disable");
                                    });
     },
     enableInputArea : function() {
-      $('#input_area button')[0].disable();
-      $('#input_area button').each(function(elem) {
+      $$('#input_area textarea')[0].enable();
+      $$('#input_area button').each(function(elem) {
                                      elem.removeAttribute("disabled");
                                    });
     },
