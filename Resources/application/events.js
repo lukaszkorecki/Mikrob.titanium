@@ -42,6 +42,7 @@ var Events = (
       var content = $('main_textarea').getValue();
 			var len =content.length;
       if(len <= interfaces[active_service].character_limit) {
+        interfaces[active_service].disableInputArea();
 	      interfaces[active_service].throbber.toggle();
         if(attachment == "") {
           services[active_service].post(content);
@@ -65,8 +66,7 @@ var Events = (
 		function main_textarea (event) {
 			var content = (event.target_up || event.target).getValue();
 			if(event.keyCode == 13  && services[active_service].type != 'Flaker') { // this needs to be service specific!
-        event.target.disable();
-
+        interfaces[active_service].disableInputArea();
 				if( (content.length-1) <= interfaces[active_service].character_limit){
 					interfaces[active_service].throbber.toggle();
           if(attachment == "") {
@@ -77,13 +77,11 @@ var Events = (
             } catch(no_post_with_file) {
               console.dir(no_post_with_file);
             }
-
           }
-
           return false;
-
 				} else {
 					interfaces[active_service].notify("Błęd", "Treść za długa o "+(content.length - interfaces[active_service].character_limit)+" znaków");
+          interfaces[active_service].enableInputArea();
 				}
 			}
 

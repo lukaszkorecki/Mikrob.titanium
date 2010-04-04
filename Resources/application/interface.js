@@ -39,7 +39,7 @@ var Interface = new Class.create({
 
       if (was_success) {
         this.setAreaContent();
-        $('main_textarea').enable();
+        this.enableInputArea();
       }
     },
     notify : function(login, body,img) {
@@ -72,6 +72,19 @@ var Interface = new Class.create({
         }
       } catch (badge_err) { console.log(badge_err); }
     },
+    disableInputArea : function() {
+      $$('#input_area textarea')[0].disable();
+      $('#input_area button').each(function(elem) {
+                                     elem.setAttribute("disabled", "disable");
+                                   });
+    },
+    enableInputArea : function() {
+      $('#input_area button')[0].disable();
+      $('#input_area button').each(function(elem) {
+                                     elem.removeAttribute("disabled");
+                                   });
+    },
+
     setUserAvatar : function(av_ob,login) {
       var av = "http://blip.pl/user_generated/"+av_ob.url_30 || "app://icons/nn_standard.png";
       var av_el = new Element("img", { width: "24px", height : "24px", "class" : "home_button_img", "src" : av});
