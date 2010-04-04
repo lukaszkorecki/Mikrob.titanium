@@ -1,10 +1,10 @@
 #appname:Mikrob
 #appid:com.coffeesounds.mikrob
-#publisher:Łukasz Korecki
+#publisher:Lukasz Korecki
 #image:mikrob_icon.png
 #url:http://coffeesounds.com
 #guid:5d98ee26-34e6-4bb3-a4e3-3cb53113ec68
-#desc:Mikrob is a 'logging client
+#desc:Mikrob is a microblogging client
 #type:desktop
 runtime:1.0.0
 api:1.0.0
