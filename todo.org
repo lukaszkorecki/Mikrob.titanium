@@ -19,6 +19,7 @@
 ** TODO clever (and efficient!) service-switching
 ** TODO preferences window
 ** TODO services management windo in preferences!
+** TODO make OSX-style toolbar and move sidebar icons there
 * Code
 ** Application
    - Note taken on [2010-03-12 pią 22:29] \\

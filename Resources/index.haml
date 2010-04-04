@@ -78,13 +78,13 @@
             %span#charcount.sender_item 0
             %form#sender{ :method => "", :action => "#", "accept-charset" => "utf-8" }
               %textarea#main_textarea{ :name => "content", :autofocus => "", :rows => "3", :placeholder => "Co teraz robisz? O czym myślisz? Dokąd zmierzamy?" }
-              %button.button_small.sender_item{ :name => "submit", :value => "" }
+              %button.button_small.sender_item{ :name => "submit"}
                 Wyślij
               %button#make_private.button_small{ :href => "#", :title => "Zmienia wiadomość na prywatną" }
                 Sprywatyzuj
               %button#shorten_links.button_small{ :href => "#", :title => "Skraca wszystkie linki" }
                 Skróć linki
-              %button.button_small{ :href => "#", :title => "Dodaje plik" }
+              %button.button_small.attach_file_img{ :href => "#", :title => "Dodaje plik" }
                 %span#attach_file
                   Dodaj plik
 

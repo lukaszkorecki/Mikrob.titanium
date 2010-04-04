@@ -125,10 +125,14 @@ var Interface = new Class.create({
             attachment = file[0];
             console.log(attachment);
             element.setAttribute("title", attachment);
+            element.addClassName('activated_');
+            element.update("Dodano plik");
         });
       } else {
         attachment = "";
         element.setAttribute("title", "");
+        element.removeClassName('activated_');
+        element.update("Dodaj plik");
       }
 
     },

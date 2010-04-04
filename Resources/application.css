@@ -110,7 +110,8 @@ p {
     -webkit-transform: rotate(8deg)  scale(0.5); }
 
 .activated_ {
-  border: 2px solid pink; }
+  color: pink;
+  font-weight: bold; }
 
 #content_container {
   border-top: 1px solid #666;
@@ -342,29 +343,3 @@ button, .button {
 
 select {
   -webkit-appearance: menulist-button !important; }
-
-.update {
-  position: relative;
-  padding: 15px;
-  margin: 1em 0 3em;
-  color: #000;
-  background: #f3961c;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  background: -moz-linear-gradient(top, #f9d835, #f3961c);
-  background: linear-gradient(top, #f9d835, #f3961c); }
-
-/* creates triangle */
-.update:after {
-  content: "\00a0";
-  display: block;
-  position: absolute;
-  z-index: -1;
-  bottom: -30px;
-  left: 50px;
-  width: 0;
-  height: 0;
-  border-width: 15px 15px;
-  border-style: solid;
-  border-color: #f3961c transparent transparent; }
