@@ -145,10 +145,12 @@ var Update = new Class.create(
       var actions = new Element('div',{'class':'actions'});
       actions.insert(this.createdAt());
       actions.insert(this.transportName());
-      actions.insert(this.permaLink());
-      actions.insert(this.quoteLink());
-      actions.insert(this.messageLink());
-      actions.insert(this.threadLink());
+      var buttons = new Element("span", { 'class' : "buttons"});
+      buttons.insert(this.permaLink());
+      buttons.insert(this.quoteLink());
+      buttons.insert(this.messageLink());
+      buttons.insert(this.threadLink());
+      actions.insert(buttons);
 
       return actions;
     },
@@ -226,10 +228,11 @@ var Message = new Class.create(
       var actions = new Element('div',{'class':'actions'});
       actions.insert(this.createdAt());
       actions.insert(this.transportName());
-      actions.insert(this.permaLink());
-      actions.insert(this.quoteLink());
-      actions.insert(this.messageLink());
-
+      var buttons = new Element("span", { 'class' : "buttons"});
+      buttons.insert(this.permaLink());
+      buttons.insert(this.quoteLink());
+      buttons.insert(this.messageLink());
+      actions.insert(buttons);
       return actions;
 
     },
@@ -303,14 +306,14 @@ var Notice = new Class.create(
 
       // TODO this is saying avatar, because eventually it will
       // render an avatar
-      var container = new Element('div', {'class': this.cclass+' notice'});
+      var container = new Element('div', {'class': this.cclass+' update'});
 
       var p = new Element('p');
       var av_container = new Element('div', {'class': 'avatar_container'});
-
+      container.insert(av_container.update(this.userAvatar()));
       p.insert(this.body);
       container.insert(p);
-      container.insert(av_container.update(this.userAvatar()));
+
       //container.insert(this.getActions());
       return container;
     }

@@ -30,11 +30,14 @@ p {
   .update .actions {
     margin-top: 3px;
     margin-bottom: 1px;
-    clear: both; }
+    position: relative; }
     .update .actions span {
       margin-top: 10px;
       margin-bottom: 10px; }
-    .update .actions button {
+    .update .actions .buttons {
+      margin: 0;
+      opacity: 0;
+      -webkit-transition: opacity 0.5s linear;
       display: none; }
   .update p {
     background: rgb(241,241,241);
@@ -44,7 +47,6 @@ p {
     min-height: 30px;
     width: 85%;
     padding: 5px;
-    position: relative;
     -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
     -webkit-border-radius: 4px;
     color: #888;
@@ -55,12 +57,17 @@ p {
     z-index: 10; }
     .update .avatar_container .avatar {
       display: block;
+      opacity: 1;
       width: 30px;
       height: 30px;
       background-image: url(app://icons/nn_nano.png); }
 
-.update:hover .actions button {
-  display: inline; }
+.update:hover .actions .buttons {
+  display: block;
+  position: absolute;
+  bottom: -5px;
+  right: 10px;
+  text-align: right; }
 
 .quoted {
   -webkit-border-radius: 4px;
@@ -183,7 +190,6 @@ input, textarea {
   -webkit-border-readius: 6px; }
 
 #input_area {
-  opacity: 0.8;
   position: fixed;
   left: 0;
   bottom: 5px;

@@ -30,16 +30,16 @@ p
   padding: 4px
   padding-top: 0
   .actions
-
     margin-top: 3px
     margin-bottom: 1px
-    clear: both
+    position: relative
+
     span
       margin-top: 10px
       margin-bottom: 10px
-    button
+    .buttons
+      margin: 0
       display: none
-
   p
     background: rgb(241,241,241)
     padding: 4px
@@ -48,7 +48,7 @@ p
     min-height: 30px
     width: 85%
     padding: 5px
-    position: relative
+    //position: relative
     -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5)
     -webkit-border-radius: 4px
     color: #888
@@ -67,8 +67,12 @@ p
 
 .update:hover
   .actions
-    button
-      display: inline
+    .buttons
+      display: block
+      position: absolute
+      bottom: -5px
+      right: 10px
+      text-align: right
 
 .quoted
   -webkit-border-radius: 4px
