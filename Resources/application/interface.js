@@ -32,6 +32,7 @@ var Interface = new Class.create({
       this.notify(Titanium.App.getName(),'Wysłano','ok');
       if(attachment != "") {
         attachment = "";
+        $('attach_file').update("Dodaj plik");
       }
       try {
         $('charcount').update('0');
