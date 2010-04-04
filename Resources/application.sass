@@ -8,7 +8,7 @@ body
   text-shadow: #333px 1px 3px
   margin: 0
   padding: 0
-  -webkit-user-select: none
+  -webkit-user-select: text
   -webkit-word-wrap: break-word
   word-wrap: break-word
 
@@ -37,11 +37,13 @@ p
     span
       margin-top: 10px
       margin-bottom: 10px
+      font-size: 80%
     .buttons
       margin: 0
       display: none
   p
-    background: rgb(241,241,241)
+    background: white
+    //rgb(241,241,241)
     padding: 4px
     margin: 5px
     margin-left: 40px
@@ -94,6 +96,7 @@ p
     color: #000
     background: #fff
 
+
 .own
   p
     margin-left: 5px
@@ -122,6 +125,8 @@ p
     -webkit-border-radius: 5px
     -webkit-transform: rotate(8deg)  scale(0.5)
 
+.activated_
+  border: 2px solid pink
 
 #content_container
   border-top: 1px solid #666
@@ -135,7 +140,7 @@ p
   top: 0px
   padding: 0px
   max-width: 440px
-  background: rgb(210,210,210)
+  background: #ededed
 
 #sidebar
   position: absolute
@@ -146,7 +151,7 @@ p
   border-top: 1px solid #666
   border-right: 1px solid #666
   border-bottom: 2px solid #666
-  background-color: #ededed
+  background-color: #DFE4EA
   ul
     list-style: none
     margin: 0
@@ -174,6 +179,7 @@ p
       float: right
 
   .change_service_container
+    display: none
     text-align: right
     position: fixed
     right: 4px
@@ -206,16 +212,16 @@ p
   margin-left: 10px
 
 // obsolete?
-.button
-  font-weight: bold
-  padding: 2px
-  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5)
-  -webkit-border-radius: 4px
-  margin: 3px
-  background: #eee
-
-  &:hover
-    background: #fff
+//.button
+//  font-weight: bold
+//  padding: 2px
+//  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5)
+//  -webkit-border-radius: 4px
+//  margin: 3px
+//  background: #eee
+//
+//  &:hover
+//    background: #fff
 .lite
   font-weight: normal
 
@@ -230,7 +236,7 @@ input, textarea
   left: 0
   bottom: 5px
   width: 100%
-  height: 75px
+  //  height: 75px
   z-index: 32
 
   textarea
@@ -344,11 +350,13 @@ input
 
 
 #charcount
-  bottom: 0px
-  font-size: 40px
-  opacity: 0.5
+  background: #EEE
+  border-radius: 4px
+  bottom: 15px
+  opacity: 0.8
+  padding: 4px 10px
   position: absolute
-  right: 2%
+  right: 2px
   z-index: 20
 
 .linux
@@ -404,7 +412,10 @@ input
 // OSX specific stuff, probably doesn't work on other operating systems
 
 button, .button
-  -webkit-appearance: square-button !important
+  -webkit-appearance: square-button  !important
 
 select
   -webkit-appearance: menulist-button !important
+
+// EXPERIMENT!
+
