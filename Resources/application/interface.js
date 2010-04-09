@@ -87,9 +87,7 @@ var Interface = new Class.create({
     },
 
     setUserAvatar : function(av_ob,login) {
-      var av = "http://blip.pl/user_generated/"+av_ob.url_30 || "app://icons/nn_standard.png";
-      var av_el = new Element("img", { width: "24px", height : "24px", "class" : "home_button_img", "src" : av});
-      $('user_icon').update(av_el);
+      // BOOOYAH
     },
     loginFail : function() {
 

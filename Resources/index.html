@@ -45,29 +45,21 @@
         </form>
       </div>
       <div id='application'>
-        <div id='sidebar'>
+        <div id='menubar'>
           <ul>
-            <li class='account'>
-              <span class='_button small'>
-                <span id='user_icon'></span>
-                <span id='user_login'></span>
-              </span>
-            </li>
             <li>
               <a class='_button small' href='#' id='home_button' title='Kokpit'>
-                <img alt='' class='home_button_img' height='24px' src='app://icons/ui/48_home.png' width='24px' />
+                <img alt='' class='home_button_img' height='32px' src='app://icons/toolbar/30x-Chats.png' width='32px' />
               </a>
             </li>
             <li>
               <a class='_button small' href='#' id='archive_button' title='Wiadomości'>
-                <img alt='' class='archive_button_img' height='24px' src='app://icons/ui/48_inbox_empty.png' width='24px' />
+                <img alt='' class='archive_button_img' height='24px' src='app://icons/toolbar/30x-Open-Mail.png' width='24px' />
               </a>
             </li>
-            <li>
-              <button class='_button small' id='mark_as_read_button' title='Oznacz jako przeczytane'>
-                <img alt='' height='12px' src='app://icons/ui/48_new.png' width='12px' />
-                0
-              </button>
+            <li class='mark_as_read'>
+              <img alt='' height='32px' src='app://icons/toolbar/30x-Grocery-Bag.png' width='32px' />
+              <button class='_button small' id='mark_as_read_button' title='Oznacz jako przeczytane'>0</button>
             </li>
           </ul>
           <!--
@@ -96,7 +88,13 @@
               </a>
             </li>
           -->
+          <span class='change_service_container'>
+            <select id='change_service'></select>
+          </span>
         </div>
+        <!--
+          The content (needs to be dynamicaly created on service retreival)
+        -->
         <div id='content_container'>
           <div class='column' id='dash0'></div>
           <div class='column' id='dash1'></div>
@@ -126,20 +124,6 @@
               </button>
             </form>
           </div>
-          <span>
-            <!--
-              <button class='small' id='sidebar_toggle' title='Schowaj sidebar'>
-                <img alt='' class='sidebar_toggle_img' height='12px' src='app://icons/ui/48_arr_left.png' width='12px' />
-              </button>
-              <button class='_button small' id='open_sender'>
-                <img alt='' class='open_sender_img' height='12px' src='app://icons/ui/48_add.png' width='12px' />
-                Dodaj
-              </button>
-            -->
-            <span class='change_service_container'>
-              <select id='change_service'></select>
-            </span>
-          </span>
         </div>
       </div>
     </div>

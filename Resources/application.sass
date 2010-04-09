@@ -119,6 +119,7 @@ p
 .update_picture
   position: absolute
   right: -5%
+  z-index: 666
 
   img
     border: 4px solid #000
@@ -130,29 +131,24 @@ p
   font-weight: bold
 
 #content_container
-  border-top: 1px solid #666
-  border-left: 1px solid #666
   border-bottom: 2px solid #666
   position: absolute
   overflow-x: hidden
   overflow-y: auto
-  left: 40px
+  left: 0px
   bottom: 80px
-  top: 0px
+  top: 40px
   padding: 0px
-  max-width: 440px
+  max-width: 480px
   background: #ededed
 
-#sidebar
+#menubar
   position: absolute
   top: 0
   left: 0
-  bottom: 80px
-  width: 40px
-  border-top: 1px solid #666
-  border-right: 1px solid #666
+  height: 39px
+  width: 100%
   border-bottom: 2px solid #666
-  background-color: #DFE4EA
   ul
     list-style: none
     margin: 0
@@ -164,11 +160,25 @@ p
       list-style: none
       margin: 0
       padding: 0
+      display: inline
       img
         vertical-align: center
     .account
       padding: 0
       list-style: square
+    .mark_as_read
+      position: relative
+      top: 1px
+      button
+        background: transparent !important
+        border: none
+        font-size: 115%
+        height: 30px
+        left: 0px
+        position: absolute
+        top: -12px
+        width: 32px
+
 
 #global_actions
   position: absolute

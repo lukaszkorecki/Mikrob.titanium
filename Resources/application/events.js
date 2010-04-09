@@ -32,7 +32,7 @@ var Events = (
 				$('login_form').fade();
 				interfaces[active_service].throbber.toggle();
 
-        $('sidebar').toggle();
+        //$('sidebar').toggle();
         $('input_area').toggle();
 			}
 		}
