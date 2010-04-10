@@ -60,16 +60,13 @@ var Interface = new Class.create({
 
     },
     setUnreadCount : function(count_str) {
-      if(count_str =='0') {
-        count_str ="0";
-      }
-      $('mark_as_read_button').update(count_str);
+      $("mark_as_read_button").down("span",0).update(count_str);
       try {
-
         if(count_str=="0") {
-          Titanium.UI.setBadge();
+          Titanium.UI.setBadge(false);
         } else {
           Titanium.UI.setBadge(count_str);
+
         }
       } catch (badge_err) { console.log(badge_err); }
     },

@@ -121,16 +121,18 @@ p {
   overflow-y: auto;
   left: 0px;
   bottom: 80px;
-  top: 40px;
+  top: 26px;
   padding: 0px;
   max-width: 480px;
   background: #ededed; }
 
 #menubar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  height: 39px;
+  height: 25px;
+  background-image: url(app://icons/BG.png);
+  background-repeat: repeat-x;
   width: 100%;
   border-bottom: 2px solid #666; }
   #menubar ul {
@@ -144,23 +146,40 @@ p {
       margin: 0;
       padding: 0;
       display: inline; }
-      #menubar ul li img {
-        vertical-align: center; }
-    #menubar ul .account {
-      padding: 0;
-      list-style: square; }
-    #menubar ul .mark_as_read {
+    #menubar ul button {
       position: relative;
-      top: 1px; }
-      #menubar ul .mark_as_read button {
+      top: 0;
+      width: 25px;
+      height: 25px;
+      display: block;
+      float: left;
+      margin-right: 12px;
+      text-align: center;
+      padding: 1px;
+      background: none;
+      border: none; }
+      #menubar ul button img {
+        vertical-align: center;
+        z-index: 23; }
+      #menubar ul button span {
+        font-weight: bold;
         position: absolute;
-        width: 30px;
-        height: 30px;
-        background: transparent !important;
-        border: none;
-        font-size: 120%;
+        text-align: center;
+        top: 8px;
         left: 1px;
-        top: -12px; }
+        width: 20px;
+        z-index: 25; }
+    #menubar ul button:hover {
+      opacity: 0.8; }
+  #menubar .change_service_container {
+    position: fixed;
+    top: 2px;
+    right: 10px; }
+
+.unread_star {
+  background-image: url(app://icons/toolbar/star.png);
+  background-position: center center;
+  background-repeat: none; }
 
 #global_actions {
   position: absolute;
@@ -170,16 +189,6 @@ p {
   #global_actions span {
     display: block;
     display-float: right; }
-  #global_actions .change_service_container {
-    display: none;
-    text-align: right;
-    position: fixed;
-    right: 4px;
-    top: 0px;
-    opacity: 0.5;
-    z-index: 64; }
-  #global_actions .change_service_container:hover {
-    opacity: 1; }
 
 .user, .recipient {
   font-weight: bold;
@@ -257,7 +266,7 @@ input[type="text"], input[type="password"] {
 
 .unread p {
   color: #000;
-  background-image: url("app://icons/ui/24_new.png");
+  background-image: url("app://icons/toolbar/star.png");
   background-position: bottom right;
   background-repeat: no-repeat; }
 
@@ -347,8 +356,5 @@ input[type="text"], input[type="password"] {
 .win32 .button {
   -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
 
-button, .button {
+.osx button, .osx .button, .linux button, .linux .button {
   -webkit-appearance: square-button  !important; }
-
-select {
-  -webkit-appearance: menulist-button !important; }

@@ -33,7 +33,7 @@ var Events = (
 				interfaces[active_service].throbber.toggle();
 
         //$('sidebar').toggle();
-        $('input_area').toggle();
+
 			}
 		}
 

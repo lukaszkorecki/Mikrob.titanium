@@ -32,16 +32,18 @@
         #menubar
           %ul
             %li
-              %a#home_button._button.small{ :href => "#", :title => "Kokpit" }
-                %img.home_button_img{ :src => "app://icons/toolbar/30x-Chats.png", :width => "32px", :height => "32px", :alt => "" }
+              %button#home_button._button.small{ :href => "#", :title => "Kokpit" }
+                %img.home_button_img{ :src => "app://icons/toolbar/30x-Cloud.png", :width => "23px", :height => "23px", :alt => "" }
 
             %li
-              %a#archive_button._button.small{ :href => "#", :title => "Wiadomości" }
-                %img.archive_button_img{ :src => "app://icons/toolbar/30x-Open-Mail.png", :width => "24px", :height => "24px", :alt => "" }
-            %li.mark_as_read
-              %img{ :src => "app://icons/toolbar/30x-Grocery-Bag.png", :height => "32px", :alt => "", :width => "32px" }
-              %button#mark_as_read_button._button.small{:title => "Oznacz jako przeczytane"} 0
-          /
+              %button#archive_button._button.small{ :href => "#", :title => "Wiadomości" }
+                %img.archive_button_img{ :src => "app://icons/toolbar/30x-Chats.png", :width => "23px", :height => "23px", :alt => "" }
+            %li
+              %button#mark_as_read_button._button.small{:title => "Oznacz jako przeczytane"}
+                %span.mark_as_read_button_img 0
+                %img.mark_as_read_button_img{ :src => "app://icons/toolbar/30x-Grocery-Bag.png", :height => "23px", :alt => "", :width => "23px" }
+
+          -#
             %li
               %a#notifications_button._button.small{ :href => "#", :title => "Powiadomienia" }
                 %img.notifications_button_img{ :src => "app://icons/ui/48_notifications.png", :width => "24px", :height => "24px", :alt => "" }
