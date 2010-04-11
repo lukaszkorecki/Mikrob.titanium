@@ -48,7 +48,16 @@ document.observe(
     }
     try {
 	    document.getElementById('main_textarea').addEventListener('keyup',dispatcher);
-
+      document.getElementById('main_textarea').addEventListener('focus', function(event) {
+                                                                  console.log("Focusing the area");
+                                                                  console.dir(event);
+                                                                  this.setAttribute("focued", true);
+                                                                });
+      document.getElementById('main_textarea').addEventListener('blur', function(event) {
+                                                                  console.log("unFocusing the area");
+                                                                  console.dir(event);
+                                                                  this.setAttribute("focued", false);
+                                                                });
     } catch(err) {
       // ignore
     }
@@ -56,23 +65,25 @@ document.observe(
       document.addEventListener(
         'keydown',
         function(event){
-          console.log(event.keyCode);
-          console.log(interfaces[active_service].active_entry);
+//          console.log(event.keyCode);
+//          console.log(interfaces[active_service].active_entry);
           var collection = $$('.update');
 
           // UP
-          if(event.keyCode == 38 && interfaces[active_service].active_entry >= 0) {
-            console.log("Wcisnalem down, czas zmniejszy");
+          if(event.keyCode == 38 && (interfaces[active_service].active_entry-1 >= 0)) {
+            console.log("[38] Wcisnalem up, czas zwiekszyc");
             interfaces[active_service].active_entry--;
           }
           // DOWN
-          if(event.keyCode == 40 && interfaces[active_service].active_entry < (collection.length)) {
-            console.log("Wcisnalem up, czas zwiekszyc");
+          if(event.keyCode == 40 && interfaces[active_service].active_entry < (collection.length-1)) {
+            console.log("[40] Wcisnalem down, czas zmniejszy");
+
             interfaces[active_service].active_entry++;
           }
 
           $$('.active_entry').each(function(elem){ elem.removeClassName("active_entry"); });
-          collection[interfaces[active_service].active_entry].addClassName("active_entry").scrollTo();
+          collection[interfaces[active_service].active_entry].scrollIntoViewIfNeeded();
+          collection[interfaces[active_service].active_entry].addClassName("active_entry");
 
 
         });

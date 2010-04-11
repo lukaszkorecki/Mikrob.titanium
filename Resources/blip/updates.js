@@ -157,7 +157,7 @@ var Update = new Class.create(
     },
     toElement : function() {
 
-      var container = new Element('div', {'class':this.cclass});
+      var container = new Element('div', {'class':this.cclass, 'id' : "S"+this.id});
       var p = new Element('p');
       var av_container = new Element('div', {'class': 'avatar_container'});
       container.insert(av_container.update(this.userAvatar()));
@@ -238,10 +238,7 @@ var Message = new Class.create(
 
     },
     toElement : function(){
-
-
-
-      var container = new Element('div', {'class':this.cclass+' '+this.mclass});
+      var container = new Element('div', {'class':this.cclass+' '+this.mclass, "id" : "S"+this.id});
       var p = new Element('p');
       var av_container = new Element('div', {'class': 'avatar_container'});
       av_container.insert(this.userAvatar());
@@ -283,7 +280,7 @@ var TwitterBlip = new Class.create(
     },
     toElement : function() {
 
-      var container = new Element('div', {'class': this.cclass + ' twitter'});
+      var container = new Element('div', {'class': this.cclass + ' twitter' , "id" : "S"+this.id});
       // TODO this is saying avatar, because eventually it will
       // render an avatar
       var body = this.body;
@@ -307,7 +304,7 @@ var Notice = new Class.create(
 
       // TODO this is saying avatar, because eventually it will
       // render an avatar
-      var container = new Element('div', {'class': this.cclass+' update'});
+      var container = new Element('div', {'class': this.cclass+' update',  "id" : "S"+this.id});
 
       var p = new Element('p');
       var av_container = new Element('div', {'class': 'avatar_container'});
