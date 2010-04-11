@@ -182,7 +182,6 @@ p
         vertical-align: center
         z-index: 23
       span
-        font-weight: bold
         position: absolute
         text-align: center
         top: 8px
@@ -234,17 +233,6 @@ p
 .transport
   margin-left: 10px
 
-// obsolete?
-//.button
-//  font-weight: bold
-//  padding: 2px
-//  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5)
-//  -webkit-border-radius: 4px
-//  margin: 3px
-//  background: #eee
-//
-//  &:hover
-//    background: #fff
 .lite
   font-weight: normal
 
@@ -413,7 +401,7 @@ input
   body
     background: #222
   .column
-    background: #ddd
+    background: #222
   #controls
     background: #222
 
@@ -427,10 +415,16 @@ input
   .update img
     &.avatar, &.ravatar
       margin-top: 5px
-      -webkit-box-shadow: -1px 1px 3px rbga(0,0,0,0.5)
+      //-webkit-box-shadow: -1px 1px 3px rbga(0,0,0,0.5)
 
   .button
     -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5)
+  ul
+    button
+      span
+        left: 5px
+  .attach_file_img
+    display: none
 
 // OSX specific stuff, probably doesn't work on other operating systems
 .osx, .linux

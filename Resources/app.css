@@ -162,7 +162,6 @@ p {
         vertical-align: center;
         z-index: 23; }
       #menubar ul button span {
-        font-weight: bold;
         position: absolute;
         text-align: center;
         top: 8px;
@@ -355,6 +354,8 @@ input[type="text"], input[type="password"] {
   -webkit-box-shadow: -1px 1px 3px rbga(0,0,0,0.5); }
 .win32 .button {
   -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
+.win32 ul button span {
+  left: 5px; }
 
 .osx button, .osx .button, .linux button, .linux .button {
   -webkit-appearance: square-button  !important; }
