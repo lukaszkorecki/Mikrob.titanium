@@ -10,7 +10,7 @@ var Update = new Class.create(
       this.raw_body = obj.body;
       this.created_at = obj.created_at;
       this.transport = (obj.transport) ? obj.transport.name : "?";
-      console.dir(obj);
+//      console.dir(obj);
       if(obj.pictures !== undefined && obj.pictures.length>0) {
         this.pictures = obj.pictures;
       } else {

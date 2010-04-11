@@ -14,7 +14,7 @@ var Interface = new Class.create({
       this.globalLimit = 20;
       this.throbber = $('throbber');
       this.character_limit = 140;
-
+      this.active_entry = 0;
       this.ok_image = "app://mikrob_icon_ok.png";
       this.not_ok_image = "app://mikrob_icon_error.png";
       try {
@@ -32,7 +32,7 @@ var Interface = new Class.create({
       this.notify(Titanium.App.getName(),'Wysłano','ok');
       if(attachment != "") {
         attachment = "";
-        $('attach_file').update("Dodaj plik");
+        $('attach_file').update("Dodaj plik").removeClassName("activated_");
       }
       try {
         $('charcount').update('0');

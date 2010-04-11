@@ -13,7 +13,7 @@ document.observe(
       win.height = img.height;
       img.toggle();
       loader.toggle();
-      win.setResizable(false);
+      win.setResizable(true);
 
     }
     resize_window.delay(1);

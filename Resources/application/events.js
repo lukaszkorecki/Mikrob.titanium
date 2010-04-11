@@ -29,11 +29,13 @@ var Events = (
 				Titanium.App.Properties.setString('username',"");
 				Titanium.App.Properties.setString('password',"");
 
-				$('login_form').fade();
+				$('login_form').remove();
 				interfaces[active_service].throbber.toggle();
 
-        //$('sidebar').toggle();
+        $('input_area').toggle(); // <- this needs to be a function
+        $('menubar').toggle();
 
+        $$('.update')[interfaces[active_service].active_entry].addClassName("active_entry").scrollTo();
 			}
 		}
 

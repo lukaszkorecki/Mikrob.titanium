@@ -66,6 +66,9 @@ p {
   left: 1px;
   text-align: right; }
 
+.active_entry {
+  background: red; }
+
 .directed p {
   background-color: #c8e880; }
 
@@ -342,7 +345,7 @@ input[type="text"], input[type="password"] {
 .win32 body {
   background: #222; }
 .win32 .column {
-  background: #ddd; }
+  background: #222; }
 .win32 #controls {
   background: #222; }
 .win32 .update p, .win32 .update .quoted {
@@ -350,12 +353,13 @@ input[type="text"], input[type="password"] {
 .win32 .avatar_container {
   -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
 .win32 .update img.avatar, .win32 .update img.ravatar {
-  margin-top: 5px;
-  -webkit-box-shadow: -1px 1px 3px rbga(0,0,0,0.5); }
+  margin-top: 5px; }
 .win32 .button {
   -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
 .win32 ul button span {
   left: 5px; }
+.win32 .attach_file_img {
+  display: none; }
 
 .osx button, .osx .button, .linux button, .linux .button {
   -webkit-appearance: square-button  !important; }

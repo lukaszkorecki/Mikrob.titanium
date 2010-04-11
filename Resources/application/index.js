@@ -16,49 +16,67 @@ var interfaces = new Array();
 // TODO this should come from the DB
 var services = new Array();
 var username,loop1,active_service,archive_opened =0;
-document.observe('dom:loaded',function(){
-                   Application.loadWindowSettings();
-                   Application.cache_start();
-                   try {
-                     $('sidebar').toggle(); // <- this needs to be a function
-                     $('throbber').toggle(); // <- this needs to be a function
-                     $('input_area').toggle(); // <- this needs to be a function
-                   } catch(orr) {
-                     // orr
-                   }
+document.observe(
+  'dom:loaded',
+  function(){
+    Application.loadWindowSettings();
+    Application.cache_start();
+      $('input_area').toggle(); // <- this needs to be a function
+      $('menubar').toggle();
 
 
+    // TEH DISPACHA
 
-// TEH DISPACHA
+    // for dispatcher to work few conventions need to followed:
+    // element name can be what ever, like "blomp" or "blamp_user"
+    // for elemen/button "blomp_user" the event hadnler will be "Events.blomp_user"
+    // if the link/button is containing an image (as a icon), the img elements
+    // id will be "blomp_user_img"
+    // that's it, the rest is magic
 
-// for dispatcher to work few conventions need to followed:
-// element name can be what ever, like "blomp" or "blamp_user"
-// for elemen/button "blomp_user" the event hadnler will be "Events.blomp_user"
-// if the link/button is containing an image (as a icon), the img elements
-// id will be "blomp_user_img"
-// that's it, the rest is magic
+    //
+    try {
+	    document.getElementById('wrapper').addEventListener('click',dispatcher);
+    } catch(err) {
+      // ignore
+    }
+    try {
+	    document.getElementById('wrapper').addEventListener('submit',dispatcher);
 
-//
-try {
-	document.getElementById('wrapper').addEventListener('click',dispatcher);
-} catch(err) {
-  // ignore
-}
-try {
-	document.getElementById('wrapper').addEventListener('submit',dispatcher);
+    } catch(err) {
+      // ignore
+    }
+    try {
+	    document.getElementById('main_textarea').addEventListener('keyup',dispatcher);
 
-} catch(err) {
-  // ignore
-}
-try {
-	document.getElementById('main_textarea').addEventListener('keyup',dispatcher);
+    } catch(err) {
+      // ignore
+    }
 
-} catch(err) {
-  // ignore
-}
+      document.addEventListener(
+        'keydown',
+        function(event){
+          console.log(event.keyCode);
+          console.log(interfaces[active_service].active_entry);
+          var collection = $$('.update');
+
+          // UP
+          if(event.keyCode == 38 && interfaces[active_service].active_entry >= 0) {
+            console.log("Wcisnalem down, czas zmniejszy");
+            interfaces[active_service].active_entry--;
+          }
+          // DOWN
+          if(event.keyCode == 40 && interfaces[active_service].active_entry < (collection.length)) {
+            console.log("Wcisnalem up, czas zwiekszyc");
+            interfaces[active_service].active_entry++;
+          }
+
+          $$('.active_entry').each(function(elem){ elem.removeClassName("active_entry"); });
+          collection[interfaces[active_service].active_entry].addClassName("active_entry").scrollTo();
 
 
-});
+        });
+  });
 
 function dispatcher(event){
 	var element = $(event.target);

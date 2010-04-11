@@ -3,7 +3,6 @@ var Application = (
   function() {
     db = "";
 
-
     window_resized = false;
     services = [];
     attachment="";
