@@ -66,6 +66,7 @@ var Events = (
 		function main_textarea (event) {
 			var content = (event.target_up || event.target).getValue();
 			if(event.keyCode == 13  && services[active_service].type != 'Flaker') { // this needs to be service specific!
+        content = content.replace("\n","");
         interfaces[active_service].disableInputArea();
 				if( (content.length-1) <= interfaces[active_service].character_limit){
 					interfaces[active_service].throbber.toggle();
