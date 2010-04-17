@@ -35,7 +35,6 @@ var Events = (
         $('input_area').toggle(); // <- this needs to be a function
         $('menubar').toggle();
 
-        $$('.update')[interfaces[active_service].active_entry].addClassName("active_entry").scrollTo();
 			}
 		}
 
