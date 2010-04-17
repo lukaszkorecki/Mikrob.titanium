@@ -55,6 +55,7 @@ p
     -webkit-border-radius: 4px
     color: #888
     z-index: 1
+    position: relative
 
   .avatar_container
     float: left
@@ -121,13 +122,17 @@ p
 
 .update_picture
   position: absolute
-  right: -5%
+  right: -1px
+  top: -10px
   z-index: 666
-
+  opacity: 0.5
   img
     border: 4px solid #000
     -webkit-border-radius: 5px
     -webkit-transform: rotate(8deg)  scale(0.5)
+
+.update_picture:hover
+  opacity: 1
 
 .activated_
   color: pink
