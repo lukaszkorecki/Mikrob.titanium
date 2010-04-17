@@ -67,7 +67,8 @@ p {
   text-align: right; }
 
 .active_entry {
-  background: red; }
+  background: white;
+  border: 1px solid black; }
 
 .directed p {
   background-color: #c8e880; }
