@@ -245,4 +245,66 @@ var Events = (
       attach_file : attach_file
 
 		};
-  })();
+  }
+)();
+
+var KeyboardEvents = (
+  function() {
+    function navigate_over_updates(event) {
+      var collection = $$('.update');
+
+      // UP
+      if(event.keyCode == 38 && (interfaces[active_service].active_entry-1 >= 0)) {
+        console.log("[38] Wcisnalem up, czas isc na gore");
+        interfaces[active_service].active_entry--;
+      }
+      // DOWN
+      if(event.keyCode == 40 && interfaces[active_service].active_entry < (collection.length-1)) {
+        console.log("[40] Wcisnalem down, czas isc na dol");
+
+        interfaces[active_service].active_entry++;
+      }
+
+      $$('.active_entry').each(function(elem){ elem.removeClassName("active_entry"); });
+      collection[interfaces[active_service].active_entry].scrollIntoViewIfNeeded();
+      collection[interfaces[active_service].active_entry].addClassName("active_entry");
+
+      console.dir(event);
+    }
+    function reply_to(event) {
+      if(has_key_modifier(event)) {
+        var klass = "message_link";
+        if(event.shiftKey == true) {
+          klass = "quote_link";
+        }
+        var el = $$(".update")[interfaces[active_service].active_entry].down("."+klass);
+        fire(el);
+      }
+    }
+    function expand_quoted(event) {
+
+    }
+    //:private
+    function fire(el){
+      if(el) {
+        Dispatcher( el.fire("click"));
+      }
+    }
+    function has_key_modifier(event) {
+      var os = document.body.className;
+
+      if(os == "osx" && event.metaKey == true) {
+        return true;
+      }
+      if((os.match(/win/i) || os == "linux") && event.ctrlKey==true) {
+        return true;
+      }
+      return false;
+    }
+    return {
+      navigate_over_updates : navigate_over_updates,
+      reply_to : reply_to,
+      expand_quoted : expand_quoted
+    };
+  }
+)();
