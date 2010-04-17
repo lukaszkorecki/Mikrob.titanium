@@ -1,4 +1,5 @@
 namespace :assets do
+  require 'rubygems'
   require 'haml'
   require 'sass'
   def haml_parse(file)
