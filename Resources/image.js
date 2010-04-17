@@ -18,5 +18,26 @@ document.observe(
     }
     resize_window.delay(1);
 
+    function resize_to (size) {
+      var win = Titanium.UI.getCurrentWindow();
+      var h = img.naturalHeight * (size / 100);
+      var w = img.naturalWidth * (size/100);
+      img.setAttribute("width",w );
+      img.setAttribute("height",h );
+      console.log(size);
+      console.dir(img);
+      win.width = w;
+      win.height = h;
+      win.setResizable(true);
+    }
+    // attach events
+    ["img_25", "img_50", "img_100"].each(
+      function(el){
+
+        $(el).observe("click", function(){
+                        var siz = el.split("_").last();
+                        resize_to(siz);
+                      });
+      });
 
   });
