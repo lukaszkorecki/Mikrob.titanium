@@ -64,7 +64,7 @@ var Interface = new Class.create({
       }
 
     },
-    setunreadcount : function(count_str) {
+    setUnreadCount : function(count_str) {
       $("mark_as_read_button").down("span",0).update(count_str);
       try {
         if(count_str=="0") {
