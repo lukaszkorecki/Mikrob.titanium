@@ -7,7 +7,8 @@
  * @author Lukasz
  */
 
-var Interface = new Class.create({
+var Interface = new Class.create(
+  {
     initialize :function(container_id, service_id) {
       this.container_id = container_id;
       this.service_id = service_id;
@@ -54,9 +55,10 @@ var Interface = new Class.create({
         img = "app://mikrob_icon.png";
         console.dir(ca_er);
       }
-      try {
       this.note.setIcon(img);
-      this.note.show();//Make it appear with the default timings.
+      try {
+
+        this.note.show();//Make it appear with the default timings.
 
       } catch(no_notifier) {
         console.log("Blad wyswietlania powiadomienia");
@@ -64,11 +66,11 @@ var Interface = new Class.create({
       }
 
     },
-    setunreadcount : function(count_str) {
+    setUnreadCount : function(count_str) {
       $("mark_as_read_button").down("span",0).update(count_str);
       try {
         if(count_str=="0") {
-          Titanium.UI.setBadge(false);
+          Titanium.UI.setBadge();
         } else {
           Titanium.UI.setBadge(count_str);
 
@@ -78,14 +80,14 @@ var Interface = new Class.create({
     disableInputArea : function() {
       $$('#input_area textarea')[0].disable();
       $$('#input_area button').each(function(elem) {
-                                     elem.setAttribute("disabled", "disable");
-                                   });
+                                      elem.setAttribute("disabled", "disable");
+                                    });
     },
     enableInputArea : function() {
       $$('#input_area textarea')[0].enable();
       $$('#input_area button').each(function(elem) {
-                                     elem.removeAttribute("disabled");
-                                   });
+                                      elem.removeAttribute("disabled");
+                                    });
     },
 
     setUserAvatar : function(av_ob,login) {
@@ -128,7 +130,7 @@ var Interface = new Class.create({
             element.setAttribute("title", attachment);
             element.addClassName('activated_');
             element.update("Dodano plik");
-        });
+          });
       } else {
         attachment = "";
         element.setAttribute("title", "");
@@ -137,33 +139,33 @@ var Interface = new Class.create({
       }
 
     },
-      sidebar_toggle: function() {
-        var sidebar = $('sidebar');
-        var toggled = {
-          "left" : "0px",
-          "max-width" : "475px"
-        };
-        var visible = {
-          "left" : "135px",
-          "max-width" : "400px"
-        };
-        var config = {
-          duration : 0.5
-        };
-        if(sidebar.visible()){
-          config.style = toggled;
-          config.afterFinish = function() {sidebar.toggle(); };
-          new Effect.Morph('content_container',config);
-          $('sidebar_toggle').down('img').setAttribute("src", "app://icons/ui/48_arr_right.png");
+    sidebar_toggle: function() {
+      var sidebar = $('sidebar');
+      var toggled = {
+        "left" : "0px",
+        "max-width" : "475px"
+      };
+      var visible = {
+        "left" : "135px",
+        "max-width" : "400px"
+      };
+      var config = {
+        duration : 0.5
+      };
+      if(sidebar.visible()){
+        config.style = toggled;
+        config.afterFinish = function() {sidebar.toggle(); };
+        new Effect.Morph('content_container',config);
+        $('sidebar_toggle').down('img').setAttribute("src", "app://icons/ui/48_arr_right.png");
 
-        } else {
-          sidebar.toggle();
-          config.style = visible;
-          new Effect.Morph('content_container',config);
-          $('sidebar_toggle').down('img').setAttribute("src", "app://icons/ui/48_arr_left.png");
-        }
+      } else {
+        sidebar.toggle();
+        config.style = visible;
+        new Effect.Morph('content_container',config);
+        $('sidebar_toggle').down('img').setAttribute("src", "app://icons/ui/48_arr_left.png");
       }
-    });
+    }
+  });
 // why this is here?
 
 var utfs = "☺☻☹★✩✫♫♪♥♦♣♠✿❀❁❄☾☂☀☁☃☄☮☯☎❦♀♂☚☛☠☢☣☤✌✍✎✂✆✈✉✔✘☥☸☦☧☨✝☩☪☭♚♛♜♝♞♟®™♈♉♊♋♌♍♎♏♐♑♒♓…∞¥€£≤≥«»≠≈∫∑∏µ∆øπΩ•÷‰⇐⇒⇔√";
@@ -222,7 +224,7 @@ var BodyParser =
      }
 
      function attach_special_class(url) {
-        // it would be cool to have some ruby here...
+       // it would be cool to have some ruby here...
        // but we'll do it differently
        var prefix = "special_";
        if(url.match("/wrzuta/gi")) { return prefix+"wrzuta"; }
