@@ -54,12 +54,17 @@ var Interface = new Class.create({
         img = "app://mikrob_icon.png";
         console.dir(ca_er);
       }
-
+      try {
       this.note.setIcon(img);
       this.note.show();//Make it appear with the default timings.
 
+      } catch(no_notifier) {
+        console.log("Blad wyswietlania powiadomienia");
+        console.dir(no_notifier);
+      }
+
     },
-    setUnreadCount : function(count_str) {
+    setunreadcount : function(count_str) {
       $("mark_as_read_button").down("span",0).update(count_str);
       try {
         if(count_str=="0") {
