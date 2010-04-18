@@ -50,7 +50,6 @@ var Preferences = (
     return {
       get : get,
       set  : set,
-      container : container,
       Bool : Bool
     };
 

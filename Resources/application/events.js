@@ -39,7 +39,6 @@ var Events = (
 		}
 
     function sender_item(event) {
-      console.log("sender_item");
       var content = $('main_textarea').getValue();
 			var len =content.length;
       if(len <= interfaces[active_service].character_limit) {
@@ -51,7 +50,6 @@ var Events = (
           try {
             services[active_service].postWithFile(content, attachment);
           } catch(no_post_with_file) {
-            console.dir(no_post_with_file);
             alert("Nie udało się wysłać statusu w plikiem, sry");
           }
         }
@@ -191,10 +189,8 @@ var Events = (
 	  }
 
 	  function external_link (event) {
-      console.log('external_link');
 			var url = $(event.target_up || event.target).getAttribute("href");
 
-      console.log(url);
 			Application.openUrl(url);
 	  }
 
@@ -257,21 +253,16 @@ var KeyboardEvents = (
 
       // UP
       if(event.keyCode == 38 && (interfaces[active_service].active_entry-1 >= 0)) {
-        console.log("[38] Wcisnalem up, czas isc na gore");
         interfaces[active_service].active_entry--;
       }
       // DOWN
       if(event.keyCode == 40 && interfaces[active_service].active_entry < (collection.length-1)) {
-        console.log("[40] Wcisnalem down, czas isc na dol");
-
         interfaces[active_service].active_entry++;
       }
 
       $$('.active_entry').each(function(elem){ elem.removeClassName("active_entry"); });
       collection[interfaces[active_service].active_entry].scrollIntoViewIfNeeded();
       collection[interfaces[active_service].active_entry].addClassName("active_entry");
-
-      console.dir(event);
     }
     function reply_to(event) { // or quote!
       if(has_key_modifier(event)) {
