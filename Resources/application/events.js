@@ -271,7 +271,7 @@ var KeyboardEvents = (
 
       console.dir(event);
     }
-    function reply_to(event) {
+    function reply_to(event) { // or quote!
       if(has_key_modifier(event)) {
         var klass = "message_link";
         if(event.shiftKey == true) {
@@ -282,7 +282,10 @@ var KeyboardEvents = (
       }
     }
     function expand_quoted(event) {
-
+      if(has_key_modifier(event)) {
+        var el = $$(".update")[interfaces[active_service].active_entry].down(".expanded_link",0);
+        // TODO this needs to be fixed: look for #445
+      }
     }
     function open_dashboard(event) {
       if(has_key_modifier(event)) {
@@ -292,6 +295,11 @@ var KeyboardEvents = (
     function open_messages(event) {
       if(has_key_modifier(event)) {
         fire($("archive_button"));
+      }
+    }
+    function open_preferences(event) {
+      if(has_key_modifier(event)) {
+        Application.openPreferencesWindow();
       }
     }
     function mark_all_as_read(event) {
@@ -326,6 +334,7 @@ var KeyboardEvents = (
       expand_quoted : expand_quoted,
       open_dashboard : open_dashboard,
       open_messages : open_messages,
+      open_preferences : open_preferences,
       mark_all_as_read : mark_all_as_read,
       make_private : make_private
     };

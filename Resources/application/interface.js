@@ -45,37 +45,48 @@ var Interface = new Class.create(
       }
     },
     notify : function(login, body,img) {
-      this.note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;
-      this.note.setMessage(body); //Add the message;
-      try {
-        if(img != undefined && img.startsWith("http")) {
-          img = Application.cache_io(img, "av"); // investigate linux
+      if(Preferences.container["notifications"] == "true") {
+        this.note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;
+        this.note.setMessage(body); //Add the message;
+        try {
+          if(img != undefined && img.startsWith("http")) {
+            img = Application.cache_io(img, "av"); // investigate linux
+          }
+        } catch(ca_er) {
+          img = "app://mikrob_icon.png";
+          console.dir(ca_er);
         }
-      } catch(ca_er) {
-        img = "app://mikrob_icon.png";
-        console.dir(ca_er);
+        this.note.setIcon(img);
+        try {
+          this.note.show();//Make it appear with the default timings.
+        } catch(no_notifier) {
+          console.log("Blad wyswietlania powiadomienia");
+          console.dir(no_notifier);
+        }
+      } else {
+        console.log("Wylaczono powiadomienia");
       }
-      this.note.setIcon(img);
-      try {
-
-        this.note.show();//Make it appear with the default timings.
-
-      } catch(no_notifier) {
-        console.log("Blad wyswietlania powiadomienia");
-        console.dir(no_notifier);
-      }
-
     },
     setUnreadCount : function(count_str) {
       $("mark_as_read_button").down("span",0).update(count_str);
-      try {
-        if(count_str=="0") {
-          Titanium.UI.setBadge();
-        } else {
-          Titanium.UI.setBadge(count_str);
 
-        }
-      } catch (badge_err) { console.log(badge_err); }
+      if(Preferences.container["badge"] =="true") {
+        try {
+          if(count_str=="0") {
+            Titanium.UI.setBadge();
+          } else {
+            Titanium.UI.setBadge(count_str);
+
+          }
+        } catch (badge_err) { console.log(badge_err); }
+      } else {
+        console.log("wylaczono badgea");
+        try {
+          Titanium.UI.setBadge();
+        } catch(e) { /* e */ }
+      }
+
+
     },
     disableInputArea : function() {
       $$('#input_area textarea')[0].disable();

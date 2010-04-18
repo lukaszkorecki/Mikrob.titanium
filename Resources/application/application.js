@@ -55,7 +55,16 @@ var Application = (
       w2.setWidth(400);
       w2.open();
     }
+    function openPreferencesWindow() {
+      var win = Titanium.UI.getCurrentWindow();
+      var w2 = win.createWindow('app://preferences.html');
 
+      w2.setToolWindow(true);
+      w2.setResizable(true);
+      w2.setHeight(550);
+      w2.setWidth(400);
+      w2.open();
+    }
     function openArchiveWindow() {
       var updates = new Array();
       var counter = 0;
@@ -211,6 +220,7 @@ var Application = (
       refreshServices :refreshServices,
       saveService :saveService,
       openAddServiceWindow :openAddServiceWindow,
+      openPreferencesWindow : openPreferencesWindow,
       openArchiveWindow :openArchiveWindow,
       closeArchiveWindow :closeArchiveWindow,
       returnServiceObjects :returnServiceObjects,

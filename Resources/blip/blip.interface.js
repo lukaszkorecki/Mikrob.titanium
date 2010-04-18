@@ -90,6 +90,8 @@ var BlipInterface = new Class.create(Interface, {
     var els = $$('.s'+target_class);
     els.each(function(el) {
       el.update('[Blip]');
+       // #445
+       // FIXME, TODO make this delegated:!!
       el.observe('click', function(event) {
         event.preventDefault();
 

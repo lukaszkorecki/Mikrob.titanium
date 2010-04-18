@@ -59,7 +59,7 @@ document.observe(
         case 40: // down
           KeyboardEvents.navigate_over_updates(event);
           break;
-        case 39: // left
+        case 79: // o
           KeyboardEvents.expand_quoted(event);
           break;
         case 82: // r
@@ -76,6 +76,9 @@ document.observe(
           break;
         case 80: //p
           KeyboardEvents.make_private(event);
+          break;
+        case 188: //,
+          KeyboardEvents.open_preferences(event);
           break;
 //          case 51: // 3 (search)
 //          case 52: // 4 (profile?)

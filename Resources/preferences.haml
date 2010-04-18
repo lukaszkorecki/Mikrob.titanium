@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }
+    %link{ :href => "app.css", :rel => "stylesheet", :type => "text/css", :media => "screen", :charset => "utf-8" }
+    %title
+      Ustawienia
+    %script{ :src => "libs/prototype.js", :type => "text/javascript" }
+    %script{ :src => "application/database_connector.js", :type => "text/javascript"}
+    %script{ :src => "application/preferences.js", :type => "text/javascript"}
+    :javascript
+      document.observe("dom:loaded", function(){
+        document.fire("preferences:interface_loaded");
+      });
+
+
+  %body{:style => "background-color: #ededed; height: 100%"}
+    %div
+      %h1 Ustawienia
+      %form#settings
+        %fieldset
+          Informacje
+          .group#notifications
+            %label{:for => "notifications"} Powiadomienia?
+            %input{:name => "notifications", :type => "checkbox"}
+          .group#badge
+            %label{:for => "badge"} Etykieta w docku?
+            %input{:name => "badge", :type => "checkbox"}
+        %fieldset
+          Konta
+          %p
+            Tutaj beda konta i ich ustawienia i w ogole bedzie lepiej

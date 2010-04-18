@@ -68,7 +68,7 @@ p {
   text-align: right; }
 
 .active_entry {
-  background: -webkit-gradient(linear, left top, right top, color-stop(0.39, rgb(255,255,255)), color-stop(0.85, rgb(190,190,190))); }
+  background: -webkit-gradient(linear, left top, right top, color-stop(0.39, rgb(190,190,190)), color-stop(0.85, rgb(255,255,255))); }
 
 .directed p {
   background-color: #c8e880; }
