@@ -46,11 +46,11 @@ var Preferences = (
 document.observe(
   "dom:loaded",
   function(){
-    if(! Preferences.getPreferences()) {
+    if(! Preferences.get()) {
       // defaults
-      Preferences.setPreference("notifications", "true");
-      Preferences.setPreference("badge", "true");
-      Preferences.getPreferences();
+      Preferences.set("notifications", "true");
+      Preferences.set("badge", "true");
+      Preferences.get();
     } else {
       console.dir(Preferences.container);
     }
@@ -60,5 +60,22 @@ document.observe(
   "preferences:interface_loaded",
   function(){
     console.log("opened preferences win");
+    // bool values
+    ["notifications", "badge"].each(
+      function(el){
+        var val =  (Preferences.container[el] === "true" ? true : false);
+        $(el).down("input").setValue(val).observe(
+          "change",
+          function() {
+            console.dir("changing "+this.name + " val: "+this.getValue());
+            var val = new String(new Boolean(this.getValue())).split("").join(""); // ha ha ha
+            Preferences.set(this.name, val);
+
+
+          }
+        );
+
+      }
+    );
   }
 );
