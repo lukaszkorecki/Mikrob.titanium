@@ -37,9 +37,9 @@ var BlipInterface = new Class.create(Interface, {
      var single_status=null;
       try {
         single_status = self.getUpdateObject(blip);
-      } catch (guo_err) { 
-        console.dir(guo_err); 
-        single_status = ""; 
+      } catch (guo_err) {
+        console.dir(guo_err);
+        single_status = "";
       }
       if(is_update !== 0) {
         dash.insert({'top': single_status});
@@ -59,12 +59,11 @@ var BlipInterface = new Class.create(Interface, {
 //      }
     });
     this.expandLink("rdir_link");
+    var unr = $$('#'+this.container_id + ' .unread').length;
     if (is_update ===0) {
-      this.setUnreadCount('0');
-    } else {
-      var unr = $$('#'+this.container_id + ' .unread').length;
-      this.setUnreadCount(""+unr);
+      unr = 0;
     }
+    this.setUnreadCount(""+unr);
     this.throbber.toggle();
   },
   expandLink : function(target_class) {
