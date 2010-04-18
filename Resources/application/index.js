@@ -9,7 +9,14 @@ function run_tests() {
 
 }
 
-
+window.addEventListener("load", function(event){
+                          console.log("OPEN");
+                          Application.loadWindowSettings();
+                        });
+window.addEventListener("unload", function(event){
+                          Application.saveWindowSettings();
+                          console.log("EXIT");
+                        });
 var open_event_id=0;
 // globalz
 var interfaces = new Array();
@@ -52,8 +59,6 @@ document.observe(
     document.body.addEventListener(
       'keydown',
       function(event){
-        console.log(event.keyCode);
-        console.dir(event);
         switch(event.keyCode) {
         case 38: //up
         case 40: // down
@@ -93,8 +98,6 @@ document.observe(
   });
 
 function Dispatcher(event){
-  console.log("Dispatcher");
-  console.dir(event);
 	var element = $(event.target);
 	// get the id of clicked element
 	var id = element.identify();
@@ -110,7 +113,6 @@ function Dispatcher(event){
 		event.target_up = event.target.up();
 	}
 	// now... DISPATCH! ;-)
-  console.log("ID: " + id);
 	if(Events[id] !== undefined) {
 		Events[id](event);
 	} else {

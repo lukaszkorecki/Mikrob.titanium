@@ -154,29 +154,38 @@ var Application = (
       $('dash'+new_service_id).appear();
     }
     function saveWindowSettings() {
+      console.log("saving window settings");
       var win = Titanium.UI.getCurrentWindow();
       var bounds = win.getBounds();
+      for(var e in bounds) {
+        console.log(e);
+        console.log(bounds[e]);
+      }
       Titanium.App.Properties.setInt("width", bounds.width);
       Titanium.App.Properties.setInt("height", bounds.height);
       Titanium.App.Properties.setInt("x", bounds.x);
       Titanium.App.Properties.setInt("y", bounds.y);
+      alert("nok");
 
     }
     function loadWindowSettings() {
-	    if(this.window_resized === false) {
-	      var win = Titanium.UI.getCurrentWindow();
-	      var bounds = win.getBounds();
-	      try {
-		      bounds.width = Titanium.App.Properties.getInt("width");
-		      bounds.height = Titanium.App.Properties.getInt("height");
-		      bounds.x = Titanium.App.Properties.getInt("x");
-		      bounds.y = Titanium.App.Properties.getInt("y");
-	      } catch (get_props) {
-				  console.log('unable to get props');
-	      }
-	      win.setBounds(bounds);
+      console.log("loading window settings");
+	 	  var win = Titanium.UI.getCurrentWindow();
+      win.setResizable(true);
+	    var bounds = win.getBounds();
+	    try {
+		    bounds.width = Titanium.App.Properties.getInt("width");
+		    bounds.height = Titanium.App.Properties.getInt("height");
+		    bounds.x = Titanium.App.Properties.getInt("x");
+		    bounds.y = Titanium.App.Properties.getInt("y");
+	    } catch (get_props) {
+				console.log('unable to get props');
 	    }
-      this.window_resized = true;
+	    win.setBounds(bounds);
+      win.setHeight(bounds.height);
+      win.setWidth(bounds.width);
+      console.dir(bounds);
+
     }
     function openImageWindow(image_url) {
       Titanium.API.set('image_url', image_url);
