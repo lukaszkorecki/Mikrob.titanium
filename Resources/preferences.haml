@@ -12,18 +12,19 @@
       document.fire("preferences:interface_loaded");
 
   %body
-    %h1 Ustawienia
-    %form#settings
-      %fieldset
-        Informacje
-        .group#notifications
-          %label{:for => "notifications"} Powiadomienia?
-          %input{:name => "notifications", :type => "checkbox"}
-        .group#badge
-          %label{:for => "badge"} Etykieta w docku?
-          %input{:name => "badge", :type => "checkbox"}
-      %fieldset
-        Konta
-        %p
-          Tutaj beda konta i ich ustawienia i w ogole bedzie lepiej
-      %input{:type => "submit"} Zapisz
+    #application
+      %h1 Ustawienia
+      %form#settings
+        %fieldset
+          Informacje
+          .group#notifications
+            %label{:for => "notifications"} Powiadomienia?
+            %input{:name => "notifications", :type => "checkbox"}
+          .group#badge
+            %label{:for => "badge"} Etykieta w docku?
+            %input{:name => "badge", :type => "checkbox"}
+        %fieldset
+          Konta
+          %p
+            Tutaj beda konta i ich ustawienia i w ogole bedzie lepiej
+        %input{:type => "submit"} Zapisz
