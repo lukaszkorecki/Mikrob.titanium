@@ -86,9 +86,9 @@ var Events = (
           interfaces[active_service].enableInputArea();
 				}
 			}
-      if(this.visible()) {
+      if(interfaces[active_service]) {
 			  if (content.length === 0) content.length=interfaces[active_service].character_limit;
-			  $('charcount').update(interfaces[active_service].character_limit-content.length);  
+			  $('charcount').update(interfaces[active_service].character_limit-content.length);
       }
 
       return true;
