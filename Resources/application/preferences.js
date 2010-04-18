@@ -18,7 +18,7 @@ var Preferences = (
         set.each(function(pref){
                    container[pref.row.prefernce_name] = pref.row.prefernce_value;
                  });
-        return true
+        return true;
       }
 
     }
@@ -28,14 +28,17 @@ var Preferences = (
           prefernce_name  : name,
           prefernce_value : value
         }
-      }
+      };
+
       this.db.save(set);
+      return this.getPreferences();
+
     }
     return {
-      getPreferences : getPreferences,
-      setPreference : setPreference,
+      get : getPreferences,
+      set  : setPreference,
       container : container
-    }
+    };
 
   })();
 
