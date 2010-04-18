@@ -75,7 +75,7 @@ var Interface = new Class.create(
       if(Preferences.container["badge"] =="true") {
         try {
           if(count_str=="0") {
-            Titanium.UI.setBadge(false);
+            Titanium.UI.setBadge();
           } else {
             Titanium.UI.setBadge(count_str);
 
@@ -83,6 +83,9 @@ var Interface = new Class.create(
         } catch (badge_err) { console.log(badge_err); }
       } else {
         console.log("wylaczono badgea");
+        try {
+                      Titanium.UI.setBadge();
+        } catch(e) { /* e */ }
       }
 
     },
