@@ -7,6 +7,8 @@ var Preferences = (
       prefernce_value : {field_type : "text", not_null  : true}
 
     };
+    var Bool = ["notifications", "badge"];
+
     var container = [];
     function getPreferences() {
       console.log("getPreferences");
@@ -34,48 +36,53 @@ var Preferences = (
       getPreferences();
 
     }
+    function set(name, val, type) {
+      var t = type || "Bool";
+      console.log(name + val + type);
+      Titanium.App.Properties["set"+t](name, val);
+    }
+    function get(name, type) {
+
+      console.log(name + type);
+      var t = type || "Bool";
+      return Titanium.App.Properties["get"+t](name);
+    }
     return {
-      get : getPreferences,
-      set  : setPreference,
-      container : container
+      get : get,
+      set  : set,
+      container : container,
+      Bool : Bool
     };
 
   })();
 
 
 document.observe(
-  "dom:loaded",
-  function(){
-    if(! Preferences.get()) {
-      // defaults
-      Preferences.set("notifications", "true");
-      Preferences.set("badge", "true");
-      Preferences.get();
-    } else {
-      console.dir(Preferences.container);
-    }
+  "preferences:interface_loaded",
+  function() {
+    console.log("opened preferences win");
+    // bool values
+    Preferences.Bool.each(function(el){
+                            $(el).down("input").setValue(Preferences.get(el)).observe(
+                              "change",
+                              function() {
+                                console.dir("changing "+this.name + " val: "+this.getValue());
+                                var val = !!(this.getValue());
+
+                                Preferences.set(this.name, val);
+                              });
+                          });
   }
 );
 document.observe(
-  "preferences:interface_loaded",
-  function(){
-    console.log("opened preferences win");
-    // bool values
-    ["notifications", "badge"].each(
-      function(el){
-        var val =  (Preferences.container[el] === "true" ? true : false);
-        $(el).down("input").setValue(val).observe(
-          "change",
-          function() {
-            console.dir("changing "+this.name + " val: "+this.getValue());
-            var val = new String(new Boolean(this.getValue())).split("").join(""); // ha ha ha
-            Preferences.set(this.name, val);
-            Preferences.get();
-
-          }
-        );
-
-      }
-    );
+  "dom:loaded",function(){
+    Preferences.Bool.each(function(el){
+                            try {
+                              Preferences.get(el);
+                            } catch(err) {
+                              // who cares?
+                            }
+                          }
+                         );
   }
 );

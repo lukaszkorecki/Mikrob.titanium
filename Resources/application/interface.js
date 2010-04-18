@@ -45,7 +45,7 @@ var Interface = new Class.create(
       }
     },
     notify : function(login, body,img) {
-      if(Preferences.container["notifications"] == "true") {
+      if(Preferences.get("notifications")) {
         this.note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;
         this.note.setMessage(body); //Add the message;
         try {
@@ -70,7 +70,7 @@ var Interface = new Class.create(
     setUnreadCount : function(count_str) {
       $("mark_as_read_button").down("span",0).update(count_str);
 
-      if(Preferences.container["badge"] =="true") {
+      if(Preferences.get("badge")) {
         try {
           if(count_str=="0") {
             Titanium.UI.setBadge();
