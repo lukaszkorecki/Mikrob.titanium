@@ -6,8 +6,8 @@ var Preferences = (
       prefernce_name : {field_type : "text", not_null : true},
       prefernce_value : {field_type : "text", not_null  : true}
 
-    }
-      var container = [];
+    };
+    var container = [];
     function getPreferences() {
 
       this.db = new DatabaseConnector("mikrob", "preferences", schema);
@@ -16,7 +16,7 @@ var Preferences = (
         return false;
       } else {
         set.each(function(pref){
-                   container.push(pref.row);
+                   container[pref.row.prefernce_name] = pref.row.prefernce_value;
                  });
         return true
       }
@@ -29,24 +29,33 @@ var Preferences = (
           prefernce_value : value
         }
       }
-      db.save(set);
+      this.db.save(set);
     }
     return {
       getPreferences : getPreferences,
-      setPreference : setPreference
+      setPreference : setPreference,
       container : container
     }
 
   })();
 
 
-document.observe("dom:loaded", function(){
-                   var has_prefs = Preferences.getPreferences();
-                   if(! has_prefs) {
-                     // defaults
-                     Preferences.setPreference("notifications", "true");
-                     Preferences.setPreference("badge", "true");
-                   } else {
-                     console.dir(Preferences.container);
-                   }
-                 });
+document.observe(
+  "dom:loaded",
+  function(){
+    if(! Preferences.getPreferences()) {
+      // defaults
+      Preferences.setPreference("notifications", "true");
+      Preferences.setPreference("badge", "true");
+      Preferences.getPreferences();
+    } else {
+      console.dir(Preferences.container);
+    }
+  }
+);
+document.observe(
+  "preferences:interface_loaded",
+  function(){
+    console.log("opened preferences win");
+  }
+);
