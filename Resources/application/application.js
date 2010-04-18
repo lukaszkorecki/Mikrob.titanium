@@ -220,6 +220,7 @@ var Application = (
       refreshServices :refreshServices,
       saveService :saveService,
       openAddServiceWindow :openAddServiceWindow,
+      openPreferencesWindow : openPreferencesWindow,
       openArchiveWindow :openArchiveWindow,
       closeArchiveWindow :closeArchiveWindow,
       returnServiceObjects :returnServiceObjects,
