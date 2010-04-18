@@ -8,6 +8,8 @@
     %script{ :src => "libs/prototype.js", :type => "text/javascript" }
     %script{ :src => "application/database_connector.js", :type => "text/javascript"}
     %script{ :src => "application/preferences.js", :type => "text/javascript"}
+    :javascript
+      document.fire("preferences:interface_loaded");
 
   %body
     %h1 Ustawienia
@@ -24,3 +26,4 @@
         Konta
         %p
           Tutaj beda konta i ich ustawienia i w ogole bedzie lepiej
+      %input{:type => "submit"} Zapisz
