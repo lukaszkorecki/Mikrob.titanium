@@ -9,7 +9,7 @@ var Preferences = (
     };
     var container = [];
     function getPreferences() {
-
+      console.log("getPreferences");
       this.db = new DatabaseConnector("mikrob", "preferences", schema);
       var set = (this.db.find() || []);
       if(set.length == 0) {
@@ -31,7 +31,7 @@ var Preferences = (
       };
 
       this.db.save(set);
-      return this.getPreferences();
+      getPreferences();
 
     }
     return {
@@ -70,7 +70,7 @@ document.observe(
             console.dir("changing "+this.name + " val: "+this.getValue());
             var val = new String(new Boolean(this.getValue())).split("").join(""); // ha ha ha
             Preferences.set(this.name, val);
-
+            Preferences.get();
 
           }
         );
