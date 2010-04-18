@@ -65,6 +65,21 @@ document.observe(
         case 82: // r
           KeyboardEvents.reply_to(event);
           break;
+        case 49: // 1
+          KeyboardEvents.open_dashboard(event);
+          break;
+        case 50: // 2
+          KeyboardEvents.open_messages(event);
+          break;
+        case 75: // k
+          KeyboardEvents.mark_all_as_read(event);
+          break;
+        case 80: //p
+          KeyboardEvents.make_private(event);
+          break;
+//          case 51: // 3 (search)
+//          case 52: // 4 (profile?)
+
         default:
           return true;
           break;

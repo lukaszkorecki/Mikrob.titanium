@@ -284,6 +284,24 @@ var KeyboardEvents = (
     function expand_quoted(event) {
 
     }
+    function open_dashboard(event) {
+      if(has_key_modifier(event)) {
+        fire($("home_button"));
+      }
+    }
+    function open_messages(event) {
+      if(has_key_modifier(event)) {
+        fire($("archive_button"));
+      }
+    }
+    function mark_all_as_read(event) {
+      if(has_key_modifier(event)) {
+        fire($("mark_as_read_button"));
+      }
+    }
+    function make_private(event) {
+
+    }
     //:private
     function fire(el){
       if(el) {
@@ -301,10 +319,15 @@ var KeyboardEvents = (
       }
       return false;
     }
+    // provide
     return {
       navigate_over_updates : navigate_over_updates,
       reply_to : reply_to,
-      expand_quoted : expand_quoted
+      expand_quoted : expand_quoted,
+      open_dashboard : open_dashboard,
+      open_messages : open_messages,
+      mark_all_as_read : mark_all_as_read,
+      make_private : make_private
     };
   }
 )();
