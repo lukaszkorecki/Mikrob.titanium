@@ -45,7 +45,15 @@ var Preferences = (
 
       console.log(name + type);
       var t = type || "Bool";
-      return Titanium.App.Properties["get"+t](name);
+      var res = false;
+      try {
+        res = Titanium.App.Properties["get"+t](name);
+      }
+      catch(err) {
+        console.log("no prefs!");
+        res = false;
+      }
+      return res;
     }
     return {
       get : get,
