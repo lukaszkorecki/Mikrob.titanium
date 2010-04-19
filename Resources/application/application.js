@@ -165,7 +165,7 @@ var Application = (
       Titanium.App.Properties.setInt("height", bounds.height);
       Titanium.App.Properties.setInt("x", bounds.x);
       Titanium.App.Properties.setInt("y", bounds.y);
-      alert("nok");
+      
 
     }
     function loadWindowSettings() {
