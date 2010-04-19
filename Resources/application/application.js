@@ -156,15 +156,11 @@ var Application = (
     function saveWindowSettings() {
       console.log("saving window settings");
       var win = Titanium.UI.getCurrentWindow();
-      var bounds = win.getBounds();
-      for(var e in bounds) {
-        console.log(e);
-        console.log(bounds[e]);
-      }
-			Preferences.set("width", bounds.width, "Int");
-			Preferences.set("height", bounds.height, "Int");
-			Preferences.set("x", bounds.x, "Int");
-			Preferences.set("y", bounds.y, "Int");
+
+			Preferences.set("width", win.width, "Int");
+			Preferences.set("height", win.height, "Int");
+			Preferences.set("x", win.getX(), "Int");
+			Preferences.set("y", win.getY(), "Int");
 
 
     }
@@ -174,17 +170,19 @@ var Application = (
       win.setResizable(true);
 	    var bounds = win.getBounds();
 	    try {
-		    bounds.width = Preferences.get("width","Int");
-		    bounds.height = Preferences.get("height","Int");
-		    bounds.x = Preferences.get("x","Int");
-		    bounds.y = Preferences.get("y", "Int");
+		    var width = Preferences.get("width","Int");
+		    var height = Preferences.get("height","Int");
+		    var x = Preferences.get("x","Int");
+		    var y = Preferences.get("y", "Int");
 	    } catch (get_props) {
 				console.log('unable to get props');
+        return false;
 	    }
-	    win.setBounds(bounds);
-      win.setHeight(bounds.height);
-      win.setWidth(bounds.width);
-      console.dir(bounds);
+      win.width = width;
+      win.height = height;
+      win.setY(y);
+      win.setX(x);
+
 
     }
     function openImageWindow(image_url) {
