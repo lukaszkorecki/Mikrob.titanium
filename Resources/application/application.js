@@ -161,11 +161,11 @@ var Application = (
         console.log(e);
         console.log(bounds[e]);
       }
-      Titanium.App.Properties.setInt("width", bounds.width);
-      Titanium.App.Properties.setInt("height", bounds.height);
-      Titanium.App.Properties.setInt("x", bounds.x);
-      Titanium.App.Properties.setInt("y", bounds.y);
-      
+			Preferences.set("width", bounds.width, "Int");
+			Preferences.set("height", bounds.height, "Int");
+			Preferences.set("x", bounds.x, "Int");
+			Preferences.set("y", bounds.y, "Int");
+
 
     }
     function loadWindowSettings() {
@@ -174,10 +174,10 @@ var Application = (
       win.setResizable(true);
 	    var bounds = win.getBounds();
 	    try {
-		    bounds.width = Titanium.App.Properties.getInt("width");
-		    bounds.height = Titanium.App.Properties.getInt("height");
-		    bounds.x = Titanium.App.Properties.getInt("x");
-		    bounds.y = Titanium.App.Properties.getInt("y");
+		    bounds.width = Preferences.get("width","Int");
+		    bounds.height = Preferences.get("height","Int");
+		    bounds.x = Preferences.get("x","Int");
+		    bounds.y = Preferences.get("y", "Int");
 	    } catch (get_props) {
 				console.log('unable to get props');
 	    }
