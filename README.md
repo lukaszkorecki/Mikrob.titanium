@@ -8,6 +8,10 @@ Mikrob jest zbudowany w oparciu o [Titanium firmy Appcelerator](http://appcelera
 
 ### Wymagania oraz instalacja
 
+#### Instalacja z uzyciem instalatora
+
+ (poki Mikrob jest niestabilny -
+instalator jest dostepny dla tych ktorzy maja ochote go poszukac ;-))
 * OSX
 > Pobierz dmb, zamontuj wrzuc gdzies, odpal
 
@@ -18,7 +22,6 @@ Mikrob jest zbudowany w oparciu o [Titanium firmy Appcelerator](http://appcelera
 > Zainstaluj:
       libopenssl-ruby
       curl
-
 > Pobierz instalator, zainstaluj odpal
 
 ##### Powiadomienia
@@ -32,6 +35,30 @@ Mikrob jest zbudowany w oparciu o [Titanium firmy Appcelerator](http://appcelera
 * Linux
 > Libnotify - domyslnie zainstalowane z Ubuntu/Gnome
 
+## Kompilowanie ze zrodel
+
+Instalacja ze zrodel dziala tylko pod Mac OSX i Linux
+(Ubuntu). Windows poki co nie jest wspierany
+
+##### Wymagania
+
+* [Titanium Developer SDK](http://appcelerator.com)
+* ruby >= 1.8.7
+ * rake
+ * haml
+* [javascript lint](http://javascriptlint.com)
+* python >= 2.5
+
+Jesli masz wszystko zainstalowane:
+
+* `git clone git://github.com/plugawy/mikrob.git`
+* `cd mikrob`
+* `rake`
+
+I wszystko powinno dzialac.
+
+`Rakefile` zawiera wszystkie rzeczy potrzebne do uruchomienia oraz
+skompilowania programu. `rake -D` wyswietla wszystkie dostepne komendy.
 
 ### Nowosci
 
