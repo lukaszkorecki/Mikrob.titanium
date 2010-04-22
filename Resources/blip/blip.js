@@ -37,26 +37,24 @@ var Blip = new Class.create(Service,{
     var req = new HttpConnector(this.commonHeaders());
     req.setUserCred(this.login, this.password);
     req.get(url);
-    var self =this;
     req.onSuccess = function(status,response) {
       // handle blip.pl error after redirect - should be 503, but instead you get 302
       // and everything appears to be a-ok
       // while it is not...
       if (response.match(/^\[/) === null) {
        // this causes Titanium to crash...
-     //   self.onFail(status, response);
       } else {
         var ob = Titanium.JSON.parse(response);
         if(ob.length >0) {
-          self.dashboard_last_id= ob[0].id;
-          self.dashboardProcess(ob,self.dashboard_last_id);
+          services[active_service].dashboard_last_id= ob[0].id;
+          services[active_service].dashboardProcess(ob,services[active_service].dashboard_last_id);
         }
       }
     };
     req.onFail = function(status, response) {
-      interfaces[self.service_id].notify('Błąd', 'Błąd połączenia z API, próbujemy dalej...', 'fail');
+      interfaces[active_service].notify('Błąd', 'Błąd połączenia z API, próbujemy dalej...', 'fail');
       console.log("błąd! " + status + "\n" + response);
-      if(status == 403 || status==401) self.loginFail();
+      if(status == 403 || status==401) services[active_service].loginFail();
     };
   },
   dashboardProcess :function(response_obj,is_update){
@@ -72,10 +70,9 @@ var Blip = new Class.create(Service,{
     req.setUserCred(this.login, this.password);
 
 		req.post(this.api_root+'/updates','update[body]='+encodeURIComponent(str));
-    var self = this;
-    req.onSuccess = function(resp) { self.afterSend(resp, true); };
+    req.onSuccess = function(resp) { services[active_service].afterSend(resp, true); };
     req.onFail = function(resp) {
-      interfaces[self.service_id].notify('Błąd', 'Błąd wysyłania... ' + resp, 'fail');
+      interfaces[active_service].notify('Błąd', 'Błąd wysyłania... ' + resp, 'fail');
 
       var was_success = true;
       // these are real failures according to BLIPAPI
@@ -85,7 +82,7 @@ var Blip = new Class.create(Service,{
       if (resp == 501 || resp == 503 || resp == 500 || resp == 403 || resp == 401) {
         was_success = false;
       }
-      self.afterSend(resp, was_success);
+      services[active_service].afterSend(resp, was_success);
     };
 
   },
@@ -102,18 +99,17 @@ var Blip = new Class.create(Service,{
     var req = new HttpConnector(this.commonHeaders());
     req.setUserCred(this.login, this.password);
     req.get(this.api_root+'/updates/'+blipid+this.include_string_full);
-    var self = this;
     req.onSuccess = function(st, resp) {
 			try {
 				var obj = Titanium.JSON.parse(resp);
-				interfaces[self.service_id].injectQuotedBlip(blipid,obj);
+				interfaces[active_service].injectQuotedBlip(blipid,obj);
 			} catch(parse_Error) {
-				 interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
+				 interfaces[active_service].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
 			}
     };
     req.onFail = function(st, resp) {
       console.log('getBlip: ' + st);
-      interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
+      interfaces[active_service].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
     };
 
    },
@@ -181,11 +177,10 @@ var Blip = new Class.create(Service,{
 
     req.get(url);
 
-    var self = this;
     req.onSuccess = function(st, resp) {
 			try {
 			  var obj = Titanium.JSON.parse(resp);
-			  self.onArchiveComplete(obj);
+			  services[active_service].onArchiveComplete(obj);
 			} catch (archive_get_error) {
 			 	console.log('getArchive fail ' + resource);
 			  console.log(st); console.log(resp);
@@ -202,12 +197,11 @@ var Blip = new Class.create(Service,{
   },
   getUserAvatar : function() {
       var req = new HttpConnector(this.commonHeaders());
-      var self = this;
       req.get(this.api_root+"/users/"+this.login+"/avatar");
       req.onSuccess = function(st, resp) {
           try {
               var obj = Titanium.JSON.parse(resp);
-              interfaces[active_service].setUserAvatar(obj, self.login);
+              interfaces[active_service].setUserAvatar(obj, services[active_service].login);
           } catch (parse_Error) {
               console.dir(parse_Error);
           }
