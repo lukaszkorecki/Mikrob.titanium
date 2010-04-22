@@ -17,14 +17,13 @@ var Blip = new Class.create(Service,{
   include_string_user : "?include=user,recipient",
   include_string_full : "?include=user,user[avatar],recipient,recipient[avatar],pictures&limit=20",
   commonHeaders : function() {
-    var self = this;
     return {
-//        'Authorization' : 'Basic '+self.credentials,
-        'X-blip-api' : '0.02',
-        'Accept' : 'application/json',
-        'User-Agent' : Titanium.App.getName()+" "+Titanium.App.getVersion() + " ",
-        "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
-      };
+      'X-blip-api' : '0.02',
+      'Accept' : 'application/json',
+      'User-Agent' : Titanium.App.getName()+" "+Titanium.App.getVersion() + " ",
+      'X-Blip-Application' :  Titanium.App.getName()+" "+Titanium.App.getVersion() + " ",
+      "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+    };
   },
   dashboardGet : function(offset) {
     var self = this;
