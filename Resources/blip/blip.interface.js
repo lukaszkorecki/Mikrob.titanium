@@ -86,27 +86,24 @@ var BlipInterface = new Class.create(Interface, {
     });
   },
   injectQuotedBlip : function(target_class, obj) {
-    var self = this;
-    var els = $$('.s'+target_class);
-    els.each(function(el) {
-      el.update('[Blip]');
-       // #445
-       // FIXME, TODO make this delegated:!!
-      el.observe('click', function(event) {
-        event.preventDefault();
-
-        var blip = self.getUpdateObject(obj);
-        var contents = blip.toQuoted();
-        contents.addClassName('quoted');
-        var elem = el.up('p') || el.up() || false; //.next();
-        if(elem) {
-          elem.insert({'after':contents});
-        }
-        el.descendants().invoke('stopObserving');
-        el.stopObserving().remove();
-        self.expandLink('quoted_link');
-      });
-    });
+    $$('.s'+target_class).each(function(el) {
+               el.update('[Blip]');
+               el.observe(
+                 'click',
+                 function(event) {
+                   var blip = interfaces[active_service].getUpdateObject(obj);
+                   var contents = blip.toQuoted();
+                   contents.addClassName('quoted');
+                   var elem = event.element().up('p') || event.element().up() || false; //.next();
+                   if(elem) {
+                     elem.insert({'after':contents});
+                   }
+                   event.element().descendants().invoke('stopObserving');
+                   event.element().stopObserving().remove();
+                   interfaces[active_service].expandLink('quoted_link');
+                   event.stop();
+                 });
+             });
   },
   expandShortenUrl : function(id, obj) {
     var els = $$('.r'+id);
