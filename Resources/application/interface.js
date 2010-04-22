@@ -68,17 +68,16 @@ var Interface = new Class.create(
       }
     },
     setTrayIcon : function() {
-      Titanium.UI.setTrayIcon("app://mikrob_tray_normal.png", function() {
-                                var  w = Titanium.UI.getCurrentWindow();
-                                w.focus();
-                              });
+      Titanium.UI.addTray("app://mikrob_tray_normal.png",Events.tray_icon);
     },
     changeTrayIcon : function(is_active) {
       var ic = "app://mikrob_tray_normal.png";
       if(is_active) {
         ic = "app://mikrob_tray_active.png";
       }
-      Titanium.UI.setIcon(ic);
+      Titanium.UI.clearTray();
+      Titanium.UI.addTray(ic,Events.tray_icon);
+
     },
     removeTrayIcon : function(){
       Titanium.UI.clearTray();
