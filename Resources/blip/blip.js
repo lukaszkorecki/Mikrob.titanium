@@ -26,18 +26,18 @@ var Blip = new Class.create(Service,{
     };
   },
   dashboardGet : function(offset) {
-    var self = this;
-     var url = self.api_root+'/dashboard'+self.include_string_full;
-    if(self.dashboard_last_id != 0) {
-       url = self.api_root+'/dashboard/since/'+self.dashboard_last_id+self.include_string_full;
+    var url = this.api_root+'/dashboard'+this.include_string_full;
+    if(this.dashboard_last_id != 0) {
+       url = this.api_root+'/dashboard/since/'+this.dashboard_last_id+this.include_string_full;
     }
     if(offset >= 0) {
-      url += '&offset='+(offset * interfaces[self.service_id].globalLimit);
+      url += '&offset='+(offset * interfaces[this.service_id].globalLimit);
     }
 
-    var req = new HttpConnector(self.commonHeaders());
-    req.setUserCred(self.login, self.password);
+    var req = new HttpConnector(this.commonHeaders());
+    req.setUserCred(this.login, this.password);
     req.get(url);
+    var self =this;
     req.onSuccess = function(status,response) {
       // handle blip.pl error after redirect - should be 503, but instead you get 302
       // and everything appears to be a-ok
@@ -67,12 +67,12 @@ var Blip = new Class.create(Service,{
     interfaces[this.service_id].afterSend(response_obj, was_success);
   },
   post : function(str) {
+
+    var req = new HttpConnector(this.commonHeaders());
+    req.setUserCred(this.login, this.password);
+
+		req.post(this.api_root+'/updates','update[body]='+encodeURIComponent(str));
     var self = this;
-    var req = new HttpConnector(self.commonHeaders());
-    req.setUserCred(self.login, self.password);
-
-		req.post(self.api_root+'/updates','update[body]='+encodeURIComponent(str));
-
     req.onSuccess = function(resp) { self.afterSend(resp, true); };
     req.onFail = function(resp) {
       interfaces[self.service_id].notify('Błąd', 'Błąd wysyłania... ' + resp, 'fail');
@@ -98,10 +98,11 @@ var Blip = new Class.create(Service,{
     this.afterSend(res, response);
   },
   getBlip : function(blipid) {
+
+    var req = new HttpConnector(this.commonHeaders());
+    req.setUserCred(this.login, this.password);
+    req.get(this.api_root+'/updates/'+blipid+this.include_string_full);
     var self = this;
-    var req = new HttpConnector(self.commonHeaders());
-    req.setUserCred(self.login, self.password);
-    req.get(self.api_root+'/updates/'+blipid+self.include_string_full);
     req.onSuccess = function(st, resp) {
 			try {
 				var obj = Titanium.JSON.parse(resp);
@@ -109,8 +110,6 @@ var Blip = new Class.create(Service,{
 			} catch(parse_Error) {
 				 interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
 			}
-
-
     };
     req.onFail = function(st, resp) {
       console.log('getBlip: ' + st);
@@ -119,42 +118,41 @@ var Blip = new Class.create(Service,{
 
    },
   shortenLink : function(url) {
-    var self = this;
-    var req = new HttpConnector(self.commonHeaders());
-    req.setUserCred(self.login, self.password);
-    req.post(self.api_root+'/shortlinks', 'shortlink[original_link]='+url);
+    var req = new HttpConnector(this.commonHeaders());
+    req.setUserCred(this.login, this.password);
+    req.post(this.api_root+'/shortlinks', 'shortlink[original_link]='+url);
+
     req.onSuccess = function(st, resp) {
 			try {
       var obj = Titanium.JSON.parse(resp);
-      interfaces[self.service_id].replaceLinks(url, obj.url);
+      interfaces[active_service].replaceLinks(url, obj.url);
 			} catch (link_shorting_error) {
-      interfaces[self.service_id].notify("Błąd","Tworzenie linka się nie powiodło", 'fail');
+      interfaces[active_service].notify("Błąd","Tworzenie linka się nie powiodło", 'fail');
 			}
 
     };
     req.onFail = function(st, resp) {
-      interfaces[self.service_id].notify("Błąd","Tworzenie linka się nie powiodło", 'fail');
+      interfaces[active_service].notify("Błąd","Tworzenie linka się nie powiodło", 'fail');
     };
   },
   expandLink : function(id) {
-    var self = this;
     id = id.replace(/\W/gi,'');
-    var req = new HttpConnector(self.commonHeaders());
-    req.setUserCred(self.login, self.password);
-    req.get(self.api_root+'/shortlinks/'+id);
+    var req = new HttpConnector(this.commonHeaders());
+    req.setUserCred(this.login, this.password);
+    req.get(this.api_root+'/shortlinks/'+id);
     req.onSuccess = function(st, resp) {
 			try {
 				var obj = Titanium.JSON.parse(resp);
-				interfaces[self.service_id].expandShortenUrl(id,obj);
+				interfaces[active_service].expandShortenUrl(id,obj);
 			} catch (expand_link_error) {
 				console.log(st);
-				interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
+				interfaces[active_service].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
 			}
 
     };
     req.onFail = function(st, resp) {
       console.log(st);
-      interfaces[self.service_id].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
+      interfaces[active_service].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
     };
   },
   getArchive : function(resource, offset) {
@@ -209,13 +207,13 @@ var Blip = new Class.create(Service,{
       req.onSuccess = function(st, resp) {
           try {
               var obj = Titanium.JSON.parse(resp);
-              interfaces[self.service_id].setUserAvatar(obj, self.login);
+              interfaces[active_service].setUserAvatar(obj, self.login);
           } catch (parse_Error) {
               console.dir(parse_Error);
           }
       };
       req.onFail = function(st, resp) {
-          interfaces[self.service_id].notify("Problem", "buuuuu");
+          interfaces[active_service].notify("Problem", "buuuuu");
       };
   }
 
