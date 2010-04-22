@@ -25,9 +25,8 @@ var BlipInterface = new Class.create(Interface, {
 
   },
   draw : function(updates,is_update) {
-    var self = this;
     var len = updates.length;
-    var dash = $(self.container_id);
+    var dash = $(this.container_id);
     if(is_update !==0) updates.reverse();
     var can_notify = false;
     if(updates.length < 4) {
@@ -36,7 +35,7 @@ var BlipInterface = new Class.create(Interface, {
     updates.each(function(blip, index){
      var single_status=null;
       try {
-        single_status = self.getUpdateObject(blip);
+        single_status = interfaces[active_service].getUpdateObject(blip);
       } catch (guo_err) {
         console.dir(guo_err);
         single_status = "";
@@ -46,17 +45,14 @@ var BlipInterface = new Class.create(Interface, {
       } else {
         dash.insert({'bottom': single_status});
       }
-        self.expandLink('quoted_link');
+        interfaces[active_service].expandLink('quoted_link');
 			 if (can_notify) {
         var av =  'app://icons/nn_nano.png';
         if(single_status.user.avatar) {
           av = 'http://blip.pl'+single_status.user.avatar.url_50;
         }
-         self.notify(single_status.user.login, single_status.raw_body, av );
+         interfaces[active_service].notify(single_status.user.login, single_status.raw_body, av );
       }
-//      if(index == updates.length-1) {
-//        self = null;
-//      }
     });
     this.expandLink("rdir_link");
     var unr = $$('#'+this.container_id + ' .unread').length;
