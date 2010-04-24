@@ -22,8 +22,8 @@ var Blip = new Class.create(
       return {
         'X-blip-api' : '0.02',
         'Accept' : 'application/json',
-        'User-Agent' : Titanium.App.getName()+" "+Titanium.App.getVersion() + " ",
-        'X-Blip-Application' :  Titanium.App.getName()+" "+Titanium.App.getVersion() + " ",
+        'User-Agent' : Application.ua_string(),
+        'X-Blip-Application' :  Application.ua_string(),
         "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
       };
     },

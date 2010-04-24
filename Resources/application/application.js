@@ -6,7 +6,9 @@ var Application = (
     window_resized = false;
     services = [];
     attachment="";
-
+    function ua_string() {
+      return Titanium.App.getName()+" "+Titanium.App.getVersion() + " ";
+    }
     function getServices() {
       var services = {
         // minified for clarity ;-)
