@@ -221,7 +221,9 @@ var Application = (
         return cache.store(url, type,file);
       }
     }
-
+    function json_parse(string) {
+      return Titanium.JSON.parse(string);
+    }
     return {
       getServices :getServices,
       buildServices :buildServices,
@@ -240,6 +242,7 @@ var Application = (
       openSenderWindow : openSenderWindow,
       openUrl: openUrl,
       cache_start : cache_start,
-      cache_io : cache_io
+      cache_io : cache_io,
+      json_parse : json_parse
     };
   } )();

@@ -46,7 +46,7 @@ var Blip = new Class.create(
         if (response.match(/^\[/) === null) {
           // this causes Titanium to crash...
         } else {
-          var ob = Titanium.JSON.parse(response);
+          var ob = Application.json_parse(response);
           if(ob.length >0) {
             this.dashboard_last_id= ob[0].id;
 					  this.dashboardProcess(ob,services[active_service].dashboard_last_id);
@@ -105,7 +105,7 @@ var Blip = new Class.create(
       req.get(this.api_root+'/updates/'+blipid+this.include_string_full);
       function success(st, resp) {
 			  try {
-				  var obj = Titanium.JSON.parse(resp);
+				  var obj = Application.json_parse(resp);
 				  interfaces[active_service].injectQuotedBlip(blipid,obj);
 			  } catch(parse_Error) {
 				  interfaces[active_service].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
@@ -126,7 +126,7 @@ var Blip = new Class.create(
 
       req.onSuccess = function(st, resp) {
 			  try {
-          var obj = Titanium.JSON.parse(resp);
+          var obj = Application.json_parse(resp);
           interfaces[active_service].replaceLinks(url, obj.url);
 			  } catch (link_shorting_error) {
           interfaces[active_service].notify("Błąd","Tworzenie linka się nie powiodło", 'fail');
@@ -144,7 +144,7 @@ var Blip = new Class.create(
       req.get(this.api_root+'/shortlinks/'+id);
       function success(st, resp) {
 			  try {
-				  var obj = Titanium.JSON.parse(resp);
+				  var obj = Application.json_parse(resp);
 				  interfaces[active_service].expandShortenUrl(id,obj);
 			  } catch (expand_link_error) {
 				  console.log(st);
@@ -186,7 +186,7 @@ var Blip = new Class.create(
       req.get(url);
       function success(st, resp) {
 			  try {
-			    var obj = Titanium.JSON.parse(resp);
+			    var obj = Application.json_parse(resp);
 			    this.onArchiveComplete(obj);
 			  } catch (archive_get_error) {
 			 	  console.log('getArchive fail ' + resource);
@@ -210,7 +210,7 @@ var Blip = new Class.create(
       req.get(this.api_root+"/users/"+this.login+"/avatar");
       function success(st, resp) {
         try {
-          var obj = Titanium.JSON.parse(resp);
+          var obj = Application.json_parse(resp);
           interfaces[active_service].setUserAvatar(obj, this.login);
         } catch (parse_Error) {
           console.dir(parse_Error);
