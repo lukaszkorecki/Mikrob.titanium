@@ -6,6 +6,7 @@ var Application = (
     window_resized = false;
     services = [];
     attachment="";
+
     function getServices() {
       var services = {
         // minified for clarity ;-)
@@ -242,27 +243,3 @@ var Application = (
       cache_io : cache_io
     };
   } )();
-
-var AppIcons = {
-	"small" : {
-		comment : "app://icons/ui/16_thread.png",
-		quote : "app://icons/ui/16_retweet.png",
-		message : "app://icons/ui/16_message.png",
-		permalink : "app://icons/ui/16_permalink.png",
-		refresh : "app://icons/ui/16_retweet.png",
-		lock: "app://icons/ui/16_private.png"
-	},
-	"medium" : {
-		"new" : "app://icons/ui/24_new.png"
-	},
-	"big" : {
-		attachment : "app://icons/ui/48_attachment.png",
-		email : "app://icons/ui/48_email.png",
-		favorite : "app://icons/ui/48_favorite.png",
-		mail_receive : "app://icons/ui/48_mail_receive.png",
-		mail : "app://icons/ui/48_mail.png",
-		promotion_new : "app://icons/ui/48_promotion_new.png",
-		search : "app://icons/ui/48_search.png",
-		tools : "app://icons/ui/48_tools.png"
-	}
-};
