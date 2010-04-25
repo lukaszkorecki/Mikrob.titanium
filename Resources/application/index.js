@@ -9,13 +9,12 @@ function run_tests() {
 
 }
 
-window.addEventListener("load", function(event){
+Titanium.addEventListener(Titanium.OPEN, function(event){
                           console.log("OPEN");
                           Application.loadWindowSettings();
                         });
-window.addEventListener("unload", function(event){
+Titanium.addEventListener(Titanium.CLOSE, function(event){
                           Application.saveWindowSettings();
-                          console.log("EXIT");
                         });
 var open_event_id=0;
 // globalz

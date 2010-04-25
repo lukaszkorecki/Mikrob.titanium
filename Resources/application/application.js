@@ -162,37 +162,33 @@ var Application = (
       $('dash'+new_service_id).appear();
     }
     function saveWindowSettings() {
-      console.log("saving window settings");
       var win = Titanium.UI.getCurrentWindow();
+      var bounds = win.getBounds();
+			Preferences.set("width", bounds.width, "Int");
+			Preferences.set("height", bounds.height, "Int");
+			Preferences.set("x", bounds.x, "Int");
+			Preferences.set("y", bounds.y, "Int");
 
-			Preferences.set("width", win.width, "Int");
-			Preferences.set("height", win.height, "Int");
-			Preferences.set("x", win.getX(), "Int");
-			Preferences.set("y", win.getY(), "Int");
 
-
+      return true; // ?
     }
 
     function loadWindowSettings() {
-      console.log("loading window settings");
 	 	  var win = Titanium.UI.getCurrentWindow();
       win.setResizable(true);
 	    var bounds = win.getBounds();
+
 	    try {
-		    var width = Preferences.get("width","Int");
-		    var height = Preferences.get("height","Int");
-		    var x = Preferences.get("x","Int");
-		    var y = Preferences.get("y", "Int");
+				bounds.width = parseInt(Preferences.get("width","Int"),10);
+				bounds.height = Preferences.get("height","Int");
+				bounds.x = Preferences.get("x","Int");
+				bounds.y = Preferences.get("y", "Int");
 	    } catch (get_props) {
-				console.log('unable to get props');
         return false;
 	    }
 
-      win.width = width;
-      win.height = height;
-      win.setY(y);
-      win.setX(x);
-
+      win.setBounds(bounds);
+      return true;
     }
     function openImageWindow(image_url) {
       Titanium.API.set('image_url', image_url);
@@ -232,6 +228,18 @@ var Application = (
     function json_parse(string) {
       return Titanium.JSON.parse(string);
     }
+    function t() {
+
+    var win = Titanium.UI.getCurrentWindow();
+
+    var b = win.getBounds();
+    b.x += 20;
+    b.y += 20;
+    b.width += 100;
+    b.height += 100;
+    win.setBounds(b);
+
+    }
     return {
       getServices :getServices,
       buildServices :buildServices,
@@ -252,7 +260,8 @@ var Application = (
       cache_start : cache_start,
       cache_io : cache_io,
       json_parse : json_parse,
-      ua_string : ua_string
+      ua_string : ua_string,
+      t : t
     };
   } )();
 
@@ -261,9 +270,7 @@ var Tray = (
   function(){
     var active = false;
     function add() {
-      console.log("set tray icon");
       if(Preferences.get("tray")) {
-        console.log("I has Preferences: " + Preferences.get("tray"));
         if(this.active == false) {
           Titanium.UI.addTray("app://mikrob_tray_normal.png",Events.tray_icon);
           this.active = true;
