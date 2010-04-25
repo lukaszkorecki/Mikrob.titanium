@@ -18,10 +18,9 @@
 
   %body{:style => "background-color: #ededed; height: 100%"}
     %div
-      %h1 Ustawienia
       %form#settings
-        %fieldset
-          Informacje
+        %h2 Interfejs
+        %fieldset#interface
           .group#notifications
             %label{:for => "notifications"} Powiadomienia?
             %input{:name => "notifications", :type => "checkbox"}
@@ -31,6 +30,21 @@
           .group#tray
             %label{:for => "badge"} Ikona w trayu?
             %input{:name => "tray", :type => "checkbox"}
+        %h2 Proxy
+        %fieldset#proxy
+          .group#proxy_ip
+            %label{:for => "proxy_ip"} IP
+            %input{ :name => "proxy_ip"}
+          .group#proxy_port
+            %label{:for => "proxy_port"} Port
+            %input{ :name => "proxy_port"}
+          .group#proxy_user
+            %label{:for => "proxy_user"} Login
+            %input{ :name => "proxy_user"}
+          .group#proxy_password
+            %label{:for => "proxy_password"} Hasło
+            %input{ :name => "proxy_password", :type => "password"}
+          %button Sprawdź
         %fieldset{:style => "display: none"}
           Konta
           %p

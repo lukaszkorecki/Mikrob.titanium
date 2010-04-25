@@ -382,3 +382,9 @@ input[type="text"], input[type="password"] {
   opacity: 1; }
   #image_preview .actions:hover button {
     display: inline; }
+
+.win32 #badge, .linux #badge {
+  display: none; }
+
+.win32 #notifications {
+  display: none; }
