@@ -31,7 +31,7 @@ document.observe(
       win.setResizable(true);
     }
     // attach events
-    ["img_25", "img_50", "img_100"].each(
+    ["img_25", "img_50", "img_75","img_100"].each(
       function(el){
 
         $(el).observe("click", function(){
