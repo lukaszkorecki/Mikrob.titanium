@@ -35,6 +35,12 @@ var Application = (
         interfaces.push(obj.interFace);
         services.push (obj.service);
       }
+      try {
+        $("login_button").enable();
+      } catch(err) {
+        console.log(err);
+      }
+
     }
     function saveService(login, password, type, api_url) {
       var a_u = api_url || "";
