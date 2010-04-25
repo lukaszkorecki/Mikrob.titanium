@@ -9,10 +9,7 @@ function run_tests() {
 
 }
 
-Titanium.addEventListener(Titanium.OPEN, function(event){
-                          console.log("OPEN");
-                          Application.loadWindowSettings();
-                        });
+
 Titanium.addEventListener(Titanium.CLOSE, function(event){
                           Application.saveWindowSettings();
                         });
