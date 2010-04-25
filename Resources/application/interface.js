@@ -18,11 +18,13 @@ var Interface = new Class.create(
       this.active_entry = 0;
       this.ok_image = "app://mikrob_icon_ok.png";
       this.not_ok_image = "app://mikrob_icon_error.png";
+
       try {
         var window = Titanium.UI.getMainWindow(); // get the main window
         this.note = Titanium.Notification.createNotification(window);
       } catch (notify_error) {
         // who cares?
+        console.log("Windows cant have Notification");
       }
 
 
@@ -45,24 +47,28 @@ var Interface = new Class.create(
       }
     },
     notify : function(login, body,img) {
-      if(Preferences.get("notifications")) {
-        this.note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;
-        this.note.setMessage(body); //Add the message;
+      if(Preferences.get("notifications") && !(Titanium.Platform.name.match(/windows/gi))) {
         try {
-          if(img != undefined && img.startsWith("http")) {
-            img = Application.cache_io(img, "av"); // investigate linux
+          this.note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;
+          this.note.setMessage(body); //Add the message;
+          try {
+            if(img != undefined && img.startsWith("http")) {
+              img = Application.cache_io(img, "av"); // investigate linux
+            }
+          } catch(ca_er) {
+            img = "app://mikrob_icon.png";
           }
-        } catch(ca_er) {
-          img = "app://mikrob_icon.png";
-          console.dir(ca_er);
+          this.note.setIcon(img);
+          try {
+            this.note.show();//Make it appear with the default timings.
+          } catch(no_notifier) {
+            console.log("Blad wyswietlania powiadomienia");
+            console.dir(no_notifier);
+          }
+        } catch(Notify_Error){
+          console.dir(Notify_Error);
         }
-        this.note.setIcon(img);
-        try {
-          this.note.show();//Make it appear with the default timings.
-        } catch(no_notifier) {
-          console.log("Blad wyswietlania powiadomienia");
-          console.dir(no_notifier);
-        }
+
       } else {
         console.log("Wylaczono powiadomienia");
       }
