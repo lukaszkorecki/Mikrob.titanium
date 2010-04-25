@@ -214,6 +214,9 @@ var Events = (
       //      Application.attachFile();
       interfaces[active_service].attach_file();
     }
+    function tray_icon() {
+      Titanium.UI.getCurrentWindow().focus();
+    }
 		return {
       sidebar_toggle : sidebar_toggle,
 			login_button : login_button,
@@ -240,7 +243,8 @@ var Events = (
       permanent_link : external_link,
       open_sender : open_sender,
       expanded_link : expanded_link,
-      attach_file : attach_file
+      attach_file : attach_file,
+      tray_icon : tray_icon
 
 		};
   }

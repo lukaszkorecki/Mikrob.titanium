@@ -10,8 +10,8 @@ var Preferences = (
     };
     var action_list = {
       "tray" : {
-        "on" : Tray.add,
-        "off" : Tray.remove
+        "on" : function() { Tray.add(); },
+        "off" : function() {Tray.remove(); }
       }
     };
     var Bool = ["notifications", "badge", "tray"];
@@ -49,10 +49,9 @@ var Preferences = (
       Titanium.App.Properties["set"+t](name, val);
     }
     function get(name, type) {
-
-      console.log(name + type);
       var t = type || "Bool";
       var res = false;
+      console.log(name + t);
       try {
         res = Titanium.App.Properties["get"+t](name);
       }
