@@ -139,7 +139,9 @@ var Events = (
 				Application.openArchiveWindow();
 			}
 		}
-
+    function preferences_button(event) {
+      Application.openPreferencesWindow();
+    }
 		function home_button () {
 			$('archive').hide();
 			$('dash'+active_service).show();
@@ -246,7 +248,8 @@ var Events = (
       open_sender : open_sender,
       expanded_link : expanded_link,
       attach_file : attach_file,
-      tray_icon : tray_icon
+      tray_icon : tray_icon,
+      preferences_button : preferences_button
 
 		};
   }
@@ -298,7 +301,7 @@ var KeyboardEvents = (
     }
     function open_preferences(event) {
       if(has_key_modifier(event)) {
-        Application.openPreferencesWindow();
+        fire($("preferences_button"));
       }
     }
     function mark_all_as_read(event) {
