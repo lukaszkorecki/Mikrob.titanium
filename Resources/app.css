@@ -352,10 +352,10 @@ input[type="text"], input[type="password"] {
   background: #222; }
 .win32 #controls {
   background: #222; }
-.win32 .update p, .win32 .update .quoted {
-  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
-.win32 .avatar_container {
-  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
+.win32 .update {
+  margin-bottom: 10px; }
+  .win32 .update p, .win32 .update .quoted {
+    -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
 .win32 .update img.avatar, .win32 .update img.ravatar {
   margin-top: 5px; }
 .win32 .button {
