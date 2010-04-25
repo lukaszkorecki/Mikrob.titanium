@@ -87,7 +87,7 @@ var Interface = new Class.create(
 
       if(Preferences.get("badge")) {
         try {
-          if(count_str=="0") {
+          if(count_str==0) {
             Titanium.UI.setBadge();
           } else {
             Titanium.UI.setBadge(count_str);
