@@ -25,9 +25,8 @@ var BlipInterface = new Class.create(Interface, {
 
   },
   draw : function(updates,is_update) {
-    var self = this;
     var len = updates.length;
-    var dash = $(self.container_id);
+    var dash = $(this.container_id);
     if(is_update !==0) updates.reverse();
     var can_notify = false;
     if(updates.length < 4) {
@@ -36,7 +35,7 @@ var BlipInterface = new Class.create(Interface, {
     updates.each(function(blip, index){
      var single_status=null;
       try {
-        single_status = self.getUpdateObject(blip);
+        single_status = interfaces[active_service].getUpdateObject(blip);
       } catch (guo_err) {
         console.dir(guo_err);
         single_status = "";
@@ -46,17 +45,14 @@ var BlipInterface = new Class.create(Interface, {
       } else {
         dash.insert({'bottom': single_status});
       }
-        self.expandLink('quoted_link');
+        interfaces[active_service].expandLink('quoted_link');
 			 if (can_notify) {
         var av =  'app://icons/nn_nano.png';
         if(single_status.user.avatar) {
           av = 'http://blip.pl'+single_status.user.avatar.url_50;
         }
-         self.notify(single_status.user.login, single_status.raw_body, av );
+         interfaces[active_service].notify(single_status.user.login, single_status.raw_body, av );
       }
-//      if(index == updates.length-1) {
-//        self = null;
-//      }
     });
     this.expandLink("rdir_link");
     var unr = $$('#'+this.container_id + ' .unread').length;
@@ -86,27 +82,24 @@ var BlipInterface = new Class.create(Interface, {
     });
   },
   injectQuotedBlip : function(target_class, obj) {
-    var self = this;
-    var els = $$('.s'+target_class);
-    els.each(function(el) {
-      el.update('[Blip]');
-       // #445
-       // FIXME, TODO make this delegated:!!
-      el.observe('click', function(event) {
-        event.preventDefault();
-
-        var blip = self.getUpdateObject(obj);
-        var contents = blip.toQuoted();
-        contents.addClassName('quoted');
-        var elem = el.up('p') || el.up() || false; //.next();
-        if(elem) {
-          elem.insert({'after':contents});
-        }
-        el.descendants().invoke('stopObserving');
-        el.stopObserving().remove();
-        self.expandLink('quoted_link');
-      });
-    });
+    $$('.s'+target_class).each(function(el) {
+               el.update('[Blip]');
+               el.observe(
+                 'click',
+                 function(event) {
+                   var blip = interfaces[active_service].getUpdateObject(obj);
+                   var contents = blip.toQuoted();
+                   contents.addClassName('quoted');
+                   var elem = event.element().up('p') || event.element().up() || false; //.next();
+                   if(elem) {
+                     elem.insert({'after':contents});
+                   }
+                   event.element().descendants().invoke('stopObserving');
+                   event.element().stopObserving().remove();
+                   interfaces[active_service].expandLink('quoted_link');
+                   event.stop();
+                 });
+             });
   },
   expandShortenUrl : function(id, obj) {
     var els = $$('.r'+id);

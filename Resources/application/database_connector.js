@@ -1,6 +1,6 @@
 var DatabaseConnector = new Class.create({
   initialize : function(db_name, table_name, table_object) {
-  
+
     this.db_name = db_name;
     this.table_name = table_name;
     if (table_object) {
@@ -23,10 +23,9 @@ var DatabaseConnector = new Class.create({
  *  }
  */
   init_table_if_needed : function(table_object) {
-    var self = this;
     var sql = "CREATE TABLE IF NOT EXISTS "+this.table_name + " (";
     for(var k in table_object) {
-      sql += k +" "+self.get_field_type(table_object[k])+", ";
+      sql += k +" "+this.get_field_type(table_object[k])+", ";
     }
     sql = sql.truncate(sql.length-2,"");
     sql += ");";
@@ -58,7 +57,7 @@ var DatabaseConnector = new Class.create({
       case 'blob':
         field_type = "BLOB";
         break;
-      
+
       default:
         field_type = "NULL";
         not_null = false;
@@ -122,7 +121,7 @@ var DatabaseConnector = new Class.create({
     }
     var f_sql = sql +" " +conditions+" " +count+";";
     return this.query(f_sql , true);
-  
+
   },
 
   /**
@@ -140,7 +139,7 @@ var DatabaseConnector = new Class.create({
     for(var key in object.fields) {
       sql += key+", ";
     }
-    
+
     sql = sql.truncate(sql.length-2,"");
 
     sql +=") VALUES(";
@@ -165,7 +164,7 @@ var DatabaseConnector = new Class.create({
    * }
    */
   update : function(object) {
-       
+
     var sql = "UPDATE "+this.table_name + " SET ";
     for(var key in object.fields) {
       sql += " "+key+"= '"+object.fields[key]+"', ";
@@ -178,10 +177,10 @@ var DatabaseConnector = new Class.create({
   remove : function(object) {
     var sql = "DELETE FROM "+this.table_name+" WHERE id='"+object.id+"';";
     return this.query(sql);
-  
+
   },
   returnField : function(field) {
     return this.res.fieldByName(field);
   }
-    
+
 });

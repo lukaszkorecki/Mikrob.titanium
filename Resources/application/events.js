@@ -215,10 +215,12 @@ var Events = (
       interfaces[active_service].attach_file();
     }
     function tray_icon() {
-      Titanium.UI.getCurrentWindow().focus();
+      var  w = Titanium.UI.getCurrentWindow();
+      w.focus();
     }
 		return {
       sidebar_toggle : sidebar_toggle,
+      tray_icon : tray_icon,
 			login_button : login_button,
       login_form : login_button,
 			main_textarea  : main_textarea ,
