@@ -1,3 +1,4 @@
+var Tray = window.opener ? window.opener.Tray : Tray;
 var Preferences = (
   function(){
     var db = {};
@@ -7,7 +8,13 @@ var Preferences = (
       prefernce_value : {field_type : "text", not_null  : true}
 
     };
-    var Bool = ["notifications", "badge"];
+    var action_list = {
+      "tray" : {
+        "on" : Tray.add,
+        "off" : Tray.remove
+      }
+    };
+    var Bool = ["notifications", "badge", "tray"];
 
     var container = [];
     function getPreferences() {
@@ -55,10 +62,27 @@ var Preferences = (
       }
       return res;
     }
+    function apply(name,type) {
+      console.log("applying prefs " + name);
+      var t = type || "Bool";
+      if(this.action_list[name]) {
+        console.log("I has this action")
+        if(this.get(name, t)){
+          console.log("status is on");
+          this.action_list[name].on();
+        } else {
+          console.log("status is off");
+          this.action_list[name].off();
+        }
+
+      }
+    }
     return {
       get : get,
       set  : set,
-      Bool : Bool
+      Bool : Bool,
+      action_list : action_list,
+      apply : apply
     };
 
   })();
@@ -69,27 +93,33 @@ document.observe(
   function() {
     console.log("opened preferences win");
     // bool values
-    Preferences.Bool.each(function(el){
-                            $(el).down("input").setValue(Preferences.get(el)).observe(
-                              "change",
-                              function() {
-                                console.dir("changing "+this.name + " val: "+this.getValue());
-                                var val = !!(this.getValue());
+      Preferences.Bool.each(
+      function(el){
+        $(el).down("input").setValue(Preferences.get(el)).observe(
+          "change",
+          function() {
+            console.dir("changing "+this.name + " val: "+this.getValue());
+            var val = !!(this.getValue());
 
-                                Preferences.set(this.name, val);
-                              });
-                          });
+            Preferences.set(this.name, val);
+            Preferences.apply(this.name);
+          });
+      });
   }
 );
 document.observe(
   "dom:loaded",function(){
     Preferences.Bool.each(function(el){
+                            console.log("checking prefes for: " + el);
                             try {
-                              Preferences.get(el);
+                              var x = Preferences.get(el);
+                              console.log(x);
+                              Preferences.apply(el);
                             } catch(err) {
                               // who cares?
                             }
                           }
                          );
   }
+
 );

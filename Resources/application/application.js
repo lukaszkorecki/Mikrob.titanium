@@ -168,6 +168,7 @@ var Application = (
 
 
     }
+
     function loadWindowSettings() {
       console.log("loading window settings");
 	 	  var win = Titanium.UI.getCurrentWindow();
@@ -181,6 +182,7 @@ var Application = (
 	    } catch (get_props) {
 				console.log('unable to get props');
 	    }
+
 	    win.setBounds(bounds);
       win.setHeight(bounds.height);
       win.setWidth(bounds.width);
@@ -245,26 +247,45 @@ var Application = (
     };
   } )();
 
-var AppIcons = {
-	"small" : {
-		comment : "app://icons/ui/16_thread.png",
-		quote : "app://icons/ui/16_retweet.png",
-		message : "app://icons/ui/16_message.png",
-		permalink : "app://icons/ui/16_permalink.png",
-		refresh : "app://icons/ui/16_retweet.png",
-		lock: "app://icons/ui/16_private.png"
-	},
-	"medium" : {
-		"new" : "app://icons/ui/24_new.png"
-	},
-	"big" : {
-		attachment : "app://icons/ui/48_attachment.png",
-		email : "app://icons/ui/48_email.png",
-		favorite : "app://icons/ui/48_favorite.png",
-		mail_receive : "app://icons/ui/48_mail_receive.png",
-		mail : "app://icons/ui/48_mail.png",
-		promotion_new : "app://icons/ui/48_promotion_new.png",
-		search : "app://icons/ui/48_search.png",
-		tools : "app://icons/ui/48_tools.png"
-	}
-};
+
+var Tray = (
+  function(){
+    var active = false;
+    function add() {
+      console.log("set tray icon");
+      if(Preferences.get("tray")) {
+        console.log("I has Preferences: " + Preferences.get("tray"));
+        if(this.active == false) {
+          Titanium.UI.addTray("app://mikrob_tray_normal.png",Events.tray_icon);
+          this.active = true;
+        }
+
+
+      }
+
+    }
+    function change(is_active) {
+      if(Preferences.get("tray")) {
+        var ic = "app://mikrob_tray_normal.png";
+        if(is_active) {
+          ic = "app://mikrob_tray_active.png";
+        }
+        Titanium.UI.clearTray();
+        Titanium.UI.addTray(ic,Events.tray_icon);
+      }
+
+    }
+    function remove(){
+      if(this.active) {
+        Titanium.UI.clearTray();
+        this.active = false;
+      }
+
+    }
+    return {
+      active : active,
+      add : add,
+      change : change,
+      remove : remove
+    }
+  })();

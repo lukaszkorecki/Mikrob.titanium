@@ -67,22 +67,7 @@ var Interface = new Class.create(
         console.log("Wylaczono powiadomienia");
       }
     },
-    setTrayIcon : function() {
-      Titanium.UI.setTrayIcon("app://mikrob_tray_normal.png", function() {
-                                var  w = Titanium.UI.getCurrentWindow();
-                                w.focus();
-                              });
-    },
-    changeTrayIcon : function(is_active) {
-      var ic = "app://mikrob_tray_normal.png";
-      if(is_active) {
-        ic = "app://mikrob_tray_active.png";
-      }
-      Titanium.UI.setIcon(ic);
-    },
-    removeTrayIcon : function(){
-      Titanium.UI.clearTray();
-    },
+
     setUnreadCount : function(count_str) {
       $("mark_as_read_button").down("span",0).update(count_str);
 
@@ -103,12 +88,12 @@ var Interface = new Class.create(
       }
       if(Preferences.get("tray")) {
         if(count_str =="0") {
-          this.setTrayIcon(false);
+          Tray.change(false);
         } else {
-          this.setTrayIcon(true);
+          Tray.change(true);
         }
       } else {
-          this.removeTrayIcon();
+          Tray.remove();
       }
 
     },

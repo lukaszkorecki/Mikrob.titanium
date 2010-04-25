@@ -7,6 +7,8 @@
       Ustawienia
     %script{ :src => "libs/prototype.js", :type => "text/javascript" }
     %script{ :src => "application/database_connector.js", :type => "text/javascript"}
+    -#
+      %script{ :src => "application/application.js", :type => "text/javascript"}
     %script{ :src => "application/preferences.js", :type => "text/javascript"}
     :javascript
       document.observe("dom:loaded", function(){
@@ -26,7 +28,10 @@
           .group#badge
             %label{:for => "badge"} Etykieta w docku?
             %input{:name => "badge", :type => "checkbox"}
-        %fieldset
+          .group#tray
+            %label{:for => "badge"} Ikona w trayu?
+            %input{:name => "tray", :type => "checkbox"}
+        %fieldset{:style => "display: none"}
           Konta
           %p
             Tutaj beda konta i ich ustawienia i w ogole bedzie lepiej
