@@ -10,8 +10,7 @@ var Application = (
       return Titanium.App.getName()+" "+Titanium.App.getVersion() + " ["+Titanium.App.getPublisher()+" "+Titanium.App.getID().split('.').reverse().join('.').replace('.','@',1)+"]";
     }
     function getServices() {
-      var services = {
-        // minified for clarity ;-)
+      var services = {        // minified for clarity ;-)
         'id':{field_type:'id'},'login':{field_type:'text',not_null:true},'password':{field_type:'text',not_null:true},'type':{field_type:'text',not_null:true},'api_url':{field_type:'text'}};
       this.db = new DatabaseConnector('mikrob', 'services', services);
       var serv = this.db.find() || [];
@@ -245,6 +244,7 @@ var Application = (
       openUrl: openUrl,
       cache_start : cache_start,
       cache_io : cache_io,
-      json_parse : json_parse
+      json_parse : json_parse,
+      ua_string : ua_string
     };
   } )();
