@@ -350,8 +350,6 @@ input[type="text"], input[type="password"] {
 
 .win32 body {
   background: #222; }
-.win32 .column {
-  background: #222; }
 .win32 #controls {
   background: #222; }
 .win32 .update p, .win32 .update .quoted {
