@@ -7,3 +7,5 @@ Resources/MikrobTestEnv/dist
 *.sw?
 *.?
 #*
+README.html
+.DS_Store
