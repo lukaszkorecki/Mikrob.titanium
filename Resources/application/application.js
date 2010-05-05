@@ -187,7 +187,11 @@ var Application = (
         return false;
 	    }
 
-      win.setBounds(bounds);
+      try {
+        win.setBounds(bounds);
+      } catch(e) {
+        console.log("couldnt set bounds");
+      }
       return true;
     }
     function openImageWindow(image_url) {
