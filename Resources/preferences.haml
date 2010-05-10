@@ -34,17 +34,16 @@
         %fieldset#proxy
           .group#proxy_ip
             %label{:for => "proxy_ip"} IP
-            %input{ :name => "proxy_ip"}
+            %input{ :name => "proxy_ip", :type => "text"}
           .group#proxy_port
             %label{:for => "proxy_port"} Port
-            %input{ :name => "proxy_port"}
+            %input{ :name => "proxy_port", :type => "text"}
           .group#proxy_user
             %label{:for => "proxy_user"} Login
-            %input{ :name => "proxy_user"}
+            %input{ :name => "proxy_user", :type => "text"}
           .group#proxy_password
             %label{:for => "proxy_password"} Hasło
             %input{ :name => "proxy_password", :type => "password"}
-          %button Sprawdź
         %fieldset{:style => "display: none"}
           Konta
           %p
