@@ -120,24 +120,39 @@ var Interface = new Class.create(
       // BOOOYAH
     },
     loginFail : function() {
-
+      alert("Zły login lub hasło lub blip nie działa lub coś tam");
+      window.reload();
     },
-    setAreaContent : function(string, is_prepend) {
+    setAreaContent : function(content, how, include_space) {
       try {
+        var contents =  content || "";
         var mt = $('main_textarea');
-        if (string) {
-          var old = mt.getValue();
-          if(is_prepend) {
-            mt.setValue(string+" "+old);
-          } else {
-            mt.setValue(old+" "+string);
-          }
-          mt.focus();
-        } else {
-          mt.setValue("");
+        var old = mt.value;
+        var val = "";
+        switch(how) {
+          case 'before':
+            val = contents+" "+old;
+            break;
+          case 'after':
+            val = old+" "+contents;
+          break;
+          case "append":
+            val = contents+old;
+          break;
+          case 'prepend':
+            val = old+contents;
+          break;
+          
+          case 'clear':
+            val ="";
+          break;
+          default:
+            val = old;
+          break;
         }
+        mt.setValue(val);
         mt.select();
-        mt.selectionEnd = mt.getValue().length;
+        mt.selectionEnd = mt.value.length;
         mt.focus();
       } catch(no_mt) {
         console.dir(no_mt);
