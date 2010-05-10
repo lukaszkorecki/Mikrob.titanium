@@ -42,7 +42,7 @@ var Interface = new Class.create(
       } catch (no_ch_err){ console.dir(no_ch_err); }
 
       if (was_success) {
-        this.setAreaContent();
+        this.setAreaContent("", "clear");
         this.enableInputArea();
       }
     },
