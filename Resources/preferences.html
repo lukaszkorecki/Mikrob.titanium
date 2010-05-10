@@ -19,10 +19,9 @@
   </head>
   <body style='background-color: #ededed; height: 100%'>
     <div>
-      <h1>Ustawienia</h1>
       <form id='settings'>
-        <fieldset>
-          Informacje
+        <h2>Interfejs</h2>
+        <fieldset id='interface'>
           <div class='group' id='notifications'>
             <label for='notifications'>Powiadomienia?</label>
             <input name='notifications' type='checkbox' />
@@ -35,6 +34,26 @@
             <label for='badge'>Ikona w trayu?</label>
             <input name='tray' type='checkbox' />
           </div>
+        </fieldset>
+        <h2>Proxy</h2>
+        <fieldset id='proxy'>
+          <div class='group' id='proxy_ip'>
+            <label for='proxy_ip'>IP</label>
+            <input name='proxy_ip' />
+          </div>
+          <div class='group' id='proxy_port'>
+            <label for='proxy_port'>Port</label>
+            <input name='proxy_port' />
+          </div>
+          <div class='group' id='proxy_user'>
+            <label for='proxy_user'>Login</label>
+            <input name='proxy_user' />
+          </div>
+          <div class='group' id='proxy_password'>
+            <label for='proxy_password'>Hasło</label>
+            <input name='proxy_password' type='password' />
+          </div>
+          <button>Sprawdź</button>
         </fieldset>
         <fieldset style='display: none'>
           Konta
