@@ -341,8 +341,6 @@ input[type="text"], input[type="password"] {
   background: #222; }
 .linux .update p, .linux .update .quoted {
   -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
-.linux .avatar_container {
-  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
 .linux .update img.avatar, .linux .update img.ravatar {
   -webkit-box-shadow: -1px 1px 3px rbga(0,0,0,0.5); }
 .linux .button {
@@ -365,7 +363,7 @@ input[type="text"], input[type="password"] {
 .win32 .attach_file_img {
   display: none; }
 
-.osx button, .osx .button, .linux button, .linux .button {
+.osx button, .osx .button, .linux button, .linux .button, .win32 button, .win32 .button {
   -webkit-appearance: square-button  !important; }
 
 #image_preview .actions {
