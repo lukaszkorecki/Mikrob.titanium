@@ -91,17 +91,20 @@
               <button class='button_small sender_item' name='submit'>
                 Wyślij
               </button>
-              <button class='button_small' href='#' id='make_private' title='Zmienia wiadomość na prywatną'>
-                Sprywatyzuj
-              </button>
-              <button class='button_small' href='#' id='shorten_links' title='Skraca wszystkie linki'>
-                Skróć linki
-              </button>
-              <button class='button_small attach_file_img' href='#' title='Dodaje plik'>
-                <span id='attach_file'>
-                  Dodaj plik
-                </span>
-              </button>
+              <select class='sender_item' id='additional_actions'>
+                <option value='0'>
+                  ... więcej
+                </option>
+                <option value='make_private'>
+                  Sprywatyzuj
+                </option>
+                <option value='shorten_links'>
+                  Skróć linki
+                </option>
+                <option value='attach_file'>
+                  Dołącz obrazek
+                </option>
+              </select>
             </form>
           </div>
         </div>
