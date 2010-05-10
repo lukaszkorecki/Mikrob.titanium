@@ -257,8 +257,8 @@ var BodyParser =
            element.setAttribute("href",link);
            element.addClassName(attach_special_class(link));
            element.update(link);
-           if(link.match('/blip.pl/') != null) element.addClassName("quoted_link");
-           if(link.match('/rdir.pl/') != null) element.addClassName("rdir_link");
+           if(link.match(/blip.pl/gi) != null) element.addClassName("quoted_link");
+           if(link.match(/rdir.pl/gi) != null) element.addClassName("rdir_link");
            body = body.replace(link, element.outerHTML);
          });
        return body;
@@ -268,9 +268,9 @@ var BodyParser =
        // it would be cool to have some ruby here...
        // but we'll do it differently
        var prefix = "special_";
-       if(url.match("/wrzuta/gi")) { return prefix+"wrzuta"; }
-       if(url.match("/youtube/gi")) { return prefix+"youtube"; }
-       if(url.match("/vimeo/gi")) { return prefix+"vimeo"; }
+       if(url.match(/wrzuta/gi)) { return prefix+"wrzuta"; }
+       if(url.match(/youtube/gi)) { return prefix+"youtube"; }
+       if(url.match(/vimeo/gi)) { return prefix+"vimeo"; }
        return "";
      }
      return {
