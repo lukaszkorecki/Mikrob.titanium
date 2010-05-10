@@ -273,10 +273,11 @@ var Application = (
 var Tray = (
   function(){
     var active = false;
+    var tray = {};
     function add() {
       if(Preferences.get("tray")) {
         if(this.active == false) {
-          Titanium.UI.addTray("app://mikrob_tray_normal.png",Events.tray_icon);
+         this.tray =  Titanium.UI.addTray("app://mikrob_tray_normal.png",Events.tray_icon);
           this.active = true;
         }
 
@@ -290,8 +291,9 @@ var Tray = (
         if(is_active) {
           ic = "app://mikrob_tray_active.png";
         }
-        Titanium.UI.clearTray();
-        Titanium.UI.addTray(ic,Events.tray_icon);
+        //Titanium.UI.clearTray();
+        //Titanium.UI.addTray(ic,Events.tray_icon);
+        this.tray.setIcon(ic);
       }
 
     }
@@ -299,6 +301,7 @@ var Tray = (
       if(this.active) {
         Titanium.UI.clearTray();
         this.active = false;
+
       }
 
     }
@@ -306,6 +309,7 @@ var Tray = (
       active : active,
       add : add,
       change : change,
-      remove : remove
+      remove : remove,
+      tray : tray
     }
   })();
