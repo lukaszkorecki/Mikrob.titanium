@@ -122,7 +122,7 @@ var Events = (
 		}
 
 		function make_private () {
-			interfaces[active_service].setAreaContent('>',true);
+			interfaces[active_service].setAreaContent('>',"prepend");
 			$('main_textarea').toggleClassName('priv_t');
 		}
 
@@ -167,11 +167,11 @@ var Events = (
     }
 
 		function quote_link (event) {
-			interfaces[active_service].setAreaContent($(event.target_up||event.target).getAttribute("data"), false);
+			interfaces[active_service].setAreaContent($(event.target_up||event.target).getAttribute("data"), "after", true);
 
 		}
 		function message_link (event) {
-			interfaces[active_service].setAreaContent($(event.target_up||event.target).getAttribute("data"), true);
+			interfaces[active_service].setAreaContent($(event.target_up||event.target).getAttribute("data"), "before",true);
 
 	  }
 	  // no, it's not code duplication!

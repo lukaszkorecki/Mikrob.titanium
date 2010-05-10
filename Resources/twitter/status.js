@@ -23,7 +23,7 @@ var TwitterStatus = new Class.create({
     var self = this;
     var link = new Element('a', {'href' : '#' , 'class' : 'msg button small'}).update("Wiadomość");
     link.observe('click', function(event) {
-      interfaces[self.owner_service_id].setAreaContent("d "+self.user.screen_name,true);
+      interfaces[self.owner_service_id].setAreaContent("d"+self.user.screen_name,"after");
       event.preventDefault();
       });
     return link;
@@ -32,7 +32,7 @@ var TwitterStatus = new Class.create({
     var self = this;
     var link = new Element('a', {'href' : '#' , 'class' : 'msg button small'}).update("Odpowiedz");
     link.observe('click', function(event) {
-      interfaces[self.owner_service_id].setAreaContent("@"+self.user.screen_name,true);
+      interfaces[self.owner_service_id].setAreaContent("@"+self.user.screen_name,"append");
       // TODO implement this:
       // interfaces[self.service_id].setAreaParam("id", self.id);
       event.preventDefault();
