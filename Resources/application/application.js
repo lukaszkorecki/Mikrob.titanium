@@ -176,13 +176,25 @@ var Application = (
     function loadWindowSettings() {
 	 	  var win = Titanium.UI.getCurrentWindow();
       win.setResizable(true);
-	    var bounds = win.getBounds();
+      try {
+        var bounds = win.getBounds();
+      } catch(e) {
+        console.dir(e);
+      }
 
 	    try {
-				bounds.width = parseInt(Preferences.get("width","Int"),10);
-				bounds.height = Preferences.get("height","Int");
-				bounds.x = Preferences.get("x","Int");
-				bounds.y = Preferences.get("y", "Int");
+        var width = parseInt(Preferences.get("width","Int"),10);
+        var height = Preferences.get("height","Int");
+        var x = Preferences.get("x","Int");
+        var y = Preferences.get("y", "Int");
+	    } catch (get_props) {
+        return false;
+	    }
+	    try {
+				bounds.width = width || Titanium.UI.getCurrentWindow().width;
+				bounds.height = height || Titanium.UI.getCurrentWindow().height;
+				bounds.x =  x || Titanium.UI.getCurrentWindow().x;
+				bounds.y = y || Titanium.UI.getCurrentWindow().y;
 	    } catch (get_props) {
         return false;
 	    }
