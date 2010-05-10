@@ -8,10 +8,12 @@ var interfaces = new Array();
 // TODO this should come from the DB
 var services = new Array();
 var username,loop1,active_service,archive_opened =0;
+window.addEventListener("load",function() {
+    Application.loadWindowSettings();
+});
 document.observe(
   'dom:loaded',
   function(){
-    Application.loadWindowSettings();
     Application.cache_start();
     $('input_area').toggle(); // <- this needs to be a function
     $('menubar').toggle();
@@ -30,16 +32,6 @@ document.observe(
 	  document.body.observe('click',Dispatcher);
 	  document.getElementById('wrapper').addEventListener('submit',Dispatcher);
 	  document.getElementById('main_textarea').addEventListener('keydown',Dispatcher);
-    //    document.getElementById('main_textarea').addEventListener('focus', function(event) {
-    //                                                                  console.log("Focusing the area");
-    //                                                                  console.dir(event);
-    //                                                                  this.setAttribute("focued", true);
-    //                                                                });
-    //      document.getElementById('main_textarea').addEventListener('blur', function(event) {
-    //                                                                  console.log("unFocusing the area");
-    //                                                                  console.dir(event);
-    //                                                                  this.setAttribute("focued", false);
-    //                                                                });
 
     document.body.addEventListener(
       'keydown',
@@ -80,7 +72,15 @@ document.observe(
         return true;
       });
 
+    document.getElementById("additional_actions").addEventListener("change", function(ev){
+      var el  = new Element("button", { id : ev.target.value });
+      Dispatcher(el.fire("click"));
+      this.value = 0;
+      el = null;
+    });
   });
+
+// delgate actions select to main dispatcher
 
 function Dispatcher(event){
 	var element = $(event.target);
