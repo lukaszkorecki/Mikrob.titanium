@@ -136,10 +136,10 @@ var Interface = new Class.create(
           case 'after':
             val = old+" "+contents;
           break;
-          case "append":
+          case "prepend":
             val = contents+old;
           break;
-          case 'prepend':
+          case 'append':
             val = old+contents;
           break;
           
