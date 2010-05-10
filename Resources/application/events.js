@@ -167,7 +167,7 @@ var Events = (
     }
 
 		function quote_link (event) {
-			interfaces[active_service].setAreaContent($(event.target_up||event.target).getAttribute("data"), "after", true);
+			interfaces[active_service].setAreaContent($(event.target_up||event.target).getAttribute("data"), "append", true);
 
 		}
 		function message_link (event) {
