@@ -16,6 +16,7 @@ var Preferences = (
     };
     var Bool = ["notifications", "badge", "tray"];
 
+    var Proxy = ["proxy_ip", "proxy_port", "proxy_user", "proxy_password"];
     var container = [];
     function getPreferences() {
       console.log("getPreferences");
@@ -58,11 +59,14 @@ var Preferences = (
       catch(err) {
         console.log("no prefs!");
         res = false;
+        if(res == false && t=="String") {
+          res = "";
+        }
       }
       return res;
     }
-    function apply(name,type) {
-      console.log("applying prefs " + name);
+    function use(name,type) {
+      console.log("useing prefs " + name);
       var t = type || "Bool";
       if(this.action_list[name]) {
         console.log("I has this action")
@@ -80,8 +84,9 @@ var Preferences = (
       get : get,
       set  : set,
       Bool : Bool,
+      Proxy : Proxy,
       action_list : action_list,
-      apply : apply
+      use : use
     };
 
   })();
@@ -92,8 +97,7 @@ document.observe(
   function() {
     console.log("opened preferences win");
     // bool values
-      Preferences.Bool.each(
-      function(el){
+      Preferences.Bool.each(function(el){
         $(el).down("input").setValue(Preferences.get(el)).observe(
           "change",
           function() {
@@ -101,24 +105,33 @@ document.observe(
             var val = !!(this.getValue());
 
             Preferences.set(this.name, val);
-            Preferences.apply(this.name);
+            Preferences.use(this.name);
           });
       });
-  }
-);
+      try {
+      Preferences.Proxy.each(function(el){
+        $(el).down("input").setValue(Preferences.get(el, "String")).observe(
+          "change",
+          function() {
+            var val = this.getValue();
+            Preferences.set(this.name, val, "String");
+            Preferences.use(this.name);
+          });
+      });
+      } catch(e) {
+        console.dir(e);
+      }
+  });
 document.observe(
   "dom:loaded",function(){
-    Preferences.Bool.each(function(el){
-                            console.log("checking prefes for: " + el);
-                            try {
-                              var x = Preferences.get(el);
-                              console.log(x);
-                              Preferences.apply(el);
-                            } catch(err) {
-                              // who cares?
-                            }
-                          }
-                         );
-  }
-
-);
+    var p = [].concat(Preferences.Proxy, Preferences.Bool);
+    p.each(function(el){
+      console.log("checking prefes for: " + el);
+      try {
+        var x = Preferences.get(el);
+        Preferences.use(el);
+      } catch(err) {
+        // who cares?
+      }
+    });
+});
