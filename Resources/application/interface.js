@@ -35,7 +35,7 @@ var Interface = new Class.create(
       this.notify(Titanium.App.getName(),'Wysłano','ok');
       if(Application.attachment != "") {
         Application.attachment = "";
-        $('attach_file').update("Dodaj plik").removeClassName("activated_");
+        Dispatcher($('attchmnt').fire("click"));
       }
       try {
         $('charcount').update('0');
