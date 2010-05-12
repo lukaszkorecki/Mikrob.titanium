@@ -277,7 +277,8 @@ var Application = (
       cache_io : cache_io,
       json_parse : json_parse,
       ua_string : ua_string,
-      t : t
+      t : t,
+      attachment : attachment
     };
   } )();
 

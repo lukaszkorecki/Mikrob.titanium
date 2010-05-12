@@ -44,11 +44,11 @@ var Events = (
       if(len <= interfaces[active_service].character_limit) {
         interfaces[active_service].disableInputArea();
         interfaces[active_service].throbber.toggle();
-        if(attachment == "") {
+        if(Application.attachment == "") {
           services[active_service].post(content);
         } else {
           try {
-            services[active_service].postWithFile(content, attachment);
+            services[active_service].postWithFile(content, Application.attachment);
           } catch(no_post_with_file) {
             alert("Nie udało się wysłać statusu w plikiem, sry");
           }
@@ -69,11 +69,11 @@ var Events = (
         interfaces[active_service].disableInputArea();
         if( (content.length-1) <= interfaces[active_service].character_limit){
           interfaces[active_service].throbber.toggle();
-          if(attachment == "") {
+          if(Application.attachment == "") {
             services[active_service].post(content);
           } else {
             try {
-              services[active_service].postWithFile(content, attachment);
+              services[active_service].postWithFile(content, Application.attachment);
             } catch(no_post_with_file) {
               console.dir(no_post_with_file);
             }
@@ -225,6 +225,11 @@ var Events = (
       var  w = Titanium.UI.getCurrentWindow();
       w.focus();
     }
+    function attchmnt(event) {
+      event.target.update();
+      Application.attachment = "";
+      
+    }
     return {
       sidebar_toggle : sidebar_toggle,
       tray_icon : tray_icon,
@@ -254,7 +259,9 @@ var Events = (
       expanded_link : expanded_link,
       attach_file : attach_file,
       tray_icon : tray_icon,
-      preferences_button : preferences_button
+      preferences_button : preferences_button,
+
+      attchmnt : attchmnt
 
     };
   }
@@ -343,7 +350,7 @@ var KeyboardEvents = (
       open_messages : open_messages,
       open_preferences : open_preferences,
       mark_all_as_read : mark_all_as_read,
-      make_private : make_private
+      make_private : make_private,
     };
   }
 )();

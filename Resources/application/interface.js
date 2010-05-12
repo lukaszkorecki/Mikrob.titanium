@@ -33,8 +33,8 @@ var Interface = new Class.create(
 
       this.throbber.toggle();
       this.notify(Titanium.App.getName(),'Wysłano','ok');
-      if(attachment != "") {
-        attachment = "";
+      if(Application.attachment != "") {
+        Application.attachment = "";
         $('attach_file').update("Dodaj plik").removeClassName("activated_");
       }
       try {
@@ -162,21 +162,21 @@ var Interface = new Class.create(
 
     attach_file : function() {
       var uwin = Titanium.UI.getCurrentWindow();
-      var element = $('attach_file');
-      if(attachment == "") {
+      var element = $('attchmnt');
+      if(Application .attachment == "") {
         uwin.openFileChooserDialog(
           function(file){
-            attachment = file[0];
+            Application.attachment = file[0];
             console.log(attachment);
-            element.setAttribute("title", attachment);
+            element.setAttribute("title", Application.attachment);
             element.addClassName('activated_');
             element.update("Dodano plik");
           });
       } else {
-        attachment = "";
+        Application.attachment = "";
         element.setAttribute("title", "");
         element.removeClassName('activated_');
-        element.update("Dodaj plik");
+        element.update("");
       }
 
     },
