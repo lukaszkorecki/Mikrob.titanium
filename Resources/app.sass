@@ -154,52 +154,11 @@ p
   position: fixed
   top: 0
   left: 0
-  height: 25px
-  background-image: url(app://icons/BG.png)
+  height: 21px
   background-repeat: repeat-x
   width: 100%
   border-bottom: 2px solid #666
-  ul
-    list-style: none
-    margin: 0
-    padding: 0
-    padding-left: 5px
-    margin-bottom: 10px
-
-    li
-      list-style: none
-      margin: 0
-      padding: 0
-      display: inline
-
-    // Toolbar icons
-    button
-      position: relative
-      top: 0
-
-      width: 25px
-      height: 25px
-      display: block
-      float: left
-      margin-right: 12px
-      text-align: center
-      padding: 1px
-      background: none
-      border: none
-      img
-        vertical-align: center
-        z-index: 23
-      span
-        position: absolute
-        text-align: center
-        top: 8px
-        left: 3px
-        width: 20px
-        z-index: 25
-
-    button:hover
-      opacity: 0.8
-
+  padding: 2px
   .change_service_container
     position: fixed
     top: 2px
@@ -449,10 +408,17 @@ input
       display: inline
 
 
+.hide
+  display: none
+
 // PREFERENCES
 .win32, .linux
   #badge
     display: none
+  #menubar, #global_actions
+    background-color: #222
+    button
+      font-size: 10px
 .win32
   #notifications
     display: none

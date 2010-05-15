@@ -19,6 +19,7 @@
 
 
     %link{ :href => "app.css", :rel => "stylesheet", :type => "text/css", :media => "screen", :charset => "utf-8" }
+    %link{ :href => "buttons.css", :rel => "stylesheet", :type => "text/css", :media => "screen", :charset => "utf-8" }
   %body
     #wrapper
       #throbber
@@ -29,42 +30,20 @@
             Zaloguj się do swoich kont &rarr;
 
       #application
-        #menubar
-          %ul
-            %li
-              %button#home_button._button.small{ :href => "#", :title => "Kokpit" }
-                %img.home_button_img{ :src => "app://icons/toolbar/30x-Cloud.png", :width => "23px", :height => "23px", :alt => "" }
+        #menubar.toolbar
+          %span.button_group
+            %button#home_button.left{ :href => "#", :title => "Kokpit" }
+              Kokpit
+            %button#archive_button.right{ :href => "#", :title => "Wiadomości" }
+              Wiadomości
+          %button#mark_as_read_button{:title => "Oznacz jako przeczytane"}
+            %span.mark_as_read_button_img 0
+          %button#preferences_button{:title => "Preferencje"}
+            Ustawienia
 
-            %li
-              %button#archive_button._button.small{ :href => "#", :title => "Wiadomości" }
-                %img.archive_button_img{ :src => "app://icons/toolbar/30x-Chats.png", :width => "23px", :height => "23px", :alt => "" }
-            %li
-              %button#mark_as_read_button._button.small{:title => "Oznacz jako przeczytane"}
-                %span.mark_as_read_button_img 0
-                %img.mark_as_read_button_img{ :src => "app://icons/toolbar/30x-Grocery-Bag.png", :height => "23px", :alt => "", :width => "23px" }
-            %li
-              %button#preferences_button.small{:title => "Preferencje"}
-                %img.preferences_button_img{ :src => "app://icons/toolbar/30x-Gear.png", :height => "23px", :alt => "Preferencje", :width => "23px"}
-          -#
-            %li
-              %a#notifications_button._button.small{ :href => "#", :title => "Powiadomienia" }
-                %img.notifications_button_img{ :src => "app://icons/ui/48_notifications.png", :width => "24px", :height => "24px", :alt => "" }
-                Powiadomienia
-            %li
-              %a#friends_button._button.small{ :href => "#", :title => "Znajomi" }
-                %img.friends_button_img{ :src => "app://icons/ui/48_users.png", :width => "24px", :height => "24px", :alt => "" }
-                Znajomi
-            %li
-              %a#my_stuff_button._button.small{ :href => "#" , :title => "Moje" }
-                %img.my_stuff_button_img{ :src => "app://icons/ui/48_mine.png", :width => "24px", :height => "24px", :alt => "" }
-                Moje
-            %li
-              %a#search_button._button.small{ :href => "#",  :title => "Szukaj" }
-                %img.search_button.img{ :src => "app://icons/ui/48_search.png", :width => "24px", :height => "24px", :alt => "" }
-                Szukaj
-
-          %span.change_service_container
+          %span.hide.change_service_container
             %select#change_service
+          %input.hide{:type => "search"}
         /
           The content (needs to be dynamicaly created on service retreival)
         #content_container

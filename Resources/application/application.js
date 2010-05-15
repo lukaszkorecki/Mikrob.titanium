@@ -144,7 +144,7 @@ var Application = (
     }
     function populateAccountSwitcher() {
       var account_switcher = $('change_service');
-      account_switcher.update();
+      //account_switcher.update();
       this.getServices();
       for(var i=0, len = this.services.length;i<len;i++) {
 

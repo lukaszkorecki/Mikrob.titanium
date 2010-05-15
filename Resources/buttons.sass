@@ -1,0 +1,29 @@
+.osx
+  .toolbar
+    button
+      -webkit-box-shadow: rgba(225, 225, 225, 0.695312) 0px 1px 0px
+      background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FDFDFD), to(darkGray))
+      border: 1px solid #3D3D3D
+      height: 20px
+      //position: absolute
+      -webkit-border-radius: 5px
+      margin: 0 10px 0 0px
+        
+    button:active
+      background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), color-stop(0.2, rgba(0, 0, 0, 0.1)), color-stop(0.75, rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.3))), -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.4)), color-stop(0.2, rgba(0, 0, 0, 0.2)), color-stop(0.8, rgba(0, 0, 0, 0.2)), to(rgba(0, 0, 0, 0.5))), -webkit-gradient(linear, left top, left bottom, from(rgb(253, 253, 253)), to(rgb(169, 169, 169)))
+      -webkit-user-drag: none
+    button.pressed
+      background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), color-stop(0.2, rgba(0, 0, 0, 0.1)), color-stop(0.75, rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.3))), -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.4)), color-stop(0.2, rgba(0, 0, 0, 0.2)), color-stop(0.8, rgba(0, 0, 0, 0.2)), to(rgba(0, 0, 0, 0.5))), -webkit-gradient(linear, left top, left bottom, from(rgb(253, 253, 253)), to(rgb(69, 69, 69)))
+      color: white
+
+    .button_group
+      button
+        margin: 0 0 0 -7px
+      .right
+        -webkit-border-top-left-radius: 0
+        -webkit-border-bottom-left-radius: 0
+      .left
+        -webkit-border-top-right-radius: 0
+        -webkit-border-bottom-right-radius: 0
+      .inner
+        -webkit-border-radius: 0px

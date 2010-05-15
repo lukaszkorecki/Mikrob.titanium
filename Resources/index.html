@@ -30,6 +30,7 @@
     <script src='twitter/twitter.interface.js' type='text/javascript'></script>
     <script src='twitter/twitter.js' type='text/javascript'></script>
     <link charset='utf-8' href='app.css' media='screen' rel='stylesheet' type='text/css' />
+    <link charset='utf-8' href='buttons.css' media='screen' rel='stylesheet' type='text/css' />
   </head>
   <body>
     <div id='wrapper'>
@@ -44,33 +45,25 @@
         </form>
       </div>
       <div id='application'>
-        <div id='menubar'>
-          <ul>
-            <li>
-              <button class='_button small' href='#' id='home_button' title='Kokpit'>
-                <img alt='' class='home_button_img' height='23px' src='app://icons/toolbar/30x-Cloud.png' width='23px' />
-              </button>
-            </li>
-            <li>
-              <button class='_button small' href='#' id='archive_button' title='Wiadomości'>
-                <img alt='' class='archive_button_img' height='23px' src='app://icons/toolbar/30x-Chats.png' width='23px' />
-              </button>
-            </li>
-            <li>
-              <button class='_button small' id='mark_as_read_button' title='Oznacz jako przeczytane'>
-                <span class='mark_as_read_button_img'>0</span>
-                <img alt='' class='mark_as_read_button_img' height='23px' src='app://icons/toolbar/30x-Grocery-Bag.png' width='23px' />
-              </button>
-            </li>
-            <li>
-              <button class='small' id='preferences_button' title='Preferencje'>
-                <img alt='Preferencje' class='preferences_button_img' height='23px' src='app://icons/toolbar/30x-Gear.png' width='23px' />
-              </button>
-            </li>
-          </ul>
-          <span class='change_service_container'>
+        <div class='toolbar' id='menubar'>
+          <span class='button_group'>
+            <button class='left' href='#' id='home_button' title='Kokpit'>
+              Kokpit
+            </button>
+            <button class='right' href='#' id='archive_button' title='Wiadomości'>
+              Wiadomości
+            </button>
+          </span>
+          <button id='mark_as_read_button' title='Oznacz jako przeczytane'>
+            <span class='mark_as_read_button_img'>0</span>
+          </button>
+          <button id='preferences_button' title='Preferencje'>
+            Ustawienia
+          </button>
+          <span class='hide change_service_container'>
             <select id='change_service'></select>
           </span>
+          <input class='hide' type='search' />
         </div>
         <!--
           The content (needs to be dynamicaly created on service retreival)
