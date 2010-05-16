@@ -44,7 +44,7 @@ var Events = (
       if(len <= interfaces[active_service].character_limit) {
         interfaces[active_service].disableInputArea();
         interfaces[active_service].throbber.toggle();
-        if(Application.attachment == "") {
+        if(Application.attachment === "") {
           services[active_service].post(content);
         } else {
           try {
@@ -69,7 +69,7 @@ var Events = (
         interfaces[active_service].disableInputArea();
         if( (content.length-1) <= interfaces[active_service].character_limit){
           interfaces[active_service].throbber.toggle();
-          if(Application.attachment == "") {
+          if(Application.attachment === "") {
             services[active_service].post(content);
           } else {
             try {
@@ -147,9 +147,17 @@ var Events = (
     function preferences_button(event) {
       Application.openPreferencesWindow();
     }
-    function home_button () {
+    function home_button (event) {
       $('archive').hide();
       $('dash'+active_service).show();
+      var src = (event.target.down("img",0) || event.target).getAttribute("src");
+      if(src.match(/dark/gi)) {
+        src = "icons/toolbar/icon_dashboard.png";
+      } else {
+      
+        src = "icons/toolbar/icon_dashboard_dark.png";
+      }
+      (event.target.down("img",0) || event.target).setAttribute("src", src);
       archive_opened = 0;
     }
 
@@ -288,7 +296,7 @@ var KeyboardEvents = (
     function reply_to(event) { // or quote!
       if(has_key_modifier(event)) {
         var klass = "message_link";
-        if(event.shiftKey == true) {
+        if(event.shiftKey === true) {
           klass = "quote_link";
         }
         var el = $$(".update")[interfaces[active_service].active_entry].down("."+klass);
@@ -333,10 +341,10 @@ var KeyboardEvents = (
     function has_key_modifier(event) {
       var os = document.body.className;
 
-      if(os == "osx" && event.metaKey == true) {
+      if(os === "osx" && event.metaKey === true) {
         return true;
       }
-      if((os.match(/win/i) || os == "linux") && event.ctrlKey==true) {
+      if((os.match(/win/i) || os.match(/linux/i)) && event.ctrlKey===true) {
         return true;
       }
       return false;
@@ -350,7 +358,7 @@ var KeyboardEvents = (
       open_messages : open_messages,
       open_preferences : open_preferences,
       mark_all_as_read : mark_all_as_read,
-      make_private : make_private,
+      make_private : make_private
     };
   }
 )();

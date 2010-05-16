@@ -30,13 +30,15 @@
         #menubar.toolbar
           %span.button_group
             %button#home_button.left.pressed{ :href => "#", :title => "Kokpit" }
+              %img.home_button_img{ :src => "icons/toolbar/icon_dashboard.png"}
               Kokpit
             %button#archive_button.right{ :href => "#", :title => "Sekretarka" }
+              %img.archive_button_img{ :src => "icons/toolbar/icon_box_dark.png"}
               Sekretarka
           %button#mark_as_read_button{:title => "Oznacz jako przeczytane"}
             %span.mark_as_read_button_img 0
           %button#preferences_button{:title => "Preferencje"}
-            Ustawienia
+            %img.preferences_button_img{ :src => "icons/toolbar/icon_settings.png"}
 
           %span.hide.change_service_container
             %select#change_service
@@ -57,7 +59,9 @@
             %form#sender{ :method => "", :action => "#", "accept-charset" => "utf-8" }
               %textarea#main_textarea{ :name => "content", :autofocus => "", :rows => "3", :placeholder => "Co teraz robisz? O czym myślisz? Dokąd zmierzamy?" }
               %span.buttons.toolbar
-                %button.button_small.sender_item{ :name => "submit"} Wyślij
+                %button.button_small.sender_item{ :name => "submit"}
+                  %img.sender_item_img{:src => "icons/toolbar/icon_add_dark.png"}
+                  Wyślij
                 %select#additional_actions
                   %option{:value => 0}
                     :plain
@@ -68,5 +72,5 @@
                     Skróć URL
                   %option{:value => "attach_file"}
                     Dodaj foto
-                %a#attchmnt
-                  &nbsp;
+                %button#attchmnt
+                  %img.attchmnt_img{:src => "icons/toolbar/icon_attach.png"}

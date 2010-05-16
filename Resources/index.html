@@ -48,9 +48,11 @@
         <div class='toolbar' id='menubar'>
           <span class='button_group'>
             <button class='left pressed' href='#' id='home_button' title='Kokpit'>
+              <img class='home_button_img' src='icons/toolbar/icon_dashboard.png' />
               Kokpit
             </button>
             <button class='right' href='#' id='archive_button' title='Sekretarka'>
+              <img class='archive_button_img' src='icons/toolbar/icon_box_dark.png' />
               Sekretarka
             </button>
           </span>
@@ -58,7 +60,7 @@
             <span class='mark_as_read_button_img'>0</span>
           </button>
           <button id='preferences_button' title='Preferencje'>
-            Ustawienia
+            <img class='preferences_button_img' src='icons/toolbar/icon_settings.png' />
           </button>
           <span class='hide change_service_container'>
             <select id='change_service'></select>
@@ -82,7 +84,10 @@
             <form accept-charset='utf-8' action='#' id='sender' method=''>
               <textarea autofocus='' id='main_textarea' name='content' placeholder='Co teraz robisz? O czym myślisz? Dokąd zmierzamy?' rows='3'></textarea>
               <span class='buttons toolbar'>
-                <button class='button_small sender_item' name='submit'>Wyślij</button>
+                <button class='button_small sender_item' name='submit'>
+                  <img class='sender_item_img' src='icons/toolbar/icon_add_dark.png' />
+                  Wyślij
+                </button>
                 <select id='additional_actions'>
                   <option value='0'>
                     Więcej
@@ -97,9 +102,9 @@
                     Dodaj foto
                   </option>
                 </select>
-                <a id='attchmnt'>
-                  &nbsp;
-                </a>
+                <button id='attchmnt'>
+                  <img class='attchmnt_img' src='icons/toolbar/icon_attach.png' />
+                </button>
               </span>
             </form>
           </div>

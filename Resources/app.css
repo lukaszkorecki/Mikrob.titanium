@@ -352,6 +352,9 @@ input[type="text"], input[type="password"] {
   #image_preview .actions:hover button {
     display: inline; }
 
+button img {
+  vertical-align: middle; }
+
 select {
   -webkit-appearance: button !important; }
 
