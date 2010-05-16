@@ -161,22 +161,22 @@ var Interface = new Class.create(
     },
 
     attach_file : function() {
+      console.log("HAR~!");
       var uwin = Titanium.UI.getCurrentWindow();
       var element = $('attchmnt');
       if(Application .attachment == "") {
         uwin.openFileChooserDialog(
           function(file){
+            console.log("here");
             Application.attachment = file[0];
             console.log(attachment);
             element.setAttribute("title", Application.attachment);
-            element.addClassName('activated_');
-            element.update("Dodano plik");
+            element.toggle();
           });
       } else {
         Application.attachment = "";
-        element.setAttribute("title", "");
-        element.removeClassName('activated_');
-        element.update("");
+        element.setAttribute("title", Application.attachment);
+        element.toggle();
       }
 
     },

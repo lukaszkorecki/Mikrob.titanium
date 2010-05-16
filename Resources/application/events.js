@@ -150,14 +150,6 @@ var Events = (
     function home_button (event) {
       $('archive').hide();
       $('dash'+active_service).show();
-      var src = (event.target.down("img",0) || event.target).getAttribute("src");
-      if(src.match(/dark/gi)) {
-        src = "icons/toolbar/icon_dashboard.png";
-      } else {
-      
-        src = "icons/toolbar/icon_dashboard_dark.png";
-      }
-      (event.target.down("img",0) || event.target).setAttribute("src", src);
       archive_opened = 0;
     }
 
@@ -234,7 +226,8 @@ var Events = (
       w.focus();
     }
     function attchmnt(event) {
-      event.target.update();
+      console.log("Click click!");
+      $(event.target_up || event.target).toggle();
       Application.attachment = "";
       
     }

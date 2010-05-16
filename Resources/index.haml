@@ -30,7 +30,7 @@
         #menubar.toolbar
           %span.button_group
             %button#home_button.left.pressed{ :href => "#", :title => "Kokpit" }
-              %img.home_button_img{ :src => "icons/toolbar/icon_dashboard.png"}
+              %img.home_button_img{ :src => "icons/toolbar/icon_dashboard_dark.png"}
               Kokpit
             %button#archive_button.right{ :href => "#", :title => "Sekretarka" }
               %img.archive_button_img{ :src => "icons/toolbar/icon_box_dark.png"}
@@ -72,5 +72,6 @@
                     Skróć URL
                   %option{:value => "attach_file"}
                     Dodaj foto
-                %button#attchmnt
+                %button.hide#attchmnt
                   %img.attchmnt_img{:src => "icons/toolbar/icon_attach.png"}
+                  Usuń
