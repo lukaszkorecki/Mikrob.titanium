@@ -47,11 +47,11 @@
       <div id='application'>
         <div class='toolbar' id='menubar'>
           <span class='button_group'>
-            <button class='left' href='#' id='home_button' title='Kokpit'>
+            <button class='left pressed' href='#' id='home_button' title='Kokpit'>
               Kokpit
             </button>
-            <button class='right' href='#' id='archive_button' title='Wiadomości'>
-              Wiadomości
+            <button class='right' href='#' id='archive_button' title='Sekretarka'>
+              Sekretarka
             </button>
           </span>
           <button id='mark_as_read_button' title='Oznacz jako przeczytane'>
@@ -63,7 +63,7 @@
           <span class='hide change_service_container'>
             <select id='change_service'></select>
           </span>
-          <input class='hide' type='search' />
+          <input class='search hide' placeholder='Szukaj/Filtruj' type='search' />
         </div>
         <!--
           The content (needs to be dynamicaly created on service retreival)
@@ -78,29 +78,29 @@
         </div>
         <div id='global_actions'>
           <div id='input_area'>
-            <span class='sender_item' id='charcount'>0</span>
+            <span id='charcount'>0</span>
             <form accept-charset='utf-8' action='#' id='sender' method=''>
               <textarea autofocus='' id='main_textarea' name='content' placeholder='Co teraz robisz? O czym myślisz? Dokąd zmierzamy?' rows='3'></textarea>
-              <button class='button_small sender_item' name='submit'>
-                Wyślij
-              </button>
-              <select class='sender_item' id='additional_actions'>
-                <option value='0'>
-                  ...więcej
-                </option>
-                <option value='make_private'>
-                  Sprywatyzuj
-                </option>
-                <option value='shorten_links'>
-                  Skróć linki
-                </option>
-                <option value='attach_file'>
-                  Dołącz obrazek
-                </option>
-              </select>
-              <a id='attchmnt'>
-                &nbsp;
-              </a>
+              <span class='buttons toolbar'>
+                <button class='button_small sender_item' name='submit'>Wyślij</button>
+                <select id='additional_actions'>
+                  <option value='0'>
+                    Więcej
+                  </option>
+                  <option value='make_private'>
+                    Prywatna
+                  </option>
+                  <option value='shorten_links'>
+                    Skróć URL
+                  </option>
+                  <option value='attach_file'>
+                    Dodaj foto
+                  </option>
+                </select>
+                <a id='attchmnt'>
+                  &nbsp;
+                </a>
+              </span>
             </form>
           </div>
         </div>

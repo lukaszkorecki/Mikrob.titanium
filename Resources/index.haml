@@ -15,9 +15,6 @@
 
     - Dir["Resources/**/*.js"].reject{|l| l=~ /libs|test|image/ }.sort.each do |file|
       %script{:src => file.sub("Resources/",""), :type => "text/javascript"}
-
-
-
     %link{ :href => "app.css", :rel => "stylesheet", :type => "text/css", :media => "screen", :charset => "utf-8" }
     %link{ :href => "buttons.css", :rel => "stylesheet", :type => "text/css", :media => "screen", :charset => "utf-8" }
   %body
@@ -32,10 +29,10 @@
       #application
         #menubar.toolbar
           %span.button_group
-            %button#home_button.left{ :href => "#", :title => "Kokpit" }
+            %button#home_button.left.pressed{ :href => "#", :title => "Kokpit" }
               Kokpit
-            %button#archive_button.right{ :href => "#", :title => "Wiadomości" }
-              Wiadomości
+            %button#archive_button.right{ :href => "#", :title => "Sekretarka" }
+              Sekretarka
           %button#mark_as_read_button{:title => "Oznacz jako przeczytane"}
             %span.mark_as_read_button_img 0
           %button#preferences_button{:title => "Preferencje"}
@@ -43,7 +40,7 @@
 
           %span.hide.change_service_container
             %select#change_service
-          %input.hide{:type => "search"}
+          %input.search.hide{:type => "search", :placeholder => "Szukaj/Filtruj"}
         /
           The content (needs to be dynamicaly created on service retreival)
         #content_container
@@ -56,20 +53,20 @@
 
         #global_actions
           #input_area
-            %span#charcount.sender_item 0
+            %span#charcount 0
             %form#sender{ :method => "", :action => "#", "accept-charset" => "utf-8" }
               %textarea#main_textarea{ :name => "content", :autofocus => "", :rows => "3", :placeholder => "Co teraz robisz? O czym myślisz? Dokąd zmierzamy?" }
-              %button.button_small.sender_item{ :name => "submit"}
-                Wyślij
-              %select#additional_actions.sender_item
-                %option{:value => 0}
-                  :plain
-                    ...więcej
-                %option{:value => "make_private"}
-                  Sprywatyzuj
-                %option{:value => "shorten_links"}
-                  Skróć linki
-                %option{:value => "attach_file"}
-                  Dołącz obrazek
-              %a#attchmnt
-                &nbsp;
+              %span.buttons.toolbar
+                %button.button_small.sender_item{ :name => "submit"} Wyślij
+                %select#additional_actions
+                  %option{:value => 0}
+                    :plain
+                      Więcej
+                  %option{:value => "make_private"}
+                    Prywatna
+                  %option{:value => "shorten_links"}
+                    Skróć URL
+                  %option{:value => "attach_file"}
+                    Dodaj foto
+                %a#attchmnt
+                  &nbsp;

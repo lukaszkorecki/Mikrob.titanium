@@ -43,7 +43,8 @@ p {
     margin: 5px;
     margin-left: 40px;
     min-height: 30px;
-    width: 85%;
+    min-width: 85%;
+    max-width: 87%;
     padding: 5px;
     -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
     -webkit-border-radius: 4px;
@@ -101,7 +102,7 @@ p {
   height: 20px; }
 
 .update img.avatar, .update img.ravatar {
-  border: 4px solid #eee;
+  margin-left: 4px;
   -webkit-border-radius: 5px;
   -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
 
@@ -130,7 +131,7 @@ p {
   overflow-y: auto;
   left: 0px;
   bottom: 80px;
-  top: 26px;
+  top: 30px;
   padding: 0px;
   max-width: 480px;
   background: #ededed; }
@@ -139,17 +140,21 @@ p {
   position: fixed;
   top: 0;
   left: 0;
-  height: 21px;
+  height: 25px;
   background-repeat: repeat-x;
-  width: 100%;
+  width: 97%;
   border-bottom: 2px solid #666;
-  padding: 2px; }
+  padding: 2px;
+  padding-left: 15px; }
+  #menubar #mark_as_read_button {
+    min-width: 35px; }
+  #menubar .search {
+    float: right;
+    margin-right: 10px; }
   #menubar .change_service_container {
     position: fixed;
     top: 2px;
     right: 10px; }
-  #menubar button {
-    font-size: 14px; }
 
 .unread_star {
   background-image: url(app://icons/toolbar/star.png);
@@ -161,9 +166,6 @@ p {
   bottom: 2px;
   left: 10px;
   max-width: 400px; }
-  #global_actions span {
-    display: block;
-    display-float: right; }
 
 .user, .recipient {
   font-weight: bold;
@@ -203,6 +205,8 @@ input, textarea {
     height: 50px;
     margin-top: 2px;
     font-family: helvetica; }
+  #input_area .buttons {
+    margin-left: 10px; }
 
 #controls {
   position: fixed;
@@ -330,8 +334,8 @@ input[type="text"], input[type="password"] {
 .win32 .attach_file_img {
   display: none; }
 
-.osx button, .osx .button, .linux button, .linux .button, .win32 button, .win32 .button {
-  -webkit-appearance: square-button  !important; }
+.osx button {
+  -webkit-appearance: square-button; }
 
 #image_preview .actions {
   position: fixed;
@@ -348,13 +352,18 @@ input[type="text"], input[type="password"] {
   #image_preview .actions:hover button {
     display: inline; }
 
+select {
+  -webkit-appearance: button !important; }
+
 .hide {
   display: none; }
 
 .win32 #badge, .linux #badge {
   display: none; }
-.win32 #menubar, .linux #menubar {
+.win32 #menubar, .win32 #global_actions, .linux #menubar, .linux #global_actions {
   background-color: #222; }
+  .win32 #menubar button, .win32 #global_actions button, .linux #menubar button, .linux #global_actions button {
+    font-size: 10px; }
 
 .win32 #notifications {
   display: none; }
