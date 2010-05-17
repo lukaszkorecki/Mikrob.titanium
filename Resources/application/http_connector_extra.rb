@@ -17,7 +17,8 @@ class HttpConnectorExtraUploader
     headers = {
       "X-blip-api" => "0.02",
       "Accept" => "application/json",
-      "User-Agent" => "Mikrob 0.1"
+      "User-Agent" => Application.ua_string,
+      'X-Blip-Application' => Application.ua_string
     }
     header_string = headers.map{|k,v| "-H'#{k}: #{v}'"}.join " "
     data_string = %{-F "update[body]=#{(data[:data]['update[body]'] || " ")}" -F"update[picture]=@#{data[:files]['update[picture]']}"}
