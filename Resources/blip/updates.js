@@ -2,6 +2,7 @@
 var Update = new Class.create(
   {
     initialize : function(obj, owner_service_id, username)  {
+      console.dir(obj);
       this.owner_service_id = owner_service_id;
       this.id = obj.id;
       this.username = username || false;
@@ -9,7 +10,7 @@ var Update = new Class.create(
       this.body = this.parseBody(obj.body);
       this.raw_body = obj.body;
       this.created_at = obj.created_at;
-      this.transport = (obj.transport) ? obj.transport.name : "?";
+      this.transport = obj.transport_description;
 //      console.dir(obj);
       if(obj.pictures !== undefined && obj.pictures.length>0) {
         this.pictures = obj.pictures;
