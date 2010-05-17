@@ -29,7 +29,7 @@ var Blip = new Class.create(
     },
     dashboardGet : function(offset) {
       var url = this.api_root+'/dashboard'+this.include_string_full;
-      if(this.dashboard_last_id != 0) {
+      if(this.dashboard_last_id !== 0) {
         url = this.api_root+'/dashboard/since/'+this.dashboard_last_id+this.include_string_full;
       }
       if(offset >= 0) {
@@ -45,6 +45,7 @@ var Blip = new Class.create(
         // while it is not...
         if (response.match(/^\[/) === null) {
           // this causes Titanium to crash...
+          console.log("nil");
         } else {
           var ob = Application.json_parse(response);
           if(ob.length >0) {
@@ -73,7 +74,7 @@ var Blip = new Class.create(
       req.setUserCred(this.login, this.password);
 
 		  req.post(this.api_root+'/updates','update[body]='+encodeURIComponent(str));
-      function success (resp) { this.afterSend(resp, true); };
+      function success (resp) { this.afterSend(resp, true); }
 
       function fail(resp) {
         interfaces[active_service].notify('Błąd', 'Błąd wysyłania... ' + resp, 'fail');
@@ -86,7 +87,7 @@ var Blip = new Class.create(
           was_success = false;
         }
         this.afterSend(resp, was_success);
-      };
+      }
       req.onSuccess = success.bind(this);
       req.onFail = fail.bind(this);
     },
@@ -110,12 +111,12 @@ var Blip = new Class.create(
 			  } catch(parse_Error) {
 				  interfaces[active_service].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
 			  }
-      };
+      }
 
       function fail(st, resp) {
         console.log('getBlip: ' + st);
         interfaces[active_service].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
-      };
+      }
       req.onSuccess = success;
       req.onFail = fail;
     },
@@ -151,11 +152,11 @@ var Blip = new Class.create(
 				  interfaces[active_service].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
 			  }
 
-      };
+      }
       function fail(st, resp) {
         console.log(st);
         interfaces[active_service].notify("Błąd","Rozwijanie linka się nie powiodło", 'fail');
-      };
+      }
       req.onSuccess = success;
       req.onFail = fail;
     },
@@ -193,12 +194,12 @@ var Blip = new Class.create(
 			    console.log(st); console.log(resp);
 			  }
 
-      };
+      }
 
       function fail(st, resp) {
         console.log('getArchive fail ' + resource);
         console.log(st); console.log(resp);
-      };
+      }
       req.onSuccess = success.bind(this);
       req.onFail = fail;
     },
@@ -215,7 +216,7 @@ var Blip = new Class.create(
         } catch (parse_Error) {
           console.dir(parse_Error);
         }
-      };
+      }
       req.onSuccess = success.bind(this);
       req.onFail = function(st, resp) {
         interfaces[active_service].notify("Problem", "buuuuu");
