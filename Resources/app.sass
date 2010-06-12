@@ -43,25 +43,25 @@ p
       display: none
   p
     background: white
-    //rgb(241,241,241)
     padding: 4px
     margin: 5px
     margin-left: 40px
     min-height: 30px
-    min-width: 85%
-    max-width: 87%
+    //min-width: 85%
+    //max-width: 87%
     padding: 5px
     //position: relative
     -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5)
     -webkit-border-radius: 4px
     color: #888
-    z-index: 1
+    z-index: 2
     position: relative
 
   .avatar_container
     float: left
     display: block
     z-index: 10
+    margin-top: 1px
 
     .avatar
       display: block
@@ -75,7 +75,7 @@ p
       display: block
       position: absolute
       bottom: -5px
-      left: 1px
+      right: 1px
       text-align: right
 .active_entry
   background: -webkit-gradient(linear, left top, right top, color-stop(0.39, rgb(190,190,190)), color-stop(0.85, rgb(255,255,255)))
@@ -346,16 +346,18 @@ input
   right: 2px
   z-index: 20
 
-.linux
+.linux, .win32
   body
-    background: #222
+    background: #ededed
 
   .column
     background: #ddd
 
   #controls
-    background: #222
+    background: #ededed
 
+  #menubar
+    padding-top: 2px
   .update
     p, .quoted
       -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5)
@@ -371,9 +373,9 @@ input
 
 .win32
   body
-    background: #222
+    background: #ededed
   #controls
-    background: #222
+    background: #ededed
 
   .update
     margin-bottom: 10px
@@ -431,9 +433,10 @@ select
   #badge
     display: none
   #menubar, #global_actions
-    background-color: #222
+    background-color: #ededed
     button
       font-size: 10px
+      height: 21px
 .win32
   #notifications
     display: none

@@ -43,18 +43,17 @@ p {
     margin: 5px;
     margin-left: 40px;
     min-height: 30px;
-    min-width: 85%;
-    max-width: 87%;
     padding: 5px;
     -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
     -webkit-border-radius: 4px;
     color: #888;
-    z-index: 1;
+    z-index: 2;
     position: relative; }
   .update .avatar_container {
     float: left;
     display: block;
-    z-index: 10; }
+    z-index: 10;
+    margin-top: 1px; }
     .update .avatar_container .avatar {
       display: block;
       width: 30px;
@@ -304,23 +303,25 @@ input[type="text"], input[type="password"] {
   right: 2px;
   z-index: 20; }
 
-.linux body {
-  background: #222; }
-.linux .column {
+.linux body, .win32 body {
+  background: #ededed; }
+.linux .column, .win32 .column {
   background: #ddd; }
-.linux #controls {
-  background: #222; }
-.linux .update p, .linux .update .quoted {
+.linux #controls, .win32 #controls {
+  background: #ededed; }
+.linux #menubar, .win32 #menubar {
+  padding-top: 2px; }
+.linux .update p, .linux .update .quoted, .win32 .update p, .win32 .update .quoted {
   -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
-.linux .update img.avatar, .linux .update img.ravatar {
+.linux .update img.avatar, .linux .update img.ravatar, .win32 .update img.avatar, .win32 .update img.ravatar {
   -webkit-box-shadow: -1px 1px 3px rbga(0,0,0,0.5); }
-.linux .button {
+.linux .button, .win32 .button {
   -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
 
 .win32 body {
-  background: #222; }
+  background: #ededed; }
 .win32 #controls {
-  background: #222; }
+  background: #ededed; }
 .win32 .update {
   margin-bottom: 10px; }
   .win32 .update p, .win32 .update .quoted {
@@ -364,9 +365,10 @@ select {
 .win32 #badge, .linux #badge {
   display: none; }
 .win32 #menubar, .win32 #global_actions, .linux #menubar, .linux #global_actions {
-  background-color: #222; }
+  background-color: #ededed; }
   .win32 #menubar button, .win32 #global_actions button, .linux #menubar button, .linux #global_actions button {
-    font-size: 10px; }
+    font-size: 10px;
+    height: 21px; }
 
 .win32 #notifications {
   display: none; }
