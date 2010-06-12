@@ -112,10 +112,10 @@ var Events = (
           if (el.hasClassName('unread')) {
             el.removeClassName('unread');
           }
-          if (index>19) {
-            el.descendants().invoke('stopObserving');
-            el.stopObserving().remove();
-          }
+          //if (index>19) {
+          //  el.descendants().invoke('stopObserving');
+          //  el.stopObserving().remove();
+          //}
         });
 
 
