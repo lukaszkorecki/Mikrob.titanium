@@ -7,9 +7,8 @@
       Ustawienia
     %script{ :src => "libs/prototype.js", :type => "text/javascript" }
     %script{ :src => "application/database_connector.js", :type => "text/javascript"}
-    -#
-      %script{ :src => "application/application.js", :type => "text/javascript"}
     %script{ :src => "application/preferences.js", :type => "text/javascript"}
+    %script{ :src => "application/events.js", :type => "text/javascript"}
     :javascript
       document.observe("dom:loaded", function(){
         document.fire("preferences:interface_loaded");
@@ -32,19 +31,8 @@
             %input{:name => "tray", :type => "checkbox"}
         %h2 Ustawienia Proxy
         %fieldset#proxy
-          .group#proxy_ip
-            %label{:for => "proxy_ip"} IP
-            %input{ :name => "proxy_ip", :type => "text"}
-          .group#proxy_port
-            %label{:for => "proxy_port"} Port
-            %input{ :name => "proxy_port", :type => "text"}
-          .group#proxy_user
-            %label{:for => "proxy_user"} Login
-            %input{ :name => "proxy_user", :type => "text"}
-          .group#proxy_password
-            %label{:for => "proxy_password"} Hasło
-            %input{ :name => "proxy_password", :type => "password"}
-        %fieldset{:style => "display: none"}
-          Konta
-          %p
-            Tutaj beda konta i ich ustawienia i w ogole bedzie lepiej
+          .group#proxy_host
+            %label{:for => "proxy_host"} Adres
+            %input{ :name => "proxy_host", :type => "text"}
+        %fieldset#services{:style => "display: none"}
+          .group
