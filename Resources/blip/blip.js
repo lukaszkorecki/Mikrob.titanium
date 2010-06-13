@@ -17,7 +17,7 @@ var Blip = new Class.create(
     tag_last_id : 0,
     current_page : 0,
     include_string_user : "?include=user,recipient",
-    include_string_full : "?include=user,user[avatar],recipient,recipient[avatar],pictures&limit=20",
+    include_string_full : "?include=user,user[avatar],recipient,recipient[avatar],pictures",
     commonHeaders : function() {
       return {
         'X-blip-api' : '0.02',
