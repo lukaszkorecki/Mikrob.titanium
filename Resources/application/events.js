@@ -202,12 +202,23 @@ var Events = (
 
     function update_picture_link (event) {
       var image_url = $(event.target_up || event.target).getAttribute("href");
-      if(Titanium.Platform.name == "Darwin") {
-        var p = Titanium.Process.createProcess(["qlmanage", "-xp", Application.cache_io(image_url, "img")]);
+img_url = Application.cache_io(image_url, "img")
+switch(Titanium.Platform.name) {
+	case 'Darwin':
+		// code
+        var p = Titanium.Process.createProcess(["qlmanage", "-xp", ]);
         p();
-      } else {
+		break;
+case 'Linux':
+        var p = Titanium.Process.createProcess(["xdg-open",  Application.cache_io(image_url, "img")]);
+        p();
+	break;
+
+	
+	default:
         Application.openImageWindow(image_url);
-      }
+break;
+}
     }
 
     function quoted_link(event) {
