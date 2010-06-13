@@ -17,13 +17,17 @@ class HttpConnectorExtraUploader
     headers = {
       "X-blip-api" => "0.02",
       "Accept" => "application/json",
-      "User-Agent" => Application.ua_string,
-      'X-Blip-Application' => Application.ua_string
+      "User-Agent" => Application.ua_string(),
+      'X-Blip-Application' => Application.ua_string()
     }
     header_string = headers.map{|k,v| "-H'#{k}: #{v}'"}.join " "
     data_string = %{-F "update[body]=#{(data[:data]['update[body]'] || " ")}" -F"update[picture]=@#{data[:files]['update[picture]']}"}
     user_string = %{-u #{@user[:login]}:#{@user[:password]}}
-    out= `curl #{header_string} #{user_string} #{data_string} #{@url}`
+    cmd = "curl #{header_string} #{user_string} #{data_string} #{@url}"
+    puts(cmd)
+    console.log(cmd)
+    alert(cmd)
+    out= `#{cmd}`
     puts out
     if out =~ /#{data[:body]}/
       return true
