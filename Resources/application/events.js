@@ -202,7 +202,12 @@ var Events = (
 
     function update_picture_link (event) {
       var image_url = $(event.target_up || event.target).getAttribute("href");
-      Application.openImageWindow(image_url);
+      if(Titanium.Platform.name == "Darwin") {
+        var p = Titanium.Process.createProcess(["qlmanage", "-xp", Application.cache_io(image_url, "img")]);
+        p();
+      } else {
+        Application.openImageWindow(image_url);
+      }
     }
 
     function quoted_link(event) {
@@ -253,6 +258,7 @@ var Events = (
       tagLink  : external_link ,
       quoted_link : external_link,
       external_link  : external_link ,
+      special_youtube: external_link ,
       update_picture_link  : update_picture_link,
       permanent_link : external_link,
       open_sender : open_sender,
