@@ -180,7 +180,6 @@ var Events = (
 
     }
     // no, it's not code duplication!
-    // eventualy each one of these functions will do something else! :-)
     function user_link (event) {
       var url = $(event.target_up || event.target).getAttribute("href");
       Application.openUrl(url);
@@ -355,3 +354,14 @@ var KeyboardEvents = (
     };
   }
 )();
+var PreferencesEvents = (
+  function() {
+    function delete_service(event) {
+    }
+    function add_service() {
+    }
+    return {
+      delete_service : delete_service,
+      add_service : add_service
+    };
+})();
