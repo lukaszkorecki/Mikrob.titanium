@@ -21,42 +21,48 @@
   <body style='background-color: #ededed; height: 100%'>
     <div>
       <form id='settings'>
-        <h2>Konta</h2>
-        <fieldset id='services'>
-          <div class='list'></div>
-          <div class='group' id='login'>
-            <label for='service_new_login'>Login</label>
-            <input name='service_new_login' type='text' />
-          </div>
-          <div class='group' id='password'>
-            <label for='service_new_password'>Hasło</label>
-            <input name='service_new_password' type='password' />
-            <input name='service_new_type' type='hidden' value='blip' />
-          </div>
-          <button>Dodaj</button>
-        </fieldset>
-        <h2>Interfejs</h2>
-        <fieldset id='interface'>
-          <div class='group' id='notifications'>
-            <label for='notifications'>Powiadomienia?</label>
-            <input name='notifications' type='checkbox' />
-          </div>
-          <div class='group' id='badge'>
-            <label for='badge'>Etykieta w docku?</label>
-            <input name='badge' type='checkbox' />
-          </div>
-          <div class='group' id='tray'>
-            <label for='badge'>Ikona w trayu?</label>
-            <input name='tray' type='checkbox' />
-          </div>
-        </fieldset>
-        <h2>Ustawienia Proxy</h2>
-        <fieldset id='proxy'>
-          <div class='group' id='proxy_host'>
-            <label for='proxy_host'>Adres</label>
-            <input name='proxy_host' type='text' />
-          </div>
-        </fieldset>
+        <div class='pref'>
+          <h2>Konta</h2>
+          <fieldset id='services'>
+            <div class='list'></div>
+            <div class='group' id='login'>
+              <label for='service_new_login'>Login</label>
+              <input name='service_new_login' type='text' />
+            </div>
+            <div class='group' id='password'>
+              <label for='service_new_password'>Hasło</label>
+              <input name='service_new_password' type='password' />
+              <input name='service_new_type' type='hidden' value='blip' />
+            </div>
+            <button id='add_service'>Dodaj</button>
+          </fieldset>
+        </div>
+        <div class='pref'>
+          <h2>Interfejs</h2>
+          <fieldset id='interface'>
+            <div class='group' id='notifications'>
+              <label for='notifications'>Powiadomienia?</label>
+              <input name='notifications' type='checkbox' />
+            </div>
+            <div class='group' id='badge'>
+              <label for='badge'>Etykieta w docku?</label>
+              <input name='badge' type='checkbox' />
+            </div>
+            <div class='group' id='tray'>
+              <label for='badge'>Ikona w trayu?</label>
+              <input name='tray' type='checkbox' />
+            </div>
+          </fieldset>
+        </div>
+        <div class='pref'>
+          <h2>Ustawienia Proxy</h2>
+          <fieldset id='proxy'>
+            <div class='group' id='proxy_host'>
+              <label for='proxy_host'>Adres</label>
+              <input name='proxy_host' type='text' />
+            </div>
+          </fieldset>
+        </div>
       </form>
     </div>
   </body>
