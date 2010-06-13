@@ -45,7 +45,7 @@ var BlipInterface = new Class.create(Interface, {
       } else {
         dash.insert({'bottom': single_status});
       }
-        interfaces[active_service].expandLink('quoted_link');
+      interfaces[active_service].expandLink('quoted_link');
 			 if (can_notify) {
         var av =  'app://icons/nn_nano.png';
         if(single_status.user.avatar) {
@@ -53,6 +53,7 @@ var BlipInterface = new Class.create(Interface, {
         }
          interfaces[active_service].notify(single_status.user.login, single_status.raw_body, av );
       }
+     single_status = null;
     });
     this.expandLink("rdir_link");
     var unr = $$('#'+this.container_id + ' .unread').length;
@@ -87,8 +88,8 @@ var BlipInterface = new Class.create(Interface, {
                el.observe(
                  'click',
                  function(event) {
-                   var blip = interfaces[active_service].getUpdateObject(obj);
-                   var contents = blip.toQuoted();
+                   var contents = interfaces[active_service].getUpdateObject(obj).toQuoted();
+
                    contents.addClassName('quoted');
                    var elem = event.element().up('p') || event.element().up() || false; //.next();
                    if(elem) {

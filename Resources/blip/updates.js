@@ -67,7 +67,7 @@ var Update = new Class.create(
         }
         pic = new Element('span',{'class':'update_picture'}).update(link.update(img));
       }
-      img_link, link, n_img_link = null;
+      img_link = null ; link = null; n_img_link = null;
       return pic;
     },
     updatePictureLink : function() {
@@ -140,7 +140,7 @@ var Update = new Class.create(
       if ( ! size) size="30";
       var avid= this.user.avatar ? this.user.avatar['url_'+size] : "";
       var avatar = "";
-      if(avid != "") {
+      if(avid !== "") {
         avatar = "file://"+Application.cache_io("http://blip.pl" + avid,"av");
       }
       return new Element('img',{'src': avatar, 'class':'avatar'});
@@ -170,7 +170,7 @@ var Update = new Class.create(
       if(this.pictures !== false) p.insert(this.updatePicture());
       container.insert(p);
       container.insert(this.getActions());
-      p, av_container = null;
+      p = null ; av_container = null;
       return container;
     },
 
@@ -223,7 +223,7 @@ var Message = new Class.create(
       if ( ! size) size="30";
       var avid= this.recipient.avatar ? this.recipient.avatar['url_'+size] : "";
       var avatar = "";
-      if(avid != "") {
+      if(avid !== "") {
         avatar = "file://"+Application.cache_io("http://blip.pl" + avid,"av");
       }
       return new Element('img',{'src': avatar, 'class':'avatar recipient_avatar'});
