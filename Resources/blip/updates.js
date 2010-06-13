@@ -31,14 +31,7 @@ var Update = new Class.create(
         break;
       }
       //  this.pictures = obj.pictures || {};
-      this.cclass = 'up'+this.id+' update ';
-      if(this.user.login == this.username)
-      {
-        this.cclass += " own";
-      }
-      else {
-        this.cclass += " unread";
-      }
+      this.cclass = 'up'+this.id+' update unread';
       obj = null;
     },
     transportName : function() {
