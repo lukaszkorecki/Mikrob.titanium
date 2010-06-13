@@ -10,9 +10,7 @@ var Application = (
       return Titanium.App.getName()+" "+Titanium.App.getVersion() + " ["+Titanium.App.getPublisher()+" "+Titanium.App.getID().split('.').reverse().join('.').replace('.','@',1)+"]";
     }
     function getServices() {
-      var services = {        // minified for clarity ;-)
-        'id':{field_type:'id'},'login':{field_type:'text',not_null:true},'password':{field_type:'text',not_null:true},'type':{field_type:'text',not_null:true},'api_url':{field_type:'text'}};
-      this.db = new DatabaseConnector('mikrob', 'services', services);
+      this.db = new DatabaseConnector('mikrob', 'services', Schema.services);
       var serv = this.db.find() || [];
       this.services = serv;
       if(this.services.length > 0) {
@@ -289,7 +287,7 @@ var Tray = (
     var tray = {};
     function add() {
       if(Preferences.get("tray")) {
-        if(this.active == false) {
+        if(this.active === false) {
          this.tray =  Titanium.UI.addTray("app://mikrob_tray_normal.png",Events.tray_icon);
           this.active = true;
         }
@@ -324,5 +322,5 @@ var Tray = (
       change : change,
       remove : remove,
       tray : tray
-    }
+    };
   })();
