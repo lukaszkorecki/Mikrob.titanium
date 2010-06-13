@@ -92,12 +92,27 @@ var Blip = new Class.create(
       req.onFail = fail.bind(this);
     },
     postWithFile: function(str, file) {
-      var res = blip_post_file(this.api_root+"/updates", this.login, this.password, str, file);
-      var response = 201;
-      if( !res) {
-        response = 503;
-      }
+      var args = [
+        "curl",
+        ['-u ', this.login,":", this.password].join(""),
+        '-F"update[picture]=@'+ file+ '"',
+        '-F"update[body]='+ str+ '"',
+        '-H"X-blip-api: 0.02"',
+        '-H"Accept: application/json"',
+       // '-H"User-Agent: '+Application.ua_string()+'"',
+       // '-H"X-Blip-Application: ' + Application.ua_string()+'"',
+        this.api_root+"/updates"
+
+      ];
+      console.log(args.join());
+      console.dir(args);
+      var r = (Titanium.Process.createProcess(args))();
+      console.log(r.toString());
+      var res = {};
+      var response = true;
+      if(r.toString().match(/failed/gi) ) response = false;
       this.afterSend(res, response);
+      return r;
     },
     getBlip : function(blipid) {
 

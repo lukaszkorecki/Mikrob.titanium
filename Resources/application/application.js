@@ -7,7 +7,7 @@ var Application = (
     services = [];
     attachment="";
     function ua_string() {
-      return Titanium.App.getName()+" "+Titanium.App.getVersion() + " ["+Titanium.App.getPublisher()+" "+Titanium.App.getID().split('.').reverse().join('.').replace('.','@',1)+"]";
+      return Titanium.App.getName()+" "+Titanium.App.getVersion();//+ " ["+Titanium.App.getPublisher()+" "+Titanium.App.getID().split('.').reverse().join('.').replace('.','@',1)+"]";
     }
     function getServices() {
       this.db = new DatabaseConnector('mikrob', 'services', Schema.services);

@@ -28,7 +28,7 @@ var Service = Class.create({
     var p = new Element("p").update(this.login);
     p.insert( new Element("span", { "class" : "type"}).update("("+this.type+")"));
     p.insert(new Element("span", { "class" : "actions"}));
-    ["delete"].each(function(el){
+    ["delete"].each(function(el){ //uses array for future options (edit, move)
       p.down("span.actions").insert(new Element("button", { "service_id" : this.service_id}).update(el));
     });
     container.insert(p);
