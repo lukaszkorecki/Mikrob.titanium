@@ -1,9 +1,9 @@
 body {
   font-family: helvetica;
   font-size: 10pt;
-  color: #000;
+  color: black;
   overflow: hidden;
-  text-shadow: #333px 1px 3px;
+  text-shadow: #333333 px 1px 3px;
   margin: 0;
   padding: 0;
   -webkit-user-select: text;
@@ -14,11 +14,11 @@ img {
   vertical-align: bottom; }
 
 a {
-  color: #333;
+  color: #333333;
   text-decoration: none; }
 
 a:hover {
-  color: #777; }
+  color: #777777; }
 
 p {
   -webkit-word-wrap: break-word; }
@@ -44,9 +44,9 @@ p {
     margin-left: 40px;
     min-height: 30px;
     padding: 5px;
-    -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.5);
     -webkit-border-radius: 4px;
-    color: #888;
+    color: #888888;
     z-index: 2;
     position: relative; }
   .update .avatar_container {
@@ -64,11 +64,11 @@ p {
   display: block;
   position: absolute;
   bottom: -5px;
-  left: 1px;
+  right: 1px;
   text-align: right; }
 
 .active_entry {
-  background: -webkit-gradient(linear, left top, right top, color-stop(0.39, rgb(190,190,190)), color-stop(0.85, rgb(255,255,255))); }
+  background: -webkit-gradient(linear, left top, right top, color-stop(0.39, #bebebe), color-stop(0.85, white)); }
 
 .directed p {
   background-color: #c8e880; }
@@ -78,17 +78,17 @@ p {
 
 .quoted {
   -webkit-border-radius: 4px;
-  background: #eee;
+  background: #eeeeee;
   padding: 5px;
   width: 80%;
   margin-top: 10px;
   margin-left: 40px;
   display: block;
-  color: #888;
-  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
+  color: #888888;
+  -webkit-box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.5); }
   .quoted:hover a {
-    color: #000;
-    background: #fff; }
+    color: black;
+    background: white; }
 
 .own p {
   margin-left: 5px;
@@ -103,7 +103,7 @@ p {
 .update img.avatar, .update img.ravatar {
   margin-left: 4px;
   -webkit-border-radius: 5px;
-  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
+  -webkit-box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.5); }
 
 .update_picture {
   position: absolute;
@@ -112,9 +112,9 @@ p {
   z-index: 666;
   opacity: 0.5; }
   .update_picture img {
-    border: 4px solid #000;
+    border: 4px solid black;
     -webkit-border-radius: 5px;
-    -webkit-transform: rotate(8deg)  scale(0.5); }
+    -webkit-transform: rotate(8deg) scale(0.5); }
 
 .update_picture:hover {
   opacity: 1; }
@@ -124,7 +124,7 @@ p {
   font-weight: bold; }
 
 #content_container {
-  border-bottom: 2px solid #666;
+  border-bottom: 2px solid #666666;
   position: absolute;
   overflow-x: hidden;
   overflow-y: auto;
@@ -142,7 +142,7 @@ p {
   height: 25px;
   background-repeat: repeat-x;
   width: 97%;
-  border-bottom: 2px solid #666;
+  border-bottom: 2px solid #666666;
   padding: 2px;
   padding-left: 15px; }
   #menubar #mark_as_read_button {
@@ -169,7 +169,7 @@ p {
 .user, .recipient {
   font-weight: bold;
   margin: 1px 4px 1px 4px;
-  background: #aaa;
+  background: #aaaaaa;
   -webkit-border-radius: 4px; }
 
 .user_link, .recipient_link {
@@ -233,7 +233,7 @@ input[type="text"], input[type="password"] {
   position: fixed;
   bottom: 5px;
   right: 20px;
-  background: #888;
+  background: #888888;
   padding: 2px;
   -webkit-border-radius: 3px; }
 
@@ -243,7 +243,7 @@ input[type="text"], input[type="password"] {
   width: 90%; }
 
 .unread p {
-  color: #000;
+  color: black;
   background-image: url("app://icons/toolbar/star.png");
   background-position: bottom right;
   background-repeat: no-repeat; }
@@ -267,7 +267,7 @@ input[type="text"], input[type="password"] {
   position: fixed;
   top: 25%;
   left: 25%;
-  background: #444;
+  background: #444444;
   padding: 20px;
   -webkit-border-radius: 10px;
   z-index: 666;
@@ -294,7 +294,7 @@ input[type="text"], input[type="password"] {
   text-align: center; }
 
 #charcount {
-  background: #EEE;
+  background: #eeeeee;
   border-radius: 4px;
   bottom: 15px;
   opacity: 0.8;
@@ -306,17 +306,17 @@ input[type="text"], input[type="password"] {
 .linux body, .win32 body {
   background: #ededed; }
 .linux .column, .win32 .column {
-  background: #ddd; }
+  background: #dddddd; }
 .linux #controls, .win32 #controls {
   background: #ededed; }
 .linux #menubar, .win32 #menubar {
   padding-top: 2px; }
 .linux .update p, .linux .update .quoted, .win32 .update p, .win32 .update .quoted {
-  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
+  -webkit-box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.5); }
 .linux .update img.avatar, .linux .update img.ravatar, .win32 .update img.avatar, .win32 .update img.ravatar {
-  -webkit-box-shadow: -1px 1px 3px rbga(0,0,0,0.5); }
+  -webkit-box-shadow: -1px 1px 3px rbga(0, 0, 0, 0.5); }
 .linux .button, .win32 .button {
-  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
+  -webkit-box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.5); }
 
 .win32 body {
   background: #ededed; }
@@ -325,11 +325,11 @@ input[type="text"], input[type="password"] {
 .win32 .update {
   margin-bottom: 10px; }
   .win32 .update p, .win32 .update .quoted {
-    -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
+    -webkit-box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.5); }
 .win32 .update img.avatar, .win32 .update img.ravatar {
   margin-top: 5px; }
 .win32 .button {
-  -webkit-box-shadow: -1px 1px 3px rgba(0,0,0,0.5); }
+  -webkit-box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.5); }
 .win32 ul button span {
   left: 5px; }
 .win32 .attach_file_img {
