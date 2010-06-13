@@ -200,9 +200,8 @@ input, textarea {
   width: 100%;
   z-index: 32; }
   #input_area textarea {
-    width: 100% !important;
+    width: 99% !important;
     height: 50px;
-    margin-top: 2px;
     font-family: helvetica; }
   #input_area .buttons {
     margin-left: 10px; }
