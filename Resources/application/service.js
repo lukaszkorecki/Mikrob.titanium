@@ -27,10 +27,11 @@ var Service = Class.create({
     var container = new Element("div", { id : [this.login, this.type, this.service_id].join("_")});
     var p = new Element("p").update(this.login);
     p.insert( new Element("span", { "class" : "type"}).update("("+this.type+")"));
-    container.insert(p);
-    ["delete", "edit"].each(function(el){
-      container.insert(new Element("button", { "service_id" : this.service_id}).update(el));
+    p.insert(new Element("span", { "class" : "actions"}));
+    ["delete"].each(function(el){
+      p.down("span.actions").insert(new Element("button", { "service_id" : this.service_id}).update(el));
     });
+    container.insert(p);
     return container;
   }
 
