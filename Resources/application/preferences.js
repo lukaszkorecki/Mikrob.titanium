@@ -112,7 +112,7 @@ document.observe(
         console.dir(e);
       }
       window.opener.services.each(function(el){
-        $("services").insert(el);
+        $("services").down(".list").insert(el);
       });
   });
 document.observe(

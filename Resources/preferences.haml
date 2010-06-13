@@ -18,21 +18,33 @@
   %body{:style => "background-color: #ededed; height: 100%"}
     %div
       %form#settings
-        %h2 Interfejs
-        %fieldset#interface
-          .group#notifications
-            %label{:for => "notifications"} Powiadomienia?
-            %input{:name => "notifications", :type => "checkbox"}
-          .group#badge
-            %label{:for => "badge"} Etykieta w docku?
-            %input{:name => "badge", :type => "checkbox"}
-          .group#tray
-            %label{:for => "badge"} Ikona w trayu?
-            %input{:name => "tray", :type => "checkbox"}
-        %h2 Ustawienia Proxy
-        %fieldset#proxy
-          .group#proxy_host
-            %label{:for => "proxy_host"} Adres
-            %input{ :name => "proxy_host", :type => "text"}
-        %fieldset#services{:style => "display: none"}
-          .group
+        %div.pref
+          %h2 Konta
+          %fieldset#services
+            .list
+            .group#login
+              %label{:for => "service_new_login"} Login
+              %input{:name => "service_new_login", :type => "text"}
+            .group#password
+              %label{:for => "service_new_password"} Hasło
+              %input{:name => "service_new_password", :type => "password"}
+              %input{:type => "hidden", :name => "service_new_type", :value => "blip"}
+            %button#add_service Dodaj
+        %div.pref
+          %h2 Interfejs
+          %fieldset#interface
+            .group#notifications
+              %label{:for => "notifications"} Powiadomienia?
+              %input{:name => "notifications", :type => "checkbox"}
+            .group#badge
+              %label{:for => "badge"} Etykieta w docku?
+              %input{:name => "badge", :type => "checkbox"}
+            .group#tray
+              %label{:for => "badge"} Ikona w trayu?
+              %input{:name => "tray", :type => "checkbox"}
+        %div.pref
+          %h2 Ustawienia Proxy
+          %fieldset#proxy
+            .group#proxy_host
+              %label{:for => "proxy_host"} Adres
+              %input{ :name => "proxy_host", :type => "text"}
