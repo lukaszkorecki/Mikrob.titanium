@@ -179,7 +179,7 @@ var Blip = new Class.create(
         url += '/dashboard';
         break;
       }
-      url += this.include_string_full+"&limit=25";
+      url += this.include_string_full;
       if (offset) {
         url += "&offset="+offset;
       }
