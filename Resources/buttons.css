@@ -1,5 +1,5 @@
 .toolbar button, .toolbar select {
-  -webkit-box-shadow: rgba(225, 225, 225, 0.695312) 0px 1px 0px;
+  -webkit-box-shadow: rgba(225, 225, 225, 0.695) 0px 1px 0px;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fdfdfd), to(darkGray));
   border: 1px solid #3d3d3d;
   height: 20px;
