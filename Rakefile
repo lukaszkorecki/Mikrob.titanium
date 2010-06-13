@@ -66,17 +66,17 @@ end
 namespace :application do
   SDK_VERSION = "1.0.0"
   def build_command_linux
-    `python ~/.titanium/sdk/linux/#{SDK_VERSION}/tibuild.py -r -a ~/.titanium/sdk/linux/#{SDK_VERSION} .`
+    puts `python ~/.titanium/sdk/linux/#{SDK_VERSION}/tibuild.py -r -a ~/.titanium/sdk/linux/#{SDK_VERSION} .`
   end
   def deploy_linux(destination)
-    `python ~/.titanium/sdk/linux/#{SDK_VERSION}/tibuild.py -d #{destination} -a ~/.titanium/sdk/linux/#{SDK_VERSION} .`
+    puts `python ~/.titanium/sdk/linux/#{SDK_VERSION}/tibuild.py -d #{destination} -a ~/.titanium/sdk/linux/#{SDK_VERSION} .`
   end
 
   def build_command_osx
-    `python "/Library/Application\ Support/Titanium/sdk/osx/#{SDK_VERSION}/tibuild.py" -r -a "/Library/Application\ Support/Titanium/sdk/osx/#{SDK_VERSION}" .`
+    puts `python "/Library/Application\ Support/Titanium/sdk/osx/#{SDK_VERSION}/tibuild.py" -r -a "/Library/Application\ Support/Titanium/sdk/osx/#{SDK_VERSION}" .`
   end
   def deploy_osx(destination)
-    `python "/Library/Application\ Support/Titanium/sdk/osx/#{SDK_VERSION}/tibuild.py" -d #{destination} -a "/Library/Application\ Support/Titanium/sdk/osx/#{SDK_VERSION}" .`
+    puts `python "/Library/Application\ Support/Titanium/sdk/osx/#{SDK_VERSION}/tibuild.py" -d #{destination} -a "/Library/Application\ Support/Titanium/sdk/osx/#{SDK_VERSION}" .`
   end
 
   def sorry
