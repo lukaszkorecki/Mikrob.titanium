@@ -33,7 +33,7 @@ var Interface = new Class.create(
 
       this.throbber.toggle();
       this.notify(Titanium.App.getName(),'Wysłano','ok');
-      if(Application.attachment != "") {
+      if(Application.attachment !== "") {
         Application.attachment = "";
         Dispatcher($('attchmnt').fire("click"));
       }
@@ -47,7 +47,7 @@ var Interface = new Class.create(
       }
     },
     notify : function(login, body,img) {
-      if(Preferences.get("notifications") && !(Titanium.Platform.name.match(/windows/gi))) {
+      if(Preferences.get("notifications") /*&& !(Titanium.Platform.name.match(/windows/gi)) */ ) {
         try {
           this.note.setTitle(services[this.service_id].login+"@"+services[this.service_id].type+": "+login); //Add the title;
           this.note.setMessage(body); //Add the message;
@@ -79,7 +79,7 @@ var Interface = new Class.create(
 
       if(Preferences.get("badge")) {
         try {
-          if(count_str==0) {
+          if(count_str===0) {
             Titanium.UI.setBadge();
           } else {
             Titanium.UI.setBadge(count_str);
@@ -93,7 +93,7 @@ var Interface = new Class.create(
         } catch(e) { /* e */ }
       }
       if(Preferences.get("tray")) {
-        if(count_str ==0) {
+        if(count_str ===0) {
           Tray.change(false);
         } else {
           Tray.change(true);
@@ -164,7 +164,7 @@ var Interface = new Class.create(
       console.log("HAR~!");
       var uwin = Titanium.UI.getCurrentWindow();
       var element = $('attchmnt');
-      if(Application .attachment == "") {
+      if(Application.attachment === "") {
         uwin.openFileChooserDialog(
           function(file){
             console.log("here");
@@ -257,8 +257,8 @@ var BodyParser =
            element.setAttribute("href",link);
            element.addClassName(attach_special_class(link));
            element.update(link);
-           if(link.match(/blip.pl/gi) != null) element.addClassName("quoted_link");
-           if(link.match(/rdir.pl/gi) != null) element.addClassName("rdir_link");
+           if(link.match(/blip.pl/gi) !== null) element.addClassName("quoted_link");
+           if(link.match(/rdir.pl/gi) !== null) element.addClassName("rdir_link");
            body = body.replace(link, element.outerHTML);
          });
        return body;
