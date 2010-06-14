@@ -202,23 +202,18 @@ var Events = (
 
     function update_picture_link (event) {
       var image_url = $(event.target_up || event.target).getAttribute("href");
-img_url = Application.cache_io(image_url, "img")
-switch(Titanium.Platform.name) {
-	case 'Darwin':
-		// code
-        var p = Titanium.Process.createProcess(["qlmanage", "-xp", ]);
-        p();
-		break;
-case 'Linux':
-        var p = Titanium.Process.createProcess(["xdg-open",  Application.cache_io(image_url, "img")]);
-        p();
-	break;
-
-	
-	default:
-        Application.openImageWindow(image_url);
-break;
-}
+      image_url = Application.cache_io(image_url, "img");
+      switch(Titanium.Platform.name) {
+        case 'Darwin':
+          (Titanium.Process.createProcess(["qlmanage", "-p", image_url ]))();
+        break;
+        case 'Linux':
+          (Titanium.Process.createProcess(["xdg-open",  Application.cache_io(image_url, "img")]))();
+        break;
+        default:
+          Application.openImageWindow(image_url);
+        break;
+      }
     }
 
     function quoted_link(event) {
