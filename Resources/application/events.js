@@ -1,6 +1,10 @@
 // EVENT HANDLERS
 var Events = (
   function() {
+    function edit_accounts() {
+      Application.openAddServiceWindow();
+      return false;
+    }
     function login_button (event) {
       Application.getServices();
       event.target.setAttribute("disabled", "disabled");
@@ -245,6 +249,7 @@ var Events = (
       sidebar_toggle : sidebar_toggle,
       tray_icon : tray_icon,
       login_button : login_button,
+      edit_accounts : edit_accounts,
       login_form : login_button,
       main_textarea  : main_textarea ,
       sender_item : sender_item,
