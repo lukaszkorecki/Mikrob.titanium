@@ -52,6 +52,8 @@ var Application = (
 
     }
     function openAddServiceWindow() {
+
+      $("login_button").removeAttribute("disabled");
       var win = Titanium.UI.getCurrentWindow();
       var w2 = win.createWindow('app://add_service.html');
 
