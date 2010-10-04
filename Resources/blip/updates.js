@@ -146,7 +146,7 @@ var Update = new Class.create(
       buttons.insert(this.permaLink());
       buttons.insert(this.quoteLink());
       buttons.insert(this.messageLink());
-//      buttons.insert(this.threadLink());
+      buttons.insert(this.threadLink());
       actions.insert(buttons);
 
       buttons = null;
