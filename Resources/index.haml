@@ -2,76 +2,14 @@
 %html{ :lang => "pl" }
   %head
     %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "content-type" }
-    %script{:src=>"/blip/blip.uploader.rb", :type=>"text/ruby"}
     %script{:type=>"text/ruby"}
       :plain
-        require 'application/cache'
+        require 'lib/cache'
         window.cache =  Cache.new(Titanium.Filesystem.getUserDirectory().nativePath());
 
-
-    %script{:src=>"libs/prototype.js", :type => "text/javascript"}
-    - Dir["Resources/libs/**/*.js"].reject{|l| l=~ /scriptaculous|prototype/}.reverse.each do |file|
+    - Dir["Resources/lib/**/*.js"].reverse.each do |file|
       %script{:src => file.sub("Resources/",""), :type => "text/javascript"}
 
-    - Dir["Resources/**/*.js"].reject{|l| l=~ /libs|test|image/ }.sort.each do |file|
-      %script{:src => file.sub("Resources/",""), :type => "text/javascript"}
     %link{ :href => "app.css", :rel => "stylesheet", :type => "text/css", :media => "screen", :charset => "utf-8" }
-    %link{ :href => "buttons.css", :rel => "stylesheet", :type => "text/css", :media => "screen", :charset => "utf-8" }
   %body
-    #wrapper
-      #throbber
-        %img{ :src => "app://icons/anim.gif" }
-      #controls
-        %form#login_form{ :method => "", :action => "#", "accept-charset" => "utf-8" }
-          %button#login_button._button{ :name => "submit", :value => "" }
-            Zaloguj się do swoich kont &rarr;
-          %button#edit_accounts Edytuj konta
-      #application
-        #menubar.toolbar
-          %span.button_group
-            %button#home_button.left.pressed{ :href => "#", :title => "Kokpit" }
-              %img.home_button_img{ :src => "icons/toolbar/icon_dashboard_dark.png"}
-              Kokpit
-            %button#archive_button.right{ :href => "#", :title => "Sekretarka" }
-              %img.archive_button_img{ :src => "icons/toolbar/icon_box_dark.png"}
-              Sekretarka
-          %button#mark_as_read_button{:title => "Oznacz jako przeczytane"}
-            %span.mark_as_read_button_img 0
-          %button#preferences_button{:title => "Preferencje"}
-            %img.preferences_button_img{ :src => "icons/toolbar/icon_settings.png"}
-
-          %span.hide.change_service_container
-            %select#change_service
-          %input.search.hide{:type => "search", :placeholder => "Szukaj/Filtruj"}
-        /
-          The content (needs to be dynamicaly created on service retreival)
-        #content_container
-          #dash0.column
-          #dash1.column
-          #dash2.column
-          #dash3.column
-          #dash4.column
-          #archive.column
-
-        #global_actions
-          #input_area
-            %span#charcount 0
-            %form#sender{ :method => "", :action => "#", "accept-charset" => "utf-8" }
-              %textarea#main_textarea{ :name => "content", :autofocus => "", :rows => "3", :placeholder => "Co teraz robisz? O czym myślisz? Dokąd zmierzamy?" }
-              %span.buttons.toolbar
-                %button.button_small.sender_item{ :name => "submit"}
-                  %img.sender_item_img{:src => "icons/toolbar/icon_add_dark.png"}
-                  Wyślij
-                %select#additional_actions
-                  %option{:value => 0}
-                    :plain
-                      Więcej
-                  %option{:value => "make_private"}
-                    Prywatna
-                  %option{:value => "shorten_links"}
-                    Skróć URL
-                  %option{:value => "attach_file"}
-                    Dodaj foto
-                %button.hide#attchmnt
-                  %img.attchmnt_img{:src => "icons/toolbar/icon_attach.png"}
-                  Usuń
+    #body
