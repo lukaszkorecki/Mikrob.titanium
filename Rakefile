@@ -64,7 +64,7 @@ namespace :source do
   end
 end
 namespace :application do
-  SDK_VERSION = "1.0.0"
+  SDK_VERSION = "1.1.0"
   def build_command_linux
     puts `python ~/.titanium/sdk/linux/#{SDK_VERSION}/tibuild.py -r -a ~/.titanium/sdk/linux/#{SDK_VERSION} .`
   end
