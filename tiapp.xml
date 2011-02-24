@@ -7,17 +7,15 @@
 <publisher>Lukasz Korecki</publisher>
 <url>http://coffeesounds.com</url>
 <icon>mikrob_icon.png</icon>
-<copyright>2009/2010 by lukasz korecki</copyright>
+<copyright>2009/2010/2011 by lukasz korecki</copyright>
   <!-- Window Definition - these values can be edited -->
   <window>
     <id>initial</id>
     <title>Mikrob</title>
-    <url>app://index.html</url>
-    <max-width>475</max-width>
-    <min-width>385</min-width>
-    <width>385</width>
+    <url>app://source/app.html</url>
+    <min-width>400</min-width>
+    <width>800</width>
     <height>600</height>
-    <max-height>3000</max-height>
     <min-height>100</min-height>
     <fullscreen>false</fullscreen>
     <resizable>true</resizable>

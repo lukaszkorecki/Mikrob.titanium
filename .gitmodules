@@ -1,0 +1,3 @@
+[submodule "Resources/source"]
+	path = Resources/source
+	url = git@github.com:lukaszkorecki/Mikrob.chrome.git
