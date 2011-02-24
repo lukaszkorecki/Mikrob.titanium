@@ -48,7 +48,6 @@ namespace :application do
 
   def before_filter # :-)
     Rake::Task['source:jslint'].invoke
-    Rake::Task['assets:generate'].invoke
   end
 
   desc "build application"
