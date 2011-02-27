@@ -10,3 +10,7 @@ Full source can be found [in the Mikrob.chrome repo](http://github.com/lukaszkor
 2. `git submodule init`
 3. `git submodule update`
 4. Launch (Rakefile has all the commands you'll need)
+
+## Pre-built packages
+
+Installers for all systems are available [to download from the project page](http://api.appcelerator.net/p/pages/app_page?token=b4jf7Td5) - bear in mind the might be slower or less stable than the Chrome version.
