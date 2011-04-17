@@ -27,7 +27,7 @@ namespace :source do
 end
 namespace :application do
   SDK_VERSION = "1.1.0"
-  HOME = File.expand_path '~'
+  HOME = ENV['USE_HOME'] ? File.expand_path('~') : ''
   def build_command_linux
     puts `python ~/.titanium/sdk/linux/#{SDK_VERSION}/tibuild.py -r -a ~/.titanium/sdk/linux/#{SDK_VERSION} .`
   end
