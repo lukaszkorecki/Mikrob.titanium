@@ -1,4 +1,6 @@
-# Mikrob 0.2
+# This app is no longer maintained, contact me if you want to take over.
+
+### Mikrob 0.2
 
 This repo contains only code and files needed for building Titanium version of Mikrob - the app which runs as a Chrome application/extension.
 
